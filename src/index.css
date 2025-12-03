@@ -1,0 +1,103 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@keyframes diacritic-pulse {
+  0%, 100% {
+    text-shadow: 0 0 8px rgba(251, 191, 36, 0.8), 0 0 12px rgba(251, 191, 36, 0.4);
+    filter: brightness(1);
+  }
+  50% {
+    text-shadow: 0 0 12px rgba(251, 191, 36, 1), 0 0 18px rgba(251, 191, 36, 0.6), 0 0 24px rgba(251, 191, 36, 0.3);
+    filter: brightness(1.2);
+  }
+}
+
+:root { color-scheme: dark; }
+html, body, #root { height: 100%; }
+
+/* Radial wheel helpers */
+.mala-wheel { position: relative; }
+.mala-bead { transition: transform 150ms ease, box-shadow 150ms ease; }
+.mala-bead.active { box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.5); }
+
+/* Thumb-friendly bottom control zone */
+.bottom-safe { padding-bottom: env(safe-area-inset-bottom); }
+
+/* Breathing pulse ring */
+@keyframes breath {
+  0%   { transform: scale(1); opacity: 0.35; }
+  50%  { transform: scale(1.03); opacity: 0.7; }
+  100% { transform: scale(1); opacity: 0.35; }
+}
+
+/* Sliding lens transitions */
+@keyframes slideUpFaint {
+  0% { transform: translateY(6px); opacity: 0.6; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+@keyframes slideDownFaint {
+  0% { transform: translateY(-6px); opacity: 0.6; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+@keyframes slideMiddleIn {
+  0% { transform: translateY(4px); opacity: 0.75; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+.animate-slide-up-faint { animation: slideUpFaint 220ms ease-out both; }
+.animate-slide-down-faint { animation: slideDownFaint 220ms ease-out both; }
+.animate-slide-middle { animation: slideMiddleIn 240ms ease-out both; }
+
+/* Intensified per-character diacritic animations */
+.dia-anim-char { display: inline-block; transform-origin: center center; will-change: transform, text-shadow; }
+
+@keyframes nasal-elongate { 0% { transform: scaleY(1); } 100% { transform: scaleY(1.25); } }
+.dia-anim-nasal { animation: nasal-elongate 1200ms ease-in-out infinite alternate; }
+
+@keyframes aspirate-stretch { 0% { transform: scaleX(1); text-shadow: 0 0 0 rgba(148,163,184,0); } 100% { transform: scaleX(1.25); text-shadow: 6px 0 2px rgba(148,163,184,0.4); } }
+.dia-anim-aspirate { animation: aspirate-stretch 1200ms ease-in-out infinite alternate; }
+
+@keyframes glottal-pause { 0%, 60%, 100% { transform: scale(1); } 30% { transform: scale(0.92); } }
+.dia-anim-glottal { animation: glottal-pause 1800ms ease-in-out infinite; }
+
+@keyframes fricative-left { 0%,100% { text-shadow: -3px 0 1px rgba(148,163,184,0.35); transform: translateX(0); } 50% { text-shadow: -6px 0 2px rgba(148,163,184,0.5); transform: translateX(-0.5px); } }
+.dia-anim-fric-l { animation: fricative-left 1200ms ease-in-out infinite; }
+
+@keyframes fricative-right { 0%,100% { text-shadow: 3px 0 1px rgba(148,163,184,0.35); transform: translateX(0); } 50% { text-shadow: 6px 0 2px rgba(148,163,184,0.5); transform: translateX(0.5px); } }
+.dia-anim-fric-r { animation: fricative-right 1200ms ease-in-out infinite; }
+
+@keyframes vowel-sustain { 0% { transform: scale(1); } 50% { transform: scale(1.12); } 100% { transform: scale(1); } }
+.dia-anim-long { animation: vowel-sustain 1600ms ease-in-out infinite; }
+
+@keyframes subtle-glow { 0%,100% { text-shadow: 0 0 8px rgba(251,191,36,0.5); } 50% { text-shadow: 0 0 14px rgba(251,191,36,0.75); } }
+.dia-anim-glow { animation: subtle-glow 1600ms ease-in-out infinite; }
+
+/* Practice mode animations */
+@keyframes bounce-subtle {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+.animate-bounce-subtle {
+  animation: bounce-subtle 400ms ease-in-out;
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 8px rgba(251,191,36,0.3); }
+  50% { box-shadow: 0 0 16px rgba(251,191,36,0.6); }
+}
+.practice-blank-hint {
+  animation: pulse-glow 2000ms ease-in-out infinite;
+}
+
+.iast-word-long {
+  outline: 1px solid rgba(56,189,248,0.65);
+  outline-offset: 1px;
+}
+
+.iast-word-retro {
+  border-bottom: 2px solid rgba(251,191,36,0.75);
+}
+
+.iast-word-aspirate {
+  border-top: 2px dashed rgba(129,140,248,0.85);
+}

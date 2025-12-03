@@ -1,0 +1,17 @@
+{
+  "name": "Stotra Maala",
+  "short_name": "Maala",
+  "description": "Mobile-first chanting companion with a radial mala UI.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#0ea5e9",
+  "icons": [
+    {
+      "src": "/icons/stotra-mala-logo.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "name": "avabodhak",
+  "version": "0.32.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "concurrently \"vite\" \"npm run tts:dev\"",
+    "tts:dev": "node scripts/tts-server.js",
+    "prebuild": "node scripts/bump-version.mjs",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "build:lines": "node scripts/build-lines.mjs",
+    "fetch:images": "node scripts/fetch-images.mjs",
+    "check-secrets": "node scripts/check-secrets.cjs"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
+    "@indic-transliteration/sanscript": "^1.0.2",
+    "@mui/icons-material": "^7.3.5",
+    "@mui/material": "^7.3.5",
+    "node-edge-tts": "^1.2.8",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@netlify/functions": "^5.1.0",
+    "@testing-library/jest-dom": "^6.4.2",
+    "@testing-library/react": "^14.1.2",
+    "@types/node": "^24.10.0",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@types/testing-library__jest-dom": "^6.0.0",
+    "@vitejs/plugin-react": "^4.3.2",
+    "autoprefixer": "^10.4.20",
+    "concurrently": "^9.2.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^5.1.0",
+    "jsdom": "^27.2.0",
+    "postcss": "^8.4.47",
+    "tailwindcss": "^3.4.14",
+    "typescript": "^5.6.3",
+    "vite": "^5.4.8",
+    "vitest": "^2.1.4"
+  }
+}
