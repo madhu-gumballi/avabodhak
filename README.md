@@ -35,3 +35,12 @@ npm run preview
 ```
 
 - Output: static files in `dist/`.
+
+Read Mode
+![alt text](image.png)
+
+Practice Mode
+![alt text](image-1.png)
+
+Puzzle Mode
+![alt text](image-2.png)
