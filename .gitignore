@@ -1,0 +1,24 @@
+# dependencies
+node_modules/
+
+# builds
+.dist/
+dist/
+.vite/
+coverage/
+
+# env
+.env
+.env.*.local
+
+# os/editor
+.DS_Store
+*.log
+.idea/
+.vscode/
+.toml
+
+scripts/ingest-vignanam.mjs
+scripts/fetch-images.mjs
+scripts/build-vs-data.mjs
+scripts/build-lines.mjs
