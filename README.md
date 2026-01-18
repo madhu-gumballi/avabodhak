@@ -1,6 +1,6 @@
 # Avabodhak - Stotra Maala
 
-Modern, mobile-friendly reader for sacred Sanskrit texts (Vishnu Sahasranama, Sri Hari Stotram) with segmented word flow, search, pronunciation help, and dual-mode TTS.
+A friedly UX to learn adn practice sacred texts and stotras (Vishnu Sahasranama, Sri Hari Stotram, Keshava Nama) with segmented word flow, search, pronunciation help, and dual-mode TTS.
 
 ## Tech
 - React 18 + TypeScript, Vite 5
@@ -25,7 +25,7 @@ App: http://localhost:5173
 ## Text-to-speech
 - **Two TTS modes** with mutual exclusivity:
   - **Line TTS** (center mic button): Plays entire line at once
-  - **Paced TTS** (timeline play button): Word-by-word with adjustable pace (30-240 WPM)
+  - **Paced TTS** (timeline play button): Word-by-word with adjustable pace (80-150 WPM)
 - Frontend calls `POST /api/tts` (see `src/lib/tts.ts`).
 - Dev: Node TTS server (`scripts/tts-server.js`) on `TTS_PORT` (default 8081).
 - Feature flag: set `VITE_FEATURE_TTS=true` in `.env`.
@@ -41,7 +41,8 @@ npm run preview
 - Output: static files in `dist/`.
 
 ## Credits
-- Vishnu Sahasranama abd Sri Hari Stotram translations courtesy of [vignanam.org](https://vignanam.org/)
+- Vishnu Sahasranama, Sri Hari Stotram and Keshava Nama translations credits solely belong to [vignanam.org](https://vignanam.org/)
+- Avabodhak is a personal project and was made to learn and practice these texts. There is no commercial intent.
 
 ## Screenshots
 

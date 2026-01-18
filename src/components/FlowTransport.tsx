@@ -22,8 +22,8 @@ export function FlowTransport({ playing, pace, onToggle, onPrev, onNext, onPace 
           <Slider
             aria-label="PACE"
             size="small"
-            min={30}
-            max={240}
+            min={80}
+            max={140}
             step={1}
             value={pace}
             onChange={(_, v) => onPace(Array.isArray(v) ? v[0] : (v as number))}

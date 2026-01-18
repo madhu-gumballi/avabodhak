@@ -37,8 +37,19 @@ export interface Media {
   groups?: string[]; // optional groups this media applies to
 }
 
+export interface StotraMetadata {
+  chapters: number;
+  totalLines: number;
+  languages: Lang[];
+  practiceMode?: boolean;
+  puzzleMode?: boolean;
+  composer?: string;
+  revealedBy?: string;
+}
+
 export interface TextFile {
   title: string;
+  metadata?: StotraMetadata;
   sources: { deva: string; knda: string; iast: string; tel?: string; tam?: string; guj?: string; pan?: string; mr?: string; ben?: string; mal?: string };
   lines: Line[];
   media?: Media[];

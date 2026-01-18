@@ -147,27 +147,11 @@ export function OverlayControls({ visible, onVisibleChange, ttsPlaying, onTTSTog
         {visible && (
           <div className="absolute inset-0 flex items-end justify-center pb-12">
             <div className="absolute inset-0 bg-black/10" />
-            <div className="flex items-center justify-between w-full px-3">
-              <button aria-label="Prev Line" onClick={(e) => { e.stopPropagation(); onPrevLine(); onNudged && onNudged('prev'); }} className="rounded-full bg-slate-900/50 border border-slate-700/60 text-slate-200 p-3">
+            <div className="flex items-center justify-between w-full px-8">
+              <button aria-label="Prev Line" onClick={(e) => { e.stopPropagation(); onPrevLine(); onNudged && onNudged('prev'); }} className="rounded-full bg-slate-900/70 backdrop-blur-sm border border-slate-600/70 text-slate-100 p-4 hover:bg-slate-800/80 hover:scale-110 transition-all shadow-lg">
                 <ChevronLeftIcon fontSize="large" />
               </button>
-              {ttsSupported && (
-                <div className="flex flex-col items-center gap-1">
-                  <button ref={centerBtnRef} aria-label={ttsPlaying ? 'Stop Line TTS' : 'Play Line TTS'} onClick={(e) => { e.stopPropagation(); onTTSToggle(); }} className={`rounded-full border p-4 ${ttsPlaying ? 'bg-amber-300 text-black border-amber-200' : 'bg-slate-900/50 text-slate-200 border-slate-700/70'}`}>
-                    {ttsPlaying ? <StopIcon fontSize="large" /> : <RecordVoiceOverIcon fontSize="large" style={{ opacity: 0.7 }} />}
-                  </button>
-                  <span className="text-[10px] text-slate-400 uppercase tracking-wider">Line</span>
-                </div>
-              )}
-              {!ttsSupported && (
-                <div className="flex flex-col items-center gap-1">
-                  <div className="rounded-full border p-4 bg-slate-900/30 text-slate-500 border-slate-700/40 opacity-50">
-                    <RecordVoiceOverIcon fontSize="large" />
-                  </div>
-                  <span className="text-[10px] text-slate-500 uppercase tracking-wider">Line</span>
-                </div>
-              )}
-              <button aria-label="Next Line" onClick={(e) => { e.stopPropagation(); onNextLine(); onNudged && onNudged('next'); }} className="rounded-full bg-slate-900/50 border border-slate-700/60 text-slate-200 p-3">
+              <button aria-label="Next Line" onClick={(e) => { e.stopPropagation(); onNextLine(); onNudged && onNudged('next'); }} className="rounded-full bg-slate-900/70 backdrop-blur-sm border border-slate-600/70 text-slate-100 p-4 hover:bg-slate-800/80 hover:scale-110 transition-all shadow-lg">
                 <ChevronRightIcon fontSize="large" />
               </button>
             </div>

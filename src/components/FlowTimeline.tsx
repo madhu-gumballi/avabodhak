@@ -160,35 +160,43 @@ export function FlowTimeline({ current, total, onSeek, onSeekStart, onSeekEnd, l
           />
         </Box>
 
-        {/* Play/Pause Button with "Paced" label for word-by-word TTS */}
-        <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 0.25 }}>
+        {/* Unified control bar: Play/Pause, Mute, and Settings aligned horizontally */}
+        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: 1, bgcolor: 'rgba(15,23,42,0.4)', borderRadius: 2, px: 1, py: 0.5 }}>
+          {/* Play/Pause Button with "Paced" label */}
           <Tooltip title={ttsSupported ? (playing ? T('pause') : `${T('play')} (Paced)`) : 'TTS not available for this language'}>
-            <span>
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
               <IconButton
                 onClick={onTogglePlay}
                 disabled={!ttsSupported}
-                color={playing ? 'primary' : 'inherit'}
+                size="small"
                 sx={{
-                  bgcolor: playing ? 'rgba(14,165,233,0.15)' : 'transparent',
-                  '&:hover': { bgcolor: playing ? 'rgba(14,165,233,0.25)' : 'rgba(255,255,255,0.05)' },
-                  opacity: ttsSupported ? 1 : 0.4
+                  bgcolor: playing ? 'rgba(14,165,233,0.2)' : 'transparent',
+                  color: playing ? 'primary.main' : 'inherit',
+                  '&:hover': { bgcolor: playing ? 'rgba(14,165,233,0.3)' : 'rgba(255,255,255,0.08)' },
+                  opacity: ttsSupported ? 1 : 0.4,
+                  transition: 'all 0.2s ease',
                 }}
               >
-                {playing ? <PauseIcon /> : <PlayArrowIcon />}
+                {playing ? <PauseIcon fontSize="small" /> : <PlayArrowIcon fontSize="small" />}
               </IconButton>
-            </span>
+              <Typography variant="caption" sx={{ fontSize: 10, color: ttsSupported ? 'text.secondary' : 'rgba(148,163,184,0.3)', textTransform: 'uppercase', letterSpacing: 0.5, fontWeight: 600 }}>
+                Paced
+              </Typography>
+            </Box>
           </Tooltip>
-          <Typography variant="caption" sx={{ fontSize: 9, color: ttsSupported ? 'text.secondary' : 'rgba(148,163,184,0.3)', textTransform: 'uppercase', letterSpacing: 0.5 }}>Paced</Typography>
-        </Box>
 
-        {/* Right side controls: mute toggle and settings */}
-        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: 0.5 }}>
+          {/* Divider */}
+          {ttsSupported && (
+            <Box sx={{ width: 1, height: 24, bgcolor: 'rgba(148,163,184,0.2)' }} />
+          )}
+
           {/* Mute/Unmute button - only show if TTS is supported */}
           {ttsSupported && (
             <Tooltip title={muted ? T('unmute') : T('mute')}>
               <IconButton
                 onClick={onToggleMute}
                 aria-label={muted ? T('unmute') : T('mute')}
+                size="small"
                 sx={{
                   color: muted ? 'rgba(148,163,184,0.6)' : 'primary.main',
                   bgcolor: muted ? 'transparent' : 'rgba(14,165,233,0.15)',
@@ -198,13 +206,26 @@ export function FlowTimeline({ current, total, onSeek, onSeekStart, onSeekEnd, l
                   transition: 'all 0.2s ease',
                 }}
               >
-                {muted ? <VolumeOffIcon /> : <VolumeUpIcon />}
+                {muted ? <VolumeOffIcon fontSize="small" /> : <VolumeUpIcon fontSize="small" />}
               </IconButton>
             </Tooltip>
           )}
+
+          {/* Divider */}
+          <Box sx={{ width: 1, height: 24, bgcolor: 'rgba(148,163,184,0.2)' }} />
+
+          {/* Settings button */}
           <Tooltip title={T('settings')}>
-            <IconButton onClick={(e) => setSettingsAnchor(e.currentTarget)} aria-label="Settings">
-              <SettingsIcon />
+            <IconButton 
+              onClick={(e) => setSettingsAnchor(e.currentTarget)} 
+              aria-label="Settings"
+              size="small"
+              sx={{
+                '&:hover': { bgcolor: 'rgba(255,255,255,0.08)' },
+                transition: 'all 0.2s ease',
+              }}
+            >
+              <SettingsIcon fontSize="small" />
             </IconButton>
           </Tooltip>
         </Box>
@@ -236,8 +257,8 @@ export function FlowTimeline({ current, total, onSeek, onSeekStart, onSeekEnd, l
               <Box sx={{ px: 2, pb: 1, minWidth: 200 }}>
                 <Slider
                   size="small"
-                  min={30}
-                  max={240}
+                  min={80}
+                  max={150}
                   value={pace}
                   onChange={(_, v) => onPaceChange(Array.isArray(v) ? v[0] : (v as number))}
                   sx={{ color: 'primary.main' }}

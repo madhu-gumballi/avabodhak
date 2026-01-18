@@ -1,5 +1,14 @@
 {
-  "title": "Vishnu Sahasranama (Text-Only)",
+  "title": "Sri Vishnu Sahasranama",
+  "metadata": {
+    "chapters": 7,
+    "totalLines": 495,
+    "languages": ["deva", "knda", "tel", "tam", "guj", "pan", "iast"],
+    "practiceMode": true,
+    "puzzleMode": true,
+    "composer": "Vyasa",
+    "revealedBy": "Bhishma"
+  },
   "sources": {
     "iast": "https://vignanam.org/english/sree-vishnu-sahasra-nama-stotram.html",
     "deva": "https://vignanam.org/devanagari/sree-vishnu-sahasra-nama-stotram.html",

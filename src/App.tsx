@@ -1,14 +1,17 @@
 import { useState } from 'react';
 import { ThemeProvider, createTheme, CssBaseline } from '@mui/material';
-import { LandingPage } from './components/LandingPage';
+import { EnhancedLandingPage } from './components/EnhancedLandingPage';
 import { VSNViewer } from './components/VSNViewer';
 import { HariStotramViewer } from './components/HariStotramViewer';
+import { KeshavaNamaViewer } from './components/KeshavaNamaViewer';
 import { analytics } from './lib/analytics';
+import type { Lang } from './data/types';
 
-type ViewState = 'landing' | 'vsn' | 'hari';
+type ViewState = 'landing' | 'vsn' | 'hari' | 'keshava';
 
 export default function App() {
   const [view, setView] = useState<ViewState>('landing');
+  const [preferredLang, setPreferredLang] = useState<Lang | undefined>(undefined);
 
   // Simple dark theme for the outer shell/landing page
   // Note: VSNViewer has its own internal theme definition that might override this when mounted,
@@ -25,26 +28,31 @@ export default function App() {
     }
   });
 
-  const handleStotraSelect = (stotra: 'vsn' | 'hari') => {
+  const handleStotraSelect = (stotra: 'vsn' | 'hari' | 'keshava', lang?: Lang) => {
     setView(stotra);
+    setPreferredLang(lang);
     analytics.selectStotra(stotra);
   };
 
   const handleBack = () => {
     setView('landing');
+    setPreferredLang(undefined);
   };
 
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       {view === 'landing' && (
-        <LandingPage onSelectStotra={handleStotraSelect} />
+        <EnhancedLandingPage onSelectStotra={handleStotraSelect} />
       )}
       {view === 'vsn' && (
-        <VSNViewer onBack={handleBack} />
+        <VSNViewer onBack={handleBack} preferredLang={preferredLang} />
       )}
       {view === 'hari' && (
-        <HariStotramViewer onBack={handleBack} />
+        <HariStotramViewer onBack={handleBack} preferredLang={preferredLang} />
+      )}
+      {view === 'keshava' && (
+        <KeshavaNamaViewer onBack={handleBack} preferredLang={preferredLang} />
       )}
     </ThemeProvider>
   );

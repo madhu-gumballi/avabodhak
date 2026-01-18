@@ -18,6 +18,7 @@ import { FlowMap } from './FlowMap';
 import { FadingImage } from './FadingImage';
 import { SearchPanel } from './SearchPanel';
 import { OverlayControls } from './OverlayControls';
+import { LineTTSBar } from './LineTTSBar';
 import { PracticeView } from './PracticeView';
 import { PuzzleView } from './PuzzleView';
 import { OnboardingTour } from './OnboardingTour';
@@ -26,7 +27,7 @@ import type { PracticeDifficulty } from '../lib/practice';
 import { isTTSEnabled, isTTSSupportedForLang, LineTTSPlayer, WordTTSPlayer } from '../lib/tts';
 
 
-export function VSNViewer({ onBack, textOverride, subtitleOverrides, availableLangs }: { onBack: () => void; textOverride?: TextFile; subtitleOverrides?: Partial<Record<Lang, string>>; availableLangs?: Lang[] }) {
+export function VSNViewer({ onBack, textOverride, subtitleOverrides, availableLangs, preferredLang }: { onBack: () => void; textOverride?: TextFile; subtitleOverrides?: Partial<Record<Lang, string>>; availableLangs?: Lang[]; preferredLang?: Lang }) {
   const APP_VERSION = `v${import.meta.env.VITE_APP_VERSION || '0.0.0'}`;
   const theme = useMemo(() => createTheme({
     palette: { mode: 'dark', primary: { main: '#0ea5e9' }, secondary: { main: '#f59e0b' } },
@@ -59,6 +60,10 @@ export function VSNViewer({ onBack, textOverride, subtitleOverrides, availableLa
   const text = (textOverride ?? (linesFile as TextFile));
   const ttsEnabled = isTTSEnabled();
   const [lang, setLang] = useState<Lang>(() => {
+    // Priority: preferredLang (if supported) > localStorage > fallbackLang
+    if (preferredLang && languageOptions.includes(preferredLang)) {
+      return preferredLang;
+    }
     try {
       const raw = localStorage.getItem('lang') as Lang | null;
       return raw && languageOptions.includes(raw) ? raw : fallbackLang;
@@ -1511,7 +1516,7 @@ export function VSNViewer({ onBack, textOverride, subtitleOverrides, availableLa
                             letterSpacing: 0.3,
                           }}
                         >
-                          Text courtesy of{' '}
+                          Text Credit: {' '}
                           <a
                             href="https://vignanam.org/"
                             target="_blank"
@@ -1736,6 +1741,17 @@ export function VSNViewer({ onBack, textOverride, subtitleOverrides, availableLa
         </Dialog>
 
         <OnboardingTour open={onboardingOpen} setOpen={setOnboardingOpen} />
+
+        {/* Always-visible Line TTS Bar - only in reading mode */}
+        {viewMode === 'reading' && (
+          <LineTTSBar
+            ttsPlaying={ttsPlaying}
+            onTTSToggle={handleLineTTS}
+            ttsSupported={ttsSupported}
+            currentLine={flow.state.lineIndex + 1}
+            totalLines={flow.totalLines}
+          />
+        )}
 
       </div>
     </ThemeProvider>

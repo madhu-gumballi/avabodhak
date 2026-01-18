@@ -4,8 +4,8 @@ export function isTTSEnabled(): boolean {
   return TTS_ENABLED;
 }
 
-// Supported languages: deva (Hindi), knda (Kannada), tel (Telugu), tam (Tamil)
-// Unsupported: iast, eng, guj, pan, mr, ben, mal
+// Supported languages: deva (Hindi), knda (Kannada), tel (Telugu), tam (Tamil), pan (Punjabi)
+// Unsupported: iast, eng, guj, mr, ben, mal
 export function isTTSSupportedForLang(lang: string): boolean {
   const supported = ['deva', 'knda', 'tel', 'tam'];
   return supported.includes(lang);
@@ -563,7 +563,7 @@ export class WordTTSPlayer {
    * Set playback pace (words per minute)
    */
   setPace(pace: number): void {
-    this._pace = Math.max(30, Math.min(pace, 240));
+    this._pace = Math.max(80, Math.min(pace, 140));
     if (this.currentAudio) {
       this.currentAudio.playbackRate = this._pace / 100;
     }
