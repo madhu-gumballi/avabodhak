@@ -28,17 +28,19 @@ export interface UseWordFlow {
   setHold: (v: boolean) => void; // prevent auto-advancement without flipping playing state
   toggleMute: () => void;
   setMuted: (muted: boolean) => void;
+  setPace: (pace: number) => void;
 }
 
 // tokenization moved to lib/tokenize for shared usage
 
-export function useWordFlow(lines: Line[], lang: Lang, ttsPlayer?: WordTTSPlayer): UseWordFlow {
+export function useWordFlow(lines: Line[], lang: Lang, ttsPlayer?: WordTTSPlayer, initialPace: number = 100): UseWordFlow {
   const [playing, setPlaying] = useState(false);
   const [lineIndex, setLineIndex] = useState(0);
   const [wordIndex, setWordIndex] = useState(0);
   const [muted, setMutedState] = useState(false);
+  const [pace, setPaceState] = useState(initialPace);
   const [hold, setHoldState] = useState<boolean>(false);
-  
+
   // Refs for callbacks to avoid stale closures
   const lineIndexRef = useRef(lineIndex);
   const linesRef = useRef(lines);
@@ -92,7 +94,7 @@ export function useWordFlow(lines: Line[], lang: Lang, ttsPlayer?: WordTTSPlayer
         // Line finished, advance to next line
         const currentLineIndex = lineIndexRef.current;
         const totalLines = linesRef.current.length;
-        
+
         if (currentLineIndex >= totalLines - 1) {
           // End of text
           setPlaying(false);
@@ -115,7 +117,7 @@ export function useWordFlow(lines: Line[], lang: Lang, ttsPlayer?: WordTTSPlayer
   // Load words into TTS player when line changes
   useEffect(() => {
     if (!ttsPlayer) return;
-    
+
     void ttsPlayer.loadLine(tokens, lang).then(() => {
       // If we're playing, start the new line
       if (playing) {
@@ -124,12 +126,18 @@ export function useWordFlow(lines: Line[], lang: Lang, ttsPlayer?: WordTTSPlayer
     });
   }, [tokens, lang, ttsPlayer, lineIndex]);
 
-  // Sync muted state with TTS player
+  // Sync muted and pace states with TTS player
   useEffect(() => {
     if (ttsPlayer) {
       ttsPlayer.setMuted(muted);
     }
   }, [muted, ttsPlayer]);
+
+  useEffect(() => {
+    if (ttsPlayer) {
+      ttsPlayer.setPace(pace);
+    }
+  }, [pace, ttsPlayer]);
 
   const rows: [string | undefined, string | undefined, string | undefined] = useMemo(() => {
     const prev = (lines[lineIndex - 1] as any)?.[lang] as string | undefined;
@@ -162,7 +170,7 @@ export function useWordFlow(lines: Line[], lang: Lang, ttsPlayer?: WordTTSPlayer
   const next = useCallback(() => {
     const currentTokens = tokensRef.current;
     const last = Math.max(0, currentTokens.length - 1);
-    
+
     if (wordIndex >= last) {
       // Move to next line
       const nextLine = Math.min(lineIndex + 1, lines.length - 1);
@@ -228,6 +236,10 @@ export function useWordFlow(lines: Line[], lang: Lang, ttsPlayer?: WordTTSPlayer
     setMutedState(m);
   }, []);
 
+  const setPace = useCallback((p: number) => {
+    setPaceState(p);
+  }, []);
+
   return {
     state: { playing, lineIndex, wordIndex, muted },
     tokens,
@@ -245,5 +257,6 @@ export function useWordFlow(lines: Line[], lang: Lang, ttsPlayer?: WordTTSPlayer
     setHold,
     toggleMute,
     setMuted,
+    setPace,
   };
 }

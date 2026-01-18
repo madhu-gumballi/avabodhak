@@ -172,7 +172,7 @@ async function fetchWordAudio(text: string, lang: string): Promise<{ audio: HTML
   try {
     // Try cache first
     const cached = getWordCacheEntry(normalized, lang);
-    
+
     if (cached) {
       // If we have a ready audio element, clone it for instant playback
       if (cached.readyAudio) {
@@ -181,7 +181,7 @@ async function fetchWordAudio(text: string, lang: string): Promise<{ audio: HTML
         cloned.currentTime = 0;
         return { audio: cloned, url: cached.url };
       }
-      
+
       // Otherwise create new Audio from cached URL (shouldn't happen often)
       const audio = new Audio(cached.url);
       // Don't wait for metadata here - let it load async
@@ -197,7 +197,7 @@ async function fetchWordAudio(text: string, lang: string): Promise<{ audio: HTML
     // Not cached - fetch the blob
     const blob = await fetchWordBlob(normalized, lang);
     if (!blob) return null;
-    
+
     const entry = storeWordCacheEntry(normalized, lang, blob);
     const audio = new Audio(entry.url);
 
@@ -214,7 +214,7 @@ async function fetchWordAudio(text: string, lang: string): Promise<{ audio: HTML
         entry.readyAudio = audio;
         resolve();
       }, { once: true });
-      
+
       audio.addEventListener('error', () => {
         window.clearTimeout(timeoutId);
         console.error('Audio load error for word:', normalized);
@@ -292,9 +292,10 @@ export class WordTTSPlayer {
   private preloadingIndex: number = -1;
   private callbacks: WordTTSCallbacks = {};
   private mutedTimer: number | null = null;
+  private _pace: number = 100;
   private disposed: boolean = false;
 
-  constructor() {}
+  constructor() { }
 
   /**
    * Set callbacks for word events
@@ -330,7 +331,7 @@ export class WordTTSPlayer {
     this.preloadingIndex = index;
     const word = this.words[index];
     const result = await fetchWordAudio(word, this.lang);
-    
+
     if (this.disposed) {
       return;
     }
@@ -409,6 +410,9 @@ export class WordTTSPlayer {
     this.currentAudio = audioData.audio;
     this.currentUrl = audioData.url;
 
+    // Apply pace as playback rate (normalized to 100 WPM)
+    this.currentAudio.playbackRate = this._pace / 100;
+
     // Preload next word while this one plays
     if (index + 1 < this.words.length) {
       this.preloadWord(index + 1);
@@ -442,7 +446,7 @@ export class WordTTSPlayer {
 
         this.callbacks.onWordEnd?.(index);
         this.cleanupCurrentAudio();
-        
+
         if (!this._isPlaying || this._isPaused || this.disposed) {
           resolve();
           return;
@@ -516,14 +520,14 @@ export class WordTTSPlayer {
     return new Promise<void>((resolve) => {
       const index = this.currentWordIndex;
       const word = this.words[index] || '';
-      
+
       // Calculate duration based on word complexity
       const duration = this.calculateWordDuration(word);
 
       this.mutedTimer = window.setTimeout(() => {
         this.mutedTimer = null;
         this.callbacks.onWordEnd?.(index);
-        
+
         if (!this._isPlaying || this._isPaused || this.disposed) {
           resolve();
           return;
@@ -540,16 +544,29 @@ export class WordTTSPlayer {
    */
   private calculateWordDuration(word: string): number {
     const len = [...word].length;
-    const base = DEFAULT_WORD_DURATION_MS;
-    
+    let base = DEFAULT_WORD_DURATION_MS;
+
+    // Adjust base by pace (normalized to 100 WPM)
+    base = base * (100 / this._pace);
+
     // Add time for longer words
     const lengthBonus = Math.min(len * 40, 400);
-    
+
     // Add time for diacritics/complex characters
     const complexChars = (word.match(/[ँंःऽ़ा-ूृॄॅॆे-ॉॊो-्।॥]/g) || []).length;
-    const complexBonus = Math.min(complexChars * 30, 200);
-    
-    return base + lengthBonus + complexBonus;
+    const complexBonus = Math.min(complexChars * 30, 200) * (100 / this._pace);
+
+    return base + (lengthBonus * (100 / this._pace)) + complexBonus;
+  }
+
+  /**
+   * Set playback pace (words per minute)
+   */
+  setPace(pace: number): void {
+    this._pace = Math.max(30, Math.min(pace, 240));
+    if (this.currentAudio) {
+      this.currentAudio.playbackRate = this._pace / 100;
+    }
   }
 
   /**
@@ -557,11 +574,11 @@ export class WordTTSPlayer {
    */
   pause(): void {
     this._isPaused = true;
-    
+
     if (this.currentAudio) {
       this.currentAudio.pause();
     }
-    
+
     if (this.mutedTimer) {
       clearTimeout(this.mutedTimer);
       this.mutedTimer = null;
@@ -608,14 +625,14 @@ export class WordTTSPlayer {
     this._isPlaying = false;
     this._isPaused = false;
     this.currentWordIndex = 0;
-    
+
     this.cleanupCurrentAudio();
-    
+
     if (this.mutedTimer) {
       clearTimeout(this.mutedTimer);
       this.mutedTimer = null;
     }
-    
+
     if (this.preloadedAudio) {
       // Only revoke if this URL is not part of the shared cache
       if (!isUrlInWordCache(this.preloadedAudio.url)) {
@@ -713,15 +730,15 @@ export class WordTTSPlayer {
    */
   seekWord(index: number): void {
     if (index < 0 || index >= this.words.length) return;
-    
+
     const wasPlaying = this._isPlaying && !this._isPaused;
     this.stop();
     this.currentWordIndex = index;
-    
+
     if (!this._isMuted) {
       this.preloadWord(index);
     }
-    
+
     if (wasPlaying) {
       this._isPlaying = true;
       this.playCurrentWord();
@@ -750,7 +767,7 @@ export class LineTTSPlayer {
   private _isPlaying: boolean = false;
   private audioUnlocked: boolean = false;
 
-  constructor() {}
+  constructor() { }
 
   setCallbacks(callbacks: LineTTSCallbacks): void {
     this.callbacks = callbacks;
@@ -763,9 +780,9 @@ export class LineTTSPlayer {
     if (this.audioUnlocked) return;
     try {
       const silent = new Audio('data:audio/mp3;base64,SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjU4Ljc2LjEwMAAAAAAAAAAAAAAA//tQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWGluZwAAAA8AAAACAAADhAC7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7//////////////////////////////////////////////////////////////////8AAAAATGF2YzU4LjEzAAAAAAAAAAAAAAAAJAAAAAAAAAAAA4T/hv+EAAAAAAAAAAAAAAAAAAAAAP/7kGQAD/AAAGkAAAAIAAANIAAAAQAAAaQAAAAgAAA0gAAABExBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/7kGQAD/AAAGkAAAAIAAANIAAAAQAAAaQAAAAgAAA0gAAABFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVQ==');
-      silent.play().catch(() => {});
+      silent.play().catch(() => { });
       this.audioUnlocked = true;
-    } catch {}
+    } catch { }
   }
 
   /**
@@ -774,7 +791,7 @@ export class LineTTSPlayer {
   async playLine(text: string, lang: string): Promise<void> {
     // Unlock audio on first play (Safari requirement)
     this.unlockAudio();
-    
+
     // Stop any current playback
     this.cleanup();
 

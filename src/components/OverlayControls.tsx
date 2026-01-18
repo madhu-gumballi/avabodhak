@@ -152,13 +152,19 @@ export function OverlayControls({ visible, onVisibleChange, ttsPlaying, onTTSTog
                 <ChevronLeftIcon fontSize="large" />
               </button>
               {ttsSupported && (
-                <button ref={centerBtnRef} aria-label={ttsPlaying ? 'Stop TTS' : 'Play TTS'} onClick={(e) => { e.stopPropagation(); onTTSToggle(); }} className={`rounded-full border p-4 ${ttsPlaying ? 'bg-amber-300 text-black border-amber-200' : 'bg-slate-900/50 text-slate-200 border-slate-700/70'}`}>
-                  {ttsPlaying ? <StopIcon fontSize="large" /> : <RecordVoiceOverIcon fontSize="large" style={{ opacity: 0.7 }} />}
-                </button>
+                <div className="flex flex-col items-center gap-1">
+                  <button ref={centerBtnRef} aria-label={ttsPlaying ? 'Stop Line TTS' : 'Play Line TTS'} onClick={(e) => { e.stopPropagation(); onTTSToggle(); }} className={`rounded-full border p-4 ${ttsPlaying ? 'bg-amber-300 text-black border-amber-200' : 'bg-slate-900/50 text-slate-200 border-slate-700/70'}`}>
+                    {ttsPlaying ? <StopIcon fontSize="large" /> : <RecordVoiceOverIcon fontSize="large" style={{ opacity: 0.7 }} />}
+                  </button>
+                  <span className="text-[10px] text-slate-400 uppercase tracking-wider">Line</span>
+                </div>
               )}
               {!ttsSupported && (
-                <div className="rounded-full border p-4 bg-slate-900/30 text-slate-500 border-slate-700/40 opacity-50">
-                  <RecordVoiceOverIcon fontSize="large" />
+                <div className="flex flex-col items-center gap-1">
+                  <div className="rounded-full border p-4 bg-slate-900/30 text-slate-500 border-slate-700/40 opacity-50">
+                    <RecordVoiceOverIcon fontSize="large" />
+                  </div>
+                  <span className="text-[10px] text-slate-500 uppercase tracking-wider">Line</span>
                 </div>
               )}
               <button aria-label="Next Line" onClick={(e) => { e.stopPropagation(); onNextLine(); onNudged && onNudged('next'); }} className="rounded-full bg-slate-900/50 border border-slate-700/60 text-slate-200 p-3">

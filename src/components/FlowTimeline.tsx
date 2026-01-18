@@ -3,8 +3,11 @@ import { useState } from 'react';
 import SettingsIcon from '@mui/icons-material/Settings';
 import CheckIcon from '@mui/icons-material/Check';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import PlayArrowIcon from '@mui/icons-material/PlayArrow';
+import PauseIcon from '@mui/icons-material/Pause';
 import VolumeUpIcon from '@mui/icons-material/VolumeUp';
 import VolumeOffIcon from '@mui/icons-material/VolumeOff';
+import SpeedIcon from '@mui/icons-material/Speed';
 import type { Lang } from '../data/types';
 
 interface Props {
@@ -27,13 +30,18 @@ interface Props {
   onToggleExpanded?: () => void;
   artActive?: boolean;
   onToggleArt?: () => void;
+  // Transport controls
+  playing?: boolean;
+  onTogglePlay?: () => void;
+  pace?: number;
+  onPaceChange?: (wpm: number) => void;
   // Expose dragging state for parent to show line number overlay
   onDraggingChange?: (dragging: boolean, lineNumber?: number) => void;
   // Optional callback when the line counter chip (current/total) is clicked
   onLineCounterClick?: () => void;
 }
 
-export function FlowTimeline({ current, total, onSeek, onSeekStart, onSeekEnd, lang, muted, onToggleMute, ttsSupported, legendActive, onToggleLegend, artActive, onToggleArt, onLineCounterClick }: Props) {
+export function FlowTimeline({ current, total, onSeek, onSeekStart, onSeekEnd, lang, muted, onToggleMute, ttsSupported, legendActive, onToggleLegend, artActive, onToggleArt, onLineCounterClick, playing, onTogglePlay, pace, onPaceChange }: Props) {
   const max = Math.max(0, total - 1);
   const value = Math.max(0, Math.min(current, max));
   const [dragging, setDragging] = useState(false);
@@ -152,6 +160,27 @@ export function FlowTimeline({ current, total, onSeek, onSeekStart, onSeekEnd, l
           />
         </Box>
 
+        {/* Play/Pause Button with "Paced" label for word-by-word TTS */}
+        <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 0.25 }}>
+          <Tooltip title={ttsSupported ? (playing ? T('pause') : `${T('play')} (Paced)`) : 'TTS not available for this language'}>
+            <span>
+              <IconButton
+                onClick={onTogglePlay}
+                disabled={!ttsSupported}
+                color={playing ? 'primary' : 'inherit'}
+                sx={{
+                  bgcolor: playing ? 'rgba(14,165,233,0.15)' : 'transparent',
+                  '&:hover': { bgcolor: playing ? 'rgba(14,165,233,0.25)' : 'rgba(255,255,255,0.05)' },
+                  opacity: ttsSupported ? 1 : 0.4
+                }}
+              >
+                {playing ? <PauseIcon /> : <PlayArrowIcon />}
+              </IconButton>
+            </span>
+          </Tooltip>
+          <Typography variant="caption" sx={{ fontSize: 9, color: ttsSupported ? 'text.secondary' : 'rgba(148,163,184,0.3)', textTransform: 'uppercase', letterSpacing: 0.5 }}>Paced</Typography>
+        </Box>
+
         {/* Right side controls: mute toggle and settings */}
         <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: 0.5 }}>
           {/* Mute/Unmute button - only show if TTS is supported */}
@@ -197,6 +226,25 @@ export function FlowTimeline({ current, total, onSeek, onSeekStart, onSeekEnd, l
             <ListItemIcon>{artActive ? <CheckIcon fontSize="small" /> : <span style={{ width: 16 }} />}</ListItemIcon>
             <ListItemText primary={T('artwork')} />
           </MenuItem>
+          {onPaceChange && typeof pace === 'number' && (
+            <>
+              <Box sx={{ px: 2, pt: 1, pb: 0.5 }}>
+                <Typography variant="caption" color="text.secondary" sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                  <SpeedIcon fontSize="inherit" /> {T('pace')}: {pace} wpm
+                </Typography>
+              </Box>
+              <Box sx={{ px: 2, pb: 1, minWidth: 200 }}>
+                <Slider
+                  size="small"
+                  min={30}
+                  max={240}
+                  value={pace}
+                  onChange={(_, v) => onPaceChange(Array.isArray(v) ? v[0] : (v as number))}
+                  sx={{ color: 'primary.main' }}
+                />
+              </Box>
+            </>
+          )}
         </MenuList>
       </Popover>
     </Paper>
