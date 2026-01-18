@@ -34,7 +34,7 @@ export function LandingPage({ onSelectStotra }: LandingPageProps) {
                         Avabodhak
                     </Typography>
                     <Typography variant="subtitle1" sx={{ opacity: 0.7, maxWidth: 400, mx: 'auto' }}>
-                        Awaken your consciousness through sacred chants.
+                        Practice stotras and gamify chants.
                     </Typography>
                 </Box>
             </Fade>
@@ -125,9 +125,6 @@ export function LandingPage({ onSelectStotra }: LandingPageProps) {
                                     <Typography variant="body2" sx={{ opacity: 0.6 }}>
                                         A beautiful hymn in praise of Lord Hari (Vishnu).
                                     </Typography>
-                                    <Typography variant="caption" sx={{ display: 'block', mt: 1, color: '#f59e0b', fontWeight: 600 }}>
-                                        COMING SOON
-                                    </Typography>
                                 </Box>
                             </CardActionArea>
                         </Card>
@@ -138,8 +135,7 @@ export function LandingPage({ onSelectStotra }: LandingPageProps) {
 
             <Box sx={{ mt: 'auto', py: 4, opacity: 0.4 }}>
                 <Typography variant="caption">
-                    © {new Date().getFullYear()} Avabodhak
-                </Typography>
+                     Avabodhak - https://github.com/madhu-gumballi/avabodhak/                </Typography>
             </Box>
         </Box>
     );
