@@ -1,8 +1,39 @@
 import { Handler } from '@netlify/functions';
-import { EdgeTTS } from 'node-edge-tts';
-import * as path from 'path';
-import * as os from 'os';
-import * as fs from 'fs';
+
+// Map language codes to Google Cloud TTS language codes
+function getLanguageCode(lang: string): string {
+    const langMap: Record<string, string> = {
+        'deva': 'hi-IN',   // Devanagari → Hindi
+        'iast': 'en-IN',   // IAST transliteration → English (India)
+        'knda': 'kn-IN',   // Kannada
+        'tel': 'te-IN',    // Telugu
+        'tam': 'ta-IN',    // Tamil
+        'guj': 'gu-IN',    // Gujarati
+        'pan': 'pa-IN',    // Punjabi
+        'mr': 'mr-IN',     // Marathi
+        'ben': 'bn-IN',    // Bengali
+        'mal': 'ml-IN',    // Malayalam
+    };
+    return langMap[lang] || 'hi-IN';
+}
+
+// Get voice name for better quality
+function getVoiceName(lang: string): string {
+    // Google Cloud TTS WaveNet voices for higher quality
+    const voiceMap: Record<string, string> = {
+        'deva': 'hi-IN-Wavenet-A',
+        'knda': 'kn-IN-Wavenet-A',
+        'tel': 'te-IN-Standard-A',
+        'tam': 'ta-IN-Wavenet-A',
+        'guj': 'gu-IN-Wavenet-A',
+        'pan': 'pa-IN-Wavenet-A',
+        'mr': 'mr-IN-Wavenet-A',
+        'ben': 'bn-IN-Wavenet-A',
+        'mal': 'ml-IN-Wavenet-A',
+        'iast': 'en-IN-Wavenet-A',
+    };
+    return process.env.GCLOUD_TTS_VOICE_NAME || voiceMap[lang] || '';
+}
 
 const handler: Handler = async (event, context) => {
     // Only allow POST
@@ -11,6 +42,19 @@ const handler: Handler = async (event, context) => {
             statusCode: 405,
             body: 'Method Not Allowed',
             headers: { 'Allow': 'POST' }
+        };
+    }
+
+    // Handle CORS preflight
+    if (event.httpMethod === 'OPTIONS') {
+        return {
+            statusCode: 200,
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Headers': 'Content-Type',
+                'Access-Control-Allow-Methods': 'POST, OPTIONS',
+            },
+            body: '',
         };
     }
 
@@ -25,52 +69,86 @@ const handler: Handler = async (event, context) => {
             };
         }
 
-        // Map language to voice
-        let voice = 'hi-IN-MadhurNeural'; // Default to Hindi (good for Sanskrit)
-        if (lang === 'knda') {
-            voice = 'kn-IN-GaganNeural';
-        } else if (lang === 'tel') {
-            voice = 'te-IN-MohanNeural';
-        } else if (lang === 'tam') {
-            voice = 'ta-IN-ValluvarNeural';
+        if (text.length > 800) {
+            return {
+                statusCode: 400,
+                body: JSON.stringify({ error: 'Text too long (max 800 characters)' })
+            };
         }
 
-        // Adjust rate based on granularity (approximate, as Edge TTS uses percentage)
-        // +0% is normal. -20% is slower.
-        let rate = '+0%';
-        if (granularity === 'verse') {
-            rate = '-20%';
-        } else if (granularity === 'line') {
-            rate = '-10%';
+        const apiKey = process.env.GCLOUD_TTS_API_KEY;
+        if (!apiKey) {
+            console.error('GCLOUD_TTS_API_KEY not set');
+            return {
+                statusCode: 500,
+                body: JSON.stringify({ error: 'TTS service not configured' })
+            };
         }
 
-        const tts = new EdgeTTS({
-            voice: voice,
-            lang: 'en-US', // Default lang, voice overrides it
-            outputFormat: 'audio-24khz-48kbitrate-mono-mp3'
+        const languageCode = getLanguageCode(lang);
+        const voiceName = getVoiceName(lang);
+
+        // Build request body for Google Cloud TTS
+        const requestBody: {
+            input: { text: string };
+            voice: { languageCode: string; name?: string };
+            audioConfig: { audioEncoding: string; speakingRate: number };
+        } = {
+            input: { text },
+            voice: {
+                languageCode,
+            },
+            audioConfig: {
+                audioEncoding: 'MP3',
+                speakingRate: granularity === 'verse' ? 0.85 : granularity === 'line' ? 0.9 : 1.0,
+            },
+        };
+
+        // Add specific voice name if available
+        if (voiceName) {
+            requestBody.voice.name = voiceName;
+        }
+
+        // Call Google Cloud TTS REST API
+        const url = `https://texttospeech.googleapis.com/v1/text:synthesize?key=${apiKey}`;
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json; charset=utf-8',
+            },
+            body: JSON.stringify(requestBody),
         });
 
-        // Generate audio to a temp file
-        const tmpDir = os.tmpdir();
-        const tmpFile = path.join(tmpDir, `tts-${Date.now()}-${Math.random().toString(36).substring(7)}.mp3`);
+        if (!response.ok) {
+            const errorText = await response.text();
+            console.error(`Google TTS error: ${response.status} - ${errorText}`);
+            return {
+                statusCode: 500,
+                body: JSON.stringify({ error: 'TTS synthesis failed' })
+            };
+        }
 
-        await tts.ttsPromise(text, tmpFile);
+        const data = await response.json() as { audioContent?: string };
 
-        // Read file
-        const audioBuffer = fs.readFileSync(tmpFile);
+        if (!data.audioContent) {
+            console.error('Google TTS returned empty audioContent');
+            return {
+                statusCode: 500,
+                body: JSON.stringify({ error: 'TTS returned no audio' })
+            };
+        }
 
-        // Clean up
-        fs.unlinkSync(tmpFile);
-
-        // Return as base64 encoded string
+        // Return base64-encoded audio
         return {
             statusCode: 200,
             headers: {
                 'Content-Type': 'audio/mpeg',
-                'Access-Control-Allow-Origin': '*', // CORS
+                'Access-Control-Allow-Origin': '*',
                 'Access-Control-Allow-Headers': 'Content-Type',
+                'X-TTS-Provider': 'gcloud',
+                'X-TTS-Lang': languageCode,
             },
-            body: audioBuffer.toString('base64'),
+            body: data.audioContent,
             isBase64Encoded: true
         };
 
