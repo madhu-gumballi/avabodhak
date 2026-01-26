@@ -69,9 +69,11 @@ export function getCorrectPositions(
   correctSegments: PuzzleSegment[]
 ): number {
   let correct = 0;
-  for (let i = 0; i < userArrangement.length; i++) {
+  const maxLen = Math.min(userArrangement.length, correctSegments.length);
+  for (let i = 0; i < maxLen; i++) {
     if (
       userArrangement[i] !== null &&
+      correctSegments[i] !== undefined &&
       userArrangement[i]!.text === correctSegments[i].text
     ) {
       correct++;

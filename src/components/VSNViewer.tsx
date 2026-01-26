@@ -7,7 +7,10 @@ import HelpOutlineRoundedIcon from '@mui/icons-material/HelpOutlineRounded';
 import SchoolIcon from '@mui/icons-material/School';
 import AutoStoriesIcon from '@mui/icons-material/AutoStories';
 import GridViewIcon from '@mui/icons-material/GridView';
+import TipsAndUpdatesIcon from '@mui/icons-material/TipsAndUpdates';
+import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import linesFile from '../data/vs.lines.new.json';
+// Force cache bust: v2 - data enrichment update 2026-01-26
 import type { Line, TextFile, Lang } from '../data/types';
 import { useWordFlow } from '../hooks/useWordFlow';
 import { splitTokens, chunkOffsetsByWord } from '../lib/tokenize';
@@ -22,9 +25,12 @@ import { LineTTSBar } from './LineTTSBar';
 import { PracticeView } from './PracticeView';
 import { PuzzleView } from './PuzzleView';
 import { OnboardingTour } from './OnboardingTour';
+import { VerseDetailPanel } from './VerseDetailPanel';
+import { MobileModeDock } from './MobileModeDock';
+import { ExploreDrawer } from './ExploreDrawer';
 import { analytics } from '../lib/analytics';
 import type { PracticeDifficulty } from '../lib/practice';
-import { isTTSEnabled, isTTSSupportedForLang, LineTTSPlayer, WordTTSPlayer } from '../lib/tts';
+import { isTTSEnabled, isTTSSupportedForLang, LineTTSPlayer } from '../lib/tts';
 
 
 export function VSNViewer({ onBack, textOverride, subtitleOverrides, availableLangs, preferredLang }: { onBack: () => void; textOverride?: TextFile; subtitleOverrides?: Partial<Record<Lang, string>>; availableLangs?: Lang[]; preferredLang?: Lang }) {
@@ -54,10 +60,23 @@ export function VSNViewer({ onBack, textOverride, subtitleOverrides, availableLa
       MuiSlider: { defaultProps: { size: 'small' } }
     }
   }), []);
-  const languageOptions = availableLangs ?? (['deva', 'knda', 'iast', 'tel', 'tam', 'guj', 'pan'] as Lang[]);
+  const rawLanguageOptions = availableLangs ?? (['deva', 'knda', 'iast', 'tel', 'tam', 'guj', 'pan'] as Lang[]);
+  const text = (textOverride ?? (linesFile as TextFile));
+
+  // Filter language options to only include languages that have actual content in the text
+  const languageOptions = useMemo(() => {
+    return rawLanguageOptions.filter((langCode) => {
+      // Check if at least some lines have non-empty content for this language
+      const hasContent = text.lines.some((line: any) => {
+        const content = line[langCode];
+        return content && typeof content === 'string' && content.trim().length > 0;
+      });
+      return hasContent;
+    });
+  }, [rawLanguageOptions, text.lines]);
+
   const fallbackLang = (languageOptions.includes('iast') ? 'iast' : (languageOptions[0] || 'iast')) as Lang;
   const fallbackLang2 = (languageOptions.find((l) => l !== fallbackLang) || '') as Lang | '';
-  const text = (textOverride ?? (linesFile as TextFile));
   const ttsEnabled = isTTSEnabled();
   const [lang, setLang] = useState<Lang>(() => {
     // Priority: preferredLang (if supported) > localStorage > fallbackLang
@@ -84,14 +103,6 @@ export function VSNViewer({ onBack, textOverride, subtitleOverrides, availableLa
     }
   }, [lang, lang2, languageOptions, fallbackLang2]);
 
-  const [pace, setPaceState] = useState<number>(() => {
-    try {
-      const stored = localStorage.getItem('ui:pace');
-      return stored ? parseInt(stored) : 90;
-    } catch { return 90; }
-  });
-  useEffect(() => { try { localStorage.setItem('ui:pace', pace.toString()); } catch { } }, [pace]);
-
   // Create TTS player instance ONCE and keep it stable across renders
   const lineTTSPlayerRef = useRef<LineTTSPlayer | null>(null);
   if (!lineTTSPlayerRef.current && ttsEnabled) {
@@ -99,56 +110,33 @@ export function VSNViewer({ onBack, textOverride, subtitleOverrides, availableLa
   }
   const lineTTSPlayer = lineTTSPlayerRef.current;
 
-  // WordTTSPlayer for chanting/reading mode
-  const wordTTSPlayerRef = useRef<WordTTSPlayer | null>(null);
-  if (!wordTTSPlayerRef.current && ttsEnabled) {
-    wordTTSPlayerRef.current = new WordTTSPlayer();
-  }
-  const wordTTSPlayer = wordTTSPlayerRef.current;
-
-  // Check if TTS is supported for current language
-  const ttsSupported = ttsEnabled && isTTSSupportedForLang(lang);
-
-  // Cleanup TTS player ONLY on unmount, not on re-renders
+  // Cleanup TTS player on unmount
   useEffect(() => {
     return () => {
       lineTTSPlayerRef.current?.dispose();
       lineTTSPlayerRef.current = null;
-      wordTTSPlayerRef.current?.dispose();
-      wordTTSPlayerRef.current = null;
     };
   }, []);
+
+  // TTS playing state (line-level TTS only)
+  const [ttsPlaying, setTtsPlaying] = useState(false);
 
   // Wire LineTTSPlayer callbacks to local state
   useEffect(() => {
     if (!lineTTSPlayer) return;
     lineTTSPlayer.setCallbacks({
-      onStart: () => setTtsMode('line'),
-      onEnd: () => setTtsMode('off'),
-      onError: () => setTtsMode('off'),
+      onStart: () => setTtsPlaying(true),
+      onEnd: () => setTtsPlaying(false),
+      onError: () => setTtsPlaying(false),
     });
   }, [lineTTSPlayer]);
 
-  // useWordFlow handles navigation and word-by-word TTS playback
-  const flow = useWordFlow(text.lines as Line[], lang, wordTTSPlayer || undefined, pace);
+  // useWordFlow handles navigation state for word highlighting
+  const flow = useWordFlow(text.lines as Line[], lang);
 
-  // Unified TTS mode: 'off' | 'line' | 'word' - ensures mutual exclusivity
-  const [ttsMode, setTtsMode] = useState<'off' | 'line' | 'word'>('off');
-  const ttsModeRef = useRef<'off' | 'line' | 'word'>('off');
-  useEffect(() => {
-    ttsModeRef.current = ttsMode;
-  }, [ttsMode]);
-
-  // Derived states for backward compatibility
-  const ttsPlaying = ttsMode === 'line';
-  const wordTtsPlaying = ttsMode === 'word';
-
-  // Sync ttsMode when word flow stops naturally (e.g., end of text)
-  useEffect(() => {
-    if (!flow.state.playing && ttsModeRef.current === 'word') {
-      setTtsMode('off');
-    }
-  }, [flow.state.playing]);
+  // Check if TTS is supported for current language AND current line has content
+  const currentLineText = (text.lines[flow.state.lineIndex] as any)?.[lang] || '';
+  const ttsSupported = ttsEnabled && isTTSSupportedForLang(lang) && currentLineText.trim().length > 0;
 
   const [detailsOpen, setDetailsOpen] = useState(false);
   // Word breakdown is always ON (no toggle in UI)
@@ -173,6 +161,14 @@ export function VSNViewer({ onBack, textOverride, subtitleOverrides, availableLa
   const [sideH, setSideH] = useState<number | null>(null);
   const [legendOpen, setLegendOpen] = useState(true);
   const [viewMode, setViewMode] = useState<'reading' | 'practice' | 'puzzle'>('reading');
+  const [learnMode, setLearnMode] = useState<boolean>(() => {
+    try {
+      return localStorage.getItem('ui:learnMode') === 'true';
+    } catch { return false; }
+  });
+  useEffect(() => { try { localStorage.setItem('ui:learnMode', learnMode.toString()); } catch { } }, [learnMode]);
+  const [verseDetailOpen, setVerseDetailOpen] = useState(false);
+  const [exploreDrawerOpen, setExploreDrawerOpen] = useState(false);
   const [modeHint, setModeHint] = useState<'reading' | 'practice' | 'puzzle' | null>(null);
   const modeHintSeenRef = useRef<{ reading: boolean; practice: boolean; puzzle: boolean }>({
     reading: false,
@@ -209,22 +205,6 @@ export function VSNViewer({ onBack, textOverride, subtitleOverrides, availableLa
 
   // Always show current line number
   useEffect(() => setNavLineNumber(flow.state.lineIndex + 1), [flow.state.lineIndex]);
-  const nudgeTimerRef = useRef<number | null>(null);
-  const rafRef = useRef<number | null>(null);
-  const [groupProgress, setGroupProgress] = useState(0); // 0..1 within current raw-word group dwell
-  const [holdingGroup, setHoldingGroup] = useState(false);
-  const [showSyncPill, setShowSyncPill] = useState(false);
-  const playingRef = useRef(flow.state.playing);
-  const holdingRef = useRef(holdingGroup);
-  const wasPlayingBeforeHoldRef = useRef(false);
-  useEffect(() => { playingRef.current = flow.state.playing; }, [flow.state.playing]);
-  useEffect(() => { holdingRef.current = holdingGroup; }, [holdingGroup]);
-  // If user manually pauses while a hold is active, do not auto-resume
-  useEffect(() => {
-    if (!flow.state.playing && holdingGroup) {
-      wasPlayingBeforeHoldRef.current = false;
-    }
-  }, [flow.state.playing, holdingGroup]);
   const sideWrapMobileRef = useRef<HTMLDivElement>(null);
   const sideWrapDesktopRef = useRef<HTMLDivElement>(null);
   const measureHeights = () => {
@@ -255,7 +235,7 @@ export function VSNViewer({ onBack, textOverride, subtitleOverrides, availableLa
     });
   }, []);
 
-  // End-of-text detection and handling
+  // End-of-text detection
   const atEnd = useMemo(() => {
     const lastToken = Math.max(0, flow.tokens.length - 1);
     return (flow.state.lineIndex >= flow.totalLines - 1) && (flow.state.wordIndex >= lastToken);
@@ -263,13 +243,12 @@ export function VSNViewer({ onBack, textOverride, subtitleOverrides, availableLa
 
   useEffect(() => {
     if (atEnd) {
-      if (holdingGroup) setHoldingGroup(false);
-      flow.setHold(false);
       setOverlayVisible(true);
     }
   }, [atEnd]);
 
-  const uiPlaying = ttsMode !== 'off' || holdingGroup;
+  // UI playing state - true when line TTS is playing
+  const uiPlaying = ttsPlaying;
 
   // Lightweight per-mode inline hints (shown once per mode, then remembered)
   useEffect(() => {
@@ -330,14 +309,14 @@ export function VSNViewer({ onBack, textOverride, subtitleOverrides, availableLa
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
-  }, [viewMode, flow.toggle, flow.seekLine, flow.state.lineIndex, flow.totalLines]);
+  }, [viewMode, flow.seekLine, flow.state.lineIndex, flow.totalLines]);
 
   // Onboarding keyboard navigation is handled inside OnboardingTour
 
   // Touch gesture state for swipe navigation (hybrid mode)
   const touchStartRef = useRef<{ x: number; y: number; time: number } | null>(null);
 
-  // Auto-hide overlay a moment after interaction if playing or holding
+  // Auto-hide overlay a moment after interaction if TTS is playing
   useEffect(() => {
     if (!overlayVisible || !uiPlaying) return;
     const id = window.setTimeout(() => setOverlayVisible(false), 2000);
@@ -356,106 +335,11 @@ export function VSNViewer({ onBack, textOverride, subtitleOverrides, availableLa
     return gi;
   }, [flow.state.lineIndex, flow.state.wordIndex, lang, text.lines]);
 
-  // Debounce showing the 'Syncing…' pill so very short holds don't flash
-  useEffect(() => {
-    let id: number | null = null;
-    if (holdingGroup) {
-      id = window.setTimeout(() => setShowSyncPill(true), 150) as unknown as number;
-    } else {
-      setShowSyncPill(false);
-    }
-    return () => { if (id) window.clearTimeout(id); };
-  }, [holdingGroup]);
-
-  // Animate within-group progression to drive secondary sub-word highlighting, even if primary group has 1 chunk
-  useEffect(() => {
-    // cancel existing RAF if any
-    if (rafRef.current) { cancelAnimationFrame(rafRef.current); rafRef.current = null; }
-    // guards
-    if (!lang2) { setGroupProgress(0); return; }
-    if (atEnd) { setGroupProgress(1); if (holdingRef.current) setHoldingGroup(false); return; }
-    const L = flow.state.lineIndex;
-    const currPrimary = (text.lines as any)[L]?.[lang] as string | undefined;
-    const currSecondary = (text.lines as any)[L]?.[lang2 as Lang] as string | undefined;
-    const offsP = chunkOffsetsByWord(currPrimary || '', lang);
-    const offsS = chunkOffsetsByWord(currSecondary || '', lang2 as Lang);
-    const gi = Math.max(0, Math.min(primaryGroupIndex, Math.max(0, offsP.length - 2)));
-    const startP = offsP[gi]; const endP = offsP[gi + 1] ?? startP + 1; const lenP = Math.max(1, endP - startP);
-    const giS = Math.max(0, Math.min(gi, Math.max(0, offsS.length - 2)));
-    const startS = offsS[giS]; const endS = offsS[giS + 1] ?? startS + 1; const lenS = Math.max(1, endS - startS);
-    // Use a fixed duration per word (audio-driven flow handles actual timing)
-    const baseMsPerWord = 600; // ~100 WPM equivalent for secondary sync animation
-    const dwellMs = Math.max(lenP, lenS) * baseMsPerWord;
-    // start RAF for dwell of this group in current line/language pair
-    setGroupProgress(0);
-    let startTs: number | null = null;
-    const step = (ts: number) => {
-      if (!startTs) startTs = ts;
-      const t = ts - startTs;
-      const prog = Math.max(0, Math.min(1, t / dwellMs));
-      setGroupProgress(prog);
-      if (prog < 1 && (playingRef.current || holdingRef.current)) { rafRef.current = requestAnimationFrame(step); }
-    };
-    rafRef.current = requestAnimationFrame(step);
-    return () => { if (rafRef.current) { cancelAnimationFrame(rafRef.current); rafRef.current = null; } };
-  }, [flow.state.lineIndex, primaryGroupIndex, lang, lang2, text.lines, atEnd]);
-
-  // Hold primary advancement at end of current raw-word group until RAF completes (ensures secondary finishes all sub-words)
-  useEffect(() => {
-    if (!lang2) { return; }
-    if (!flow.state.playing) { return; }
-    // Do not engage hold if we are already at the end of the final line
-    if (atEnd) return;
-    const L = flow.state.lineIndex;
-    const currPrimary = (text.lines as any)[L]?.[lang] as string | undefined;
-    const currSecondary = (text.lines as any)[L]?.[lang2 as Lang] as string | undefined;
-    const offsP = chunkOffsetsByWord(currPrimary || '', lang);
-    const offsS = chunkOffsetsByWord(currSecondary || '', lang2 as Lang);
-    const gi = Math.max(0, Math.min(primaryGroupIndex, Math.max(0, offsP.length - 2)));
-    const startP = offsP[gi];
-    const endP = offsP[gi + 1] ?? startP + 1;
-    const lenP = Math.max(1, (offsP[gi + 1] ?? (startP + 1)) - startP);
-    const giS = Math.max(0, Math.min(gi, Math.max(0, offsS.length - 2)));
-    const startS = offsS[giS];
-    const lenS = Math.max(1, (offsS[giS + 1] ?? (startS + 1)) - startS);
-    const lastIdxInGroup = Math.max(startP, endP - 1);
-    const meaningfulGroup = (lenS > lenP) && (lenS > 1);
-    if (meaningfulGroup && groupProgress < 0.999 && flow.state.wordIndex >= lastIdxInGroup && !holdingGroup) {
-      wasPlayingBeforeHoldRef.current = flow.state.playing;
-      flow.setHold(true);
-      setHoldingGroup(true);
-    }
-  }, [flow.state.playing, flow.state.wordIndex, flow.state.lineIndex, lang, lang2, text.lines, primaryGroupIndex, groupProgress, atEnd]);
-
-  // Resume once secondary finished its within-group progression (only if playback was active)
-  useEffect(() => {
-    if (holdingGroup && groupProgress >= 0.999) {
-      setHoldingGroup(false);
-      flow.setHold(false);
-      wasPlayingBeforeHoldRef.current = false;
-    }
-  }, [holdingGroup, groupProgress, flow.start]);
-
-  // Safety watchdog: if a group-hold lingers too long, auto-resume to avoid appearing "stuck"
-  useEffect(() => {
-    if (!holdingGroup) return;
-    const id = window.setTimeout(() => {
-      if (holdingRef.current) {
-        wasPlayingBeforeHoldRef.current = false;
-        setHoldingGroup(false);
-        flow.setHold(false);
-      }
-    }, 450) as unknown as number;
-    return () => window.clearTimeout(id);
-  }, [holdingGroup, flow.start]);
-
   // Bump visual nudge indicator (+/- words) with small accumulation window
   const bumpNudge = useCallback((dir: 'prev' | 'next') => {
     setNudge({ dir, count: 1, show: true });
     setTimeout(() => setNudge(n => ({ ...n, show: false })), 1200);
   }, []);
-
-  useEffect(() => () => { if (nudgeTimerRef.current) window.clearTimeout(nudgeTimerRef.current); }, []);
 
 
 
@@ -630,51 +514,20 @@ export function VSNViewer({ onBack, textOverride, subtitleOverrides, availableLa
   }, [lang, legendOpen, flow.state.lineIndex, text.lines, lang2, isSmall]);
 
   // TTS playback handler: toggle line-level TTS for current line.
-  // Ensures mutual exclusivity: stops word-by-word TTS if active.
   const handleLineTTS = useCallback(async () => {
     if (!lineTTSPlayer || !ttsSupported) return;
 
     // If line TTS is currently playing, stop it.
-    if (ttsModeRef.current === 'line') {
+    if (lineTTSPlayer.isPlaying()) {
       lineTTSPlayer.stop();
-      setTtsMode('off');
       return;
-    }
-
-    // Stop word-by-word TTS if active (mutual exclusivity)
-    if (ttsModeRef.current === 'word' || flow.state.playing) {
-      flow.pause();
     }
 
     const currentLineText = (text.lines[flow.state.lineIndex] as any)?.[lang] as string | undefined;
     if (!currentLineText) return;
 
-    setTtsMode('line');
-    try {
-      await lineTTSPlayer.playLine(currentLineText, lang);
-    } finally {
-      setTtsMode('off');
-    }
-  }, [lineTTSPlayer, ttsSupported, text.lines, flow.state.lineIndex, lang, flow]);
-
-  // Word-by-word TTS toggle handler.
-  // Ensures mutual exclusivity: stops line TTS if active.
-  const handleWordTTS = useCallback(() => {
-    // Stop line TTS if active (mutual exclusivity)
-    if (ttsModeRef.current === 'line' && lineTTSPlayer) {
-      lineTTSPlayer.stop();
-      setTtsMode('off');
-    }
-
-    // Toggle word-by-word playback
-    if (flow.state.playing) {
-      flow.pause();
-      setTtsMode('off');
-    } else {
-      setTtsMode('word');
-      flow.start();
-    }
-  }, [flow, lineTTSPlayer]);
+    await lineTTSPlayer.playLine(currentLineText, lang);
+  }, [lineTTSPlayer, ttsSupported, text.lines, flow.state.lineIndex, lang]);
 
   // Global shortcuts: Cmd/Ctrl+K or '/' for search, Space for TTS
   useEffect(() => {
@@ -746,12 +599,12 @@ export function VSNViewer({ onBack, textOverride, subtitleOverrides, availableLa
       iast: {
         app_title: 'Avabodhak', app_subtitle: 'Vishnu Sahasranama',
         search: 'Search', help: 'Help', howto: 'How to use', play: 'Play', pause: 'Manual', pace: 'Pace', tips: 'Tips', footer_hint: 'Use arrow keys or swipe to navigate lines.',
-        tip_play: '🔊 <strong>Text-to-Speech</strong>: <strong>Tap center</strong> or press <strong>Space</strong> to play audio for the current line. Press again to stop. <strong>Swipe left/right</strong> or use <strong>← / →</strong> arrow keys to navigate between lines.',
-        tip_pace: '⏱️ <strong>Navigation</strong>: Use arrow keys, swipe gestures, or the timeline to browse through verses at your own pace.',
-        tip_timeline: '🧭 <strong>Timeline</strong>: Drag to jump between lines. The line counter shows your current position.',
-        tip_pronun: '🎧 Pronunciation: Toggle in settings (cog) to see character animations—nasals elongate vertically, aspirates stretch horizontally, long vowels pulse gently.',
-        tip_search: '🔍 <strong>Search</strong>: Press <strong>⌘K</strong> or <strong>/</strong> to open search. Type any word or part of a verse (fuzzy match—no need for exact text). Tap a result (or press <strong>Enter</strong>) to jump to that line.',
-        tip_chapters: '📚 Sections: Tap the <strong>Sections</strong> chip above the timeline (line counter) to jump straight to a section heading.',
+        tip_play: '🔊 <strong>Text-to-Speech</strong>: Tap <strong>Play Line</strong> at the bottom to hear the current line. On desktop, press <strong>Space</strong>. <strong>Swipe</strong> or use <strong>← →</strong> to navigate.',
+        tip_pace: '📱 <strong>Mobile Dock</strong>: Use the bottom bar to switch modes (Read/Practice/Puzzle), open <strong>Details</strong> for verse meanings, or tap <strong>More</strong> for settings.',
+        tip_timeline: '🧭 <strong>Timeline</strong>: Drag the slider to jump between lines. Tap the line counter to see sections.',
+        tip_pronun: '🎧 <strong>Pronunciation</strong>: Toggle in settings to see character animations for nasals, aspirates, and long vowels.',
+        tip_search: '🔍 <strong>Search</strong>: Press <strong>⌘K</strong> or <strong>/</strong> to search. Fuzzy match finds partial text. Tap a result to jump there.',
+        tip_chapters: '📖 <strong>Verse Details</strong>: Tap <strong>Details</strong> in the dock (mobile) or info icon to see meanings, word analysis, and etymology.',
         practice: 'Practice', practice_mode: 'Practice Mode', difficulty: 'Difficulty', easy: 'Easy', medium: 'Medium', hard: 'Hard',
         jump_to_line: 'Go to...', reveal: 'Reveal', replay_line: 'Replay Line', revealed: 'revealed', practiced: 'practiced', progress: 'Progress', exit_practice: 'Exit Practice', line: 'Line',
         practice_hint: 'Tap blanks to reveal words', practice_complete: 'Verse practiced!', practice_progress: 'Progress',
@@ -761,8 +614,8 @@ export function VSNViewer({ onBack, textOverride, subtitleOverrides, availableLa
         correct: 'correct', completed: 'completed', attempts: 'attempts', hints: 'hints', keyboard_shortcuts: 'Keyboard shortcuts', to_navigate: 'to navigate',
         exit_puzzle: 'Exit Word Puzzle',
         help_play_tab: 'Play Mode', help_practice_tab: 'Practice Mode', help_puzzle_tab: 'Word Puzzle',
-        tip_practice_enter: '🎯 Practice Mode: Toggle using the book icon in the header.',
-        tip_puzzle_enter: '🧩 Word Puzzle: Toggle using the grid icon in the header.',
+        tip_practice_enter: '🎯 <strong>Practice Mode</strong>: Tap <strong>Practice</strong> in the bottom dock (mobile) or the book icon in header (desktop).',
+        tip_puzzle_enter: '🧩 <strong>Word Puzzle</strong>: Tap <strong>Puzzle</strong> in the bottom dock (mobile) or the grid icon in header (desktop).',
         tip_puzzle_arrange: '🧩 Arrange: Tap scrambled words below to place them in order. Tap placed words to remove them.',
         tip_puzzle_hints: '💡 Hints: Each hint reveals one more word from the beginning. Maximum hints = words - 1 (up to 4).',
         tip_puzzle_reveal: '👁️ Reveal: Instantly shows the complete solution.',
@@ -784,12 +637,12 @@ export function VSNViewer({ onBack, textOverride, subtitleOverrides, availableLa
       deva: {
         app_title: 'अवबोधक', app_subtitle: 'विष्णु सहस्रनाम',
         search: 'खोजें', help: 'सहायता', howto: 'कैसे उपयोग करें', play: 'चलाएँ', pause: 'मैन्युअल', pace: 'गति', tips: 'सुझाव', footer_hint: 'पंक्तियों में जाने के लिए तीर कुंजी या स्वाइप करें।',
-        tip_play: '🔊 <strong>टेक्स्ट-टू-स्पीच</strong>: <strong>केंद्र टैप करें</strong> या <strong>Space</strong> दबाएँ वर्तमान पंक्ति के लिए ऑडियो चलाने हेतु। रोकने के लिए फिर से दबाएँ। <strong>बाएँ/दाएँ स्वाइप</strong> या <strong>← / →</strong> तीर कुंजी से पंक्तियों के बीच जाएँ।',
-        tip_pace: '⏱️ <strong>नेविगेशन</strong>: तीर कुंजी, स्वाइप जेस्चर, या टाइमलाइन का उपयोग करके अपनी गति से श्लोकों में जाएँ।',
-        tip_timeline: '🧭 <strong>टाइमलाइन</strong>: खींचकर पंक्तियों पर जाएँ। लाइन काउंटर आपकी वर्तमान स्थिति दिखाता है।',
-        tip_pronun: '🎧 उच्चारण: सेटिंग्स (गियर) में <strong>उच्चारण</strong> सक्षम करें—अनुस्वार ऊर्ध्वाधर, विसर्ग क्षैतिज, दीर्घ स्वर धीरे स्पंदित।',
-        tip_search: '🔍 खोज: <strong>⌘K</strong> या <strong>/</strong> दबाकर खोज खोलें। किसी शब्द या श्लोक का अंश टाइप करें (धुंधली खोज—सटीक मिलान ज़रूरी नहीं)। परिणाम पर टैप करें या <strong>Enter</strong> दबाएँ, सीधे उसी पंक्ति पर पहुँचने के लिए।',
-        tip_chapters: '📚 अध्याय: टाइमलाइन के ऊपर "अध्याय" लाइन-काउंटर चिप पर टैप करके सीधे अध्याय शीर्षक पर जाएँ।',
+        tip_play: '🔊 <strong>टेक्स्ट-टू-स्पीच</strong>: नीचे <strong>Play Line</strong> टैप करें। डेस्कटॉप पर <strong>Space</strong> दबाएँ। <strong>स्वाइप</strong> या <strong>← →</strong> से नेविगेट करें।',
+        tip_pace: '📱 <strong>मोबाइल डॉक</strong>: नीचे की बार से मोड बदलें (Read/Practice/Puzzle), <strong>Details</strong> से अर्थ देखें, या <strong>More</strong> से सेटिंग्स।',
+        tip_timeline: '🧭 <strong>टाइमलाइन</strong>: स्लाइडर खींचकर पंक्तियों में जाएँ। लाइन काउंटर टैप करें अध्याय देखने हेतु।',
+        tip_pronun: '🎧 <strong>उच्चारण</strong>: सेटिंग्स में सक्षम करें—अनुस्वार, विसर्ग, दीर्घ स्वर के एनिमेशन देखें।',
+        tip_search: '🔍 <strong>खोज</strong>: <strong>⌘K</strong> या <strong>/</strong> दबाएँ। आंशिक टेक्स्ट से भी खोज सकते हैं।',
+        tip_chapters: '📖 <strong>श्लोक विवरण</strong>: डॉक में <strong>Details</strong> (मोबाइल) या info आइकॉन टैप करें—अर्थ, शब्द विश्लेषण देखें।',
         practice: 'अभ्यास', practice_mode: 'अभ्यास मोड', difficulty: 'कठिनाई', easy: 'आसान', medium: 'मध्यम', hard: 'कठिन',
         jump_to_line: 'जाएँ...', reveal: 'प्रकट करें', replay_line: 'लाइन रिप्ले करें', revealed: 'प्रकट', practiced: 'अभ्यास किया', progress: 'प्रगति', exit_practice: 'अभ्यास से बाहर निकलें', line: 'लाइन',
         practice_hint: 'शब्द प्रकट करने हेतु रिक्त स्थान टैप करें', practice_complete: 'श्लोक अभ्यास किया!', practice_progress: 'प्रगति',
@@ -799,7 +652,7 @@ export function VSNViewer({ onBack, textOverride, subtitleOverrides, availableLa
         correct: 'सही', completed: 'पूर्ण', attempts: 'प्रयास', hints: 'संकेत', keyboard_shortcuts: 'कीबोर्ड शॉर्टकट', to_navigate: 'नेविगेट करने के लिए',
         exit_puzzle: 'शब्द पहेली से बाहर निकलें',
         help_play_tab: 'प्ले मोड', help_practice_tab: 'अभ्यास मोड', help_puzzle_tab: 'शब्द पहेली',
-        tip_practice_enter: '🎯 हेडर में पुस्तक आइकॉन का उपयोग करके अभ्यास मोड में टॉगल करें',
+        tip_practice_enter: '🎯 <strong>अभ्यास मोड</strong>: डॉक में <strong>Practice</strong> (मोबाइल) या हेडर में पुस्तक आइकॉन टैप करें।',
         tip_practice_hints: '💡 संकेत: शब्द प्रारंभिक अक्षर दिखाते हैं—आसान (50%), मध्यम (33%), कठिन (25%)',
         tip_practice_reveal: '👁️ क्रमिक प्रकटीकरण: शब्द को कई बार टैप करें—हर टैप अधिक अक्षर प्रकट करता है। पूरी लाइन तुरंत पूरा करने के लिए "प्रकट करें" बटन का उपयोग करें',
         tip_practice_replay: '🔁 पुनरावृत्ति: लाइन पूरा करने के बाद, इसे फिर से अभ्यास करने के लिए "लाइन रिप्ले करें" टैप करें',
@@ -808,7 +661,7 @@ export function VSNViewer({ onBack, textOverride, subtitleOverrides, availableLa
         tip_practice_jump: '⏩ लाइन में जाएँ: किसी भी लाइन संख्या पर जल्दी नेविगेट करने के लिए सर्च बॉक्स का उपयोग करें',
         tip_practice_exit: '⏹️ अभ्यास से बाहर निकलें: रीडिंग मोड में वापस जाने के लिए हेडर में "अभ्यास से बाहर निकलें" बटन का उपयोग करें',
         tip_practice_search: '🔍 खोज: अभ्यास मोड में भी <strong>⌘K</strong> या <strong>/</strong> दबाएँ',
-        tip_puzzle_enter: '🧩 हेडर में ग्रिड आइकॉन का उपयोग करके शब्द पहेली में टॉगल करें',
+        tip_puzzle_enter: '🧩 <strong>शब्द पहेली</strong>: डॉक में <strong>Puzzle</strong> (मोबाइल) या हेडर में ग्रिड आइकॉन टैप करें।',
         tip_puzzle_arrange: '🧩 व्यवस्थित करें: नीचे दिए गए अव्यवस्थित शब्दों को टैप करके उन्हें क्रम में रखें। रखे गए शब्दों को हटाने के लिए उन्हें टैप करें',
         tip_puzzle_hints: '💡 संकेत: हर संकेत शुरुआत से एक और शब्द प्रकट करता है। अधिकतम संकेत = शब्द - 1 (अधिकतम 4)',
         tip_puzzle_reveal: '👁️ प्रकट करें: तुरंत पूरा समाधान दिखाता है',
@@ -822,12 +675,12 @@ export function VSNViewer({ onBack, textOverride, subtitleOverrides, availableLa
       knda: {
         app_title: 'ಅವಬೋಧಕ', app_subtitle: 'ವಿಷ್ಣು ಸಹಸ್ರನಾಮ',
         search: 'ಹುಡುಕಿ', help: 'ಸಹಾಯ', howto: 'ಹೆಗೆ ಬಳಸುವುದು', play: 'ಆಡಿಸಿ', pause: 'ಹಸ್ತಚಾಲಿತ', pace: 'ವೇಗ', tips: 'ಸಲಹೆಗಳು', footer_hint: 'ಸಾಲುಗಳ ನಡುವೆ ಹೋಗಲು ಬಾಣದ ಕೀಲಿಗಳು ಅಥವಾ ಸ್ವೈಪ್ ಬಳಸಿ.',
-        tip_play: '🔊 <strong>ಟೆಕ್ಸ್ಟ್-ಟು-ಸ್ಪೀಚ್</strong>: <strong>ಮಧ್ಯ ಟ್ಯಾಪ್ ಮಾಡಿ</strong> ಅಥವಾ <strong>Space</strong> ಒತ್ತಿ ಪ್ರಸ್ತುತ ಸಾಲಿಗೆ ಆಡಿಯೋ ಪ್ಲೇ ಮಾಡಲು. ನಿಲ್ಲಿಸಲು ಮತ್ತೆ ಒತ್ತಿ. <strong>ಎಡ/ಬಲ ಸ್ವೈಪ್</strong> ಅಥವಾ <strong>← / →</strong> ಬಾಣದ ಕೀಲಿಗಳಿಂದ ಸಾಲುಗಳ ನಡುವೆ ಹೋಗಿ.',
-        tip_pace: '⏱️ <strong>ನ್ಯಾವಿಗೇಶನ್</strong>: ಬಾಣದ ಕೀಲಿಗಳು, ಸ್ವೈಪ್ ಜೆಸ್ಚರ್‌ಗಳು, ಅಥವಾ ಟೈಮ್‌ಲೈನ್ ಬಳಸಿ ನಿಮ್ಮ ವೇಗದಲ್ಲಿ ಶ್ಲೋಕಗಳನ್ನು ಓದಿ.',
-        tip_timeline: '🧭 <strong>ಟೈಮ್‌ಲೈನ್</strong>: ಎಳೆಯುವುದರಿಂದ ಸಾಲುಗಳಿಗೆ ಜಿಗಿಯಿರಿ. ಲೈನ್ ಕೌಂಟರ್ ನಿಮ್ಮ ಪ್ರಸ್ತುತ ಸ್ಥಾನವನ್ನು ತೋರಿಸುತ್ತದೆ.',
-        tip_pronun: '🎧 ಉಚ್ಛಾರ: ಸೆಟ್ಟಿಂಗ್‌ಗಳಲ್ಲಿ <strong>ಉಚ್ಛಾರ</strong> ಸಕ್ರಿಯಗೊಳಿಸಿ—ಅನುಸ್ವಾರ ಲಂಬವಾಗಿ, ವಿಸರ್ಗ ಅಡ್ಡವಾಗಿ, ದೀರ್ಘ ಸ್ವರಗಳು ನಿಧಾನವಾಗಿ ಸ್ಪಂದಿಸುತ್ತವೆ.',
-        tip_search: '🔍 ಹುಡುಕಿ: <strong>⌘K</strong> ಅಥವಾ <strong>/</strong> ಒತ್ತಿ ಹುಡುಕಾಟ ತೆರೆಯಲು. ಯಾವುದೇ ಪದ ಅಥವಾ ಶ್ಲೋಕದ ಭಾಗವನ್ನು ಟೈಪ್ ಮಾಡಿ (ಫಜಿ ಸರ್ಚ್—ಹುಬ್ಬುಹುಬ್ಬು ಹೊಂದಿಕೆಯಾಗಬೇಕೆಂಬ ಅವಶ್ಯಕತೆ ಇಲ್ಲ). ಫಲಿತಾಂಶದ ಮೇಲೆ ಟ್ಯಾಪ್ ಮಾಡಿದರೆ (ಅಥವಾ <strong>Enter</strong> ಒತ್ತಿದರೆ) ಆ ಸಾಲಿಗೆ ನೇರವಾಗಿ ಜಿಗಿಯುತ್ತೀರಿ.',
-        tip_chapters: '📚 ಅಧ್ಯಾಯಗಳು: ಟೈಮ್‌ಲೈನ್ ಮೇಲಿರುವ "ಅಧ್ಯಾಯಗಳು" ಚಿಪ್ (ಸಾಲು ಎಣಿಕೆ) ಮೇಲೆ ಟ್ಯಾಪ್ ಮಾಡಿ ಅಧ್ಯಾಯ ಶೀರ್ಷಿಕೆಗೆ ನೇರವಾಗಿ ಜಿಗಿಯಿರಿ.',
+        tip_play: '🔊 <strong>ಟೆಕ್ಸ್ಟ್-ಟು-ಸ್ಪೀಚ್</strong>: ಕೆಳಗಿನ <strong>Play Line</strong> ಟ್ಯಾಪ್ ಮಾಡಿ. ಡೆಸ್ಕ್‌ಟಾಪ್‌ನಲ್ಲಿ <strong>Space</strong> ಒತ್ತಿ. <strong>ಸ್ವೈಪ್</strong> ಅಥವಾ <strong>← →</strong> ನ್ಯಾವಿಗೇಟ್ ಮಾಡಲು.',
+        tip_pace: '📱 <strong>ಮೊಬೈಲ್ ಡಾಕ್</strong>: ಕೆಳಗಿನ ಬಾರ್‌ನಿಂದ ಮೋಡ್ ಬದಲಿಸಿ (Read/Practice/Puzzle), <strong>Details</strong> ಅರ್ಥಕ್ಕಾಗಿ, <strong>More</strong> ಸೆಟ್ಟಿಂಗ್‌ಗಳಿಗಾಗಿ.',
+        tip_timeline: '🧭 <strong>ಟೈಮ್‌ಲೈನ್</strong>: ಸ್ಲೈಡರ್ ಎಳೆಯಿರಿ ಸಾಲುಗಳಿಗೆ ಜಿಗಿಯಲು. ಸಾಲು ಎಣಿಕೆ ಟ್ಯಾಪ್ ಮಾಡಿ ವಿಭಾಗಗಳು ನೋಡಲು.',
+        tip_pronun: '🎧 <strong>ಉಚ್ಛಾರ</strong>: ಸೆಟ್ಟಿಂಗ್‌ಗಳಲ್ಲಿ ಸಕ್ರಿಯಗೊಳಿಸಿ—ಅನುಸ್ವಾರ, ವಿಸರ್ಗ, ದೀರ್ಘ ಸ್ವರ ಅನಿಮೇಶನ್ ನೋಡಿ.',
+        tip_search: '🔍 <strong>ಹುಡುಕಿ</strong>: <strong>⌘K</strong> ಅಥವಾ <strong>/</strong> ಒತ್ತಿ. ಭಾಗಶಃ ಪಠ್ಯದಿಂದಲೂ ಹುಡುಕಬಹುದು.',
+        tip_chapters: '📖 <strong>ಶ್ಲೋಕ ವಿವರ</strong>: ಡಾಕ್‌ನಲ್ಲಿ <strong>Details</strong> (ಮೊಬೈಲ್) ಅಥವಾ info ಐಕಾನ್ ಟ್ಯಾಪ್ ಮಾಡಿ—ಅರ್ಥ, ಪದ ವಿಶ್ಲೇಷಣೆ ನೋಡಿ.',
         practice: 'ಅಭ್ಯಾಸ', practice_mode: 'ಅಭ್ಯಾಸ ಮೋಡ್', difficulty: 'ಕಷ್ಟತೆ', easy: 'ಸುಲಭ', medium: 'ಮಧ್ಯಮ', hard: 'ಕಠಿಣ',
         jump_to_line: 'ಹೋಗಿ...', reveal: 'ಬಹಿರಂಗಪಡಿಸಿ', replay_line: 'ಸಾಲು ಮರುಚಲಾವಣೆ', revealed: 'ಬಹಿರಂಗಪಡಿಸಲಾಗಿದೆ', practiced: 'ಅಭ್ಯಾಸ ಮಾಡಲಾಗಿದೆ', progress: 'ಪ್ರಗತಿ', exit_practice: 'ಅಭ್ಯಾಸದಿಂದ ನಿರ್ಗಮಿಸಿ', line: 'ಸಾಲು',
         practice_hint: 'ಪದಗಳನ್ನು ತೋರಿಸಲು ಖಾಲಿ ಜಾಗ ಟ್ಯಾಪ್ ಮಾಡಿ', practice_complete: 'ಶ್ಲೋಕ ಅಭ್ಯಾಸ ಮಾಡಲಾಗಿದೆ!', practice_progress: 'ಪ್ರಗತಿ',
@@ -837,7 +690,7 @@ export function VSNViewer({ onBack, textOverride, subtitleOverrides, availableLa
         correct: 'ಸರಿ', completed: 'ಪೂರ್ಣಗೊಂಡಿದೆ', attempts: 'ಪ್ರಯತ್ನಗಳು', hints: 'ಸೂಚನೆಗಳು', keyboard_shortcuts: 'ಕೀಬೋರ್ಡ್ ಶಾರ್ಟ್‌ಕಟ್‌ಗಳು', to_navigate: 'ನ್ಯಾವಿಗೇಟ್ ಮಾಡಲು',
         exit_puzzle: 'ಪದ ಒಗಟುದಿಂದ ನಿರ್ಗಮಿಸಿ',
         help_play_tab: 'ಪ್ಲೇ ಮೋಡ್', help_practice_tab: 'ಅಭ್ಯಾಸ ಮೋಡ್', help_puzzle_tab: 'ಪದ ಒಗಟು',
-        tip_practice_enter: '🎯 ಹೆಡರ್‌ನಲ್ಲಿ ಪುಸ್ತಕ ಐಕಾನ್ ಬಳಸಿ ಅಭ್ಯಾಸ ಮೋಡ್‌ಗೆ ಟಾಗಲ್ ಮಾಡಿ',
+        tip_practice_enter: '🎯 <strong>ಅಭ್ಯಾಸ ಮೋಡ್</strong>: ಡಾಕ್‌ನಲ್ಲಿ <strong>Practice</strong> (ಮೊಬೈಲ್) ಅಥವಾ ಹೆಡರ್‌ನಲ್ಲಿ ಪುಸ್ತಕ ಐಕಾನ್ ಟ್ಯಾಪ್ ಮಾಡಿ.',
         tip_practice_hints: '💡 ಸೂಚನೆಗಳು: ನೀವು ಟ್ಯಾಪ್ ಮಾಡುವಂತೆ ಪದಗಳು ಕ್ರಮವಾಗಿ ಪ್ರಾರಂಭದ ಅಕ್ಷರಗಳನ್ನು ತೋರಿಸುತ್ತವೆ.',
         tip_practice_reveal: '👁️ ಹಂತ ಹಂತದ ಬಹಿರಂಗಪಡಿಸುವಿಕೆ: ಪದವನ್ನು ಹಲವು ಬಾರಿ ಟ್ಯಾಪ್ ಮಾಡಿ—ಪ್ರತಿ ಟ್ಯಾಪ್ ಹೆಚ್ಚು ಅಕ್ಷರಗಳನ್ನು ತೋರಿಸುತ್ತದೆ. ಸಂಪೂರ್ಣ ಸಾಲನ್ನು ತಕ್ಷಣವೇ ಪೂರ್ಣಗೊಳಿಸಲು "ಬಹಿರಂಗಪಡಿಸಿ" ಬಟನ್ ಬಳಸಿ',
         tip_practice_replay: '🔁 ಪುನರಾವರ್ತನೆ: ಸಾಲು ಪೂರ್ಣಗೊಂಡ ನಂತರ, ಅದನ್ನು ಮತ್ತೆ ಅಭ್ಯಾಸ ಮಾಡಲು "ಸಾಲು ಮರುಚಲಾವಣೆ" ಟ್ಯಾಪ್ ಮಾಡಿ',
@@ -846,7 +699,7 @@ export function VSNViewer({ onBack, textOverride, subtitleOverrides, availableLa
         tip_practice_jump: '⏩ ಸಾಲಿಗೆ ಹೋಗಿ: ಯಾವುದೇ ಸಾಲು ಸಂಖ್ಯೆಗೆ ತ್ವರಿತವಾಗಿ ನ್ಯಾವಿಗೇಟ್ ಮಾಡಲು ಹುಡುಕಾಟ ಬಾಕ್ಸ್ ಬಳಸಿ',
         tip_practice_exit: '⏹️ ಅಭ್ಯಾಸದಿಂದ ನಿರ್ಗಮಿಸಿ: ಓದುವ ಮೋಡ್‌ಗೆ ಮರಳಲು ಹೆಡರ್‌ನಲ್ಲಿ "ಅಭ್ಯಾಸದಿಂದ ನಿರ್ಗಮಿಸಿ" ಬಟನ್ ಬಳಸಿ',
         tip_practice_search: '🔍 ಹುಡುಕಿ: ಅಭ್ಯಾಸ ಮೋಡ್‌ನಲ್ಲಿಯೂ <strong>⌘K</strong> ಅಥವಾ <strong>/</strong> ಒತ್ತಿ',
-        tip_puzzle_enter: '🧩 ಹೆಡರ್‌ನಲ್ಲಿ ಗ್ರಿಡ್ ಐಕಾನ್ ಬಳಸಿ ಪದ ಒಗಟುಗೆ ಟಾಗಲ್ ಮಾಡಿ',
+        tip_puzzle_enter: '🧩 <strong>ಪದ ಒಗಟು</strong>: ಡಾಕ್‌ನಲ್ಲಿ <strong>Puzzle</strong> (ಮೊಬೈಲ್) ಅಥವಾ ಹೆಡರ್‌ನಲ್ಲಿ ಗ್ರಿಡ್ ಐಕಾನ್ ಟ್ಯಾಪ್ ಮಾಡಿ.',
         tip_puzzle_arrange: '🧩 ವ್ಯವಸ್ಥೆ ಮಾಡಿ: ಕೆಳಗಿನ ಅಸ್ತವ್ಯಸ್ತ ಪದಗಳನ್ನು ಟ್ಯಾಪ್ ಮಾಡಿ ಅವುಗಳನ್ನು ಕ್ರಮದಲ್ಲಿ ಇರಿಸಿ. ಇರಿಸಿದ ಪದಗಳನ್ನು ತೆಗೆದುಹಾಕಲು ಅವುಗಳನ್ನು ಟ್ಯಾಪ್ ಮಾಡಿ',
         tip_puzzle_hints: '💡 ಸೂಚನೆಗಳು: ಪ್ರತಿ ಸೂಚನೆಯೂ ಆರಂಭದಿಂದ ಒಂದು ಹೆಚ್ಚು ಪದವನ್ನು ಬಹಿರಂಗಪಡಿಸುತ್ತದೆ. ಗರಿಷ್ಠ ಸೂಚನೆಗಳು = ಪದಗಳು - 1 (ಗರಿಷ್ಠ 4)',
         tip_puzzle_reveal: '👁️ ಬಹಿರಂಗಪಡಿಸಿ: ತತ್ಕ್ಷಣವೇ ಸಂಪೂರ್ಣ ಪರಿಹಾರವನ್ನು ತೋರಿಸುತ್ತದೆ',
@@ -860,12 +713,12 @@ export function VSNViewer({ onBack, textOverride, subtitleOverrides, availableLa
       tel: {
         app_title: 'అవబోధక', app_subtitle: 'విష్ణు సహస్రనామ',
         search: 'వెతకండి', help: 'సహాయం', howto: 'ఎలా వాడాలి', play: 'ప్లే', pause: 'మాన్యువల్', pace: 'వేగం', tips: 'సూచనలు', footer_hint: 'పంక్తుల నడువే హోగలు బాణ కీలు లేదా స్వైప్ బళసండి.',
-        tip_play: '🔊 <strong>టెక్స్ట్-టు-స్పీచ్</strong>: <strong>మధ్యలో ట్యాప్ చేయండి</strong> లేదా <strong>Space</strong> నొక్కండి ప్రస్తుత లైన్‌కు ఆడియో ప్లే చేయడానికి. నిలిపివేయడానికి మళ్లీ నొక్కండి. <strong>ఎడమ/కుడి స్వైప్</strong> లేదా <strong>← / →</strong> బాణ కీలుతో పంక్తుల నడువే హోగండి.',
-        tip_pace: '⏱️ <strong>నావిగేట్</strong>: బాణ కీలు, స్వైప్ జెస్చర్‌లు, లేదా టైమ్‌లైన్ బళసి మీ వేగంలో శ్లోకాలను చదవండి.',
-        tip_timeline: '🧭 <strong>టైమ్‌లైన్</strong>: లాగి పంక్తులకు జంప్ చేయండి. లైన్ కౌంటర్ మీ ప్రస్తుత స్థానాన్ని చూపిస్తుంది.',
-        tip_pronun: '🎧 ఉచ్చారణ: సెట్టింగ్స్‌లో <strong>ఉచ్చారణ</strong> ఆన్ చేయండి—అనుస్వారం నిలువుగా, విసర్గం అడ్డంగా, దీర్ఘ స్వరాలు నెమ్మదిగా స్పందిస్తాయి.',
-        tip_search: '🔍 సెర్చ్: <strong>⌘K</strong> లేదా <strong>/</strong> నొక్కి సెర్చ్ తెరచండి. ఏ పదం అయినా లేదా శ్లోకంలోని భాగాన్ని టైప్ చేయండి (ఫజీ సెర్చ్—పూర్తి మ్యాచ్ అవసరం లేదు). ఫలితంపై ట్యాప్ చేస్తే (లేదా <strong>Enter</strong> నొక్కితే) ఆ లైన్‌కే నేరుగా వెళ్తారు.',
-        tip_chapters: '📚 అధ్యాయాలు: టైమ్‌లైన్ పై ఉన్న "అధ్యాయాలు" చిప్ (లైన్ కౌంటర్) పై ట్యాప్ చేసి నేరుగా అధ్యాయ ప్రారంభానికి వెళ్లండి.',
+        tip_play: '🔊 <strong>టెక్స్ట్-టు-స్పీచ్</strong>: క్రింద <strong>Play Line</strong> ట్యాప్ చేయండి. డెస్క్‌టాప్‌లో <strong>Space</strong> నొక్కండి. <strong>స్వైప్</strong> లేదా <strong>← →</strong> నావిగేట్ చేయడానికి.',
+        tip_pace: '📱 <strong>మొబైల్ డాక్</strong>: క్రింది బార్ నుండి మోడ్ మార్చండి (Read/Practice/Puzzle), <strong>Details</strong> అర్థాలకు, <strong>More</strong> సెట్టింగ్స్‌కు.',
+        tip_timeline: '🧭 <strong>టైమ్‌లైన్</strong>: స్లైడర్ లాగి పంక్తులకు జంప్ చేయండి. లైన్ కౌంటర్ ట్యాప్ చేసి విభాగాలు చూడండి.',
+        tip_pronun: '🎧 <strong>ఉచ్చారణ</strong>: సెట్టింగ్స్‌లో ఆన్ చేయండి—అనుస్వారం, విసర్గం, దీర్ఘ స్వర యానిమేషన్లు చూడండి.',
+        tip_search: '🔍 <strong>సెర్చ్</strong>: <strong>⌘K</strong> లేదా <strong>/</strong> నొక్కండి. పాక్షిక టెక్స్ట్‌తో కూడా సెర్చ్ చేయవచ్చు.',
+        tip_chapters: '📖 <strong>శ్లోక వివరాలు</strong>: డాక్‌లో <strong>Details</strong> (మొబైల్) లేదా info ఐకాన్ ట్యాప్ చేయండి—అర్థాలు, పద విశ్లేషణ చూడండి.',
         practice: 'అభ్యాసం', practice_mode: 'అభ్యాస మోడ్', difficulty: 'కష్టం', easy: 'సులభం', medium: 'మధ్యస్థ', hard: 'కఠినం',
         jump_to_line: 'వెళ్లు...', reveal: 'వెల్లడించు', replay_line: 'లైన్ రీప్లే', revealed: 'వెల్లడించబడింది', practiced: 'అభ్యసించబడింది', progress: 'పురోగతి', exit_practice: 'అభ్యాసం నుండి నిష్క్రమించు', line: 'లైన్',
         practice_hint: 'పదాలను చూపించడానికి ఖాళీలను ట్యాప్ చేయండి', practice_complete: 'శ్లోకం అభ్యసించబడింది!', practice_progress: 'పురోగతి',
@@ -874,7 +727,7 @@ export function VSNViewer({ onBack, textOverride, subtitleOverrides, availableLa
         get_hint: 'సూచన పొందండి', hint: 'సూచన', reset_puzzle: 'పజిల్ రీసెట్ చేయండి', reset: 'రీసెట్', check: 'తనిఖీ చేయండి', next_puzzle: 'తదుపరి పజిల్',
         correct: 'సరైనది', completed: 'పూర్తయింది', attempts: 'ప్రయత్నాలు', hints: 'సూచనలు', keyboard_shortcuts: 'కీబోర్డ్ షార్ట్‌కట్‌లు', to_navigate: 'నావిగేట్ చేయడానికి',
         help_play_tab: 'ప్లే మోడ్', help_practice_tab: 'అభ్యాస మోడ్', help_puzzle_tab: 'పజిల్ మోడ్',
-        tip_practice_enter: '🎯 హెడర్‌లో బుక్ ఐకాన్‌ను ఉపయోగించి అభ్యాస మోడ్‌కు టాగుల్ చేయండి',
+        tip_practice_enter: '🎯 <strong>అభ్యాస మోడ్</strong>: డాక్‌లో <strong>Practice</strong> (మొబైల్) లేదా హెడర్‌లో బుక్ ఐకాన్ ట్యాప్ చేయండి.',
         tip_practice_hints: '💡 సూచనలు: పదాలు ప్రారంభ అక్షరాలను చూపిస్తాయి—సులభం (50%), మధ్యస్థ (33%), కఠినం (25%)',
         tip_practice_reveal: '👁️ క్రమంగా బహిర్గతం: పదాన్ని పలు సార్లు ట్యాప్ చేయండి—ప్రతి ట్యాప్ మరిన్ని అక్షరాలను చూపిస్తుంది. మొత్తం లైన్‌ను వెంటనే పూర్తి చేయడానికి "వెల్లడించు" బటన్‌ను ఉపయోగించండి',
         tip_practice_replay: '🔁 పునరావృతం: లైన్ పూర్తైన తర్వాత, దాన్ని మళ్లీ అభ్యసించడానికి "లైన్ రీప్లే" ట్యాప్ చేయండి',
@@ -883,7 +736,7 @@ export function VSNViewer({ onBack, textOverride, subtitleOverrides, availableLa
         tip_practice_jump: '⏩ లైన్‌కు వెళ్లు: ఎంతైనా లైన్ నంబర్‌కు వేగంగా నావిగేట్ చేయడానికి సెర్చ్ బాక్స్‌ను ఉపయోగించండి',
         tip_practice_exit: '⏹️ అభ్యాసం నుండి నిష్క్రమించు: రీడింగ్ మోడ్‌కు తిరిగి వెళ్లడానికి హెడర్‌లో "అభ్యాసం నుండి నిష్క్రమించు" బటన్‌ను ఉపయోగించండి',
         tip_practice_search: '🔍 వెతకండి: అభ్యాస మోడ్‌లో కూడా <strong>⌘K</strong> లేదా <strong>/</strong> నొక్కండి',
-        tip_puzzle_enter: '🧩 హెಡర్‌లో గ్రిడ్ ఐకాన్‌ను ఉపయోగించి పజిల్ మోడ్‌కు టాగుల్ చేయండి',
+        tip_puzzle_enter: '🧩 <strong>పజిల్ మోడ్</strong>: డాక్‌లో <strong>Puzzle</strong> (మొబైల్) లేదా హెడర్‌లో గ్రిడ్ ఐకాన్ ట్యాప్ చేయండి.',
         tip_puzzle_arrange: '🧩 అమర్చు: క్రింద అస్తవ్యస్త పదాలను ట్యాప్ చేసి వాటిని క్రమంలో ఉంచండి. ఉంచిన పదాలను తీసివేయడానికి వాటిని ట్యాప్ చేయండి',
         tip_puzzle_hints: '💡 సూచనలు: ప్రతి సూచన ప్రారంభం నుండి ఒక పదాన్ని మరింత వెల్లడిస్తుంది. గరిష్ట సూచనలు = పదాలు - 1 (గరిష్ట 4)',
         tip_puzzle_reveal: '👁️ వెల్లడించు: వెంటనే పూర్తి పరిష్కారాన్ని చూపిస్తుంది',
@@ -897,12 +750,12 @@ export function VSNViewer({ onBack, textOverride, subtitleOverrides, availableLa
       tam: {
         app_title: 'அவபோதக', app_subtitle: 'விஷ்ணு ஸஹஸ்ரநாமம்',
         search: 'தேடு', help: 'உதவி', howto: 'பயன்படுத்துவது எப்படி', play: 'இயக்கு', pause: 'கைமுறை', pace: 'வேகம்', tips: 'உதவிக்குறிப்புகள்', footer_hint: 'தொடங்க ப்ளே அழுத்தவும்; வேகத்தை விருப்பப்படி அமைக்கவும்.',
-        tip_play: '▶️ இயக்கு/இடைநிறுத்து: <strong>மையத்தில் தட்டவும்</strong> அல்லது <strong>Space</strong> அழுத்தவும். சொல்-சொல்லாக செல்ல விளிம்புகளில் <strong>இரட்டை-தட்டவும்</strong>.',
-        tip_pace: '⏱️ வேகம்: சொல்களின் சிக்கலுக்கு (நீளம், குறிகள்/நீட்சி, கூட்டெழுத்துகள்) ஏற்ப நேரம் மாறும். WPM ஸ்பீடோமீட்டர் ஸ்லைடரைப் பயன்படுத்தி உங்கள் மொத்த வேகத்தை அமைக்கவும்.',
-        tip_timeline: '🧭 காலவரிசை: இழுத்து வரிகளைத் தாண்டிச் செல்லவும். நடப்பு சொல் மஞ்சள் நிறத்தில் சூழலுடன் வெளிப்படுத்தப்படும்.',
-        tip_pronun: '🎧 உச்சாரண: அமைப்புகளில் <strong>உச்சாரண</strong> இயக்கவும்—அனுஸ்வாரம் செங்குத்தாக, விஸர்கம் கிடைமட்டமாக, நீண்ட உயிர்கள் மெதுவாக துடிக்கும்.',
-        tip_search: '🔍 தேடு: <strong>⌘K</strong> அல்லது <strong>/</strong> அழுத்தி தேடல் திறக்கவும். எந்தச் சொல் அல்லது ஸ்லோகத்தின் ஒரு பகுதியையும் எழுதலாம் (ஃபஜி தேடல்—அச்சுக் கூட்டுத் துல்லியம் தேவையில்லை). முடிவைத் தட்டினால் (அல்லது <strong>Enter</strong> அழுத்தினால்) அந்த வரியிலேயே செல்லலாம்.',
-        tip_chapters: '📚 அத்தியாயங்கள்: காலவரிசை மேல் உள்ள "அத்தியாயங்கள்" சிப் (வரி எண்ணிக்கை) மீது தட்டுவதன் மூலம் நேராக அத்தியாயத்தின் தொடக்கத்திற்கு செல்லலாம்.',
+        tip_play: '🔊 <strong>உரை-உச்சாரணம்</strong>: நடப்பு வரியைக் கேட்க கீழே <strong>Play Line</strong> தட்டவும். டெஸ்க்டாப்பில் <strong>Space</strong>. <strong>ஸ்வைப்</strong>/<strong>← →</strong> வழிசெலுத்த.',
+        tip_pace: '📱 <strong>மொபைல் டாக்</strong>: கீழ் பட்டியில் முறைகள் (Read/Practice/Puzzle) மாற்றவும், <strong>Details</strong> அர்த்தங்கள் பார்க்க, <strong>More</strong> அமைப்புகளுக்கு.',
+        tip_timeline: '🧭 காலவரிசை: இழுத்து வரிகளைத் தாண்டவும். நடப்பு சொல் மஞ்சள் நிறத்தில் வெளிப்படும்.',
+        tip_pronun: '🎧 உச்சாரணம்: அமைப்புகளில் இயக்கவும்—அனுஸ்வாரம், விஸர்கம், நீண்ட உயிர்கள் காட்சி குறிகளுடன்.',
+        tip_search: '🔍 தேடு: <strong>⌘K</strong>/<strong>/</strong> திறக்கவும். எந்த சொல்/ஸ்லோகமும் எழுதலாம் (ஃபஜி தேடல்). முடிவு தட்டி அங்கு செல்லவும்.',
+        tip_chapters: '📚 அத்தியாயங்கள்: "அத்தியாயங்கள்" சிப் தட்டி நேரடியாக அத்தியாய தொடக்கத்திற்கு செல்லவும்.',
         practice: 'பயிற்சி', practice_mode: 'பயிற்சி முறை', difficulty: 'சிரமம்', easy: 'எளிது', medium: 'நடுத்தரம்', hard: 'கடினம்',
         jump_to_line: 'செல்லு...', reveal: 'வெளிப்படுத்து', replay_line: 'வரியை மீண்டும் இயக்கு', revealed: 'வெளிப்படுத்தப்பட்டது', practiced: 'பயிற்சி செய்யப்பட்டது', progress: 'முன்னேற்றம்', exit_practice: 'பயிற்சியில் இருந்து வெளியேறு', line: 'வரி',
         practice_hint: 'சொற்களைக் காட்ட வெற்றிடங்களைத் தட்டவும்', practice_complete: 'சொக்கம் பயிற்சி செய்யப்பட்டது!', practice_progress: 'முன்னேற்றம்',
@@ -911,7 +764,7 @@ export function VSNViewer({ onBack, textOverride, subtitleOverrides, availableLa
         get_hint: 'குறிப்பு பெறு', hint: 'குறிப்பு', reset_puzzle: 'புதிரை மீட்டமை', reset: 'மீட்டமை', check: 'சரிபார்', next_puzzle: 'அடுத்த புதிர்',
         correct: 'சரி', completed: 'முடிந்தது', attempts: 'முயற்சிகள்', hints: 'குறிப்புகள்', keyboard_shortcuts: 'கீபோர்ட் குறுக்குவழிகள்', to_navigate: 'நகர்த்த',
         help_play_tab: 'ப்ளே முறை', help_practice_tab: 'பயிற்சி முறை', help_puzzle_tab: 'புதிர் முறை',
-        tip_practice_enter: 'பயிற்சி முறைக்கு மாற்ற தலைப்பில் 🎯 ஐகானைப் பயன்படுத்தவும் (படிப்பு மற்றும் பயிற்சி முறைகளுக்கு இடையே மாறுகிறது)',
+        tip_practice_enter: '🎯 <strong>பயிற்சி முறை</strong>: டாக்கில் <strong>Practice</strong> (மொபைல்) அல்லது தலைப்பில் புத்தக ஐகான் தட்டவும்.',
         tip_practice_hints: 'குறிப்புகள்: சொற்கள் தொடக்க எழுத்துக்களைக் காட்டும்—எளிது (50%), நடுத்தரம் (33%), கடினம் (25%)',
         tip_practice_reveal: 'படிப்படியாக வெளிப்படுத்தல்: சொல்லை பல முறை தட்டவும்—ஒவ்வொரு தட்டலும் மேலும் எழுத்துக்களைக் காட்டும். முழு வரியையும் உடனடியாக முடிக்க "வெளிப்படுத்து" பொத்தானைப் பயன்படுத்தவும்',
         tip_practice_replay: 'மீண்டும் செய்: வரி முடிந்ததும், அதை மீண்டும் பயிற்சி செய்ய "வரியை மீண்டும் இயக்கு" தட்டவும்',
@@ -920,7 +773,7 @@ export function VSNViewer({ onBack, textOverride, subtitleOverrides, availableLa
         tip_practice_jump: 'வரிக்குச் செல்: எந்த வரி எண்ணுக்கும் விரைவாக செல்ல தேடல் பெட்டியைப் பயன்படுத்தவும்',
         tip_practice_exit: 'பயிற்சியில் இருந்து வெளியேறு: வாசிப்பு முறைக்குத் திரும்ப தலைப்பில் "பயிற்சியில் இருந்து வெளியேறு" பொத்தானைப் பயன்படுத்தவும்',
         tip_practice_search: 'தேடு: பயிற்சி முறையிலும் <strong>⌘K</strong> அல்லது <strong>/</strong> அழுத்தவும்',
-        tip_puzzle_enter: 'புதிர் முறைக்கு மாற்ற தலைப்பில் கிரிட் ஐகானைப் பயன்படுத்தவும்',
+        tip_puzzle_enter: '🧩 <strong>புதிர் முறை</strong>: டாக்கில் <strong>Puzzle</strong> (மொபைல்) அல்லது தலைப்பில் கிரிட் ஐகான் தட்டவும்.',
         tip_puzzle_arrange: 'அமை: கீழே குழப்பமான சொற்களைத் தட்டி அவற்றை வரிசையில் வைக்கவும். வைக்கப்பட்ட சொற்களை அகற்ற அவற்றைத் தட்டவும்',
         tip_puzzle_hints: 'குறிப்புகள்: ஒவ்வொரு குறிப்பும் தொடக்கத்திலிருந்து ஒரு சொல்லை மேலும் வெளிப்படுத்தும். அதிகபட்ச குறிப்புகள் = சொற்கள் - 1 (அதிகபட்ச 4)',
         tip_puzzle_reveal: 'வெளிப்படுத்து: உடனடியாக முழு தீர்வையும் காட்டுகிறது',
@@ -934,45 +787,47 @@ export function VSNViewer({ onBack, textOverride, subtitleOverrides, availableLa
       guj: {
         app_title: 'અવબોધક', app_subtitle: 'વિષ્ણુ સહસ્રનામ',
         search: 'શોધો', help: 'મદદ', howto: 'કેવી રીતે વાપરવું', play: 'ચાલુ', pause: 'મેન્યુઅલ', pace: 'ગતિ', tips: 'સૂચનો', footer_hint: 'શરૂ કરવા પ્લે દબાવો; ગતિને પસંદ મુજબ સમાયોજિત કરો.',
-        tip_play: '▶️ ચાલુ/વિરામ: <strong>મધ્યમાં ટૅપ કરો</strong> અથવા <strong>Space</strong> દબાવો. શબ્દ-દર-શબ્દ જવા કિનારાઓ પર <strong>ડબલ-ટૅપ</strong> કરો.',
-        tip_pace: '⏱️ ગતિ: સમય શબ્દની જટિલતા (લંબાઈ, ચિહ્નો/માત્રા, સંયુક્ત અક્ષર) મુજબ બદલાય છે. WPM સ્પીડોમીટર સ્લાઇડરથી તમારી કુલ ગતિ સેટ કરો.',
-        tip_timeline: '🧭 સમયરેખા: ખેંચીને પંક્તિઓ પર જાઓ. વર્તમાન શબ્દ પીળા રંગમાં સંદર્ભ સાથે હાઇલાઇટ થાય છે.',
-        tip_pronun: '🎧 ઉચ્ચાર: સેટિંગ્સમાં <strong>ઉચ્ચાર</strong> સક્રિય કરો—અનુસ્વાર ઊભી રીતે, વિસર્ગ આડી રીતે, લાંબા સ્વરો ધીમે ધબકે છે.',
-        tip_search: '🔍 શોધો: <strong>⌘K</strong> અથવા <strong>/</strong> દબાવી શોધ વિંડો ખોલો. કોઈપણ શબ્દ અથવા શ્લોકનો ભાગ લખો (ફઝી સર્ચ—સચોટ મેળાપ જરૂરી નથી). પરિણામ પર ટૅપ કરો અથવા <strong>Enter</strong> દબાવો, સીધા તે લાઇન પર જવા માટે.',
-        tip_chapters: '📚 અધ્યાય: ટાઇમલાઇન ઉપરના "અધ્યાય" ચિપ (લાઇન કાઉન્ટર) પર ટૅપ કરીને સીધું અધ્યાય શીર્ષક પર જાઓ.',
+        tip_play: '🔊 <strong>ટેક્સ્ટ-ટુ-સ્પીચ</strong>: વર્તમાન લાઇન સાંભળવા <strong>Play Line</strong> ટૅપ કરો. ડેસ્કટોપ પર <strong>Space</strong>. <strong>સ્વાઇપ</strong>/<strong>← →</strong> નેવિગેટ કરવા.',
+        tip_pace: '📱 <strong>મોબાઇલ ડોક</strong>: નીચેની બારથી મોડ (Read/Practice/Puzzle) બદલો, <strong>Details</strong> અર્થો જુઓ, <strong>More</strong> સેટિંગ્સ માટે.',
+        tip_timeline: '🧭 ટાઇમલાઇન: ખેંચીને લાઇન પર જાઓ. વર્તમાન શબ્દ પીળા રંગમાં હાઇલાઇટ.',
+        tip_pronun: '🎧 ઉચ્ચારણ: સેટિંગ્સમાં સક્રિય કરો—અનુસ્વાર, વિસર્ગ, લાંબા સ્વરો વિઝ્યુઅલ સંકેતો સાથે.',
+        tip_search: '🔍 શોધ: <strong>⌘K</strong>/<strong>/</strong> ખોલો. કોઈપણ શબ્દ/શ્લોક લખો (ફઝી સર્ચ). પરિણામ ટૅપ કરી ત્યાં જાઓ.',
+        tip_chapters: '📚 અધ્યાય: "અધ્યાય" ચિપ ટૅપ કરી સીધા અધ્યાયની શરૂઆત પર જાઓ.',
         practice: 'પ્રેક્ટિસ', practice_mode: 'પ્રેક્ટિસ મોડ', difficulty: 'મુશ્કેલી', easy: 'સરળ', medium: 'મધ્યમ', hard: 'મુશ્કેલ',
         jump_to_line: 'જાઓ...', reveal: 'દેખાડો', replay_line: 'લાઈન રિપ્લે કરો', revealed: 'દેખાડ્યું', practiced: 'અભ્યાસ કર્યો', progress: 'પ્રગતિ', exit_practice: 'પ્રેક્ટિસમાંથી બહાર નીકળો', line: 'લાઈન',
         practice_hint: 'શબ્દો દર્શાવવા માટે ખાલી જગ્યાઓ ટૅપ કરો', practice_complete: 'શ્લોક અભ્યાસ કર્યો!', practice_progress: 'પ્રગતિ',
-        tip_practice_hints: '� ਸੰਕੇਤ: ਸ਼ਬਦ ਸ਼ੁਰੂਆਤੀ ਅੱਖਰ ਦਿਖਾਉਂਦੇ ਹਨ—ਆਸਾਨ (50%), ਮੱਧਮ (33%), ਔਖਾ (25%)',
-        tip_practice_reveal: '👁️ ਧੀਰੇ ਧੀਰੇ ਖੁਲਾਸਾ: ਸ਼ਬਦ ਨੂੰ ਕਈ ਵਾਰ ਟੈਪ ਕਰੋ—ਹਰ ਟੈਪ ਵਧੇਰੇ ਅੱਖਰ ਦਿਖਾਉਂਦਾ ਹੈ। ਪੂਰੀ ਲਾਈਨ ਫੌਰਨ ਪੂਰੀ ਕਰਨ ਲਈ "ਦਿਖਾਓ" ਬਟਨ ਦੀ ਵਰਤੋਂ ਕਰੋ',
-        tip_practice_replay: '🔁 ਦੁਹਰਾਓ: ਲਾਈਨ ਪੂਰੀ ਹੋਣ ਦੇ ਬਾਅਦ, ਇਸਨੂੰ ਦੁਬਾਰਾ ਅਭਿਆਸ ਕਰਨ ਲਈ "ਲਾਈਨ ਦੁਹਰਾਓ" ਟੈਪ ਕਰੋ',
-        tip_practice_navigate: '🧭 ਨੇਵੀਗੇਟ: ← → ਤੀਰ ਕੁੰਜੀਆਂ, ਪਿਛਲਾ/ਅਗਲਾ ਬਟਨਾਂ, ਜਾਂ ਸਵਾਈਪ ਜੈਸਚਰਾਂ ਦੀ ਵਰਤੋਂ ਕਰੋ। ਪਹਿਲਾ/ਆਖਿਰੀ ਬਟਨਾਂ ਸ਼ੁਰੂਆਤ/ਅੰਤ ਵਿੱਚ ਜਾਂਦੇ ਹਨ। ਹੋਮ/ਐਂਡ ਕੁੰਜੀਆਂ ਵੀ ਕੰਮ ਕਰਦੀਆਂ ਹਨ। ਅਧਿਆਇ ਲਾਈਨਾਂ ਆਪਣੇ ਆਪ ਛੱਡੀਆਂ ਜਾਂਦੀਆਂ ਹਨ',
-        tip_practice_progress: '📈 ਤਰੱਕੀ: ਹੇਠਾਂ ਰੰਗੀਨ ਡੌਟ ਪੂਰੀਆਂ ਲਾਈਨਾਂ (ਹਰਾ) ਅਤੇ ਮੌਜੂਦਾ ਸਥਿਤੀ (ਨੀਲਾ) ਦਿਖਾਉਂਦੇ ਹਨ। ਕਾਊਂਟਰ ਕੁੱਲ ਅਭਿਆਸ ਕੀਤੀਆਂ ਲਾਈਨਾਂ ਦਿਖਾਉਂਦਾ ਹੈ',
-        tip_practice_jump: '⏩ ਲਾਈਨ ਵਿੱਚ ਜਾਓ: ਕਿਸੇ ਵੀ ਲਾਈਨ ਨੰਬਰ ਤੇ ਤੇਜ਼ੀ ਨਾਲ ਨੇਵੀਗੇਟ ਕਰਨ ਲਈ ਸਰਚ ਬਾਕਸ ਦੀ ਵਰਤੋਂ ਕਰੋ',
-        tip_practice_exit: '⏹️ ਅਭਿਆਸ ਵਿੱਚੋਂ ਬਾਹਰ ਨਿਕਲੋ: ਰੀਡਿੰਗ ਮੋਡ ਵਿੱਚ ਵਾਪਸ ਜਾਣ ਲਈ ਹੇਡਰ ਵਿੱਚ "ਅਭਿਆਸ ਵਿੱਚੋਂ ਬਾਹਰ ਨਿਕਲੋ" ਬਟਨ ਦੀ ਵਰਤੋਂ ਕਰੋ',
-        tip_practice_search: '🔍 ਖੋਜੋ: ਅਭਿਆਸ ਮੋਡ ਵਿੱਚ ਵੀ <strong>⌘K</strong> ਜਾਂ <strong>/</strong> ਦਬਾਓ',
-        tip_puzzle_enter: '🧩 Toggle to Word Puzzle using the grid icon in the header',
-        tip_puzzle_arrange: '🧩 Arrange: Tap scrambled words below to place them in order. Tap placed words to remove them',
-        tip_puzzle_hints: '💡 Hints: Each hint reveals one more word from the beginning. Maximum hints = words - 1 (up to 4)',
-        tip_puzzle_reveal: '👁️ Reveal: Instantly shows the complete solution',
-        tip_puzzle_replay: '🔁 Replay: After solving, tap "Replay" to try again',
-        tip_puzzle_confetti: '🎉 Confetti: Solve on first correct attempt for a celebration!',
-        tip_puzzle_navigate: '🧭 Navigate: Use ← → arrow keys, Previous/Next buttons, or swipe gestures between puzzles'
+        help_play_tab: 'પ્લે મોડ', help_practice_tab: 'પ્રેક્ટિસ મોડ', help_puzzle_tab: 'વર્ડ પઝલ',
+        tip_practice_enter: '🎯 <strong>પ્રેક્ટિસ મોડ</strong>: ડોકમાં <strong>Practice</strong> (મોબાઇલ) અથવા હેડરમાં પુસ્તક આઇકન ટૅપ કરો.',
+        tip_practice_hints: '💡 સંકેત: શબ્દો શરૂઆતના અક્ષરો બતાવે છે—સરળ (50%), મધ્યમ (33%), મુશ્કેલ (25%)',
+        tip_practice_reveal: '👁️ ધીમે ધીમે પ્રગટ: શબ્દ વારંવાર ટૅપ કરો—દરેક ટૅપ વધુ અક્ષરો બતાવે છે. સંપૂર્ણ લાઇન માટે "દેખાડો" બટન વાપરો',
+        tip_practice_replay: '🔁 ફરીથી: લાઇન પૂર્ણ થયા પછી, ફરી અભ્યાસ કરવા "લાઈન રિપ્લે કરો" ટૅપ કરો',
+        tip_practice_navigate: '🧭 નેવિગેટ: ← → એરો કી, Previous/Next બટન, અથવા સ્વાઇપ વાપરો. અધ્યાય લાઇન આપોઆપ છોડાય છે',
+        tip_practice_progress: '📈 પ્રગતિ: નીચે રંગીન ડોટ પૂર્ણ લાઇન (લીલો) અને વર્તમાન સ્થાન (વાદળી) બતાવે છે',
+        tip_practice_jump: '⏩ લાઇન પર જાઓ: કોઈપણ લાઇન નંબર પર ઝડપથી જવા શોધ બોક્સ વાપરો',
+        tip_practice_exit: '⏹️ પ્રેક્ટિસ છોડો: વાંચન મોડમાં પાછા જવા હેડરમાં "પ્રેક્ટિસમાંથી બહાર નીકળો" વાપરો',
+        tip_practice_search: '🔍 શોધ: પ્રેક્ટિસ મોડમાં પણ <strong>⌘K</strong>/<strong>/</strong> દબાવો',
+        tip_puzzle_enter: '🧩 <strong>પઝલ મોડ</strong>: ડોકમાં <strong>Puzzle</strong> (મોબાઇલ) અથવા હેડરમાં ગ્રિડ આઇકન ટૅપ કરો.',
+        tip_puzzle_arrange: '🧩 ગોઠવો: નીચે ગૂંચવાયેલા શબ્દો ટૅપ કરી ક્રમમાં મૂકો. મૂકેલા શબ્દો દૂર કરવા ટૅપ કરો',
+        tip_puzzle_hints: '💡 સંકેત: દરેક સંકેત શરૂઆતથી એક વધુ શબ્દ પ્રગટ કરે છે. મહત્તમ = શબ્દો - 1 (4 સુધી)',
+        tip_puzzle_reveal: '👁️ પ્રગટ: તરત સંપૂર્ણ ઉકેલ બતાવે છે',
+        tip_puzzle_replay: '🔁 ફરીથી: ઉકેલ્યા પછી, ફરી પ્રયાસ કરવા "Replay" ટૅપ કરો',
+        tip_puzzle_confetti: '🎉 કન્ફેટી: પ્રથમ સાચા પ્રયત્ને ઉકેલો અને ઉજવણી કરો!',
+        tip_puzzle_navigate: '🧭 નેવિગેટ: ← → એરો કી, Previous/Next બટન, અથવા પઝલ વચ્ચે સ્વાઇપ વાપરો'
       },
       pan: {
         app_title: 'ਅਵਬੋਧਕ', app_subtitle: 'ਵਿਸ਼੍ਣੁ ਸਹਸ੍ਰ ਨਾਮ',
         search: 'ਖੋਜ', help: 'ਮਦਦ', howto: 'ਕਿਵੇਂ ਵਰਤਣਾ ਹੈ', play: 'ਚਲਾਓ', pause: 'ਮੈਨੁਅਲ', pace: 'ਗਤੀ', tips: 'ਸੁਝਾਅ', footer_hint: 'ਸ਼ੁਰੂ ਕਰਨ ਲਈ ਪਲੇ ਦਬਾਓ; ਗਤੀ ਆਪਣੀ ਪਸੰਦ ਅਨੁਸਾਰ ਸੈੱਟ ਕਰੋ।',
-        tip_play: '▶️ ਚਲਾਓ/ਰੋਕੋ: <strong>ਕੇਂਦਰ ’ਤੇ ਟੈਪ ਕਰੋ</strong> ਜਾਂ <strong>Space</strong> ਦਬਾਓ। ਸ਼ਬਦ-ਸ਼ਬਦ ਜਾਣ ਲਈ ਕਿਨਾਰਿਆਂ ’ਤੇ <strong>ਡਬਲ-ਟੈਪ</strong> ਕਰੋ।',
-        tip_pace: '⏱️ ਗਤੀ: ਸਮਾਂ ਸ਼ਬਦ ਦੀ ਜਟਿਲਤਾ (ਲੰਬਾਈ, ਮਾਤਰਾ/ਚਿੰਨ੍ਹ, ਸੰਯੁਕਤ ਅੱਖਰ) ਮੁਤਾਬਕ ਬਦਲਦਾ ਹੈ। WPM ਸਪੀਡੋਮੀਟਰ ਸਲਾਈਡਰ ਨਾਲ ਆਪਣੀ ਕੁੱਲ ਗਤੀ ਸੈੱਟ ਕਰੋ।',
-        tip_timeline: '🧭 ਟਾਈਮਲਾਈਨ: ਡ੍ਰੈਗ ਕਰਕੇ ਲਾਈਨਾਂ ’ਤੇ ਜਾਓ। ਮੌਜੂਦਾ ਸ਼ਬਦ ਪੀਲੇ ਰੰਗ ਵਿੱਚ ਸੰਦਰਭ ਸਮੇਤ ਹਾਈਲਾਈਟ ਹੁੰਦਾ ਹੈ।',
-        tip_pronun: '🎧 ਉਚਾਰਣ: ਸੈਟਿੰਗਜ਼ (ਗਿਅਰ) ਵਿੱਚ <strong>ਉਚਾਰਣ</strong> ਓਨ ਕਰੋ—ਅਨੁਸਵਾਰ ਖੜਾ, ਵਿਸਰਗ ਹਰੇਕ, ਲੰਬੇ ਸਵਰ ਹੌਲੀ ਧੜਕਦੇ ਹਨ।',
-        tip_search: '🔍 ਖੋਜ: <strong>⌘K</strong> ਜਾਂ <strong>/</strong> ਦਬਾ ਕੇ ਖੋਜ ਖੋਲ੍ਹੋ। ਕੋਈ ਵੀ ਸ਼ਬਦ ਜਾਂ ਸ਼ਲੋਕ ਦਾ ਹਿੱਸਾ ਲਿਖੋ (ਫਜ਼ੀ ਸਰਚ—ਬਿਲਕੁਲ ਸਹੀ ਮਿਲਾਪ ਲਾਜ਼ਮੀ ਨਹੀਂ)। ਨਤੀਜੇ ’ਤੇ ਟੈਪ ਕਰੋ ਜਾਂ <strong>Enter</strong> ਦਬਾਓ, ਉਸੇ ਲਾਈਨ ’ਤੇ ਸਿਧੇ ਜਾਣ ਲਈ।',
-        tip_chapters: '📚 ਅਧਿਆਇ: ਟਾਈਮਲਾਈਨ ਤੋਂ ਉੱਪਰ ਵਾਲੇ "ਅਧਿਆਇ" ਚਿਪ (ਲਾਈਨ ਗਿਣਤੀ) ’ਤੇ ਟੈਪ ਕਰਕੇ ਸਿੱਧੇ ਅਧਿਆਇ ਸਿਰਲੇਖ ’ਤੇ ਜਾਓ।',
+        tip_play: '🔊 <strong>ਟੈਕਸਟ-ਟੂ-ਸਪੀਚ</strong>: ਮੌਜੂਦਾ ਲਾਈਨ ਸੁਣਨ ਲਈ ਥੱਲੇ <strong>Play Line</strong> ਟੈਪ ਕਰੋ। ਡੈਸਕਟਾਪ ਤੇ <strong>Space</strong>। <strong>ਸਵਾਈਪ</strong>/<strong>← →</strong> ਨੇਵੀਗੇਟ ਕਰਨ ਲਈ।',
+        tip_pace: '📱 <strong>ਮੋਬਾਈਲ ਡੌਕ</strong>: ਥੱਲੇ ਬਾਰ ਨਾਲ ਮੋਡ (Read/Practice/Puzzle) ਬਦਲੋ, <strong>Details</strong> ਅਰਥ ਵੇਖੋ, <strong>More</strong> ਸੈਟਿੰਗਾਂ ਲਈ।',
+        tip_timeline: '🧭 ਟਾਈਮਲਾਈਨ: ਖਿੱਚ ਕੇ ਲਾਈਨਾਂ ਤੇ ਜਾਓ। ਮੌਜੂਦਾ ਸ਼ਬਦ ਪੀਲੇ ਰੰਗ ਵਿੱਚ ਹਾਈਲਾਈਟ।',
+        tip_pronun: '🎧 ਉਚਾਰਣ: ਸੈਟਿੰਗਾਂ ਵਿੱਚ ਓਨ ਕਰੋ—ਅਨੁਸਵਾਰ, ਵਿਸਰਗ, ਲੰਬੇ ਸਵਰ ਵਿਜ਼ੂਅਲ ਸੰਕੇਤਾਂ ਨਾਲ।',
+        tip_search: '🔍 ਖੋਜ: <strong>⌘K</strong>/<strong>/</strong> ਖੋਲ੍ਹੋ। ਕੋਈ ਸ਼ਬਦ/ਸ਼ਲੋਕ ਲਿਖੋ (ਫਜ਼ੀ ਸਰਚ)। ਨਤੀਜੇ ਟੈਪ ਕਰੋ ਉੱਥੇ ਜਾਣ ਲਈ।',
+        tip_chapters: '📚 ਅਧਿਆਇ: "ਅਧਿਆਇ" ਚਿਪ ਟੈਪ ਕਰਕੇ ਸਿੱਧੇ ਅਧਿਆਇ ਦੀ ਸ਼ੁਰੂਆਤ ਤੇ ਜਾਓ।',
         practice: 'ਅਭਿਆਸ', practice_mode: 'ਅਭਿਆਸ ਮੋਡ', difficulty: 'ਮੁਸ਼ਕਲ', easy: 'ਆਸਾਨ', medium: 'ਮੱਧਮ', hard: 'ਔਖਾ',
         jump_to_line: 'ਜਾਓ...', reveal: 'ਦਿਖਾਓ', replay_line: 'ਲਾਈਨ ਦੁਹਰਾਓ', revealed: 'ਦਿਖਾਇਆ ਗਿਆ', practiced: 'ਅਭਿਆਸ ਕੀਤਾ', progress: 'ਤਰੱਕੀ', exit_practice: 'ਅਭਿਆਸ ਵਿੱਚੋਂ ਬਾਹਰ ਨਿਕਲੋ', line: 'ਲਾਈਨ',
         practice_hint: 'ਸ਼ਬਦ ਦਿਖਾਉਣ ਲਈ ਖਾਲੀ ਟੈਪ ਕਰੋ', practice_complete: 'ਸ਼ਲੋਕ ਅਭਿਆਸ ਕੀਤਾ!', practice_progress: 'ਤਰੱਕੀ',
         help_play_tab: 'ਪਲੇ ਮੋਡ', help_practice_tab: 'ਅਭਿਆਸ ਮੋਡ', help_puzzle_tab: 'ਵਰਡ ਪਜ਼ਲ',
-        tip_practice_enter: '🎯 ਹੇਡਰ ਵਿੱਚ ਆਈਕਾਨ ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਅਭਿਆਸ ਮੋਡ ਵਿੱਚ ਟੌਗਲ ਕਰੋ (ਰੀਡਿੰਗ ਅਤੇ ਅਭਿਆਸ ਮੋਡ ਵਿਚਕਾਰ ਸਵਿੱਚ ਕਰਦਾ ਹੈ)',
+        tip_practice_enter: '🎯 <strong>ਅਭਿਆਸ ਮੋਡ</strong>: ਡੌਕ ਵਿੱਚ <strong>Practice</strong> (ਮੋਬਾਈਲ) ਜਾਂ ਹੇਡਰ ਵਿੱਚ ਕਿਤਾਬ ਆਈਕਨ ਟੈਪ ਕਰੋ।',
         tip_practice_hints: '💡 ਸੰਕੇਤ: ਸ਼ਬਦ ਸ਼ੁਰੂਆਤੀ ਅੱਖਰ ਦਿਖਾਉਂਦੇ ਹਨ—ਆਸਾਨ (50%), ਮੱਧਮ (33%), ਔਖਾ (25%)',
         tip_practice_reveal: '👁️ ਧੀਰੇ ਧੀਰੇ ਖੁਲਾਸਾ: ਸ਼ਬਦ ਨੂੰ ਕਈ ਵਾਰ ਟੈਪ ਕਰੋ—ਹਰ ਟੈਪ ਵਧੇਰੇ ਅੱਖਰ ਦਿਖਾਉਂਦਾ ਹੈ। ਪੂਰੀ ਲਾਈਨ ਫੌਰਨ ਪੂਰੀ ਕਰਨ ਲਈ "ਦਿਖਾਓ" ਬਟਨ ਦੀ ਵਰਤੋਂ ਕਰੋ',
         tip_practice_replay: '🔁 ਦੁਹਰਾਓ: ਲਾਈਨ ਪੂਰੀ ਹੋਣ ਦੇ ਬਾਅਦ, ਇਸਨੂੰ ਦੁਬਾਰਾ ਅਭਿਆਸ ਕਰਨ ਲਈ "ਲਾਈਨ ਦੁਹਰਾਓ" ਟੈਪ ਕਰੋ',
@@ -981,7 +836,7 @@ export function VSNViewer({ onBack, textOverride, subtitleOverrides, availableLa
         tip_practice_jump: '⏩ ਲਾਈਨ ਵਿੱਚ ਜਾਓ: ਕਿਸੇ ਵੀ ਲਾਈਨ ਨੰਬਰ ਤੇ ਤੇਜ਼ੀ ਨਾਲ ਨੇਵੀਗੇਟ ਕਰਨ ਲਈ ਸਰਚ ਬਾਕਸ ਦੀ ਵਰਤੋਂ ਕਰੋ',
         tip_practice_exit: '⏹️ ਅਭਿਆਸ ਵਿੱਚੋਂ ਬਾਹਰ ਨਿਕਲੋ: ਰੀਡਿੰਗ ਮੋਡ ਵਿੱਚ ਵਾਪਸ ਜਾਣ ਲਈ ਹੇਡਰ ਵਿੱਚ "ਅਭਿਆਸ ਵਿੱਚੋਂ ਬਾਹਰ ਨਿਕਲੋ" ਬਟਨ ਦੀ ਵਰਤੋਂ ਕਰੋ',
         tip_practice_search: '🔍 ਖੋਜੋ: ਅਭਿਆਸ ਮੋਡ ਵਿੱਚ ਵੀ <strong>⌘K</strong> ਜਾਂ <strong>/</strong> ਦਬਾਓ',
-        tip_puzzle_enter: '🧩 ਹੇਡਰ ਵਿੱਚ ਗ੍ਰਿਡ ਆਈਕਾਨ ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਵਰਡ ਪਜ਼ਲ ਵਿੱਚ ਟੌਗਲ ਕਰੋ',
+        tip_puzzle_enter: '🧩 <strong>ਪਜ਼ਲ ਮੋਡ</strong>: ਡੌਕ ਵਿੱਚ <strong>Puzzle</strong> (ਮੋਬਾਈਲ) ਜਾਂ ਹੇਡਰ ਵਿੱਚ ਗ੍ਰਿਡ ਆਈਕਨ ਟੈਪ ਕਰੋ।',
         tip_puzzle_arrange: '🧩 ਗੋਢੋ: ਹੇਠਾਂ ਦਿੱਤੇ ਗੁਲਮਲ ਸ਼ਬਦਾਂ ’ਤੇ ਟੈਪ ਕਰੋ ਤਾਂ ਜੋ ਉਹਨਾਂ ਨੂੰ ਸਹੀ ਕ੍ਰਮ ਵਿੱਚ ਰੱਖ ਸਕੋ। ਰੱਖੇ ਸ਼ਬਦਾਂ ਨੂੰ ਹਟਾਉਣ ਲਈ ਉਨ੍ਹਾਂ ’ਤੇ ਟੈਪ ਕਰੋ',
         tip_puzzle_hints: '💡 ਸੰਕੇਤ: ਹਰ ਸੰਕੇਤ ਸ਼ੁਰੂ ਤੋਂ ਇੱਕ ਹੋਰ ਸ਼ਬਦ ਦਿਖਾਉਂਦਾ ਹੈ। ਵੱਧ ਤੋਂ ਵੱਧ ਸੰਕੇਤ = ਸ਼ਬਦ - 1 (ਜ਼ਿਆਦਾ ਤੋਂ ਜ਼ਿਆਦਾ 4)',
         tip_puzzle_reveal: '👁️ ਦਿਖਾਓ: ਤੁਰੰਤ ਪੂਰਾ ਹੱਲ ਦਿਖਾਉਂਦਾ ਹੈ',
@@ -995,17 +850,17 @@ export function VSNViewer({ onBack, textOverride, subtitleOverrides, availableLa
       mr: {
         app_title: 'अवबोधक', app_subtitle: 'विष्णु सहस्रनाम',
         search: 'शोधा', help: 'मदत', howto: 'कसे वापरायचे', play: 'प्ले', pause: 'मॅन्युअल', pace: 'गती', tips: 'सूचना', footer_hint: 'सुरू करण्यासाठी प्ले दाबा; गती समायोजित करा.',
-        tip_play: 'चालू/थांबा: टाइमलाइनजवळील नियंत्रण वापरा किंवा Space दाबा.',
-        tip_pace: 'गती: शब्दाच्या गुंतागुंतीनुसार वेळ अनुकूलित होतो.',
-        tip_timeline: 'टाइमलाइन: ओढून ओळींवर जा.',
-        tip_details: 'तपशील: मुख्य ओळीखालील बटन वापरा.',
-        tip_pronun: 'उच्चारण: स्पीकर आयकॉन वापरा.',
-        tip_search: 'शोध: ⌘K किंवा /; जाण्यासाठी Enter.',
+        tip_play: '🔊 <strong>टेक्स्ट-टू-स्पीच</strong>: सध्याची ओळ ऐकण्यासाठी खाली <strong>Play Line</strong> टॅप करा। डेस्कटॉपवर <strong>Space</strong>। <strong>स्वाइप</strong>/<strong>← →</strong> नेव्हिगेट करण्यासाठी।',
+        tip_pace: '📱 <strong>मोबाइल डॉक</strong>: खालच्या बारने मोड (Read/Practice/Puzzle) बदला, <strong>Details</strong> अर्थ पहा, <strong>More</strong> सेटिंग्ज साठी.',
+        tip_timeline: '🧭 टाइमलाइन: ओढून ओळींवर जा. सध्याचा शब्द पिवळ्या रंगात हायलाइट.',
+        tip_pronun: '🎧 उच्चारण: सेटिंग्ज मध्ये सक्रिय करा—अनुस्वार, विसर्ग, दीर्घ स्वर व्हिज्युअल संकेतांसह.',
+        tip_search: '🔍 शोध: <strong>⌘K</strong>/<strong>/</strong> उघडा. कोणताही शब्द/श्लोक लिहा (फझी सर्च). निकालावर टॅप करा तेथे जाण्यासाठी.',
+        tip_chapters: '📚 अध्याय: "अध्याय" चिप टॅप करून थेट अध्यायाच्या सुरुवातीला जा.',
         practice: 'अभ्यास', practice_mode: 'अभ्यास मोड', difficulty: 'अडचण', easy: 'सोपे', medium: 'मध्यम', hard: 'कठीण',
         jump_to_line: 'जा...', reveal: 'दाखवा', replay_line: 'ओळ पुन्हा चालू करा', revealed: 'दाखवले', practiced: 'अभ्यास केला', progress: 'प्रगती', exit_practice: 'अभ्यासातून बाहेर पडा', line: 'ओळ',
         practice_hint: 'शब्द दाखवण्यासाठी रिक्त ठिकाणे टॅप करा', practice_complete: 'श्लोक सराव केला!', practice_progress: 'प्रगती',
         help_play_tab: 'प्ले मोड', help_practice_tab: 'अभ्यास मोड', help_puzzle_tab: 'वर्ड पझल',
-        tip_practice_enter: 'हेडरमध्ये 🎯 आयकॉन वापरून अभ्यास मोडमध्ये टॉगल करा (वाचन आणि अभ्यास मोडमध्ये स्विच करते)',
+        tip_practice_enter: '🎯 <strong>अभ्यास मोड</strong>: डॉकमध्ये <strong>Practice</strong> (मोबाइल) किंवा हेडरमध्ये पुस्तक आयकॉन टॅप करा.',
         tip_practice_hints: 'सूचना: शब्द सुरुवातीचे अक्षरे दाखवतात—सोपे (50%), मध्यम (33%), कठीण (25%)',
         tip_practice_reveal: 'क्रमशः प्रकटीकरण: शब्द अनेकदा टॅप करा—प्रत्येक टॅप अधिक अक्षरे प्रकट करतो. संपूर्ण ओळ त्वरित पूर्ण करण्यासाठी "दाखवा" बटन वापरा',
         tip_practice_replay: 'पुन्हा चालू करा: ओळ पूर्ण झाल्यानंतर, ती पुन्हा अभ्यास करण्यासाठी "ओळ पुन्हा चालू करा" टॅप करा',
@@ -1014,28 +869,28 @@ export function VSNViewer({ onBack, textOverride, subtitleOverrides, availableLa
         tip_practice_jump: 'ओळमध्ये जा: कोणत्याही ओळ क्रमांकावर त्वरित नेव्हिगेट करण्यासाठी शोध बॉक्स वापरा',
         tip_practice_exit: 'अभ्यासातून बाहेर पडा: वाचन मोडमध्ये परत जाण्यासाठी हेडरमध्ये "अभ्यासातून बाहेर पडा" बटन वापरा',
         tip_practice_search: 'शोधा: अभ्यास मोडमध्ये देखील <strong>⌘K</strong> किंवा <strong>/</strong> दाबा',
-        tip_puzzle_enter: 'Toggle to Word Puzzle using the grid icon in the header',
-        tip_puzzle_arrange: 'Arrange: Tap scrambled words below to place them in order. Tap placed words to remove them',
-        tip_puzzle_hints: 'Hints: Each hint reveals one more word from the beginning. Maximum hints = words - 1 (up to 4)',
-        tip_puzzle_reveal: 'Reveal: Instantly shows the complete solution',
-        tip_puzzle_replay: 'Replay: After solving, tap "Replay" to try again',
-        tip_puzzle_confetti: 'Confetti: Solve on first correct attempt for a celebration!',
-        tip_puzzle_navigate: 'Navigate: Use ← → arrow keys, Previous/Next buttons, or swipe gestures between puzzles'
+        tip_puzzle_enter: '🧩 <strong>पझल मोड</strong>: डॉकमध्ये <strong>Puzzle</strong> (मोबाइल) किंवा हेडरमध्ये ग्रिड आयकॉन टॅप करा.',
+        tip_puzzle_arrange: '🧩 लावा: खाली गोंधळलेले शब्द टॅप करून क्रमाने ठेवा. ठेवलेले शब्द काढण्यासाठी टॅप करा',
+        tip_puzzle_hints: '💡 संकेत: प्रत्येक संकेत सुरुवातीपासून आणखी एक शब्द दाखवतो. कमाल = शब्द - 1 (4 पर्यंत)',
+        tip_puzzle_reveal: '👁️ दाखवा: लगेच संपूर्ण उत्तर दाखवतो',
+        tip_puzzle_replay: '🔁 पुन्हा: सोडवल्यानंतर, पुन्हा प्रयत्न करण्यासाठी "Replay" टॅप करा',
+        tip_puzzle_confetti: '🎉 कॉन्फेटी: पहिल्याच बरोबर प्रयत्नात सोडवा आणि उत्सव साजरा करा!',
+        tip_puzzle_navigate: '🧭 नेव्हिगेट: ← → एरो की, Previous/Next बटणे, किंवा पझल मध्ये स्वाइप वापरा'
       },
       ben: {
         app_title: 'অববোধক', app_subtitle: 'বিষ্ণু সহস্রনাম',
         search: 'খুঁজুন', help: 'সহায়তা', howto: 'কিভাবে ব্যবহার করবেন', play: 'চালান', pause: 'ম্যানুয়াল', pace: 'গতি', tips: 'টিপস', footer_hint: 'শুরু করতে প্লে চাপুন; গতি সামঞ্জস্য করুন।',
-        tip_play: 'চালান/বিরতি: টাইমলাইনের কাছে নিয়ন্ত্রণ ব্যবহার করুন বা Space চাপুন।',
-        tip_pace: 'গতি: শব্দের জটিলতার উপর সময় ঠিক হয়।',
-        tip_timeline: 'টাইমলাইন: টেনে লাইন পরিবর্তন করুন।',
-        tip_details: 'বিস্তারিত: প্রধান লাইনের নিচের বোতাম ব্যবহার করুন।',
-        tip_pronun: 'উচ্চারণ: স্পিকার আইকন ব্যবহার করুন।',
-        tip_search: 'খোঁজ: ⌘K বা /; যেতে Enter।',
+        tip_play: '🔊 <strong>টেক্সট-টু-স্পিচ</strong>: বর্তমান লাইন শুনতে নিচে <strong>Play Line</strong> ট্যাপ করুন। ডেস্কটপে <strong>Space</strong>। <strong>সোয়াইপ</strong>/<strong>← →</strong> নেভিগেট করতে।',
+        tip_pace: '📱 <strong>মোবাইল ডক</strong>: নিচের বার দিয়ে মোড (Read/Practice/Puzzle) বদলান, <strong>Details</strong> অর্থ দেখুন, <strong>More</strong> সেটিংসের জন্য।',
+        tip_timeline: '🧭 টাইমলাইন: টেনে লাইনে যান। বর্তমান শব্দ হলুদ রঙে হাইলাইট।',
+        tip_pronun: '🎧 উচ্চারণ: সেটিংসে সক্রিয় করুন—অনুস্বার, বিসর্গ, দীর্ঘ স্বর ভিজুয়াল সংকেত সহ।',
+        tip_search: '🔍 খোঁজ: <strong>⌘K</strong>/<strong>/</strong> খুলুন। যেকোনো শব্দ/শ্লোক লিখুন (ফাজি সার্চ)। ফলাফলে ট্যাপ করে সেখানে যান।',
+        tip_chapters: '📚 অধ্যায়: "অধ্যায়" চিপ ট্যাপ করে সরাসরি অধ্যায়ের শুরুতে যান।',
         practice: 'অনুশীলন', practice_mode: 'অনুশীলন মোড', difficulty: 'কঠিনতা', easy: 'সহজ', medium: 'মাঝারি', hard: 'কঠিন',
         jump_to_line: 'যাও...', reveal: 'দেখাও', replay_line: 'লাইন রিপ্লে করুন', revealed: 'দেখানো হয়েছে', practiced: 'অনুশীলন করা হয়েছে', progress: 'অগ্রগতি', exit_practice: 'অনুশীলন থেকে বেরোন', line: 'লাইন',
         practice_hint: 'শব্দ প্রকাশ করতে ফাঁকা জায়গা ট্যাপ করুন', practice_complete: 'শ্লোক অনুশীলন করা হয়েছে!', practice_progress: 'অগ্রগতি',
         help_play_tab: 'প্লে মোড', help_practice_tab: 'অনুশীলন মোড', help_puzzle_tab: 'শব্দ ধাঁধা',
-        tip_practice_enter: 'হেডারে 🎯 আইকন ব্যবহার করে অনুশীলন মোডে টগল করুন (পড়া এবং অনুশীলন মোডের মধ্যে সুইচ করে)',
+        tip_practice_enter: '🎯 <strong>অনুশীলন মোড</strong>: ডকে <strong>Practice</strong> (মোবাইল) বা হেডারে বই আইকন ট্যাপ করুন।',
         tip_practice_hints: 'সূচনা: শব্দগুলো শুরুর অক্ষর দেখায়—সহজ (50%), মাঝারি (33%), কঠিন (25%)',
         tip_practice_reveal: 'ধাপে ধাপে প্রকাশ: শব্দটি একাধিকবার ট্যাপ করুন—প্রতিটি ট্যাপ আরও অক্ষর প্রকাশ করে। সম্পূর্ণ লাইন তাৎক্ষণিকভাবে সম্পূর্ণ করতে "দেখাও" বোতামটি ব্যবহার করুন',
         tip_practice_replay: 'পুনরায় চালান: একটি লাইন সম্পূর্ণ হওয়ার পর, এটি আবার অনুশীলন করতে "লাইন রিপ্লে করুন" ট্যাপ করুন',
@@ -1044,28 +899,28 @@ export function VSNViewer({ onBack, textOverride, subtitleOverrides, availableLa
         tip_practice_jump: 'লাইনে যান: যেকোনো লাইন নম্বরে দ্রুত নেভিগেট করতে সার্চ বক্স ব্যবহার করুন',
         tip_practice_exit: 'অনুশীলন থেকে বেরোন: রিডিং মোডে ফিরে যেতে হেডারে "অনুশীলন থেকে বেরোন" বোতামটি ব্যবহার করুন',
         tip_practice_search: 'খোঁজ করুন: অনুশীলন মোডেও <strong>⌘K</strong> বা <strong>/</strong> চাপুন',
-        tip_puzzle_enter: 'Toggle to Word Puzzle using the grid icon in the header',
-        tip_puzzle_arrange: 'Arrange: Tap scrambled words below to place them in order. Tap placed words to remove them',
-        tip_puzzle_hints: 'Hints: Each hint reveals one more word from the beginning. Maximum hints = words - 1 (up to 4)',
-        tip_puzzle_reveal: 'Reveal: Instantly shows the complete solution',
-        tip_puzzle_replay: 'Replay: After solving, tap "Replay" to try again',
-        tip_puzzle_confetti: 'Confetti: Solve on first correct attempt for a celebration!',
-        tip_puzzle_navigate: 'Navigate: Use ← → arrow keys, Previous/Next buttons, or swipe gestures between puzzles'
+        tip_puzzle_enter: '🧩 <strong>পাজল মোড</strong>: ডকে <strong>Puzzle</strong> (মোবাইল) বা হেডারে গ্রিড আইকন ট্যাপ করুন।',
+        tip_puzzle_arrange: '🧩 সাজান: নিচে গুলিয়ে যাওয়া শব্দ ট্যাপ করে ক্রমে রাখুন। রাখা শব্দ সরাতে ট্যাপ করুন',
+        tip_puzzle_hints: '💡 সংকেত: প্রতিটি সংকেত শুরু থেকে আরও একটি শব্দ দেখায়। সর্বোচ্চ = শব্দ - 1 (4 পর্যন্ত)',
+        tip_puzzle_reveal: '👁️ দেখান: তাৎক্ষণিক সম্পূর্ণ সমাধান দেখায়',
+        tip_puzzle_replay: '🔁 পুনরায়: সমাধান করার পর, আবার চেষ্টা করতে "Replay" ট্যাপ করুন',
+        tip_puzzle_confetti: '🎉 কনফেটি: প্রথম সঠিক প্রচেষ্টায় সমাধান করে উদযাপন করুন!',
+        tip_puzzle_navigate: '🧭 নেভিগেট: ← → তীর কী, Previous/Next বোতাম, বা পাজলের মধ্যে সোয়াইপ ব্যবহার করুন'
       },
       mal: {
         app_title: 'അവബോധക', app_subtitle: 'വിഷ്ണു സഹസ്രനാമം',
         search: 'തിരയുക', help: 'സഹായം', howto: 'എങ്ങനെ ഉപയോഗിക്കാം', play: 'പ്ലേ', pause: 'മാനുവൽ', pace: 'വേഗം', tips: 'ടിപ്സ്', footer_hint: 'പ്ലേ അമർത്തി ആരംഭിക്കുക; വേഗം ക്രമീകരിക്കുക.',
-        tip_play: 'പ്ലേ/പോസ്: ടൈംലൈൻ സമീപമുള്ള നിയന്ത്രണങ്ങൾ ഉപയോഗിക്കുക അല്ലെങ്കിൽ Space അമർത്തുക.',
-        tip_pace: 'വേഗം: വാക്കിന്റെ സങ്കീർണ്ണത അനുസരിച്ചു സമയം മാറുന്നു.',
-        tip_timeline: 'ടൈംലൈൻ: വലിച്ചുനീക്കി ലൈനുകൾ മാറുക.',
-        tip_details: 'വിശദാംശങ്ങൾ: പ്രധാന വരിയ്ക്ക് കീഴിലെ ബട്ടൺ ഉപയോഗിക്കുക.',
-        tip_pronun: 'ഉച്ചാരണം: സ്പീക്കർ ഐക്കൺ ഉപയോഗിക്കുക.',
-        tip_search: 'തിരയുക: ⌘K അല്ലെങ്കിൽ /; പോകാൻ Enter.',
+        tip_play: '🔊 <strong>ടെക്സ്റ്റ്-ടു-സ്പീച്ച്</strong>: നിലവിലെ ലൈൻ കേൾക്കാൻ താഴെ <strong>Play Line</strong> ടാപ്പ് ചെയ്യുക. ഡെസ്ക്ടോപ്പിൽ <strong>Space</strong>. <strong>സ്വൈപ്പ്</strong>/<strong>← →</strong> നാവിഗേറ്റ് ചെയ്യാൻ.',
+        tip_pace: '📱 <strong>മൊബൈൽ ഡോക്ക്</strong>: താഴെയുള്ള ബാർ വഴി മോഡ് (Read/Practice/Puzzle) മാറ്റുക, <strong>Details</strong> അർത്ഥം കാണുക, <strong>More</strong> സെറ്റിംഗ്സിനായി.',
+        tip_timeline: '🧭 ടൈംലൈൻ: വലിച്ച് ലൈനുകളിലേക്ക് പോകുക. നിലവിലെ വാക്ക് മഞ്ഞ നിറത്തിൽ ഹൈലൈറ്റ്.',
+        tip_pronun: '🎧 ഉച്ചാരണം: സെറ്റിംഗ്സിൽ സജീവമാക്കുക—അനുസ്വാരം, വിസർഗം, ദീർഘ സ്വരങ്ങൾ വിഷ്വൽ സൂചനകളോടെ.',
+        tip_search: '🔍 തിരയൽ: <strong>⌘K</strong>/<strong>/</strong> തുറക്കുക. ഏതെങ്കിലും വാക്ക്/ശ്ലോകം എഴുതുക (ഫസി സെർച്ച്). ഫലത്തിൽ ടാപ്പ് ചെയ്ത് അവിടേക്ക് പോകുക.',
+        tip_chapters: '📚 അധ്യായങ്ങൾ: "അധ്യായങ്ങൾ" ചിപ്പ് ടാപ്പ് ചെയ്ത് നേരിട്ട് അധ്യായത്തിന്റെ തുടക്കത്തിലേക്ക് പോകുക.',
         practice: 'അഭ്യസിക്കുക', practice_mode: 'അഭ്യാസ മോഡ്', difficulty: 'സങ്കീർണ്ണത', easy: 'എളുപ്പം', medium: 'ഇടത്തരം', hard: 'കഠിനം',
         jump_to_line: 'പോകൂ...', reveal: 'കാണിക്കുക', replay_line: 'ലൈൻ വീണ്ടും പ്ലേ ചെയ്യുക', revealed: 'കാണിച്ചു', practiced: 'അഭ്യസിച്ചു', progress: 'പുരോഗതി', exit_practice: 'അഭ്യാസത്തിൽ നിന്ന് പുറത്തുകടക്കുക', line: 'ലൈൻ',
         practice_hint: 'വാക്കുകൾ വെളിപ്പെടുത്താൻ ശൂന്യ ഇടങ്ങൾ ടാപ്പ് ചെയ്യുക', practice_complete: 'ശ്ലോകം പരിശീലിച്ചു!', practice_progress: 'പുരോഗതി',
         help_play_tab: 'പ്ലേ മോഡ്', help_practice_tab: 'അഭ്യാസ മോഡ്', help_puzzle_tab: 'വേഡ് പസിൽ',
-        tip_practice_enter: 'ഹെഡറിൽ 🎯 ഐക്കൺ ഉപയോഗിച്ച് അഭ്യാസ മോഡിലേക്ക് ടോഗിൾ ചെയ്യുക (വായനയും അഭ്യാസ മോഡും തമ്മിൽ മാറുന്നു)',
+        tip_practice_enter: '🎯 <strong>അഭ്യാസ മോഡ്</strong>: ഡോക്കിൽ <strong>Practice</strong> (മൊബൈൽ) അല്ലെങ്കിൽ ഹെഡറിൽ പുസ്തക ഐക്കൺ ടാപ്പ് ചെയ്യുക.',
         tip_practice_hints: 'സൂചനകൾ: വാക്കുകൾ ആരംഭ അക്ഷരങ്ങൾ കാണിക്കുന്നു—എളുപ്പം (50%), ഇടത്തരം (33%), കഠിനം (25%)',
         tip_practice_reveal: 'ഘട്ടം ഘട്ടമായി വെളിപ്പെടുത്തൽ: വാക്ക് ഒന്നിലധികം തവണ ടാപ്പ് ചെയ്യുക—ഓരോ ടാപ്പും കൂടുതൽ അക്ഷരങ്ങൾ വെളിപ്പെടുത്തുന്നു. മുഴുവൻ ലൈൻ ഉടനെ പൂർത്തിയാക്കാൻ "കാണിക്കുക" ബട്ടൺ ഉപയോഗിക്കുക',
         tip_practice_replay: 'വീണ്ടും പ്ലേ ചെയ്യുക: ഒരു വരി പൂർത്തിയായതിന് ശേഷം, അത് വീണ്ടും അഭ്യസിക്കാൻ "ലൈൻ വീണ്ടും പ്ലേ ചെയ്യുക" ടാപ്പ് ചെയ്യുക',
@@ -1074,13 +929,13 @@ export function VSNViewer({ onBack, textOverride, subtitleOverrides, availableLa
         tip_practice_jump: 'ലൈനിലേക്ക് പോകുക: ഏതെങ്കിലും ലൈൻ നമ്പറിലേക്ക് വേഗം നാവിഗേറ്റ് ചെയ്യാൻ തിരയൽ ബോക്സ് ഉപയോഗിക്കുക',
         tip_practice_exit: 'അഭ്യാസത്തിൽ നിന്ന് പുറത്തുകടക്കുക: റീഡിംഗ് മോഡിലേക്ക് മടങ്ങാൻ ഹെഡറിൽ "അഭ്യാസത്തിൽ നിന്ന് പുറത്തുകടക്കുക" ബട്ടൺ ഉപയോഗിക്കുക',
         tip_practice_search: 'തിരയുക: അഭ്യാസ മോഡിലും <strong>⌘K</strong> അല്ലെങ്കിൽ <strong>/</strong> അമർത്തുക',
-        tip_puzzle_enter: 'Toggle to Word Puzzle using the grid icon in the header',
-        tip_puzzle_arrange: 'Arrange: Tap scrambled words below to place them in order. Tap placed words to remove them',
-        tip_puzzle_hints: 'Hints: Each hint reveals one more word from the beginning. Maximum hints = words - 1 (up to 4)',
-        tip_puzzle_reveal: 'Reveal: Instantly shows the complete solution',
-        tip_puzzle_replay: 'Replay: After solving, tap "Replay" to try again',
-        tip_puzzle_confetti: 'Confetti: Solve on first correct attempt for a celebration!',
-        tip_puzzle_navigate: 'Navigate: Use ← → arrow keys, Previous/Next buttons, or swipe gestures between puzzles'
+        tip_puzzle_enter: '🧩 <strong>പസിൽ മോഡ്</strong>: ഡോക്കിൽ <strong>Puzzle</strong> (മൊബൈൽ) അല്ലെങ്കിൽ ഹെഡറിൽ ഗ്രിഡ് ഐക്കൺ ടാപ്പ് ചെയ്യുക.',
+        tip_puzzle_arrange: '🧩 ക്രമീകരിക്കുക: താഴെ കലർന്ന വാക്കുകൾ ടാപ്പ് ചെയ്ത് ക്രമത്തിൽ വയ്ക്കുക. വച്ച വാക്കുകൾ നീക്കം ചെയ്യാൻ ടാപ്പ് ചെയ്യുക',
+        tip_puzzle_hints: '💡 സൂചനകൾ: ഓരോ സൂചനയും തുടക്കം മുതൽ ഒരു വാക്ക് കൂടി കാണിക്കുന്നു. പരമാവധി = വാക്കുകൾ - 1 (4 വരെ)',
+        tip_puzzle_reveal: '👁️ കാണിക്കുക: ഉടനെ പൂർണ്ണ പരിഹാരം കാണിക്കുന്നു',
+        tip_puzzle_replay: '🔁 വീണ്ടും: പരിഹരിച്ച ശേഷം, വീണ്ടും ശ്രമിക്കാൻ "Replay" ടാപ്പ് ചെയ്യുക',
+        tip_puzzle_confetti: '🎉 കോൺഫെറ്റി: ആദ്യ ശരിയായ ശ്രമത്തിൽ പരിഹരിച്ച് ആഘോഷിക്കുക!',
+        tip_puzzle_navigate: '🧭 നാവിഗേറ്റ്: ← → ആരോ കീകൾ, Previous/Next ബട്ടണുകൾ, അല്ലെങ്കിൽ പസിലുകൾക്കിടയിൽ സ്വൈപ്പ് ഉപയോഗിക്കുക'
       },
     };
     return (k: string) => {
@@ -1114,18 +969,34 @@ export function VSNViewer({ onBack, textOverride, subtitleOverrides, availableLa
                 <Typography variant="caption" sx={{ display: 'block', mt: 0.5, color: 'text.secondary' }}>{T('app_subtitle')}</Typography>
               </Box>
             </Box>
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-              <Select size="small" value={lang} onChange={(e: SelectChangeEvent) => { const newLang = e.target.value as Lang; setLang(newLang); analytics.languageChange(newLang); ensurePlayPauseReady(); }} sx={{ minWidth: isSmall ? 72 : 140 }}>
+            {/* Desktop Controls - Full toolbar */}
+            <Box sx={{ display: { xs: 'none', sm: 'flex' }, alignItems: 'center', gap: 1 }}>
+              <Select size="small" value={lang} onChange={(e: SelectChangeEvent) => { const newLang = e.target.value as Lang; setLang(newLang); analytics.languageChange(newLang); ensurePlayPauseReady(); }} sx={{ minWidth: 140 }}>
                 {languageOptions.map((code) => (
                   <MenuItem key={code} value={code}>1 · {label(code)}</MenuItem>
                 ))}
               </Select>
-              <Select size="small" value={lang2 || ''} onChange={(e: SelectChangeEvent) => { const newLang = (e.target.value || '') as any; setLang2(newLang); if (newLang) analytics.languageChange(`${newLang}_secondary`); ensurePlayPauseReady(); }} sx={{ minWidth: isSmall ? 72 : 140 }} displayEmpty>
+              <Select size="small" value={lang2 || ''} onChange={(e: SelectChangeEvent) => { const newLang = (e.target.value || '') as any; setLang2(newLang); if (newLang) analytics.languageChange(`${newLang}_secondary`); ensurePlayPauseReady(); }} sx={{ minWidth: 140 }} displayEmpty>
                 <MenuItem value=""><em>2 · —</em></MenuItem>
                 {languageOptions.filter(code => code !== lang).map((code) => (
                   <MenuItem key={code} value={code}>2 · {label(code)}</MenuItem>
                 ))}
               </Select>
+              <Tooltip title="Verse Details - Meter, poetic devices, and more">
+                <IconButton
+                  color="inherit"
+                  onClick={() => {
+                    setVerseDetailOpen(true);
+                    analytics.featureAction('verse_detail', 'opened');
+                  }}
+                  aria-label="View Verse Details"
+                  sx={{
+                    '&:hover': { bgcolor: 'rgba(255,255,255,0.05)' }
+                  }}
+                >
+                  <InfoOutlinedIcon />
+                </IconButton>
+              </Tooltip>
               <Tooltip title={viewMode === 'reading' ? 'Practice Mode' : 'Reading Mode'}>
                 <IconButton
                   color={viewMode === 'practice' ? 'primary' : 'inherit'}
@@ -1133,11 +1004,9 @@ export function VSNViewer({ onBack, textOverride, subtitleOverrides, availableLa
                     const currentMode = viewMode === 'reading' ? 'play' : viewMode === 'practice' ? 'practice' : 'puzzle';
                     const newMode = viewMode === 'reading' ? 'practice' : 'reading';
 
-                    // Auto-stop any TTS when switching to practice mode
-                    if (newMode === 'practice' && ttsMode !== 'off') {
-                      if (ttsMode === 'line' && lineTTSPlayer) lineTTSPlayer.stop();
-                      if (ttsMode === 'word') flow.pause();
-                      setTtsMode('off');
+                    // Auto-stop TTS when switching to practice mode
+                    if (newMode === 'practice' && ttsPlaying && lineTTSPlayer) {
+                      lineTTSPlayer.stop();
                       analytics.playAction('pause');
                     }
 
@@ -1170,11 +1039,9 @@ export function VSNViewer({ onBack, textOverride, subtitleOverrides, availableLa
                     const currentMode = viewMode === 'reading' ? 'play' : viewMode === 'practice' ? 'practice' : 'puzzle';
                     const newMode = viewMode === 'puzzle' ? 'reading' : 'puzzle';
 
-                    // Auto-stop any TTS when switching to puzzle mode
-                    if (newMode === 'puzzle' && ttsMode !== 'off') {
-                      if (ttsMode === 'line' && lineTTSPlayer) lineTTSPlayer.stop();
-                      if (ttsMode === 'word') flow.pause();
-                      setTtsMode('off');
+                    // Auto-stop TTS when switching to puzzle mode
+                    if (newMode === 'puzzle' && ttsPlaying && lineTTSPlayer) {
+                      lineTTSPlayer.stop();
                       analytics.playAction('pause');
                     }
 
@@ -1210,6 +1077,29 @@ export function VSNViewer({ onBack, textOverride, subtitleOverrides, availableLa
                 </IconButton>
               </Tooltip>
             </Box>
+            {/* Mobile Controls - Simplified header, mode controls in bottom dock */}
+            <Box sx={{ display: { xs: 'flex', sm: 'none' }, alignItems: 'center', gap: 0.5 }}>
+              <Select
+                size="small"
+                value={lang}
+                onChange={(e: SelectChangeEvent) => { const newLang = e.target.value as Lang; setLang(newLang); analytics.languageChange(newLang); ensurePlayPauseReady(); }}
+                sx={{ minWidth: 64, '& .MuiSelect-select': { py: 0.75, px: 1 } }}
+              >
+                {languageOptions.map((code) => (
+                  <MenuItem key={code} value={code}>{label(code)}</MenuItem>
+                ))}
+              </Select>
+              <Tooltip title={`${T('search')} (⌘K /)`}>
+                <IconButton color="inherit" onClick={() => { setSearchOpen(true); }} aria-label="Search" size="small">
+                  <SearchIcon fontSize="small" />
+                </IconButton>
+              </Tooltip>
+              <Tooltip title={T('help')}>
+                <IconButton color={helpOpen ? 'primary' : 'inherit'} onClick={() => { setHelpOpen(true); analytics.helpOpen(); }} aria-label={T('help')} size="small">
+                  <HelpOutlineRoundedIcon fontSize="small" />
+                </IconButton>
+              </Tooltip>
+            </Box>
           </Toolbar>
         </AppBar>
         <SearchPanel
@@ -1228,10 +1118,9 @@ export function VSNViewer({ onBack, textOverride, subtitleOverrides, availableLa
               setPracticeLineIndex(i);
               setSearchOpen(false);
             } else {
-              // In reading/play mode, use the flow
+              // In reading mode, seek to the line
               flow.seekLine(i);
               if (typeof w === 'number') flow.seekWord(w);
-              flow.pause();
             }
           }}
           onResults={handleSearchResults}
@@ -1309,25 +1198,12 @@ export function VSNViewer({ onBack, textOverride, subtitleOverrides, availableLa
                         )}
                       </div>
                       <div className="flex items-center flex-shrink-0">
-                        {/* Paused pill: only when no TTS is active (not while group-hold animation is driving) */}
-                        {ttsMode === 'off' && !holdingGroup && (
+                        {/* Status pill: shows when TTS is not playing */}
+                        {!ttsPlaying && (
                           <span className={`inline-flex items-center px-2.5 py-1 rounded-full text-[11px] bg-slate-800/90 text-slate-100 border border-slate-600/60 shadow-sm`}>
                             {T('pause')}
                           </span>
                         )}
-                        {/* Syncing pill: low-contrast, faded, non-blocking; keeps mounted to avoid blink */}
-                        <span
-                          className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] ml-2"
-                          style={{
-                            opacity: (holdingGroup && showSyncPill) ? 0.75 : 0,
-                            transition: 'opacity 240ms ease',
-                            backgroundColor: 'rgba(2,6,23,0.4)',
-                            color: 'rgba(148,163,184,0.85)',
-                            border: '1px solid rgba(71,85,105,0.35)'
-                          }}
-                        >
-                          Syncing…
-                        </span>
                       </div>
                     </div>
                     <Box ref={lensWrapRef} sx={{ transition: 'height 180ms ease', height: freezing && lensH ? `${lensH}px` : undefined, overflow: freezing ? 'hidden' : undefined }}>
@@ -1352,15 +1228,9 @@ export function VSNViewer({ onBack, textOverride, subtitleOverrides, availableLa
 
                           // Swipe detection: minimum 50px horizontal, max 300ms, more horizontal than vertical
                           if (Math.abs(deltaX) > 50 && deltaTime < 300 && Math.abs(deltaX) > Math.abs(deltaY) * 1.5) {
-                            // Auto-stop any TTS on swipe (hybrid mode)
-                            if (ttsMode !== 'off') {
-                              if (ttsMode === 'line' && lineTTSPlayer) {
-                                lineTTSPlayer.stop();
-                              }
-                              if (ttsMode === 'word') {
-                                flow.pause();
-                              }
-                              setTtsMode('off');
+                            // Auto-stop TTS on swipe
+                            if (ttsPlaying && lineTTSPlayer) {
+                              lineTTSPlayer.stop();
                               setOverlayVisible(true);
                             }
 
@@ -1409,6 +1279,12 @@ export function VSNViewer({ onBack, textOverride, subtitleOverrides, availableLa
                           onExpandedChange={setExpanded}
                           playing={uiPlaying}
                           chapter={chapterLabel}
+                          learnMode={learnMode}
+                          lineData={{
+                            meaning: (text.lines[flow.state.lineIndex] as any)?.meaning,
+                            samasaVibhaga: (text.lines[flow.state.lineIndex] as any)?.samasaVibhaga,
+                            note: (text.lines[flow.state.lineIndex] as any)?.note,
+                          }}
                         />
                         {lang2 && (
                           <Box sx={{ mt: 1.5 }}>
@@ -1434,16 +1310,8 @@ export function VSNViewer({ onBack, textOverride, subtitleOverrides, availableLa
                                 const offs2 = chunkOffsetsByWord(curr || '', lang2 as Lang);
                                 const rawIdx2 = Math.max(0, Math.min(rawIdx, Math.max(0, offs2.length - 2)));
                                 const start2 = offs2[rawIdx2];
-                                const end2 = offs2[rawIdx2 + 1];
-                                const len2 = Math.max(1, end2 - start2);
-                                // Progress through every sub-word without skipping using floor
-                                const prog2 = Math.max(0, Math.min(1, groupProgress));
-                                if (len2 <= 1) {
-                                  secWordIdx = start2;
-                                } else {
-                                  const step = Math.min(len2 - 1, Math.floor(prog2 * len2));
-                                  secWordIdx = start2 + step;
-                                }
+                                // Simply use the start of the mapped word group in secondary language
+                                secWordIdx = start2;
                               } catch { }
                               return (
                                 <FlowLens
@@ -1460,6 +1328,12 @@ export function VSNViewer({ onBack, textOverride, subtitleOverrides, availableLa
                                   onExpandedChange={setExpanded}
                                   playing={uiPlaying}
                                   chapter={chapterLabel}
+                                  learnMode={learnMode}
+                                  lineData={{
+                                    meaning: (text.lines[flow.state.lineIndex] as any)?.meaning,
+                                    samasaVibhaga: (text.lines[flow.state.lineIndex] as any)?.samasaVibhaga,
+                                    note: (text.lines[flow.state.lineIndex] as any)?.note,
+                                  }}
                                 />
                               );
                             })()}
@@ -1482,24 +1356,10 @@ export function VSNViewer({ onBack, textOverride, subtitleOverrides, availableLa
                           setTimeout(() => { setFreezing(false); setLensH(null); setSideH(null); }, 120);
                         }}
                         lang={lang}
-                        muted={flow.state.muted}
-                        onToggleMute={flow.toggleMute}
-                        ttsSupported={ttsSupported}
                         legendActive={legendOpen}
                         onToggleLegend={() => setLegendOpen(v => !v)}
-                        artActive={detailsOpen}
-                        onToggleArt={() => setDetailsOpen(o => !o)}
-                        playing={wordTtsPlaying}
-                        onTogglePlay={handleWordTTS}
-                        pace={pace}
-                        onPaceChange={(p) => { setPaceState(p); flow.setPace(p); }}
                         onLineCounterClick={() => {
                           if (!chapters.length) return;
-                          // Pause autoplay when opening chapter navigation
-                          if (flow.state.playing) {
-                            flow.pause();
-                            analytics.playAction('pause');
-                          }
                           setOverlayVisible(true);
                           setChapterSheetOpen(true);
                         }}
@@ -1599,7 +1459,6 @@ export function VSNViewer({ onBack, textOverride, subtitleOverrides, availableLa
                       fullWidth
                       onClick={() => {
                         flow.seekLine(ch.index);
-                        flow.pause();
                         analytics.playAction('seek');
                         setChapterSheetOpen(false);
                         setOverlayVisible(true);
@@ -1750,6 +1609,94 @@ export function VSNViewer({ onBack, textOverride, subtitleOverrides, availableLa
             ttsSupported={ttsSupported}
             currentLine={flow.state.lineIndex + 1}
             totalLines={flow.totalLines}
+            bottomOffset={isSmall ? 80 : 0}
+          />
+        )}
+
+        {/* Verse Detail Panel */}
+        <VerseDetailPanel
+          open={verseDetailOpen}
+          onClose={() => setVerseDetailOpen(false)}
+          lineNumber={flow.state.lineIndex}
+          lineText={(text.lines[flow.state.lineIndex] as any)?.[lang] || ''}
+          lineIast={(text.lines[flow.state.lineIndex] as any)?.iast}
+          lang={lang}
+          enrichedData={(() => {
+            const line = text.lines[flow.state.lineIndex] as any;
+            // Check if line has any enriched data fields (including namaAnalysis and note)
+            if (line?.samasaVibhaga || line?.chandas || line?.alamkara || line?.rasa || line?.devataSvarupa || line?.upadesha || line?.imagery || line?.meaning || line?.namaAnalysis || line?.note) {
+              return {
+                stotraType: 'verse' as const,
+                ...line,
+              };
+            }
+            return undefined;
+          })()}
+        />
+
+        {/* Explore Drawer - Mobile navigation map */}
+        <ExploreDrawer
+          open={exploreDrawerOpen}
+          onClose={() => setExploreDrawerOpen(false)}
+          current={flow.state.lineIndex}
+          total={flow.totalLines}
+          onSeek={(index) => { flow.seekLine(index); setExploreDrawerOpen(false); }}
+          sectionMarks={sectionMarks}
+          chapterMarks={chapterMarks}
+          lang={lang}
+          T={T}
+        />
+
+        {/* Mobile Mode Dock - Bottom navigation for mobile */}
+        {isSmall && (
+          <MobileModeDock
+            viewMode={viewMode}
+            lang={lang}
+            lang2={lang2}
+            languageOptions={languageOptions}
+            onViewModeChange={(newMode) => {
+              const currentMode = viewMode === 'reading' ? 'play' : viewMode === 'practice' ? 'practice' : 'puzzle';
+
+              // Auto-stop TTS when switching modes
+              if (newMode !== 'reading' && ttsPlaying && lineTTSPlayer) {
+                lineTTSPlayer.stop();
+                analytics.playAction('pause');
+              }
+
+              // Track mode exit
+              const durationSeconds = Math.round((Date.now() - modeStartTimeRef.current) / 1000);
+              analytics.modeExit(currentMode === 'puzzle' ? 'practice' : currentMode as 'play' | 'practice', durationSeconds, modeActionCountRef.current);
+
+              // Enter new mode
+              setViewMode(newMode);
+              analytics.modeEnter(newMode === 'reading' ? 'play' : 'practice', flow.state.lineIndex);
+              if (newMode === 'practice') analytics.practiceToggle(true);
+
+              // Reset tracking
+              modeStartTimeRef.current = Date.now();
+              modeActionCountRef.current = 0;
+            }}
+            onVerseDetailOpen={() => {
+              setVerseDetailOpen(true);
+              analytics.featureAction('verse_detail', 'opened');
+            }}
+            onLangChange={(newLang) => {
+              setLang(newLang);
+              analytics.languageChange(newLang);
+              ensurePlayPauseReady();
+            }}
+            onLang2Change={(newLang) => {
+              setLang2(newLang);
+              if (newLang) analytics.languageChange(`${newLang}_secondary`);
+              ensurePlayPauseReady();
+            }}
+            onHelpOpen={() => {
+              setHelpOpen(true);
+              analytics.helpOpen();
+            }}
+            onExploreOpen={() => setExploreDrawerOpen(true)}
+            labelFn={label}
+            T={T}
           />
         )}
 

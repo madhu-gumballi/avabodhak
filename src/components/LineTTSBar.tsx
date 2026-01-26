@@ -9,9 +9,11 @@ interface Props {
   ttsSupported?: boolean;
   currentLine?: number;
   totalLines?: number;
+  /** Bottom offset in pixels to avoid overlapping with mobile dock */
+  bottomOffset?: number;
 }
 
-export function LineTTSBar({ ttsPlaying, onTTSToggle, ttsSupported, currentLine, totalLines }: Props) {
+export function LineTTSBar({ ttsPlaying, onTTSToggle, ttsSupported, currentLine, totalLines, bottomOffset = 0 }: Props) {
   const [pulseAnimation, setPulseAnimation] = useState(false);
 
   useEffect(() => {
@@ -27,7 +29,10 @@ export function LineTTSBar({ ttsPlaying, onTTSToggle, ttsSupported, currentLine,
   }
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-50 pointer-events-none">
+    <div
+      className="fixed left-0 right-0 z-50 pointer-events-none"
+      style={{ bottom: bottomOffset }}
+    >
       <div className="relative">
         {/* Gradient fade effect at top */}
         <div className="absolute bottom-full left-0 right-0 h-8 bg-gradient-to-t from-slate-900/80 to-transparent pointer-events-none" />

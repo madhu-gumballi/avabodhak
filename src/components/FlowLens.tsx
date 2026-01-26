@@ -1,8 +1,15 @@
 import { useEffect, useMemo, useState } from 'react';
-import type { Lang } from '../data/types';
+import type { Lang, Keyword, CompoundBreakdown } from '../data/types';
 import { DIACRITIC_INFO, isIASTDiacritic, simplifyIAST, extractIASTDiacritics, classifyIASTWord } from '../lib/pronounce';
 import { basicSplit, chunkOffsetsByWord, segmentGraphemes } from '../lib/tokenize';
 import { Paper } from '@mui/material';
+import { WordInfoPopover } from './WordInfoPopover';
+
+interface LineData {
+  meaning?: string;
+  samasaVibhaga?: CompoundBreakdown[];
+  note?: string;
+}
 
 interface Props {
   tokens: string[]; // current line tokens (active language)
@@ -18,9 +25,11 @@ interface Props {
   onExpandedChange?: (v: boolean) => void;
   playing?: boolean;
   chapter?: string;
+  learnMode?: boolean; // When true, words become tappable to show etymology/meaning
+  lineData?: LineData; // Enriched data for the current line
 }
 
-export function FlowLens({ tokens, rows, wordIndex, lineIndex, lang, legendOpen: legendOpenProp, onLegendOpenChange, detailsOpen, onToggleDetails, expandedProp, onExpandedChange, playing, chapter }: Props) {
+export function FlowLens({ tokens, rows, wordIndex, lineIndex, lang, legendOpen: legendOpenProp, onLegendOpenChange, detailsOpen, onToggleDetails, expandedProp, onExpandedChange, playing, chapter, learnMode = false, lineData }: Props) {
   const [prev, curr, next] = rows;
   const [expanded, setExpanded] = useState(false);
   const [secVisible, setSecVisible] = useState(true);
@@ -30,16 +39,16 @@ export function FlowLens({ tokens, rows, wordIndex, lineIndex, lang, legendOpen:
   const [flashIndex, setFlashIndex] = useState<number>(-1);
   const T = useMemo(() => {
     const map: Record<Lang, Record<string, string>> = {
-      iast: { helper: 'Pronunciation help', show_details: 'Show details', hide_details: 'Hide details', show_art: 'Show artwork', hide_art: 'Hide artwork' },
-      deva: { helper: 'उच्चारण सहायता', show_details: 'विवरण दिखाएँ', hide_details: 'विवरण छिपाएँ', show_art: 'चित्र दिखाएँ', hide_art: 'चित्र छिपाएँ' },
-      knda: { helper: 'ಉಚ್ಛಾರ ಸಹಾಯ', show_details: 'ವಿವರಗಳನ್ನು ತೋರಿಸಿ', hide_details: 'ವಿವರಗಳನ್ನು ಮರೆಮಾಡಿ', show_art: 'ಚಿತ್ರ ತೋರಿಸಿ', hide_art: 'ಚಿತ್ರ ಮರೆಮಾಡಿ' },
-      tel: { helper: 'ఉచ్చరణ సహాయం', show_details: 'వివరాలు చూపు', hide_details: 'వివరాలు దాచు', show_art: 'చిత్రం చూపు', hide_art: 'చిత్రం దాచు' },
-      tam: { helper: 'உச்சரிப்பு உதவி', show_details: 'விவரங்களை காட்டு', hide_details: 'விவரங்களை மறை', show_art: 'படத்தை காட்டு', hide_art: 'படத்தை மறை' },
-      guj: { helper: 'ઉચ્ચાર સહાય', show_details: 'વિગતો બતાવો', hide_details: 'વિગતો છુપાવો', show_art: 'ચિત્ર બતાવો', hide_art: 'ચિત્ર છુપાવો' },
-      pan: { helper: 'ਉਚਾਰਣ ਮਦਦ', show_details: 'ਵੇਰਵੇ ਦਿਖਾਓ', hide_details: 'ਵੇਰਵੇ ਲੁਕਾਓ', show_art: 'ਚਿੱਤਰ ਦਿਖਾਓ', hide_art: 'ਚਿੱਤਰ ਲੁਕਾਓ' },
-      mr: { helper: 'उच्चार मदत', show_details: 'तपशील दाखवा', hide_details: 'तपशील लपवा', show_art: 'चित्र दाखवा', hide_art: 'चित्र लपवा' },
-      ben: { helper: 'উচ্চারণ সহায়তা', show_details: 'বিস্তারিত দেখুন', hide_details: 'বিস্তারিত লুকান', show_art: 'ছবি দেখান', hide_art: 'ছবি লুকান' },
-      mal: { helper: 'ഉച്ചാരണ സഹായം', show_details: 'വിശദാംശങ്ങൾ കാണിക്കുക', hide_details: 'വിശദാംശങ്ങൾ മറയ്ക്കുക', show_art: 'ചിത്രം കാണിക്കുക', hide_art: 'ചിത്രം മറയ്ക്കുക' },
+      iast: { helper: 'Pronunciation help', show_details: 'Show details', hide_details: 'Hide details' },
+      deva: { helper: 'उच्चारण सहायता', show_details: 'विवरण दिखाएँ', hide_details: 'विवरण छिपाएँ' },
+      knda: { helper: 'ಉಚ್ಛಾರ ಸಹಾಯ', show_details: 'ವಿವರಗಳನ್ನು ತೋರಿಸಿ', hide_details: 'ವಿವರಗಳನ್ನು ಮರೆಮಾಡಿ' },
+      tel: { helper: 'ఉచ్చరణ సహాయం', show_details: 'వివరాలు చూపు', hide_details: 'వివరాలు దాచు' },
+      tam: { helper: 'உச்சரிப்பு உதவி', show_details: 'விவரங்களை காட்டு', hide_details: 'விவரங்களை மறை' },
+      guj: { helper: 'ઉચ્ચાર સહાય', show_details: 'વિગતો બતાવો', hide_details: 'વિગતો છુપાવો' },
+      pan: { helper: 'ਉਚਾਰਣ ਮਦਦ', show_details: 'ਵੇਰਵੇ ਦਿਖਾਓ', hide_details: 'ਵੇਰਵੇ ਲੁਕਾਓ' },
+      mr: { helper: 'उच्चार मदत', show_details: 'तपशील दाखवा', hide_details: 'तपशील लपवा' },
+      ben: { helper: 'উচ্চারণ সহায়তা', show_details: 'বিস্তারিত দেখুন', hide_details: 'বিস্তারিত লুকান' },
+      mal: { helper: 'ഉച്ചാരണ സഹായം', show_details: 'വിശദാംശങ്ങൾ കാണിക്കുക', hide_details: 'വിശദാംശങ്ങൾ മറയ്ക്കുക' },
     };
     return (k: string) => (map[lang] || map.iast)[k] || k;
   }, [lang]);
@@ -242,7 +251,7 @@ export function FlowLens({ tokens, rows, wordIndex, lineIndex, lang, legendOpen:
 
           {/* Word breakdown – show whole words with subtle diacritic highlighting */}
           {!isNumericLike(curr) && secVisible && curr && (
-            <div className="mt-3 px-2 py-1 rounded-md border bg-slate-900/60 border-emerald-300/35 text-emerald-200 w-full overflow-hidden">
+            <div className={`mt-3 px-2 py-1 rounded-md border w-full overflow-hidden ${learnMode ? 'bg-amber-900/20 border-amber-400/30 text-amber-200' : 'bg-slate-900/60 border-emerald-300/35 text-emerald-200'}`}>
               <div
                 className="flex flex-wrap items-center justify-center gap-1.5"
                 style={{ opacity: secExiting ? 0 : 1, transform: `translateY(${secExiting ? '-6px' : '0px'})`, transition: 'opacity 180ms ease, transform 180ms ease' }}
@@ -252,8 +261,12 @@ export function FlowLens({ tokens, rows, wordIndex, lineIndex, lang, legendOpen:
                   const strong = active && !!playing;
                   let baseCls = 'px-1.5 py-0.5 rounded-md leading-tight break-words text-sm sm:text-base lg:text-lg ';
                   const stateCls = strong
-                    ? 'animate-pulse bg-emerald-200 text-black shadow-[0_0_12px_rgba(52,211,153,0.45)]'
-                    : 'text-emerald-200/80';
+                    ? learnMode
+                      ? 'animate-pulse bg-amber-200 text-black shadow-[0_0_12px_rgba(251,191,36,0.45)]'
+                      : 'animate-pulse bg-emerald-200 text-black shadow-[0_0_12px_rgba(52,211,153,0.45)]'
+                    : learnMode
+                      ? 'text-amber-200/80'
+                      : 'text-emerald-200/80';
                   let featureCls = '';
                   if (lang === 'iast' && legendOpen) {
                     const f = classifyIASTWord(w);
@@ -262,7 +275,30 @@ export function FlowLens({ tokens, rows, wordIndex, lineIndex, lang, legendOpen:
                     if (f.hasAspirate) featureCls += ' iast-word-aspirate';
                   }
                   const cls = `${baseCls}${stateCls}${featureCls}`;
-                  return (
+
+                  // Find matching compound breakdown for this word
+                  const normalizeWord = (s: string) => s.toLowerCase().replace(/[।॥\s.,'"]/g, '').normalize('NFD');
+                  const wordNorm = normalizeWord(w);
+                  // Handle samasaVibhaga as either array or single object
+                  const samasaArray = Array.isArray(lineData?.samasaVibhaga)
+                    ? lineData.samasaVibhaga
+                    : lineData?.samasaVibhaga ? [lineData.samasaVibhaga] : [];
+                  const matchingCompound = samasaArray.find((c) => {
+                    const compoundNorm = normalizeWord(c.compound || '');
+                    // Match if word contains the compound or compound contains the word
+                    return wordNorm.includes(compoundNorm) || compoundNorm.includes(wordNorm) ||
+                           // Also try simple substring match on first 4+ chars
+                           (wordNorm.length >= 4 && compoundNorm.startsWith(wordNorm.slice(0, 4)));
+                  });
+
+                  // Create keyword with meaning from line data if available
+                  const keyword: Keyword | undefined = learnMode ? {
+                    term: w,
+                    script: lang,
+                    meaning: matchingCompound?.combinedMeaning || lineData?.meaning || '',
+                  } : undefined;
+
+                  const wordSpan = (
                     <span
                       key={`word-sec-${i}`}
                       className={cls}
@@ -270,6 +306,19 @@ export function FlowLens({ tokens, rows, wordIndex, lineIndex, lang, legendOpen:
                       {renderWithAnimation(w)}
                     </span>
                   );
+
+                  return learnMode ? (
+                    <WordInfoPopover
+                      key={`word-pop-${i}`}
+                      word={w}
+                      keyword={keyword}
+                      compoundBreakdown={matchingCompound}
+                      enabled={learnMode}
+                      lang={lang}
+                    >
+                      {wordSpan}
+                    </WordInfoPopover>
+                  ) : wordSpan;
                 })}
               </div>
             </div>
