@@ -108,7 +108,11 @@ export const analytics = {
   practiceAction: (action: 'word_reveal' | 'line_complete' | 'replay' | 'navigate' | 'difficulty_change' | 'jump' | 'complete_line') =>
     trackEvent('practice_action', { action }),
 
-  // Play mode actions (for tracking engagement)  
+  // Play mode actions (for tracking engagement)
   playAction: (action: 'play' | 'pause' | 'next' | 'prev' | 'seek' | 'pace_change') =>
     trackEvent('play_action', { action }),
+
+  // Feature toggle tracking (learn mode, etc.)
+  featureAction: (feature: string, action: string) =>
+    trackEvent('feature_action', { feature, action }),
 };
