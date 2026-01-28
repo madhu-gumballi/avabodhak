@@ -4,10 +4,11 @@ import { EnhancedLandingPage } from './components/EnhancedLandingPage';
 import { VSNViewer } from './components/VSNViewer';
 import { HariStotramViewer } from './components/HariStotramViewer';
 import { KeshavaNamaViewer } from './components/KeshavaNamaViewer';
+import { VayuStutiViewer } from './components/VayuStutiViewer';
 import { analytics } from './lib/analytics';
 import type { Lang } from './data/types';
 
-type ViewState = 'landing' | 'vsn' | 'hari' | 'keshava';
+type ViewState = 'landing' | 'vsn' | 'hari' | 'keshava' | 'vayu';
 
 export default function App() {
   const [view, setView] = useState<ViewState>('landing');
@@ -28,7 +29,7 @@ export default function App() {
     }
   });
 
-  const handleStotraSelect = (stotra: 'vsn' | 'hari' | 'keshava', lang?: Lang) => {
+  const handleStotraSelect = (stotra: 'vsn' | 'hari' | 'keshava' | 'vayu', lang?: Lang) => {
     setView(stotra);
     setPreferredLang(lang);
     analytics.selectStotra(stotra);
@@ -53,6 +54,9 @@ export default function App() {
       )}
       {view === 'keshava' && (
         <KeshavaNamaViewer onBack={handleBack} preferredLang={preferredLang} />
+      )}
+      {view === 'vayu' && (
+        <VayuStutiViewer onBack={handleBack} preferredLang={preferredLang} />
       )}
     </ThemeProvider>
   );

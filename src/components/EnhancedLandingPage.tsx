@@ -11,10 +11,11 @@ import ExtensionIcon from '@mui/icons-material/Extension';
 import vsnLines from '../data/vs.lines.new.json';
 import hariLines from '../data/hari.lines.json';
 import keshavaLines from '../data/keshava.lines.json';
+import vayuLines from '../data/vayu.lines.json';
 import type { TextFile, Lang } from '../data/types';
 
 interface LandingPageProps {
-    onSelectStotra: (stotra: 'vsn' | 'hari' | 'keshava', preferredLang?: Lang) => void;
+    onSelectStotra: (stotra: 'vsn' | 'hari' | 'keshava' | 'vayu', preferredLang?: Lang) => void;
 }
 
 const LANGUAGE_NAMES: Record<Lang, { native: string; english: string }> = {
@@ -61,7 +62,7 @@ export function EnhancedLandingPage({ onSelectStotra }: LandingPageProps) {
         handleLanguageMenuClose();
     };
 
-    const handleStotraClick = (stotra: 'vsn' | 'hari' | 'keshava') => {
+    const handleStotraClick = (stotra: 'vsn' | 'hari' | 'keshava' | 'vayu') => {
         onSelectStotra(stotra, selectedLang);
     };
 
@@ -163,7 +164,7 @@ export function EnhancedLandingPage({ onSelectStotra }: LandingPageProps) {
     };
 
     const renderStotraCard = (
-        stotra: 'vsn' | 'hari' | 'keshava',
+        stotra: 'vsn' | 'hari' | 'keshava' | 'vayu',
         data: TextFile,
         icon: React.ReactNode,
         color: string,
@@ -427,6 +428,13 @@ export function EnhancedLandingPage({ onSelectStotra }: LandingPageProps) {
                         <SpaIcon sx={{ fontSize: 40 }} />,
                         '#8b5cf6',
                         1600
+                    )}
+                    {renderStotraCard(
+                        'vayu',
+                        vayuLines as TextFile,
+                        <SpaIcon sx={{ fontSize: 40 }} />,
+                        '#10b981',
+                        1800
                     )}
                 </Box>
             </Container>

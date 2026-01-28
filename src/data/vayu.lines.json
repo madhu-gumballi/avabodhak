@@ -1,0 +1,719 @@
+{
+  "title": "Vayu Stuti",
+  "metadata": {
+    "chapters": 1,
+    "totalLines": 42,
+    "languages": ["deva", "knda", "tel", "tam", "iast"],
+    "practiceMode": true,
+    "puzzleMode": true,
+    "stotraType": "verse",
+    "composer": "Sri Trivikrama Panditacharya",
+    "composerInfo": {
+      "name": "Sri Trivikrama Panditacharya",
+      "period": "13th Century CE",
+      "tradition": "Dvaita Vedanta",
+      "biography": "A direct disciple of Sri Madhvacharya and a great scholar of the Dvaita tradition. He composed the Vayu Stuti in praise of Mukhya Prana (Vayu/Hanuman/Bhima/Madhvacharya), celebrating the three incarnations of the Wind God."
+    },
+    "sampradaya": {
+      "name": "Dvaita Vedanta",
+      "lineage": "Madhva Sampradaya",
+      "region": "Karnataka"
+    },
+    "devataPrimary": "Vayu/Mukhya Prana",
+    "devataSecondary": ["Hanuman", "Bhima", "Madhvacharya", "Vishnu"],
+    "chandas": {
+      "name": "Sragdhara",
+      "pattern": "7+7+7 = 21 syllables per pada",
+      "syllablesPerLine": 21,
+      "description": "A majestic meter with 21 syllables per quarter-verse, creating a grand, flowing rhythm perfect for devotional poetry praising divine glory."
+    },
+    "historicalContext": "Also known as 'Hari Vayu Stuti' or 'Mukhya Prana Stuti', this hymn praises Vayu through his three incarnations - as Hanuman (servant of Rama), Bhima (Pandava hero), and Madhvacharya (founder of Dvaita Vedanta). It is recited daily by followers of the Madhva tradition.",
+    "rasa": ["bhakti", "adbhuta", "vira"],
+    "gunaCategories": ["shakti", "jnana", "bhakti", "rakshana"],
+    "credits": {
+      "textSource": "StotraNidhi.com",
+      "textSourceUrl": "https://stotranidhi.com/",
+      "tradition": "Dvaita Vedanta / Madhva Sampradaya",
+      "scriptSources": {
+        "kannada": "https://stotranidhi.com/kn/vayu-stuti-in-kannada/",
+        "english": "https://stotranidhi.com/en/vayu-stuti-in-english/",
+        "telugu": "https://stotranidhi.com/vayu-stuti-in-telugu/",
+        "tamil": "https://stotranidhi.com/ta/vayu-stuti-in-tamil/",
+        "sanskrit": "https://stotranidhi.com/hi/vayu-stuti-in-sanskrit/"
+      },
+      "attribution": "All text content sourced from StotraNidhi.com (https://stotranidhi.com/) - A comprehensive collection of Hindu devotional hymns. We are grateful to StotraNidhi for making these sacred texts available.",
+      "transliterationStandard": "IAST (International Alphabet of Sanskrit Transliteration)",
+      "pronunciationReference": "https://www.youtube.com/watch?v=r3qWhCZWUZU"
+    },
+    "disclaimer": {
+      "text": "The meanings and translations provided here are approximations meant to aid learning and devotion. Sanskrit, being a sacred and multi-layered language, carries depths of meaning that cannot be fully captured in English translation. Different acharyas and traditions may interpret verses differently based on their philosophical framework. For authoritative understanding and the complete essence of these sacred texts, please consult a qualified guru or traditional scholar in the Dvaita Vedanta tradition.",
+      "note": "The Vayu Stuti glorifies Mukhya Prana (the Chief Life-force) through his three incarnations: Hanuman, Bhima, and Madhvacharya. Each verse contains profound philosophical and devotional content rooted in the Dvaita tradition of Sri Madhvacharya.",
+      "sourceAttribution": "All script versions sourced from StotraNidhi.com with gratitude. Please visit the original sources for complete text and additional resources."
+    }
+  },
+  "sources": {
+    "iast": "https://stotranidhi.com/en/vayu-stuti-in-english/",
+    "deva": "https://stotranidhi.com/hi/vayu-stuti-in-sanskrit/",
+    "knda": "https://stotranidhi.com/kn/vayu-stuti-in-kannada/",
+    "tel": "https://stotranidhi.com/vayu-stuti-in-telugu/",
+    "tam": "https://stotranidhi.com/ta/vayu-stuti-in-tamil/"
+  },
+  "lines": [
+    {
+      "id": "1",
+      "deva": "वायु स्तुति",
+      "iast": "Vayu Stuti",
+      "knda": "ವಾಯು ಸ್ತುತಿ",
+      "tel": "వాయు స్తుతి",
+      "tam": "வாயு ஸ்துதி",
+      "meaning": "Hymn in Praise of Vayu (The Wind God / Mukhya Prana)",
+      "note": "The Vayu Stuti is a powerful hymn composed by Sri Trivikrama Panditacharya, glorifying Mukhya Prana (Vayu) through his three incarnations: Hanuman (who served Lord Rama), Bhima (the mighty Pandava), and Madhvacharya (the founder of Dvaita Vedanta). This stotra is recited daily by devotees of the Madhva tradition for spiritual protection and enlightenment.",
+      "chapter": "Vayu Stuti"
+    },
+    {
+      "id": "2",
+      "deva": "॥ नखस्तुति ॥",
+      "iast": "॥ Nakha Stuti ॥",
+      "knda": "॥ ನಖಸ್ತುತಿ ॥",
+      "tel": "॥ నఖస్తుతి ॥",
+      "tam": "॥ நகஸ்துதி ॥",
+      "meaning": "Hymn to the Divine Claw (Narasimha's Nails)",
+      "note": "The Vayu Stuti traditionally begins with the Nakha Stuti, praising Lord Narasimha's divine claws that destroyed the demon Hiranyakashipu. This invocation seeks the Lord's protection before proceeding to praise Vayu."
+    },
+    {
+      "id": "3",
+      "deva": "पान्त्वस्मान् पुरुहूतवैरिबलवन्मातङ्गमाद्यद्घटा-कुम्भोच्चाद्रिविपाटनाधिकपटुप्रत्येकवज्रायिताः ।",
+      "iast": "pāntvāsmān puruhūtavairibalavānmātaṅgamādyadghaṭā-kumbhōchchādrivipāṭanādhikapuṭupratyēkavajrāyitāḥ |",
+      "knda": "ಪಾಂತ್ವಸ್ಮಾನ್ ಪುರುಹೂತವೈರಿಬಲವನ್ಮಾತಂಗಮಾದ್ಯದ್ಘಟಾ-ಕುಂಭೋಚ್ಚಾದ್ರಿವಿಪಾಟನಾಧಿಕಪಟುಪ್ರತ್ಯೇಕವಜ್ರಾಯಿತಾಃ ।",
+      "tel": "పాంత్వస్మాన్ పురుహూతవైరిబలవన్మాతంగమాద్యద్ఘటా-కుంభోచ్చాద్రివిపాటనాధికపటుప్రత్యేకవజ్రాయితాః ।",
+      "tam": "பாந்த்வஸ்மாந் புருஹூதவைரிப³லவந்மாதங்க³மாத்³யத்³க⁴டா-கும்போ⁴ச்சாத்³ரிவிபாடநாதி⁴கபடுப்ரத்யேகவஜ்ராயிதா꞉ ।",
+      "meaning": "May they protect us - those (nails) which are like individual thunderbolts, more powerful in splitting the temple-like skulls of the mighty elephants of Indra's enemy (Hiranyakashipu)...",
+      "padachchheda": "pāntu asmān / puru-hūta-vairi-balavat-mātaṅga-mādyat-ghaṭā / kumbha-uccha-adri-vipāṭana-adhika-paṭu / prati-ēka-vajrāyitāḥ",
+      "wordByWord": [
+        {"word": "pāntasmān", "meaning": "may they protect us"},
+        {"word": "puruhūta-vairi", "meaning": "enemy of Indra (Hiranyakashipu)"},
+        {"word": "balavat-mātaṅga", "meaning": "mighty elephants"},
+        {"word": "mādyat-ghaṭā", "meaning": "intoxicated group"},
+        {"word": "kumbha-uccha-adri", "meaning": "mountain-high temple (skull)"},
+        {"word": "vipāṭana", "meaning": "splitting"},
+        {"word": "adhika-paṭu", "meaning": "more powerful"},
+        {"word": "prati-ēka", "meaning": "each one"},
+        {"word": "vajrāyitāḥ", "meaning": "like thunderbolts"}
+      ]
+    },
+    {
+      "id": "4",
+      "deva": "श्रीमत्कण्ठीरवास्यप्रततसुनखरा दारितारातिदूर-प्रध्वस्तध्वान्तशान्तप्रविततमनसा भाविता भूरिभागैः ॥ १ ॥",
+      "iast": "śrīmatkaṇṭhīravāsyapratatasunakharā dāritārātidūra-pradhvastadhvāntaśāntapravitatamanasā bhāvitā bhūribhāgaiḥ || 1 ||",
+      "knda": "ಶ್ರೀಮತ್ಕಂಠೀರವಾಸ್ಯಪ್ರತತಸುನಖರಾ ದಾರಿತಾರಾತಿದೂರ-ಪ್ರಧ್ವಸ್ತಧ್ವಾಂತಶಾಂತಪ್ರವಿತತಮನಸಾ ಭಾವಿತಾ ಭೂರಿಭಾಗೈಃ ॥ ೧ ॥",
+      "tel": "శ్రీమత్కంఠీరవాస్యప్రతతసునఖరా దారితారాతిదూర-ప్రధ్వస్తధ్వాంతశాంతప్రవితతమనసా భావితా భూరిభాగైః ॥ 1 ॥",
+      "tam": "ஶ்ரீமத்கண்டீ²ரவாஸ்யப்ரததஸுநக²ரா தா³ரிதாராதிதூ³ர-ப்ரத்⁴வஸ்தத்⁴வாந்தஶாந்தப்ரவிததமநஸா பா⁴விதா பூ⁴ரிபா⁴கை³꞉ ॥ 1 ॥",
+      "meaning": "The beautiful nails of the glorious Lion-faced Lord (Narasimha), which tore apart the enemy, dispelled the darkness far away, and are meditated upon by those of great fortune with peaceful and expansive minds.",
+      "padachchheda": "śrīmat-kaṇṭhīrava-āsya-pratata-su-nakharā / dārita-arāti-dūra / pradhvasta-dhvānta-śānta-pravitata-manasā / bhāvitā bhūri-bhāgaiḥ",
+      "wordByWord": [
+        {"word": "śrīmat", "meaning": "glorious"},
+        {"word": "kaṇṭhīrava", "meaning": "lion"},
+        {"word": "āsya", "meaning": "faced"},
+        {"word": "pratata", "meaning": "extended"},
+        {"word": "su-nakharā", "meaning": "beautiful nails"},
+        {"word": "dārita-arāti", "meaning": "tore apart the enemy"},
+        {"word": "dūra-pradhvasta", "meaning": "far away destroyed"},
+        {"word": "dhvānta", "meaning": "darkness"},
+        {"word": "śānta-pravitata-manasā", "meaning": "with peaceful expansive minds"},
+        {"word": "bhāvitā", "meaning": "meditated upon"},
+        {"word": "bhūri-bhāgaiḥ", "meaning": "by those of great fortune"}
+      ],
+      "rasa": ["bhakti", "vira"]
+    },
+    {
+      "id": "5",
+      "deva": "लक्ष्मीकान्त समन्ततोऽविकलयन् नैवेश्यमीशो यतः त्वं हे नृत्तगृहीतरूपनिचये यातस्ततोऽन्यैरजैः ।",
+      "iast": "lakṣmīkānta samantatō:'vikalayan naivēśyamīśō yataḥ tvaṁ hē nr̥ttagr̥hītarūpanicayē yātastatō:'nyairajaiḥ |",
+      "knda": "ಲಕ್ಷ್ಮೀಕಾಂತ ಸಮಂತತೋಽವಿಕಲಯನ್ ನೈವೇಶ್ಯಮೀಶೋ ಯತಃ ತ್ವಂ ಹೇ ನೃತ್ತಗೃಹೀತರೂಪನಿಚಯೇ ಯಾತಸ್ತತೋಽನ್ಯೈರಜೈಃ ।",
+      "tel": "లక్ష్మీకాంత సమంతతోఽవికలయన్ నైవేశ్యమీశో యతః త్వం హే నృత్తగృహీతరూపనిచయే యాతస్తతోఽన్యైరజైః ।",
+      "tam": "லக்ஷ்மீகாந்த ஸமந்ததோऽவிகலயந் நைவேஶ்யமீஶோ யத꞉ த்வம் ஹே ந்ருத்தக்³ருஹீதரூபநிசயே யாதஸ்ததோऽந்யைரஜை꞉ ।",
+      "meaning": "O Lord of Lakshmi! You alone are the master who cannot be fully comprehended from all directions, O You who have assumed the form of the dancer (Narasimha), having gone thus by others (who remain) unborn...",
+      "padachchheda": "lakṣmī-kānta / samantataḥ avikalayan / na eva īśyam īśaḥ yataḥ / tvam hē / nṛtta-gṛhīta-rūpa-nicayē / yātaḥ tataḥ anyaiḥ ajaiḥ",
+      "wordByWord": [
+        {"word": "lakṣmī-kānta", "meaning": "O beloved of Lakshmi"},
+        {"word": "samantataḥ", "meaning": "from all directions"},
+        {"word": "avikalayan", "meaning": "not fully comprehending"},
+        {"word": "na eva īśyam", "meaning": "not at all to be mastered"},
+        {"word": "īśaḥ", "meaning": "the Lord"},
+        {"word": "yataḥ", "meaning": "because"},
+        {"word": "tvam", "meaning": "You"},
+        {"word": "nṛtta-gṛhīta-rūpa", "meaning": "form assumed in dance (Narasimha)"},
+        {"word": "nicayē", "meaning": "in the collection"},
+        {"word": "yātaḥ", "meaning": "having gone"},
+        {"word": "anyaiḥ ajaiḥ", "meaning": "by other unborn ones"}
+      ]
+    },
+    {
+      "id": "6",
+      "deva": "कायव्यूहमसह्यकोपदहनज्वालावलीपञ्जरे पान्त्वस्मान् प्रथयन्नखोखिलसुरान् गर्भोदयोत्खातवान् ॥ २ ॥",
+      "iast": "kāyavyūhamasahyakōpadahanajvālāvalīpañjarē pāntvāsmān prathayanakhōkhilasurān garbhōdayōtkhātavān || 2 ||",
+      "knda": "ಕಾಯವ್ಯೂಹಮಸಹ್ಯಕೋಪದಹನಜ್ವಾಲಾವಲೀಪಂಜರೇ ಪಾಂತ್ವಸ್ಮಾನ್ ಪ್ರಥಯನ್ನಖೋಖಿಲಸುರಾನ್ ಗರ್ಭೋದಯೋತ್ಖಾತವಾನ್ ॥ ೨ ॥",
+      "tel": "కాయవ్యూహమసహ్యకోపదహనజ్వాలావలీపంజరే పాంత్వస్మాన్ ప్రథయన్నఖోఖిలసురాన్ గర్భోదయోత్ఖాతవాన్ ॥ 2 ॥",
+      "tam": "காயவ்யூஹமஸஹ்யகோபத³ஹநஜ்வாலாவலீபஞ்ஜரே பாந்த்வஸ்மாந் ப்ரத²யந்நகோ²கி²லஸுராந் க³ர்போ⁴த³யோத்கா²தவாந் ॥ 2 ॥",
+      "meaning": "May He protect us - He whose body was surrounded by a cage of unbearable flames of anger, who displayed His nails to all the gods, and who excavated (Hiranyakashipu) from within.",
+      "padachchheda": "kāya-vyūham asahya-kōpa-dahana-jvālā-avalī-pañjarē / pāntu asmān / prathayan nakha-akhila-surān / garbha-udaya-utkhātavān",
+      "wordByWord": [
+        {"word": "kāya-vyūham", "meaning": "body formation"},
+        {"word": "asahya-kōpa", "meaning": "unbearable anger"},
+        {"word": "dahana-jvālā", "meaning": "burning flames"},
+        {"word": "avalī-pañjarē", "meaning": "in a cage/enclosure"},
+        {"word": "pāntu asmān", "meaning": "may He protect us"},
+        {"word": "prathayan", "meaning": "displaying"},
+        {"word": "nakha", "meaning": "nails"},
+        {"word": "akhila-surān", "meaning": "to all the gods"},
+        {"word": "garbha-udaya", "meaning": "from within"},
+        {"word": "utkhātavān", "meaning": "excavated/uprooted"}
+      ],
+      "rasa": ["vira", "adbhuta"]
+    },
+    {
+      "id": "7",
+      "deva": "॥ इति श्री श्रीपादराजकृतं नखस्तुति सम्पूर्णं ॥",
+      "iast": "|| iti śrī śrīpādarājakr̥taṁ nakhastuti sampūrṇaṁ ||",
+      "knda": "॥ ಇತಿ ಶ್ರೀ ಶ್ರೀಪಾದರಾಜಕೃತಂ ನಖಸ್ತುತಿ ಸಂಪೂರ್ಣಂ ॥",
+      "tel": "॥ ఇతి శ్రీ శ్రీపాదరాజకృతం నఖస్తుతి సంపూర్ణం ॥",
+      "tam": "॥ இதி ஶ்ரீ ஶ்ரீபாத³ராஜக்ருதம் நக²ஸ்துதி ஸம்பூர்ணம் ॥",
+      "meaning": "Thus ends the Nakha Stuti composed by Sri Sripadaraja."
+    },
+    {
+      "id": "8",
+      "deva": "॥ वायुस्तुति ॥",
+      "iast": "|| Vayu Stuti ||",
+      "knda": "॥ ವಾಯುಸ್ತುತಿ ॥",
+      "tel": "॥ వాయుస్తుతి ॥",
+      "tam": "॥ வாயுஸ்துதி ॥",
+      "meaning": "The Hymn to Vayu (Begins)",
+      "note": "The main Vayu Stuti now begins, praising Mukhya Prana through his three incarnations."
+    },
+    {
+      "id": "9",
+      "deva": "श्रीमद्विष्ण्वङ्घ्रिनिष्ठातिगुणगुरुतमश्रीमदानन्दतीर्थ-त्रैलोक्याचार्यपादोज्ज्वलजलजलसत्पांसवोऽस्मान् पुनन्तु ।",
+      "iast": "śrīmadviṣṇvaṅghriniṣṭhātiguṇagurutamaśrīmadānandatīrtha-trailōkyācāryapādōjjvalajalajlasatpāṁsavō'smān punantu |",
+      "knda": "ಶ್ರೀಮದ್ವಿಷ್ಣ್ವಂಘ್ರಿನಿಷ್ಠಾತಿಗುಣಗುರುತಮಶ್ರೀಮದಾನಂದತೀರ್ಥ-ತ್ರೈಲೋಕ್ಯಾಚಾರ್ಯಪಾದೋಜ್ಜ್ವಲಜಲಜಲಸತ್ಪಾಂಸವೋಽಸ್ಮಾನ್ ಪುನಂತು ।",
+      "tel": "శ్రీమద్విష్ణ్వంఘ్రినిష్ఠాతిగుణగురుతమశ్రీమదానందతీర్థ-త్రైలోక్యాచార్యపాదోజ్జ్వలజలజలసత్పాంసవోఽస్మాన్ పునంతు ।",
+      "tam": "ஶ்ரீமத்³விஷ்ண்வங்க்⁴ரிநிஷ்டா²திகு³ணகு³ருதமஶ்ரீமதா³நந்த³தீர்த²-த்ரைலோக்யாசார்யபாதோ³ஜ்ஜ்வலஜலஜலஸத்பாம்ஸவோऽஸ்மாந் புநந்து ।",
+      "meaning": "May the holy dust particles from the radiant lotus feet of Sri Ananda Tirtha (Madhvacharya), the world-teacher, who is most devoted to the feet of Lord Vishnu and supreme in excellent qualities, purify us.",
+      "padachchheda": "śrīmat-viṣṇu-aṅghri-niṣṭha-ati-guṇa-gurutama-śrīmat-ānanda-tīrtha / trai-lokya-ācārya-pāda-ujjvala-jalaja-lasat-pāṁsavaḥ asmān punantu",
+      "wordByWord": [
+        {"word": "śrīmat", "meaning": "glorious"},
+        {"word": "viṣṇu-aṅghri-niṣṭha", "meaning": "devoted to Vishnu's feet"},
+        {"word": "ati-guṇa", "meaning": "exceedingly virtuous"},
+        {"word": "gurutama", "meaning": "most venerable"},
+        {"word": "ānanda-tīrtha", "meaning": "Ananda Tirtha (Madhvacharya)"},
+        {"word": "trai-lokya-ācārya", "meaning": "teacher of three worlds"},
+        {"word": "pāda-ujjvala", "meaning": "radiant feet"},
+        {"word": "jalaja", "meaning": "lotus"},
+        {"word": "lasat-pāṁsavaḥ", "meaning": "shining dust particles"},
+        {"word": "asmān punantu", "meaning": "may they purify us"}
+      ],
+      "rasa": ["bhakti", "shanta"],
+      "samasaVibhaga": [
+        {
+          "compound": "viṣṇvaṅghriniṣṭha",
+          "breakdown": ["viṣṇu", "aṅghri", "niṣṭha"],
+          "meanings": ["Vishnu", "feet", "devoted to"],
+          "samasaType": "tatpurusha",
+          "combinedMeaning": "One devoted to the feet of Vishnu"
+        },
+        {
+          "compound": "trailōkyācārya",
+          "breakdown": ["trailokya", "ācārya"],
+          "meanings": ["three worlds", "teacher"],
+          "samasaType": "tatpurusha",
+          "combinedMeaning": "Teacher of the three worlds"
+        }
+      ]
+    },
+    {
+      "id": "10",
+      "deva": "यत्प्रज्ञाविष्कृतिः केवलमथ परमं वादिराड्गण्डशैलम् पञ्चद्वारं भिनद्मी निजमतनिवहैर्भव्यसिंहो यतीनाम् ॥ १ ॥",
+      "iast": "yatprajñāviṣkr̥tiḥ kēvalamattha paramaṁ vādirāḍgaṇḍaśailam pañchadvāraṁ bhinadmī nijamatanavahairbhavyasiṁhō yatīnām || 1 ||",
+      "knda": "ಯತ್ಪ್ರಜ್ಞಾವಿಷ್ಕೃತಿಃ ಕೇವಲಮಥ ಪರಮಂ ವಾದಿರಾಡ್ಗಂಡಶೈಲಮ್ ಪಂಚದ್ವಾರಂ ಭಿನದ್ಮೀ ನಿಜಮತನಿವಹೈರ್ಭವ್ಯಸಿಂಹೋ ಯತೀನಾಮ್ ॥ ೧ ॥",
+      "tel": "యత్ప్రజ్ఞావిష్కృతిః కేవలమథ పరమం వాదిరాడ్గండశైలమ్ పంచద్వారం భినద్మీ నిజమతనివహైర్భవ్యసింహో యతీనామ్ ॥ 1 ॥",
+      "tam": "யத்ப்ரஜ்ஞாவிஷ்க்ருதி꞉ கேவலமத² பரமம் வாதி³ராட்³க³ண்ட³ஶைலம் பஞ்சத்³வாரம் பி⁴நத்³மீ நிஜமதநிவஹைர்ப⁴வ்யஸிம்ஹோ யதீநாம் ॥ 1 ॥",
+      "meaning": "He whose wisdom-display alone destroys the supreme mountain-like pride of the king of debaters through the five doors (senses), is the noble lion among ascetics through his own doctrinal teachings.",
+      "padachchheda": "yat-prajñā-viṣkṛtiḥ kēvalam atha paramam / vādi-rāṭ-gaṇḍa-śailam / pañca-dvāram bhinadmi / nija-mata-nivahaiḥ bhavya-siṁhaḥ yatīnām",
+      "wordByWord": [
+        {"word": "yat-prajñā-viṣkṛtiḥ", "meaning": "whose wisdom-display"},
+        {"word": "kēvalam", "meaning": "alone"},
+        {"word": "paramam", "meaning": "supreme"},
+        {"word": "vādi-rāṭ", "meaning": "king of debaters"},
+        {"word": "gaṇḍa-śailam", "meaning": "mountain-like pride (cheek)"},
+        {"word": "pañca-dvāram", "meaning": "through five doors (senses)"},
+        {"word": "bhinadmi", "meaning": "I break/destroy"},
+        {"word": "nija-mata-nivahaiḥ", "meaning": "by his own doctrines"},
+        {"word": "bhavya-siṁhaḥ", "meaning": "noble lion"},
+        {"word": "yatīnām", "meaning": "among ascetics"}
+      ],
+      "rasa": ["vira", "adbhuta"]
+    },
+    {
+      "id": "11",
+      "deva": "उत्कण्ठाकुण्ठकोलाहलजवविजिताजस्रसेवानुवृद्ध-प्राज्ञात्मज्ञानधूतान्धतमससुमनोमौलिरत्नावलीनाम् ।",
+      "iast": "utkaṇṭhākuṇṭhakōlāhalajavavijitājasrasēvānuvr̥ddha-prājñātmajñānadhūtāndhaatamasasumanōmauliratanāvalīnām |",
+      "knda": "ಉತ್ಕಂಠಾಕುಂಠಕೋಲಾಹಲಜವವಿಜಿತಾಜಸ್ರಸೇವಾನುವೃದ್ಧ-ಪ್ರಾಜ್ಞಾತ್ಮಜ್ಞಾನಧೂತಾಂಧತಮಸಸುಮನೋಮೌಲಿರತ್ನಾವಲೀನಾಮ್ ।",
+      "tel": "ఉత్కంఠాకుంఠకోలాహలజవావిజితాజస్రసేవానువృద్ధ-ప్రాజ్ఞాత్మజ్ఞానధూతాంధతమససుమనోమౌలిరత్నావలీనామ్ ।",
+      "tam": "உத்கண்டா²குண்ட²கோலாஹலஜவவிஜிதாஜஸ்ரஸேவாநுவ்ருத்³த⁴-ப்ராஜ்ஞாத்மஜ்ஞாநதூ⁴தாந்த⁴தமஸஸுமநோமௌலிரத்நாவலீநாம் ।",
+      "meaning": "Whose eager devotion, victorious with unrestrained tumultuous speed, grows through constant service; the crest-jewels of the wise-souled ones whose darkness of ignorance is dispelled by self-knowledge...",
+      "padachchheda": "utkaṇṭhā-akuṇṭha-kōlāhala-java-vijita-ajasra-sēvā-anuvṛddha / prājña-ātma-jñāna-dhūta-andha-tamasa-sumanaḥ-mauli-ratna-āvalīnām",
+      "wordByWord": [
+        {"word": "utkaṇṭhā", "meaning": "eager longing"},
+        {"word": "akuṇṭha", "meaning": "unrestrained"},
+        {"word": "kōlāhala-java", "meaning": "tumultuous speed"},
+        {"word": "vijita", "meaning": "victorious"},
+        {"word": "ajasra-sēvā", "meaning": "constant service"},
+        {"word": "anuvṛddha", "meaning": "increased/grown"},
+        {"word": "prājña-ātma", "meaning": "wise-souled"},
+        {"word": "jñāna-dhūta", "meaning": "dispelled by knowledge"},
+        {"word": "andha-tamasa", "meaning": "blind darkness"},
+        {"word": "sumanaḥ-mauli-ratna", "meaning": "crest-jewels of the good-minded"},
+        {"word": "āvalīnām", "meaning": "of the row/series"}
+      ]
+    },
+    {
+      "id": "12",
+      "deva": "विष्ण्वंघ्रिस्मृतिः पर्याप्ता मुक्तिलाभाय नृणां दिव्या सा ते तदङ्घ्रिस्नातमौलेः ननु मुक्तिरितः पादकञ्जद्वयात्ते ॥ २ ॥",
+      "iast": "viṣṇvaṅghrisamr̥tiḥ paryāptā muktilābhāya nr̥ṇāṁ divyā sā tē tadaṅghrisnātamaulēḥ nanu muktir̥taḥ pādakañjadvayāttē || 2 ||",
+      "knda": "ವಿಷ್ಣ್ವಂಘ್ರಿಸ್ಮೃತಿಃ ಪರ್ಯಾಪ್ತಾ ಮುಕ್ತಿಲಾಭಾಯ ನೃಣಾಂ ದಿವ್ಯಾ ಸಾ ತೇ ತದಂಘ್ರಿಸ್ನಾತಮೌಲೇಃ ನನು ಮುಕ್ತಿರಿತಃ ಪಾದಕಂಜದ್ವಯಾತ್ತೇ ॥ ೨ ॥",
+      "tel": "విష్ణ్వంఘ్రిస్మృతిః పర్యాప్తా ముక్తిలాభాయ నృణాం దివ్యా సా తే తదంఘ్రిస్నాతమౌలేః ననుముక్తిరితః పాదకంజద్వయాత్తే ॥ 2 ॥",
+      "tam": "விஷ்ண்வங்க்⁴ரிஸ்ம்ருதி꞉ பர்யாப்தா முக்திலாபா⁴ய ந்ருணாம் தி³வ்யா ஸா தே தத³ங்க்⁴ரிஸ்நாதமௌலே꞉ நநு முக்திரித꞉ பாத³கஞ்ஜத்³வயாத்தே ॥ 2 ॥",
+      "meaning": "The divine remembrance of Vishnu's feet is sufficient for humans to attain liberation. Indeed, liberation flows from your two lotus feet for those whose heads are bathed in those (Vishnu's) feet."
+    },
+    {
+      "id": "13",
+      "deva": "जन्माधिव्याध्युपाधिप्रतिहतिविरहप्रापकाणां गुणानाम् अग्र्याणामर्पकाणां चिरमुदितचिदानन्दसन्दोहदानाम् ।",
+      "iast": "janmādhivyādhyupādhipratiahativirahaprāpakāṇāṁ guṇānām agryāṇāmarpakāṇāṁ ciramudita cidānanadasandōhadānām |",
+      "knda": "ಜನ್ಮಾಧಿವ್ಯಾಧ್ಯುಪಾಧಿಪ್ರತಿಹತಿವಿರಹಪ್ರಾಪಕಾಣಾಂ ಗುಣಾನಾಮ್ ಅಗ್ರ್ಯಾಣಾಮರ್ಪಕಾಣಾಂ ಚಿರಮುದಿತಚಿದಾನಂದಸಂದೋಹದಾನಾಮ್ ।",
+      "tel": "జన్మాధివ్యాధ్యుపాధిప్రతిహతివిరహప్రాపకాణాం గుణానామ్ అగ్ర్యాణామర్పకాణాం చిరముదితచిదానందసందోహదానామ్ ।",
+      "tam": "ஜந்மாதி⁴வ்யாத்⁴யுபாதி⁴ப்ரதிஹதிவிரஹப்ராபகாணாம் கு³ணாநாம் அக்³ர்யாணாமர்பகாணாம் சிரமுதி³தசிதா³நந்த³ஸந்தோ³ஹதா³நாம் ।",
+      "meaning": "Of those qualities which remove the hindrances of birth, disease, and limitations, and which grant freedom from suffering; which are the foremost bestowers, the givers of the eternal flood of consciousness and bliss...",
+      "padachchheda": "janma-ādhi-vyādhi-upādhi-pratihati-viraha-prāpakāṇām guṇānām / agryāṇām arpakāṇām / ciram udita-cit-ānanda-sandōha-dānām",
+      "wordByWord": [
+        {"word": "janma", "meaning": "birth"},
+        {"word": "ādhi", "meaning": "mental affliction"},
+        {"word": "vyādhi", "meaning": "disease"},
+        {"word": "upādhi", "meaning": "limitations"},
+        {"word": "pratihati", "meaning": "obstacles"},
+        {"word": "viraha-prāpakāṇām", "meaning": "which grant freedom from suffering"},
+        {"word": "guṇānām", "meaning": "of qualities"},
+        {"word": "agryāṇām", "meaning": "foremost"},
+        {"word": "arpakāṇām", "meaning": "bestowers"},
+        {"word": "cit-ānanda", "meaning": "consciousness and bliss"},
+        {"word": "sandōha-dānām", "meaning": "givers of the flood"}
+      ],
+      "rasa": ["shanta", "bhakti"]
+    },
+    {
+      "id": "14",
+      "deva": "पादौ पद्मासनं नौम्यहममलमहाज्ञानदं देवदेव-प्राणेशं ब्राह्मणानां विमलमसुभृतां भूभृतां भूष्णुमीड्यम् ॥ ३ ॥",
+      "iast": "pādau padmāsanaṁ naumyahamamalamaahājñānadaṁ dēvadēva-prāṇēśaṁ brāhmaṇānāṁ vimalamsubhr̥tāṁ bhūbhr̥tāṁ bhūṣṇumīḍyam || 3 ||",
+      "knda": "ಪಾದೌ ಪದ್ಮಾಸನಂ ನೌಮ್ಯಹಮಮಲಮಹಾಜ್ಞಾನದಂ ದೇವದೇವ-ಪ್ರಾಣೇಶಂ ಬ್ರಾಹ್ಮಣಾನಾಂ ವಿಮಲಮಸುಭೃತಾಂ ಭೂಭೃತಾಂ ಭೂಷ್ಣುಮೀಡ್ಯಮ್ ॥ ೩ ॥",
+      "tel": "పాదౌ పద్మాసనం నౌమ్యహమమలమహాజ్ఞానదం దేవదేవ-ప్రాణేశం బ్రాహ్మణానాం విమలమసుభృతాం భూభృతాం భూష్ణుమీడ్యమ్ ॥ 3 ॥",
+      "tam": "பாதௌ³ பத்³மாஸநம் நௌம்யஹமமலமஹாஜ்ஞாநத³ம் தே³வதே³வ-ப்ராணேஶம் ப்³ராஹ்மணாநாம் விமலமஸுப்⁴ருதாம் பூ⁴ப்⁴ருதாம் பூ⁴ஷ்ணுமீட்³யம் ॥ 3 ॥",
+      "meaning": "I bow to the lotus seat of the feet of the Lord of the life-breath of Brahmanas, the God of gods, giver of pure great knowledge, the pure sustainer of beings, praised by the kings, ever prospering."
+    },
+    {
+      "id": "15",
+      "deva": "अस्याविष्कर्तुकामं कलिमलकलुषेऽस्मिन् जने ज्ञानमार्गं वन्द्यं चन्द्रेन्द्ररुद्रद्युमणिफणिवयोनायकाद्यैरिहाद्य ।",
+      "iast": "asyāviṣkartukāmaṁ kalimalakaluṣē'smin janē jñānamārgaṁ vandyaṁ candrēndrarudradyumaṇiphaṇivayōnāyakādyairihādya |",
+      "knda": "ಅಸ್ಯಾವಿಷ್ಕರ್ತುಕಾಮಂ ಕಲಿಮಲಕಲುಷೇಽಸ್ಮಿನ್ ಜನೇ ಜ್ಞಾನಮಾರ್ಗಂ ವಂದ್ಯಂ ಚಂದ್ರೇಂದ್ರರುದ್ರದ್ಯುಮಣಿಫಣಿವಯೋನಾಯಕಾದ್ಯೈರಿಹಾದ್ಯ ।",
+      "tel": "అస్యావిష్కర్తుకామం కలిమలకలుషేఽస్మిన్ జనే జ్ఞానమార్గం వంద్యం చంద్రేంద్రరుద్రద్యుమణిఫణివయోనాయకాద్యైరిహాద్య ।",
+      "tam": "அஸ்யாவிஷ்கர்துகாமம் கலிமலகலுஷேऽஸ்மிந் ஜநே ஜ்ஞாநமார்க³ம் வந்த்³யம் சந்த்³ரேந்த்³ரருத்³ரத்³யுமணிப²ணிவயோநாயகாத்³யைரிஹாத்³ய ।",
+      "meaning": "He who desires to reveal the path of knowledge to this world polluted by the impurities of Kali Yuga, is worshipped by the Moon, Indra, Rudra, the Sun, Shesha, and the leaders of the Maruts.",
+      "padachchheda": "asya āviṣkartu-kāmam / kali-mala-kaluṣē asmin janē / jñāna-mārgam vandyam / candra-indra-rudra-dyumaṇi-phaṇi-vayaḥ-nāyaka-ādyaiḥ iha ādya",
+      "wordByWord": [
+        {"word": "asya", "meaning": "of this"},
+        {"word": "āviṣkartu-kāmam", "meaning": "desiring to reveal"},
+        {"word": "kali-mala", "meaning": "impurities of Kali"},
+        {"word": "kaluṣē", "meaning": "polluted"},
+        {"word": "asmin janē", "meaning": "in this world/people"},
+        {"word": "jñāna-mārgam", "meaning": "path of knowledge"},
+        {"word": "vandyam", "meaning": "is worshipped"},
+        {"word": "candra", "meaning": "Moon"},
+        {"word": "indra", "meaning": "Indra"},
+        {"word": "rudra", "meaning": "Rudra/Shiva"},
+        {"word": "dyumaṇi", "meaning": "Sun (jewel of sky)"},
+        {"word": "phaṇi", "meaning": "Shesha (serpent)"},
+        {"word": "vayaḥ-nāyaka", "meaning": "leaders of Maruts (wind-gods)"},
+        {"word": "ādyaiḥ", "meaning": "by the primordial ones"}
+      ]
+    },
+    {
+      "id": "16",
+      "deva": "अध्यात्मज्ञानिनान्द्याज्ञनिवहसहितं सन्ततं सत्त्वसंस्थं प्राणेशं तं प्रपद्ये पवनतनयवत्सद्गुरुं श्रीमदाद्यम् ॥ ४ ॥",
+      "iast": "adhyātmajñānināndyājñanivahsahitaṁ santataṁ sattvasaṁsthaṁ prāṇēśaṁ taṁ prapadyē pavanatanayavatsadguruṁ śrīmadādyam || 4 ||",
+      "knda": "ಅಧ್ಯಾತ್ಮಜ್ಞಾನಿನಾಂದ್ಯಾಜ್ಞನಿವಹಸಹಿತಂ ಸಂತತಂ ಸತ್ತ್ವಸಂಸ್ಥಂ ಪ್ರಾಣೇಶಂ ತಂ ಪ್ರಪದ್ಯೇ ಪವನತನಯವತ್ಸದ್ಗುರುಂ ಶ್ರೀಮದಾದ್ಯಮ್ ॥ ೪ ॥",
+      "tel": "అధ్యాత్మజ్ఞానినాంద్యాజ్ఞనివహసహితం సంతతం సత్త్వసంస్థం ప్రాణేశం తం ప్రపద్యే పవనతనయవత్సద్గురుం శ్రీమదాద్యమ్ ॥ 4 ॥",
+      "tam": "அத்⁴யாத்மஜ்ஞாநிநாந்த்³யாஜ்ஞநிவஹஸஹிதம் ஸந்ததம் ஸத்த்வஸம்ஸ்த²ம் ப்ராணேஶம் தம் ப்ரபத்³யே பவநதநயவத்ஸத்³கு³ரும் ஶ்ரீமதா³த்³யம் ॥ 4 ॥",
+      "meaning": "I take refuge in that Lord of life-breath, accompanied by the knowledgeable followers of spiritual wisdom, ever established in pure sattva, the glorious primordial true guru, dear to the son of the Wind (Hanuman)."
+    },
+    {
+      "id": "17",
+      "deva": "उद्यद्विद्युत्प्रचण्डां निजरुचिनिकरव्याप्तलोकावकाशो बिभ्रद्भीमो भुजे योऽभ्युदितदिनकराभाङ्गदाढ्यप्रकाण्डे ।",
+      "iast": "udyadvidyutpracaṇḍāṁ nijarucinikaravyāptalōkāvakāśō bibhradbhīmō bhujē yō'bhyuditadinakarābhāṅgadāḍhyaprakāṇḍē |",
+      "knda": "ಉದ್ಯದ್ವಿದ್ಯುತ್ಪ್ರಚಂಡಾಂ ನಿಜರುಚಿನಿಕರವ್ಯಾಪ್ತಲೋಕಾವಕಾಶೋ ಬಿಭ್ರದ್ಭೀಮೋ ಭುಜೇ ಯೋಽಭ್ಯುದಿತದಿನಕರಾಭಾಂಗದಾಢ್ಯಪ್ರಕಾಂಡೇ ।",
+      "tel": "ఉద్యద్విద్యుత్ప్రచండాం నిజరుచినికరవ్యాప్తలోకావకాశో బిభ్రద్భీమో భుజే యోఽభ్యుదితదినకరాభాంగదాఢ్యప్రకాండే ।",
+      "tam": "உத்³யத்³வித்³யுத்ப்ரசண்டா³ம் நிஜருசிநிகரவ்யாப்தலோகாவகாஶோ பி³ப்⁴ரத்³பீ⁴மோ பு⁴ஜே யோऽப்⁴யுதி³ததி³நகராபா⁴ங்க³தா³ட்⁴யப்ரகாண்டே³ ।",
+      "meaning": "Bhima, who fills all the space of the worlds with rays of his own luster, bearing in his arm - which is like the trunk of a rising sun adorned with armlets - a mace fierce as rising lightning...",
+      "padachchheda": "udyat-vidyut-pracaṇḍām / nija-ruci-nikara-vyāpta-lōka-avakāśaḥ / bibhrat bhīmaḥ bhujē / yaḥ abhyudita-dinakara-ābha-aṅgada-āḍhya-prakāṇḍē",
+      "wordByWord": [
+        {"word": "udyat-vidyut", "meaning": "rising lightning"},
+        {"word": "pracaṇḍām", "meaning": "fierce"},
+        {"word": "nija-ruci", "meaning": "own luster"},
+        {"word": "nikara-vyāpta", "meaning": "filled with rays"},
+        {"word": "lōka-avakāśaḥ", "meaning": "space of worlds"},
+        {"word": "bibhrat", "meaning": "bearing"},
+        {"word": "bhīmaḥ", "meaning": "Bhima"},
+        {"word": "bhujē", "meaning": "in his arm"},
+        {"word": "abhyudita-dinakara", "meaning": "rising sun"},
+        {"word": "ābha", "meaning": "like/resembling"},
+        {"word": "aṅgada-āḍhya", "meaning": "adorned with armlets"},
+        {"word": "prakāṇḍē", "meaning": "in the trunk/handle"}
+      ]
+    },
+    {
+      "id": "18",
+      "deva": "भ्राजिष्णुं भ्रूविलासैः क्षपितसकलसान्द्रारिवीरं वरिष्ठं तं वन्दे पूर्वजं ते पवनसुतवरारोहमुख्यप्रधानम् ॥ ५ ॥",
+      "iast": "bhrājiṣṇuṁ bhrūvilāsaiḥ kṣapitasakalasāndrārivīraṁ variṣṭhaṁ taṁ vandē pūrvajaṁ tē pavanasutavarārōhamukhyapradhānam || 5 ||",
+      "knda": "ಭ್ರಾಜಿಷ್ಣುಂ ಭ್ರೂವಿಲಾಸೈಃ ಕ್ಷಪಿತಸಕಲಸಾಂದ್ರಾರಿವೀರಂ ವರಿಷ್ಠಂ ತಂ ವಂದೇ ಪೂರ್ವಜಂ ತೇ ಪವನಸುತವರಾರೋಹಮುಖ್ಯಪ್ರಧಾನಮ್ ॥ ೫ ॥",
+      "tel": "భ్రాజిష్ణుం భ్రూవిలాసైః క్షపితసకలసాంద్రారివీరం వరిష్ఠం తం వందే పూర్వజం తే పవనసుతవరారోహముఖ్యప్రధానమ్ ॥ 5 ॥",
+      "tam": "ப்⁴ராஜிஷ்ணும் ப்⁴ரூவிலாஸை꞉ க்ஷபிதஸகலஸாந்த்³ராரிவீரம் வரிஷ்ட²ம் தம் வந்தே³ பூர்வஜம் தே பவநஸுதவராரோஹமுக்²யப்ரதா⁴நம் ॥ 5 ॥",
+      "meaning": "I bow to that radiant one, who by the playful movements of his eyebrows destroyed all the dense army of enemy heroes, the most excellent, your elder brother (Bhima), chief among the prime riders of the Wind-god's son.",
+      "padachchheda": "bhrājiṣṇum / bhrū-vilāsaiḥ kṣapita-sakala-sāndra-ari-vīram variṣṭham / tam vandē pūrvajam tē / pavana-suta-vara-ārōha-mukhya-pradhānam",
+      "wordByWord": [
+        {"word": "bhrājiṣṇum", "meaning": "the radiant one"},
+        {"word": "bhrū-vilāsaiḥ", "meaning": "by eyebrow movements"},
+        {"word": "kṣapita", "meaning": "destroyed"},
+        {"word": "sakala", "meaning": "all"},
+        {"word": "sāndra-ari-vīram", "meaning": "dense army of enemy heroes"},
+        {"word": "variṣṭham", "meaning": "most excellent"},
+        {"word": "tam vandē", "meaning": "I bow to him"},
+        {"word": "pūrvajam tē", "meaning": "your elder brother"},
+        {"word": "pavana-suta", "meaning": "son of Wind-god"},
+        {"word": "vara-ārōha", "meaning": "prime riders"},
+        {"word": "mukhya-pradhānam", "meaning": "chief among the foremost"}
+      ]
+    },
+    {
+      "id": "19",
+      "deva": "मण्डीकृत्य व्रजोद्यन्नवघनरुचिनाजं प्रगल्भार्थमुक्त्या विद्याबुद्धिप्रदं तं प्रणमत मनसा मारुतिं भक्तिपूतैः ।",
+      "iast": "maṇḍīkr̥tya vrajōdyannavaghanarucinājāṁ pragalbhārthamukyā vidyābuddhipradaṁ taṁ praṇamata manasā mārutiṁ bhaktipūtaiḥ |",
+      "knda": "ಮಂಡೀಕೃತ್ಯ ವ್ರಜೋದ್ಯನ್ನವಘನರುಚಿನಾಜಂ ಪ್ರಗಲ್ಭಾರ್ಥಮುಕ್ತ್ಯಾ ವಿದ್ಯಾಬುದ್ಧಿಪ್ರದಂ ತಂ ಪ್ರಣಮತ ಮನಸಾ ಮಾರುತಿಂ ಭಕ್ತಿಪೂತೈಃ ।",
+      "tel": "మండీకృత్య వ్రజోద్యన్నవఘనరుచినాజం ప్రగల్భార్థముక్త్యా విద్యాబుద్ధిప్రదం తం ప్రణమత మనసా మారుతిం భక్తిపూతైః ।",
+      "tam": "மண்டீ³க்ருத்ய வ்ரஜோத்³யந்நவக⁴நருசிநாஜம் ப்ரக³ல்பா⁴ர்த²முக்த்யா வித்³யாபு³த்³தி⁴ப்ரத³ம் தம் ப்ரணமத மநஸா மாருதிம் ப⁴க்திபூதை꞉ ।",
+      "meaning": "Having bowed down, prostrate with your minds purified by devotion to Maruti (Hanuman), who gives knowledge and wisdom, who moves like a newly risen cloud...",
+      "padachchheda": "maṇḍī-kṛtya vraja / udyan-nava-ghana-rucinā ajam / pragalbha-artha-muktyā / vidyā-buddhi-pradam tam / praṇamata manasā mārutim bhakti-pūtaiḥ",
+      "wordByWord": [
+        {"word": "maṇḍī-kṛtya", "meaning": "having bowed down"},
+        {"word": "vraja", "meaning": "proceed/move"},
+        {"word": "udyan-nava-ghana", "meaning": "rising new cloud"},
+        {"word": "rucinā", "meaning": "with luster/color"},
+        {"word": "ajam", "meaning": "the unborn one"},
+        {"word": "pragalbha-artha-muktyā", "meaning": "with bold/confident meaning liberation"},
+        {"word": "vidyā-buddhi-pradam", "meaning": "giver of knowledge and wisdom"},
+        {"word": "tam", "meaning": "him"},
+        {"word": "praṇamata manasā", "meaning": "prostrate with minds"},
+        {"word": "mārutim", "meaning": "to Maruti (Hanuman)"},
+        {"word": "bhakti-pūtaiḥ", "meaning": "purified by devotion"}
+      ]
+    },
+    {
+      "id": "20",
+      "deva": "वान्तद्वैतापहान्तव्यसनकृतमहासेतुबन्धोद्धतायि-त्रातारं वाक्षतानां प्रणतिमुपगतं जानकीजीविकं वः ॥ ६ ॥",
+      "iast": "vāntadvaitāpahāntavyasanakr̥tamahāsētubandhōddhatāyi-trātāraṁ vākṣatānāṁ praṇatimupagataṁ jānakījīvikaṁ vaḥ || 6 ||",
+      "knda": "ವಾಂತದ್ವೈತಾಪಹಾಂತವ್ಯಸನಕೃತಮಹಾಸೇತುಬಂಧೋದ್ಧತಾಯಿ-ತ್ರಾತಾರಂ ವಾಕ್ಷತಾನಾಂ ಪ್ರಣತಿಮುಪಗತಂ ಜಾನಕೀಜೀವಿಕಂ ವಃ ॥ ೬ ॥",
+      "tel": "వాంతద్వైతాపహాంతవ్యసనకృతమహాసేతుబంధోద్ధతాయి-త్రాతారం వాక్షతానాం ప్రణతిముపగతం జానకీజీవికం వః ॥ 6 ॥",
+      "tam": "வாந்தத்³வைதாபஹாந்தவ்யஸநக்ருதமஹாஸேதுப³ந்தோ⁴த்³த⁴தாயி-த்ராதாரம் வாக்ஷதாநாம் ப்ரணதிமுபக³தம் ஜாநகீஜீவிகம் வ꞉ ॥ 6 ॥",
+      "meaning": "May he who rejects duality, who removes afflictions, who constructed the great bridge (to Lanka), the protector who rose up, the savior of the distressed, who came to bow, the life-giver to Janaki (Sita), be yours.",
+      "padachchheda": "vānta-dvaita-apahānta-vyasana-kṛta-mahā-sētu-bandha-uddhatāyi / trātāram vākṣatānām / praṇatim upagatam jānakī-jīvikam vaḥ",
+      "wordByWord": [
+        {"word": "vānta-dvaita", "meaning": "who rejected duality"},
+        {"word": "apahānta-vyasana", "meaning": "who removed afflictions"},
+        {"word": "kṛta", "meaning": "who made"},
+        {"word": "mahā-sētu-bandha", "meaning": "great bridge construction"},
+        {"word": "uddhatāyi", "meaning": "who rose up"},
+        {"word": "trātāram", "meaning": "protector/savior"},
+        {"word": "vākṣatānām", "meaning": "of the distressed"},
+        {"word": "praṇatim upagatam", "meaning": "who came to bow"},
+        {"word": "jānakī-jīvikam", "meaning": "life-giver to Janaki (Sita)"},
+        {"word": "vaḥ", "meaning": "be yours"}
+      ]
+    },
+    {
+      "id": "21",
+      "deva": "वह्नि ज्वलन्तमुत्सृज्य स्वयं प्राप्तः समीपतः रामः प्रीत्या समालिङ्ग्य ददौ विद्यां समृद्धिदाम् ।",
+      "iast": "vahni jvalantamutsṛjya svayaṁ prāptaḥ samīpataḥ rāmaḥ prītyā samāliṅgya dadau vidyāṁ samṛddhidām |",
+      "knda": "ವಹ್ನಿ ಜ್ವಲಂತಮುತ್ಸೃಜ್ಯ ಸ್ವಯಂ ಪ್ರಾಪ್ತಃ ಸಮೀಪತಃ ರಾಮಃ ಪ್ರೀತ್ಯಾ ಸಮಾಲಿಂಗ್ಯ ದದೌ ವಿದ್ಯಾಂ ಸಮೃದ್ಧಿದಾಮ್ ।",
+      "tel": "వహ్ని జ్వలంతముత్సృజ్య స్వయం ప్రాప్తః సమీపతః రామః ప్రీత్యా సమాలింగ్య దదౌ విద్యాం సమృద్ధిదామ్ ।",
+      "tam": "வஹ்நி ஜ்வலந்தமுத்ஸ்ருஜ்ய ஸ்வயம் ப்ராப்த꞉ ஸமீபத꞉ ராம꞉ ப்ரீத்யா ஸமாலிங்க்³ய த³தௌ³ வித்³யாம் ஸம்ருத்³தி⁴தா³ம் ।",
+      "meaning": "Having cast aside the blazing fire, he himself approached nearby; Rama, embracing him with love, gave him the wisdom that bestows prosperity."
+    },
+    {
+      "id": "22",
+      "deva": "जयद्वानरमुख्याय सत्यसन्धाय मौळिने । रामप्राणप्रियायाशु महतीं कीर्तिमाप्नुहि ॥ ७ ॥",
+      "iast": "jayadvānaramukhyāya satyasandhāya mauḷinē | rāmaprāṇapriyāyāśu mahatīṁ kīrtimāpnuhi || 7 ||",
+      "knda": "ಜಯದ್ವಾನರಮುಖ್ಯಾಯ ಸತ್ಯಸಂಧಾಯ ಮೌಲಿನೇ । ರಾಮಪ್ರಾಣಪ್ರಿಯಾಯಾಶು ಮಹತೀಂ ಕೀರ್ತಿಮಾಪ್ನುಹಿ ॥ ೭ ॥",
+      "tel": "జయద్వానరముఖ్యాయ సత్యసంధాయ మౌళినే । రామప్రాణప్రియాయాశు మహతీం కీర్తిమాప్నుహి ॥ 7 ॥",
+      "tam": "ஜயத்³வாநரமுக்²யாய ஸத்யஸந்தா⁴ய மௌளிநே । ராமப்ராணப்ரியாயாஶு மஹதீம் கீர்திமாப்நுஹி ॥ 7 ॥",
+      "meaning": "Victory to the chief of monkeys, who is true to his word, crowned with glory. O beloved of Rama's very life, quickly attain great fame!"
+    },
+    {
+      "id": "23",
+      "deva": "देवाधिदेवं जगदेकनाथं विश्वाभयं शाश्वतं शान्तमूर्तिम् । श्रीवल्लभं सर्वगुणैकराशिं विष्णुं भजे त्रैगुण्यदोषदूरम् ॥ ८ ॥",
+      "iast": "dēvādhidēvaṁ jagadēkanāthaṁ viśvābhayaṁ śāśvataṁ śāntamūrtim | śrīvallabhaṁ sarvaguṇaikarāśiṁ viṣṇuṁ bhajē traiguṇyadōṣadūram || 8 ||",
+      "knda": "ದೇವಾಧಿದೇವಂ ಜಗದೇಕನಾಥಂ ವಿಶ್ವಾಭಯಂ ಶಾಶ್ವತಂ ಶಾಂತಮೂರ್ತಿಮ್ । ಶ್ರೀವಲ್ಲಭಂ ಸರ್ವಗುಣೈಕರಾಶಿಂ ವಿಷ್ಣುಂ ಭಜೇ ತ್ರೈಗುಣ್ಯದೋಷದೂರಮ್ ॥ ೮ ॥",
+      "tel": "దేవాధిదేవం జగదేకనాథం విశ్వాభయం శాశ్వతం శాంతమూర్తిమ్ । శ్రీవల్లభం సర్వగుణైకరాశిం విష్ణుం భజే త్రైగుణ్యదోషదూరమ్ ॥ 8 ॥",
+      "tam": "தே³வாதி⁴தே³வம் ஜக³தே³கநாத²ம் விஶ்வாப⁴யம் ஶாஶ்வதம் ஶாந்தமூர்திம் । ஶ்ரீவல்லப⁴ம் ஸர்வகு³ணைகராஶிம் விஷ்ணும் ப⁴ஜே த்ரைகு³ண்யதோ³ஷதூ³ரம் ॥ 8 ॥",
+      "meaning": "I worship Vishnu, the God of gods, the sole Lord of the universe, the fearlessness of the world, eternal, of peaceful form, beloved of Sri, the treasure-house of all virtues, far from the defects of the three gunas."
+    },
+    {
+      "id": "24",
+      "deva": "नीलमेघश्यामं राममलघुवरदं कौस्तुभालङ्कृताङ्गं पीताम्बरधरं विष्णुं प्रणताशेषकामार्थदम् ।",
+      "iast": "nīlamēghaśyāmaṁ rāmamalaghuvardaṁ kaustubhālaṅkr̥tāṅgaṁ pītāmbaradharaṁ viṣṇuṁ praṇatāśēṣakāmārthadam |",
+      "knda": "ನೀಲಮೇಘಶ್ಯಾಮಂ ರಾಮಮಲಘುವರದಂ ಕೌಸ್ತುಭಾಲಂಕೃತಾಂಗಂ ಪೀತಾಂಬರಧರಂ ವಿಷ್ಣುಂ ಪ್ರಣತಾಶೇಷಕಾಮಾರ್ಥದಮ್ ।",
+      "tel": "నీలమేఘశ్యామం రామమలఘువరదం కౌస్తుభాలంకృతాంగం పీతాంబరధరం విష్ణుం ప్రణతాశేషకామార్థదమ్ ।",
+      "tam": "நீலமேக⁴ஶ்யாமம் ராமமலகு⁴வரத³ம் கௌஸ்துபா⁴லங்க்ருதாங்க³ம் பீதாம்ப³ரத⁴ரம் விஷ்ணும் ப்ரணதாஶேஷகாமார்த²த³ம் ।",
+      "meaning": "Dark as a blue cloud, Rama the great bestower of boons, with body adorned by the Kaustubha gem, wearing yellow garments, Vishnu who grants all desires and wealth to those who bow."
+    },
+    {
+      "id": "25",
+      "deva": "सर्वान्तरात्मानमनादिमीशं सदाशिवं शर्वमुमाधवं च । सर्वज्ञमज्ञानतमिस्रनाशं सर्वैश्वर्योपेतमशेषहेतुम् ॥ ९ ॥",
+      "iast": "sarvāntarātmānamānādimīśaṁ sadāśivaṁ śarvamumādhavaṁ ca | sarvajñamajñānatamisranāśaṁ sarvaiśvaryōpētamaśēṣahētum || 9 ||",
+      "knda": "ಸರ್ವಾಂತರಾತ್ಮಾನಮನಾದಿಮೀಶಂ ಸದಾಶಿವಂ ಶರ್ವಮುಮಾಧವಂ ಚ । ಸರ್ವಜ್ಞಮಜ್ಞಾನತಮಿಸ್ರನಾಶಂ ಸರ್ವೈಶ್ವರ್ಯೋಪೇತಮಶೇಷಹೇತುಮ್ ॥ ೯ ॥",
+      "tel": "సర్వాంతరాత్మానమనాదిమీశం సదాశివం శర్వముమాధవం చ । సర్వజ్ఞమజ్ఞానతమిస్రనాశం సర్వైశ్వర్యోపేతమశేషహేతుమ్ ॥ 9 ॥",
+      "tam": "ஸர்வாந்தராத்மாநமநாதி³மீஶம் ஸதா³ஶிவம் ஶர்வமுமாத⁴வம் ச । ஸர்வஜ்ஞமஜ்ஞாநதமிஸ்ரநாஶம் ஸர்வைஶ்வர்யோபேதமஶேஷஹேதும் ॥ 9 ॥",
+      "meaning": "The inner Self of all, the beginningless Lord, ever-auspicious Shiva, Sharva (destroyer), lord of Uma, the omniscient destroyer of the darkness of ignorance, endowed with all sovereignty, the cause of everything."
+    },
+    {
+      "id": "26",
+      "deva": "विद्युत्कान्ति विदारितारि गजरैर्मातङ्गलीलादर-प्रध्वस्ताहितदन्तिदन्तमुसलद्वैधीकृताराति यः ।",
+      "iast": "vidyutkānti vidāritāri gajaraimātaṅgalīlādara-pradhvastāhitadantidantamusaladividhīkr̥tārāti yaḥ |",
+      "knda": "ವಿದ್ಯುತ್ಕಾಂತಿ ವಿದಾರಿತಾರಿ ಗಜರೈರ್ಮಾತಂಗಲೀಲಾದರ-ಪ್ರಧ್ವಸ್ತಾಹಿತದಂತಿದಂತಮುಸಲದ್ವೈಧೀಕೃತಾರಾತಿ ಯಃ ।",
+      "tel": "విద్యుత్కాంతి విదారితారి గజరైర్మాతంగలీలాదర-ప్రధ్వస్తాహితదంతిదంతముసలద్వైధీకృతారాతి యః ।",
+      "tam": "வித்³யுத்காந்தி வித³ரிதாரி க³ஜரைர்மாதங்க³லீலாத³ர-ப்ரத்⁴வஸ்தாஹிததந்தித³ந்தமுஸலத்³வைதீ⁴க்ருதாராதி ய꞉ ।",
+      "meaning": "He who has the radiance of lightning, who tore apart the enemy elephants, who playfully like an elephant destroyed the enemy's elephant tusks, who split the enemies into two with the pestle...",
+      "padachchheda": "vidyut-kānti / vidārita-ari gajaraiḥ / mātaṅga-līlā-ādara / pradhvasta-ahita-danti-danta-musala-dvaidhī-kṛta-arāti yaḥ",
+      "wordByWord": [
+        {"word": "vidyut-kānti", "meaning": "radiance of lightning"},
+        {"word": "vidārita-ari", "meaning": "tore apart enemy"},
+        {"word": "gajaraiḥ", "meaning": "by elephants"},
+        {"word": "mātaṅga-līlā", "meaning": "elephant-play"},
+        {"word": "ādara", "meaning": "with respect/playfully"},
+        {"word": "pradhvasta", "meaning": "destroyed"},
+        {"word": "ahita-danti", "meaning": "enemy's elephant"},
+        {"word": "danta-musala", "meaning": "tusks like pestles"},
+        {"word": "dvaidhī-kṛta", "meaning": "split in two"},
+        {"word": "arāti", "meaning": "enemies"},
+        {"word": "yaḥ", "meaning": "he who"}
+      ]
+    },
+    {
+      "id": "27",
+      "deva": "कृष्णात्परं किमपि तत्त्वमहं न जाने पीताम्बरेण नवमाल्यवनाभिरामम् । अत्यन्तचारुतरयौवनगर्वधारि प्रत्यग्रसुन्दरमुखेन्दुनि लोलनेत्रम् ॥ १० ॥",
+      "iast": "kr̥ṣṇātparaṁ kimapi tattvaamahaṁ na jānē pītāmbarēṇa navamālyavanābhirāmam | atyantacārutarayauvanagarvdhāri pratyagrasundaramukēnduni lōlanētram || 10 ||",
+      "knda": "ಕೃಷ್ಣಾತ್ಪರಂ ಕಿಮಪಿ ತತ್ತ್ವಮಹಂ ನ ಜಾನೇ ಪೀತಾಂಬರೇಣ ನವಮಾಲ್ಯವನಾಭಿರಾಮಮ್ । ಅತ್ಯಂತಚಾರುತರಯೌವನಗರ್ವಧಾರಿ ಪ್ರತ್ಯಗ್ರಸುಂದರಮುಖೇಂದುನಿ ಲೋಲನೇತ್ರಮ್ ॥ ೧೦ ॥",
+      "tel": "కృష్ణాత్పరం కిమపి తత్త్వమహం న జానే పీతాంబరేణ నవమాల్యవనాభిరామమ్ । అత్యంతచారుతరయౌవనగర్వధారి ప్రత్యగ్రసుందరముఖేందుని లోలనేత్రమ్ ॥ 10 ॥",
+      "tam": "க்ருஷ்ணாத்பரம் கிமபி தத்த்வமஹம் ந ஜாநே பீதாம்ப³ரேண நவமால்யவநாபி⁴ராமம் । அத்யந்தசாருதரயௌவநக³ர்வதா⁴ரி ப்ரத்யக்³ரஸுந்த³ரமுகே²ந்து³நி லோலநேத்ரம் ॥ 10 ॥",
+      "meaning": "I know no reality greater than Krishna, beautiful with yellow garments and fresh garlands, bearing the pride of exceedingly charming youth, with restless eyes in a face like a fresh beautiful moon."
+    },
+    {
+      "id": "28",
+      "deva": "श्रीनिवासं नवपल्लवारुणपदं प्राणाधिपं वायु देवप्राणेश्वरं जगद्गुरुं सर्वार्थदं धर्मप्रवर्तकम् ।",
+      "iast": "śrīnivāsaṁ navapallavāruṇapadaṁ prāṇādhipaṁ vāyu dēvaprāṇēśvaraṁ jagadguruṁ sarvārthadaṁ dharmapravartakam |",
+      "knda": "ಶ್ರೀನಿವಾಸಂ ನವಪಲ್ಲವಾರುಣಪದಂ ಪ್ರಾಣಾಧಿಪಂ ವಾಯು ದೇವಪ್ರಾಣೇಶ್ವರಂ ಜಗದ್ಗುರುಂ ಸರ್ವಾರ್ಥದಂ ಧರ್ಮಪ್ರವರ್ತಕಮ್ ।",
+      "tel": "శ్రీనివాసం నవపల్లవారుణపదం ప్రాణాధిపం వాయు దేవప్రాణేశ్వరం జగద్గురుం సర్వార్థదం ధర్మప్రవర్తకమ్ ।",
+      "tam": "ஶ்ரீநிவாஸம் நவபல்லவாருணபத³ம் ப்ராணாதி⁴பம் வாயு தே³வப்ராணேஶ்வரம் ஜக³த்³கு³ரும் ஸர்வார்த²த³ம் த⁴ர்மப்ரவர்தகம் ।",
+      "meaning": "The abode of Sri, with feet red as new sprouts, the lord of life-breath, Vayu the lord of the gods' life-breath, world-teacher, giver of all goals, propagator of dharma."
+    },
+    {
+      "id": "29",
+      "deva": "ब्रह्मैव योऽयं प्रथमो हनूमान् संजायते वायुसुतोऽथ भीमः । तृतीयमध्वार्यमुपैति शंभोः तमाद्यमाचार्यमहं प्रपद्ये ॥ ११ ॥",
+      "iast": "brahmaiva yō'yaṁ prathamō hanūmān sañjāyatē vāyusutō'tha bhīmaḥ | tr̥tīyamadvāryamupaitiśambhōḥ tamādyamācāryamahaṁ prapadyē || 11 ||",
+      "knda": "ಬ್ರಹ್ಮೈವ ಯೋಽಯಂ ಪ್ರಥಮೋ ಹನೂಮಾನ್ ಸಂಜಾಯತೇ ವಾಯುಸುತೋಽಥ ಭೀಮಃ । ತೃತೀಯಮಧ್ವಾರ್ಯಮುಪೈತಿ ಶಂಭೋಃ ತಮಾದ್ಯಮಾಚಾರ್ಯಮಹಂ ಪ್ರಪದ್ಯೇ ॥ ೧೧ ॥",
+      "tel": "బ్రహ్మైవ యోఽయం ప్రథమో హనూమాన్ సంజాయతే వాయుసుతోఽథ భీమః । తృతీయమధ్వార్యముపైతి శంభోః తమాద్యమాచార్యమహం ప్రపద్యే ॥ 11 ॥",
+      "tam": "ப்³ரஹ்மைவ யோऽயம் ப்ரத²மோ ஹநூமாந் ஸஞ்ஜாயதே வாயுஸுதோऽத² பீ⁴ம꞉ । த்ருதீயமத்⁴வார்யமுபைதி ஶம்போ⁴꞉ தமாத்³யமாசார்யமஹம் ப்ரபத்³யே ॥ 11 ॥",
+      "meaning": "He who is verily Brahma, first born as Hanuman the son of Vayu, then as Bhima, attains the third (incarnation as) Madhva, the sacrificial priest of Shambhu (Shiva). I take refuge in that primordial teacher.",
+      "padachchheda": "brahma eva yaḥ ayam prathamaḥ hanūmān / sañjāyatē vāyu-sutaḥ atha bhīmaḥ / tṛtīyam adhvāryam upaiti śambhōḥ / tam ādyam ācāryam aham prapadyē",
+      "wordByWord": [
+        {"word": "brahma eva", "meaning": "verily Brahma"},
+        {"word": "yaḥ ayam", "meaning": "he who this"},
+        {"word": "prathamaḥ", "meaning": "first"},
+        {"word": "hanūmān", "meaning": "Hanuman"},
+        {"word": "sañjāyatē", "meaning": "is born"},
+        {"word": "vāyu-sutaḥ", "meaning": "son of Vayu"},
+        {"word": "atha bhīmaḥ", "meaning": "then as Bhima"},
+        {"word": "tṛtīyam", "meaning": "third"},
+        {"word": "adhvāryam", "meaning": "as Madhva (sacrificial priest)"},
+        {"word": "upaiti", "meaning": "attains"},
+        {"word": "śambhōḥ", "meaning": "of Shambhu (Shiva)"},
+        {"word": "tam ādyam ācāryam", "meaning": "that primordial teacher"},
+        {"word": "aham prapadyē", "meaning": "I take refuge"}
+      ],
+      "note": "This verse explicitly states the three incarnations of Mukhya Prana: Hanuman, Bhima, and Madhvacharya."
+    },
+    {
+      "id": "30",
+      "deva": "विष्णोरत्युत्तमत्वादखिलगुणगणैः सर्वजीवोत्तमत्वात् सर्वेषामाश्रयत्वाद्बहुगुणितगणः सर्वदाऽसौ स्मृतोऽस्तु ।",
+      "iast": "viṣṇōratyuttamatvādakhilaguṇagaṇaiḥ sarvajīvōttamatvāt sarvēṣāmāśrayatvādbahuguitagaṇaḥ sarvadā'sau smr̥tō'stu |",
+      "knda": "ವಿಷ್ಣೋರತ್ಯುತ್ತಮತ್ವಾದಖಿಲಗುಣಗಣೈಃ ಸರ್ವಜೀವೋತ್ತಮತ್ವಾತ್ ಸರ್ವೇಷಾಮಾಶ್ರಯತ್ವಾದ್ಬಹುಗುಣಿತಗಣಃ ಸರ್ವದಾಽಸೌ ಸ್ಮೃತೋಽಸ್ತು ।",
+      "tel": "విష్ణోరత్యుత్తమత్వాదఖిలగుణగణైః సర్వజీవోత్తమత్వాత్ సర్వేషామాశ్రయత్వాద్బహుగుణితగణః సర్వదాఽసౌ స్మృతోఽస్తు ।",
+      "tam": "விஷ்ணோரத்யுத்தமத்வாத³கி²லகு³ணக³ணை꞉ ஸர்வஜீவோத்தமத்வாத் ஸர்வேஷாமாஶ்ரயத்வாத்³ப³ஹுகு³ணிதக³ண꞉ ஸர்வதா³ऽஸௌ ஸ்ம்ருதோऽஸ்து ।",
+      "meaning": "Because of being exceedingly superior to Vishnu (in devoted service), possessing all qualities, being the best among all souls, being the refuge of all, may he who is multiplied by many virtues be always remembered.",
+      "padachchheda": "viṣṇōḥ ati-uttamatvāt / akhila-guṇa-gaṇaiḥ sarva-jīva-uttamatvāt / sarvēṣām āśrayatvāt / bahu-guṇita-gaṇaḥ sarvadā asau smṛtaḥ astu",
+      "wordByWord": [
+        {"word": "viṣṇōḥ", "meaning": "of Vishnu"},
+        {"word": "ati-uttamatvāt", "meaning": "because of supreme excellence"},
+        {"word": "akhila-guṇa-gaṇaiḥ", "meaning": "with all groups of qualities"},
+        {"word": "sarva-jīva-uttamatvāt", "meaning": "being best among all souls"},
+        {"word": "sarvēṣām āśrayatvāt", "meaning": "being refuge of all"},
+        {"word": "bahu-guṇita-gaṇaḥ", "meaning": "multiplied by many virtues"},
+        {"word": "sarvadā", "meaning": "always"},
+        {"word": "asau", "meaning": "he"},
+        {"word": "smṛtaḥ astu", "meaning": "may be remembered"}
+      ]
+    },
+    {
+      "id": "31",
+      "deva": "ब्रह्माण्यैश्वर्यमुख्यैर्यदुभयनियतं कर्तृकर्मप्रसिद्धं सोऽयं विष्णोः पदे शुद्धभक्तैर्निश्चितात्मा भजेद्यः ॥ १२ ॥",
+      "iast": "brahmāṇyaiśvaryamukhyairyad ubhayaniyataṁ kartr̥karmaprasiddhaṁ sō'yaṁ viṣṇōḥ padē śuddhabhaktairniscitātmā bhajēdyaḥ || 12 ||",
+      "knda": "ಬ್ರಹ್ಮಾಣ್ಯೈಶ್ವರ್ಯಮುಖ್ಯೈರ್ಯದುಭಯನಿಯತಂ ಕರ್ತೃಕರ್ಮಪ್ರಸಿದ್ಧಂ ಸೋಽಯಂ ವಿಷ್ಣೋಃ ಪದೇ ಶುದ್ಧಭಕ್ತೈರ್ನಿಶ್ಚಿತಾತ್ಮಾ ಭಜೇದ್ಯಃ ॥ ೧೨ ॥",
+      "tel": "బ్రహ్మాణ్యైశ్వర్యముఖ్యైర్యదుభయనియతం కర్తృకర్మప్రసిద్ధం సోఽయం విష్ణోః పదే శుద్ధభక్తైర్నిశ్చితాత్మా భజేద్యః ॥ 12 ॥",
+      "tam": "ப்³ரஹ்மாண்யைஶ்வர்யமுக்²யைர்யது³ப⁴யநியதம் கர்த்ருகர்மப்ரஸித்³த⁴ம் ஸோऽயம் விஷ்ணோ꞉ பதே³ ஶுத்³த⁴ப⁴க்தைர்நிஶ்சிதாத்மா ப⁴ஜேத்³ய꞉ ॥ 12 ॥",
+      "meaning": "He who is bound by both the glories of Brahma and sovereignty, renowned for both doer and deed - may that pure-souled one with pure devotion worship at the feet of Vishnu."
+    },
+    {
+      "id": "32",
+      "deva": "दुर्वादिध्वान्तरविं निजमतशरणैरुल्लसद्भिः प्रभाभि-र्वायुं तत्त्वज्ञमुक्तिभाजः पुरभिद्भिरभितो दृश्यते यो भवस्तैः ।",
+      "iast": "durvādhidhvāntarviṁ nijamatśaraṇairullasadbhiḥ prabhābhir-vāyuṁ tattvajñamuktibhājaḥ purabid bhirabhitō dr̥śyatē yō bhavastaḥ |",
+      "knda": "ದುರ್ವಾದಿಧ್ವಾಂತರವಿಂ ನಿಜಮತಶರಣೈರುಲ್ಲಸದ್ಭಿಃ ಪ್ರಭಾಭಿ-ರ್ವಾಯುಂ ತತ್ತ್ವಜ್ಞಮುಕ್ತಿಭಾಜಃ ಪುರಭಿದ್ಭಿರಭಿತೋ ದೃಶ್ಯತೇ ಯೋ ಭವಸ್ತೈಃ ।",
+      "tel": "దుర్వాదిధ్వాంతరవిం నిజమతశరణైరుల్లసద్భిః ప్రభాభి-ర్వాయుం తత్త్వజ్ఞముక్తిభాజః పురభిద్భిరభితో దృశ్యతే యో భవస్తైః ।",
+      "tam": "து³ர்வாதி³த்⁴வாந்தரவிம் நிஜமதஶரணைருல்லஸத்³பி⁴꞉ ப்ரபா⁴பி⁴-ர்வாயும் தத்த்வஜ்ஞமுக்திபா⁴ஜ꞉ புரபி⁴த்³பி⁴ரபி⁴தோ த்³ருஶ்யதே யோ ப⁴வஸ்தை꞉ ।",
+      "meaning": "May Vayu, the sun dispelling the darkness of evil disputants, radiant with the splendor of his own doctrine's refuge, be seen all around by those knowers of truth and partakers of liberation, who destroy the cities (of enemies).",
+      "padachchheda": "dur-vādi-dhvānta-ravim / nija-mata-śaraṇaiḥ ullasadbhiḥ prabhābhiḥ / vāyum tattva-jña-mukti-bhājaḥ / pura-bhidbhiḥ abhitaḥ dṛśyatē yaḥ bhavastaiḥ",
+      "wordByWord": [
+        {"word": "dur-vādi", "meaning": "evil disputants"},
+        {"word": "dhvānta-ravim", "meaning": "sun dispelling darkness"},
+        {"word": "nija-mata-śaraṇaiḥ", "meaning": "with own doctrine's refuge"},
+        {"word": "ullasadbhiḥ prabhābhiḥ", "meaning": "with radiant splendor"},
+        {"word": "vāyum", "meaning": "Vayu"},
+        {"word": "tattva-jña", "meaning": "knowers of truth"},
+        {"word": "mukti-bhājaḥ", "meaning": "partakers of liberation"},
+        {"word": "pura-bhidbhiḥ", "meaning": "by city-destroyers"},
+        {"word": "abhitaḥ", "meaning": "all around"},
+        {"word": "dṛśyatē", "meaning": "be seen"},
+        {"word": "yaḥ", "meaning": "who"}
+      ]
+    },
+    {
+      "id": "33",
+      "deva": "यस्य ज्ञानं विना नो खलु परमगतेर्लाभतोऽन्यं भवं नो वायुं तं वन्दे वन्द्यमनन्द्यं सुरगुरुचरणाम्भोज भृङ्गं च भृङ्गम् ॥ १३ ॥",
+      "iast": "yasya jñānaṁ vinā nō khalu paramagatērlābhatō'nyaṁ bhavaṁ nō vāyuṁ taṁ vandē vandyamanandyaṁ suragurcaraṇāmbhōja bhr̥ṅgaṁ ca bhr̥ṅgam || 13 ||",
+      "knda": "ಯಸ್ಯ ಜ್ಞಾನಂ ವಿನಾ ನೋ ಖಲು ಪರಮಗತೇರ್ಲಾಭತೋಽನ್ಯಂ ಭವಂ ನೋ ವಾಯುಂ ತಂ ವಂದೇ ವಂದ್ಯಮನಂದ್ಯಂ ಸುರಗುರುಚರಣಾಂಭೋಜ ಭೃಂಗಂ ಚ ಭೃಂಗಮ್ ॥ ೧೩ ॥",
+      "tel": "యస్య జ్ఞానం వినా నో ఖలు పరమగతేర్లాభతోఽన్యం భవం నో వాయుం తం వందే వంద్యమనంద్యం సురగురుచరణాంభోజ భృంగం చ భృంగమ్ ॥ 13 ॥",
+      "tam": "யஸ்ய ஜ்ஞாநம் விநா நோ க²லு பரமக³தேர்லாப⁴தோऽந்யம் ப⁴வம் நோ வாயும் தம் வந்தே³ வந்த்³யமநந்த்³யம் ஸுரகு³ருசரணாம்போ⁴ஜ ப்⁴ருங்க³ம் ச ப்⁴ருங்க³ம் ॥ 13 ॥",
+      "meaning": "Without whose knowledge there is indeed no attainment of the supreme goal, nor any other existence - I bow to that Vayu, worthy of worship, free from blame, a bee at the lotus feet of the divine guru, and the bee itself.",
+      "padachchheda": "yasya jñānam vinā / nō khalu parama-gatēḥ lābhataḥ anyam bhavam nō / vāyum tam vandē / vandyam anandyam / sura-guru-caraṇa-ambhōja-bhṛṅgam ca bhṛṅgam",
+      "wordByWord": [
+        {"word": "yasya jñānam", "meaning": "whose knowledge"},
+        {"word": "vinā", "meaning": "without"},
+        {"word": "nō khalu", "meaning": "indeed not"},
+        {"word": "parama-gatēḥ", "meaning": "of supreme goal"},
+        {"word": "lābhataḥ", "meaning": "attainment"},
+        {"word": "anyam bhavam nō", "meaning": "nor any other existence"},
+        {"word": "vāyum tam vandē", "meaning": "I bow to that Vayu"},
+        {"word": "vandyam", "meaning": "worthy of worship"},
+        {"word": "anandyam", "meaning": "free from blame"},
+        {"word": "sura-guru", "meaning": "divine guru (Vishnu)"},
+        {"word": "caraṇa-ambhōja", "meaning": "lotus feet"},
+        {"word": "bhṛṅgam", "meaning": "bee"}
+      ]
+    },
+    {
+      "id": "34",
+      "deva": "अधुनापि निजैर्मतैरखण्डं जगदेतन्महितं करोतु शान्तम् । हरिपादकमलैकनिष्ठया तं प्रतिकूलं परमार्थतः किमस्य ॥ १४ ॥",
+      "iast": "adhunāpi nijairmatairakaṇḍaṁ jagadētanmahitaṁ karōtu śāntam | haripādakamalaikaniṣṭhayā taṁ pratikūlaṁ paramārthataḥ kimasya || 14 ||",
+      "knda": "ಅಧುನಾಪಿ ನಿಜೈರ್ಮತೈರಖಂಡಂ ಜಗದೇತನ್ಮಹಿತಂ ಕರೋತು ಶಾಂತಮ್ । ಹರಿಪಾದಕಮಲೈಕನಿಷ್ಠಯಾ ತಂ ಪ್ರತಿಕೂಲಂ ಪರಮಾರ್ಥತಃ ಕಿಮಸ್ಯ ॥ ೧೪ ॥",
+      "tel": "అధునాపి నిజైర్మతైరఖండం జగదేతన్మహితం కరోతు శాంతమ్ । హరిపాదకమలైకనిష్ఠయా తం ప్రతికూలం పరమార్థతః కిమస్య ॥ 14 ॥",
+      "tam": "அது⁴நாபி நிஜைர்மதைரக²ண்ட³ம் ஜக³தே³தந்மஹிதம் கரோது ஶாந்தம் । ஹரிபாத³கமலைகநிஷ்ட²யா தம் ப்ரதிகூலம் பரமார்த²த꞉ கிமஸ்ய ॥ 14 ॥",
+      "meaning": "Even now, may he make this honored world whole and peaceful through his own doctrines. Through sole devotion to Hari's lotus feet, what is truly unfavorable to him?"
+    },
+    {
+      "id": "35",
+      "deva": "रामो नाम बभूव सुप्रियतनयः कृष्णस्य साक्षात्परम् ब्रह्मैवास्य विभक्तशक्तिविषये विष्णुः स्वयं प्रोच्यते ।",
+      "iast": "rāmō nāma babhūva supriyatanayaḥ kr̥ṣṇasya sākṣātparam brahmaivāsya vibhaktaśaktiviṣayē viṣṇuḥ svayaṁ prōchyatē |",
+      "knda": "ರಾಮೋ ನಾಮ ಬಭೂವ ಸುಪ್ರಿಯತನಯಃ ಕೃಷ್ಣಸ್ಯ ಸಾಕ್ಷಾತ್ಪರಮ್ ಬ್ರಹ್ಮೈವಾಸ್ಯ ವಿಭಕ್ತಶಕ್ತಿವಿಷಯೇ ವಿಷ್ಣುಃ ಸ್ವಯಂ ಪ್ರೋಚ್ಯತೇ ।",
+      "tel": "రామో నామ బభూవ సుప్రియతనయః కృష్ణస్య సాక్షాత్పరమ్ బ్రహ్మైవాస్య విభక్తశక్తివిషయే విష్ణుః స్వయం ప్రోచ్యతే ।",
+      "tam": "ராமோ நாம ப³பூ⁴வ ஸுப்ரியதநய꞉ க்ருஷ்ணஸ்ய ஸாக்ஷாத்பரம் ப்³ரஹ்மைவாஸ்ய விப⁴க்தஶக்திவிஷயே விஷ்ணு꞉ ஸ்வயம் ப்ரோச்யதே ।",
+      "meaning": "Rama became the beloved son of Krishna, directly the Supreme Brahman; in the aspect of manifested power, He Himself is called Vishnu."
+    },
+    {
+      "id": "36",
+      "deva": "तस्माद्रामाग्रजं विष्णुमिव वायुमभीप्सितं तं वन्दे वन्द्यमनन्द्यं भजे सौख्यदं ॥ १५ ॥",
+      "iast": "tasmādrāmāgrajaṁ viṣṇumiva vāyumabhīpsitaṁ taṁ vandē vandyamanandyaṁ bhajē saukhyadaṁ || 15 ||",
+      "knda": "ತಸ್ಮಾದ್ರಾಮಾಗ್ರಜಂ ವಿಷ್ಣುಮಿವ ವಾಯುಮಭೀಪ್ಸಿತಂ ತಂ ವಂದೇ ವಂದ್ಯಮನಂದ್ಯಂ ಭಜೇ ಸೌಖ್ಯದಂ ॥ ೧೫ ॥",
+      "tel": "తస్మాద్రామాగ్రజం విష్ణుమివ వాయుమభీప్సితం తం వందే వంద్యమనంద్యం భజే సౌఖ్యదం ॥ 15 ॥",
+      "tam": "தஸ்மாத்³ராமாக்³ரஜம் விஷ்ணுமிவ வாயுமபீ⁴ப்ஸிதம் தம் வந்தே³ வந்த்³யமநந்த்³யம் ப⁴ஜே ஸௌக்²யத³ம் ॥ 15 ॥",
+      "meaning": "Therefore I bow to that desired Vayu, like Vishnu the elder brother of Rama, worthy of worship, free from blame, and I worship the giver of happiness."
+    },
+    {
+      "id": "37",
+      "deva": "॥ फलश्रुति ॥",
+      "iast": "|| Phala Shruti ||",
+      "knda": "॥ ಫಲಶ್ರುತಿ ॥",
+      "tel": "॥ ఫలశ్రుతి ॥",
+      "tam": "॥ ப²லஶ்ருதி ॥",
+      "meaning": "The Fruit of Recitation (Benefits)",
+      "note": "The following verses describe the benefits of reciting the Vayu Stuti."
+    },
+    {
+      "id": "38",
+      "deva": "य इदं पठते नित्यं वायुदेवस्य संस्तवम् । स सर्वान् कामानवाप्नोति सर्वदुःखैः प्रमुच्यते ॥",
+      "iast": "ya idaṁ paṭhatē nityaṁ vāyudēvasya saṁstavam | sa sarvān kāmānavāpnōti sarvaduḥkhaiḥ pramuchyatē ||",
+      "knda": "ಯ ಇದಂ ಪಠತೇ ನಿತ್ಯಂ ವಾಯುದೇವಸ್ಯ ಸಂಸ್ತವಮ್ । ಸ ಸರ್ವಾನ್ ಕಾಮಾನವಾಪ್ನೋತಿ ಸರ್ವದುಃಖೈಃ ಪ್ರಮುಚ್ಯತೇ ॥",
+      "tel": "య ఇదం పఠతే నిత్యం వాయుదేవస్య సంస్తవమ్ । స సర్వాన్ కామానవాప్నోతి సర్వదుఃఖైః ప్రముచ్యతే ॥",
+      "tam": "ய இத³ம் பட²தே நித்யம் வாயுதே³வஸ்ய ஸம்ஸ்தவம் । ஸ ஸர்வாந் காமாநவாப்நோதி ஸர்வது³꞉கை²꞉ ப்ரமுச்யதே ॥",
+      "meaning": "He who recites this hymn of praise to Lord Vayu daily, attains all desires and is freed from all sorrows."
+    },
+    {
+      "id": "39",
+      "deva": "रोगान्मुच्यते रोगी बद्धो मुच्येत बन्धनात् । भयान्मुच्येत भीतश्च मुच्यतेऽपत्सु सर्वतः ॥",
+      "iast": "rōgānmuchyatē rōgī baddhō muchyēta bandhanāt | bhayānmuchyēta bhītaścha muchyatē'patsu sarvataḥ ||",
+      "knda": "ರೋಗಾನ್ಮುಚ್ಯತೇ ರೋಗೀ ಬದ್ಧೋ ಮುಚ್ಯೇತ ಬಂಧನಾತ್ । ಭಯಾನ್ಮುಚ್ಯೇತ ಭೀತಶ್ಚ ಮುಚ್ಯತೇಽಪತ್ಸು ಸರ್ವತಃ ॥",
+      "tel": "రోగాన్ముచ్యతే రోగీ బద్ధో ముచ్యేత బంధనాత్ । భయాన్ముచ్యేత భీతశ్చ ముచ్యతేఽపత్సు సర్వతః ॥",
+      "tam": "ரோகா³ந்முச்யதே ரோகீ³ ப³த்³தோ⁴ முச்யேத ப³ந்த⁴நாத் । ப⁴யாந்முச்யேத பீ⁴தஶ்ச முச்யதேऽபத்ஸு ஸர்வத꞉ ॥",
+      "meaning": "The diseased is freed from diseases, the bound is freed from bondage, the fearful is freed from fear, and one is freed from calamities everywhere."
+    },
+    {
+      "id": "40",
+      "deva": "आयुरारोग्यमैश्वर्यं धर्मार्थकाममोक्षदम् । सर्वान्पापान्क्षयं नीत्वा प्राप्नोत्यभीष्टं शुभम् ॥",
+      "iast": "āyurārōgyamaiśvaryaṁ dharmārthakāmamōkṣadam | sarvānpāpānkṣayaṁ nītvā prāpnōtyabhīṣṭaṁ śubham ||",
+      "knda": "ಆಯುರಾರೋಗ್ಯಮೈಶ್ವರ್ಯಂ ಧರ್ಮಾರ್ಥಕಾಮಮೋಕ್ಷದಮ್ । ಸರ್ವಾನ್ಪಾಪಾನ್ಕ್ಷಯಂ ನೀತ್ವಾ ಪ್ರಾಪ್ನೋತ್ಯಭೀಷ್ಟಂ ಶುಭಮ್ ॥",
+      "tel": "ఆయురారోగ్యమైశ్వర్యం ధర్మార్థకామమోక్షదమ్ । సర్వాన్పాపాన్క్షయం నీత్వా ప్రాప్నోత్యభీష్టం శుభమ్ ॥",
+      "tam": "ஆயுராரோக்³யமைஶ்வர்யம் த⁴ர்மார்த²காமமோக்ஷத³ம் । ஸர்வாந்பாபாந்க்ஷயம் நீத்வா ப்ராப்நோத்யபீ⁴ஷ்டம் ஶுப⁴ம் ॥",
+      "meaning": "It grants long life, health, prosperity, dharma, wealth, desires, and liberation. Having destroyed all sins, one attains the desired auspiciousness."
+    },
+    {
+      "id": "41",
+      "deva": "॥ इति श्री त्रिविक्रमपण्डिताचार्य विरचिता वायुस्तुतिः सम्पूर्णा ॥",
+      "iast": "|| iti śrī trivikramapaṇḍitācārya viracitā vāyustutiḥ sampūrṇā ||",
+      "knda": "॥ ಇತಿ ಶ್ರೀ ತ್ರಿವಿಕ್ರಮಪಂಡಿತಾಚಾರ್ಯ ವಿರಚಿತಾ ವಾಯುಸ್ತುತಿಃ ಸಂಪೂರ್ಣಾ ॥",
+      "tel": "॥ ఇతి శ్రీ త్రివిక్రమపండితాచార్య విరచితా వాయుస్తుతిః సంపూర్ణా ॥",
+      "tam": "॥ இதி ஶ்ரீ த்ரிவிக்ரமபண்டி³தாசார்ய விரசிதா வாயுஸ்துதி꞉ ஸம்பூர்ணா ॥",
+      "meaning": "Thus ends the Vayu Stuti composed by Sri Trivikrama Panditacharya."
+    },
+    {
+      "id": "42",
+      "deva": "॥ श्रीकृष्णार्पणमस्तु ॥",
+      "iast": "|| śrīkr̥ṣṇārpaṇamastu ||",
+      "knda": "॥ ಶ್ರೀಕೃಷ್ಣಾರ್ಪಣಮಸ್ತು ॥",
+      "tel": "॥ శ్రీకృష్ణార్పణమస్తు ॥",
+      "tam": "॥ ஶ்ரீக்ருஷ்ணார்பணமஸ்து ॥",
+      "meaning": "May this be an offering to Lord Sri Krishna."
+    }
+  ]
+}

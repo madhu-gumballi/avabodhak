@@ -1,0 +1,134 @@
+{
+  "title": "Sri Vishnu Sahasranama",
+  "metadata": {
+    "chapters": 7,
+    "totalLines": 495,
+    "languages": [
+      "deva",
+      "knda",
+      "tel",
+      "tam",
+      "guj",
+      "pan",
+      "iast"
+    ],
+    "practiceMode": true,
+    "puzzleMode": true,
+    "stotraType": "nama",
+    "composer": "Vyasa",
+    "revealedBy": "Bhishma",
+    "composerInfo": {
+      "name": "Veda Vyasa",
+      "period": "Dvapara Yuga (traditional)",
+      "tradition": "Vedic",
+      "biography": "Krishna Dvaipayana Vyasa, compiler of the Vedas, author of the Mahabharata and Puranas, and the son of Parashara and Satyavati."
+    },
+    "devataPrimary": "Vishnu",
+    "chandas": {
+      "name": "Anushtup",
+      "pattern": "8 syllables per pada, 32 per verse",
+      "syllablesPerLine": 8,
+      "description": "The most common meter in Sanskrit literature, used in the Bhagavad Gita and most stotras."
+    },
+    "historicalContext": "From the Anushasana Parva (Chapter 149) of the Mahabharata. Revealed by Bhishma to Yudhishthira on the battlefield of Kurukshetra while lying on a bed of arrows.",
+    "credits": {
+      "textSource": "Mahabharata, Anushasana Parva",
+      "commentaries": [
+        {
+          "author": "Adi Shankaracharya",
+          "tradition": "Advaita"
+        },
+        {
+          "author": "Parashara Bhattar",
+          "tradition": "Vishishtadvaita"
+        },
+        {
+          "author": "Satyasandha Tirtha",
+          "tradition": "Dvaita"
+        }
+      ],
+      "scriptSources": "vignanam.org",
+      "transliterationStandard": "IAST (International Alphabet of Sanskrit Transliteration)"
+    },
+    "disclaimer": {
+      "text": "The meanings and translations provided here are approximations meant to aid learning and devotion. Sanskrit, being a sacred and multi-layered language, carries depths of meaning that cannot be fully captured in English translation. Different acharyas and traditions may interpret verses differently based on their philosophical framework. For authoritative understanding and the complete essence of these sacred texts, please consult a qualified guru or traditional scholar in your sampradaya.",
+      "note": "These interpretations draw from Shankaracharya's Advaita commentary, Parashara Bhattar's Vishishtadvaita commentary, and traditional Sanskrit grammar. The compound breakdowns (samasa vibhaga) follow traditional Sanskrit grammar but the spiritual significance goes far beyond linguistic analysis."
+    },
+    "namaCountInfo": {
+      "totalNamas": 1000,
+      "uniqueNamas": "Varies by counting method (some names repeat)",
+      "note": "Traditional count is 1000 names, though some commentators count differently based on how compound words are split."
+    },
+    "gunaCategories": [
+      "paramarthika",
+      "saundarya",
+      "rakshana",
+      "vyapti",
+      "shakti",
+      "jnana",
+      "karunya",
+      "srishti",
+      "samhara",
+      "anugraha"
+    ]
+  },
+  "sources": {
+    "iast": "https://vignanam.org/english/sree-vishnu-sahasra-nama-stotram.html",
+    "deva": "https://vignanam.org/devanagari/sree-vishnu-sahasra-nama-stotram.html",
+    "knda": "https://vignanam.org/kannada/sree-vishnu-sahasra-nama-stotram.html",
+    "tel": "https://vignanam.org/telugu/sree-vishnu-sahasra-nama-stotram.html",
+    "tam": "https://vignanam.org/tamil/sree-vishnu-sahasra-nama-stotram.html",
+    "guj": "https://vignanam.org/gujarati/sree-vishnu-sahasra-nama-stotram.html",
+    "pan": "https://vignanam.org/punjabi/sree-vishnu-sahasra-nama-stotram.html",
+    "mr": "https://vignanam.org/marathi/sree-vishnu-sahasra-nama-stotram.html",
+    "ben": "https://vignanam.org/bengali/sree-vishnu-sahasra-nama-stotram.html",
+    "mal": "https://vignanam.org/malayalam/sree-vishnu-sahasra-nama-stotram.html"
+  },
+  "chapters": [
+    {
+      "id": "intro",
+      "title": "Invocation and Poorva Peetika",
+      "file": "vs.intro.json",
+      "lineRange": {
+        "start": 1,
+        "end": 72
+      }
+    },
+    {
+      "id": "nyasa",
+      "title": "Nyasa (Ritual Placements)",
+      "file": "vs.nyasa.json",
+      "lineRange": {
+        "start": 73,
+        "end": 104
+      }
+    },
+    {
+      "id": "dhyanam",
+      "title": "Dhyanam (Meditation Verses)",
+      "file": "vs.dhyanam.json",
+      "lineRange": {
+        "start": 105,
+        "end": 139
+      }
+    },
+    {
+      "id": "stotram",
+      "title": "Stotram (The 1000 Divine Names)",
+      "file": "vs.stotram.json",
+      "lineRange": {
+        "start": 140,
+        "end": 469
+      }
+    },
+    {
+      "id": "phalashruti",
+      "title": "Phala Shruti (Benefits of Recitation)",
+      "file": "vs.phalashruti.json",
+      "lineRange": {
+        "start": 470,
+        "end": 999
+      }
+    }
+  ]
+}

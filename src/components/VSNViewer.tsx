@@ -25,7 +25,7 @@ import { LineTTSBar } from './LineTTSBar';
 import { PracticeView } from './PracticeView';
 import { PuzzleView } from './PuzzleView';
 import { OnboardingTour } from './OnboardingTour';
-import { VerseDetailPanel } from './VerseDetailPanel';
+import { VerseDetailInline } from './VerseDetailPanel';
 import { MobileModeDock } from './MobileModeDock';
 import { ExploreDrawer } from './ExploreDrawer';
 import { analytics } from '../lib/analytics';
@@ -75,7 +75,7 @@ export function VSNViewer({ onBack, textOverride, subtitleOverrides, availableLa
     });
   }, [rawLanguageOptions, text.lines]);
 
-  const fallbackLang = (languageOptions.includes('iast') ? 'iast' : (languageOptions[0] || 'iast')) as Lang;
+  const fallbackLang = (languageOptions.includes('knda') ? 'knda' : (languageOptions[0] || 'knda')) as Lang;
   const fallbackLang2 = (languageOptions.find((l) => l !== fallbackLang) || '') as Lang | '';
   const ttsEnabled = isTTSEnabled();
   const [lang, setLang] = useState<Lang>(() => {
@@ -121,6 +121,9 @@ export function VSNViewer({ onBack, textOverride, subtitleOverrides, availableLa
   // TTS playing state (line-level TTS only)
   const [ttsPlaying, setTtsPlaying] = useState(false);
 
+  // Ref to track the seekWord function for TTS word sync
+  const seekWordRef = useRef<((i: number) => void) | null>(null);
+
   // Wire LineTTSPlayer callbacks to local state
   useEffect(() => {
     if (!lineTTSPlayer) return;
@@ -128,11 +131,20 @@ export function VSNViewer({ onBack, textOverride, subtitleOverrides, availableLa
       onStart: () => setTtsPlaying(true),
       onEnd: () => setTtsPlaying(false),
       onError: () => setTtsPlaying(false),
+      onWordChange: (wordIndex: number) => {
+        // Update word highlighting during TTS playback
+        seekWordRef.current?.(wordIndex);
+      },
     });
   }, [lineTTSPlayer]);
 
   // useWordFlow handles navigation state for word highlighting
   const flow = useWordFlow(text.lines as Line[], lang);
+
+  // Keep seekWordRef updated for TTS word sync
+  useEffect(() => {
+    seekWordRef.current = flow.seekWord;
+  }, [flow.seekWord]);
 
   // Check if TTS is supported for current language AND current line has content
   const currentLineText = (text.lines[flow.state.lineIndex] as any)?.[lang] || '';
@@ -526,8 +538,12 @@ export function VSNViewer({ onBack, textOverride, subtitleOverrides, availableLa
     const currentLineText = (text.lines[flow.state.lineIndex] as any)?.[lang] as string | undefined;
     if (!currentLineText) return;
 
-    await lineTTSPlayer.playLine(currentLineText, lang);
-  }, [lineTTSPlayer, ttsSupported, text.lines, flow.state.lineIndex, lang]);
+    // Reset to first word before starting TTS
+    flow.seekWord(0);
+
+    // Pass tokens for word-level synchronization
+    await lineTTSPlayer.playLine(currentLineText, lang, flow.tokens);
+  }, [lineTTSPlayer, ttsSupported, text.lines, flow.state.lineIndex, lang, flow.tokens, flow.seekWord]);
 
   // Global shortcuts: Cmd/Ctrl+K or '/' for search, Space for TTS
   useEffect(() => {
@@ -982,16 +998,17 @@ export function VSNViewer({ onBack, textOverride, subtitleOverrides, availableLa
                   <MenuItem key={code} value={code}>2 · {label(code)}</MenuItem>
                 ))}
               </Select>
-              <Tooltip title="Verse Details - Meter, poetic devices, and more">
+              <Tooltip title={verseDetailOpen ? "Hide Verse Details" : "Show Verse Details"}>
                 <IconButton
-                  color="inherit"
+                  color={verseDetailOpen ? 'primary' : 'inherit'}
                   onClick={() => {
-                    setVerseDetailOpen(true);
-                    analytics.featureAction('verse_detail', 'opened');
+                    setVerseDetailOpen(prev => !prev);
+                    analytics.featureAction('verse_detail', verseDetailOpen ? 'closed' : 'opened');
                   }}
-                  aria-label="View Verse Details"
+                  aria-label={verseDetailOpen ? "Hide Verse Details" : "View Verse Details"}
                   sx={{
-                    '&:hover': { bgcolor: 'rgba(255,255,255,0.05)' }
+                    bgcolor: verseDetailOpen ? 'rgba(14, 165, 233, 0.15)' : 'transparent',
+                    '&:hover': { bgcolor: verseDetailOpen ? 'rgba(14, 165, 233, 0.25)' : 'rgba(255,255,255,0.05)' }
                   }}
                 >
                   <InfoOutlinedIcon />
@@ -1167,7 +1184,17 @@ export function VSNViewer({ onBack, textOverride, subtitleOverrides, availableLa
           <Box sx={{ position: 'relative', zIndex: 10, flex: 1, display: 'grid', gridTemplateRows: '1fr auto' }}>
             <Container maxWidth={false} sx={{ py: { xs: 3, md: 4 } }}>
               <Box sx={{ mx: 'auto', width: '100%', px: { xs: 2, md: 4 } }}>
-                <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', md: '56px 1fr' }, columnGap: { md: 16 }, rowGap: 16, alignItems: 'start' }}>
+                <Box sx={{
+                  display: 'grid',
+                  gridTemplateColumns: {
+                    xs: '1fr',
+                    md: verseDetailOpen ? '56px 1fr 320px' : '56px 1fr',
+                    lg: verseDetailOpen ? '56px 1fr 380px' : '56px 1fr',
+                  },
+                  columnGap: { md: 3, lg: 4 },
+                  rowGap: { xs: 2, md: 3 },
+                  alignItems: 'start'
+                }}>
                   <Box sx={{ display: { xs: 'none', md: 'flex' }, justifyContent: 'center' }}>
                     <Box sx={{ position: 'sticky', top: 80 }}>
                       <FlowMap
@@ -1402,6 +1429,55 @@ export function VSNViewer({ onBack, textOverride, subtitleOverrides, availableLa
                         </Paper>
                       </Box>
                     </Box>
+
+                    {/* Mobile Inline Verse Details - shows below main content when toggled */}
+                    <Box
+                      sx={{
+                        display: { xs: verseDetailOpen ? 'block' : 'none', md: 'none' },
+                        mt: 2,
+                        mb: 10, // Extra margin for mobile dock
+                      }}
+                    >
+                      <VerseDetailInline
+                        lineNumber={flow.state.lineIndex}
+                        lineText={(text.lines[flow.state.lineIndex] as any)?.[lang] || ''}
+                        lineIast={(text.lines[flow.state.lineIndex] as any)?.iast}
+                        lang={lang}
+                        compact={true}
+                        enrichedData={(() => {
+                          const line = text.lines[flow.state.lineIndex] as any;
+                          if (line?.samasaVibhaga || line?.chandas || line?.alamkara || line?.rasa || line?.devataSvarupa || line?.upadesha || line?.imagery || line?.meaning || line?.namaAnalysis || line?.note || line?.bhaktiRasa || line?.regionalGlossary || line?.translation || line?.padachchheda || line?.wordByWord) {
+                            return { stotraType: 'verse' as const, ...line };
+                          }
+                          return undefined;
+                        })()}
+                      />
+                    </Box>
+                  </Box>
+
+                  {/* Desktop Verse Details Panel - Third column */}
+                  <Box
+                    sx={{
+                      display: { xs: 'none', md: verseDetailOpen ? 'block' : 'none' },
+                      position: 'sticky',
+                      top: 80,
+                      maxHeight: 'calc(100vh - 120px)',
+                      overflow: 'hidden',
+                    }}
+                  >
+                    <VerseDetailInline
+                      lineNumber={flow.state.lineIndex}
+                      lineText={(text.lines[flow.state.lineIndex] as any)?.[lang] || ''}
+                      lineIast={(text.lines[flow.state.lineIndex] as any)?.iast}
+                      lang={lang}
+                      enrichedData={(() => {
+                        const line = text.lines[flow.state.lineIndex] as any;
+                        if (line?.samasaVibhaga || line?.chandas || line?.alamkara || line?.rasa || line?.devataSvarupa || line?.upadesha || line?.imagery || line?.meaning || line?.namaAnalysis || line?.note || line?.bhaktiRasa || line?.regionalGlossary || line?.translation || line?.padachchheda || line?.wordByWord) {
+                          return { stotraType: 'verse' as const, ...line };
+                        }
+                        return undefined;
+                      })()}
+                    />
                   </Box>
                 </Box>
               </Box>
@@ -1613,27 +1689,6 @@ export function VSNViewer({ onBack, textOverride, subtitleOverrides, availableLa
           />
         )}
 
-        {/* Verse Detail Panel */}
-        <VerseDetailPanel
-          open={verseDetailOpen}
-          onClose={() => setVerseDetailOpen(false)}
-          lineNumber={flow.state.lineIndex}
-          lineText={(text.lines[flow.state.lineIndex] as any)?.[lang] || ''}
-          lineIast={(text.lines[flow.state.lineIndex] as any)?.iast}
-          lang={lang}
-          enrichedData={(() => {
-            const line = text.lines[flow.state.lineIndex] as any;
-            // Check if line has any enriched data fields (including namaAnalysis and note)
-            if (line?.samasaVibhaga || line?.chandas || line?.alamkara || line?.rasa || line?.devataSvarupa || line?.upadesha || line?.imagery || line?.meaning || line?.namaAnalysis || line?.note) {
-              return {
-                stotraType: 'verse' as const,
-                ...line,
-              };
-            }
-            return undefined;
-          })()}
-        />
-
         {/* Explore Drawer - Mobile navigation map */}
         <ExploreDrawer
           open={exploreDrawerOpen}
@@ -1654,6 +1709,7 @@ export function VSNViewer({ onBack, textOverride, subtitleOverrides, availableLa
             lang={lang}
             lang2={lang2}
             languageOptions={languageOptions}
+            verseDetailOpen={verseDetailOpen}
             onViewModeChange={(newMode) => {
               const currentMode = viewMode === 'reading' ? 'play' : viewMode === 'practice' ? 'practice' : 'puzzle';
 
@@ -1676,9 +1732,9 @@ export function VSNViewer({ onBack, textOverride, subtitleOverrides, availableLa
               modeStartTimeRef.current = Date.now();
               modeActionCountRef.current = 0;
             }}
-            onVerseDetailOpen={() => {
-              setVerseDetailOpen(true);
-              analytics.featureAction('verse_detail', 'opened');
+            onVerseDetailToggle={() => {
+              setVerseDetailOpen(prev => !prev);
+              analytics.featureAction('verse_detail', verseDetailOpen ? 'closed' : 'opened');
             }}
             onLangChange={(newLang) => {
               setLang(newLang);

@@ -30,8 +30,9 @@ interface MobileModeDockProps {
   lang: Lang;
   lang2: Lang | '';
   languageOptions: Lang[];
+  verseDetailOpen?: boolean;
   onViewModeChange: (mode: ViewMode) => void;
-  onVerseDetailOpen: () => void;
+  onVerseDetailToggle: () => void;
   onLangChange: (lang: Lang) => void;
   onLang2Change: (lang: Lang | '') => void;
   onHelpOpen: () => void;
@@ -51,8 +52,9 @@ export function MobileModeDock({
   lang,
   lang2,
   languageOptions,
+  verseDetailOpen = false,
   onViewModeChange,
-  onVerseDetailOpen,
+  onVerseDetailToggle,
   onLangChange,
   onLang2Change,
   onHelpOpen,
@@ -166,8 +168,9 @@ export function MobileModeDock({
 
           {/* Verse Details */}
           <DockButton
+            active={verseDetailOpen}
             color="#a78bfa"
-            onClick={onVerseDetailOpen}
+            onClick={onVerseDetailToggle}
             icon={<InfoOutlinedIcon fontSize="small" />}
             label="Details"
           />

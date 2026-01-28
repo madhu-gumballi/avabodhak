@@ -6,7 +6,41 @@
     "languages": ["deva", "knda", "tel", "tam", "pan", "iast"],
     "practiceMode": true,
     "puzzleMode": true,
-    "composer": "Swami Brahmananda"
+    "stotraType": "verse",
+    "composer": "Swami Brahmananda",
+    "composerInfo": {
+      "name": "Paramahamsa Swami Brahmananda",
+      "tradition": "Vedanta",
+      "biography": "A revered saint and composer of devotional hymns praising Lord Vishnu."
+    },
+    "devataPrimary": "Vishnu/Hari",
+    "chandas": {
+      "name": "Shardula Vikridita",
+      "pattern": "ma-sa-ja-sa-ta-ta-ga (19 syllables per line)",
+      "syllablesPerLine": 19,
+      "description": "A majestic meter known as 'tiger's play', creating a grand, flowing rhythm suitable for devotional poetry."
+    },
+    "rasa": ["bhakti", "adbhuta", "shanta"],
+    "gunaCategories": ["paramarthika", "saundarya", "rakshana", "vyapti"],
+    "poeticDevices": [
+      {
+        "type": "anuprasam",
+        "description": "Extensive use of alliteration, with each verse having words ending in '-am' creating a melodic, mantra-like quality."
+      },
+      {
+        "type": "yamaka",
+        "description": "Repetition of similar sounds and syllable patterns throughout each verse."
+      }
+    ],
+    "credits": {
+      "textSource": "Traditional Sanskrit devotional literature",
+      "scriptSources": "vignanam.org",
+      "transliterationStandard": "IAST (International Alphabet of Sanskrit Transliteration)"
+    },
+    "disclaimer": {
+      "text": "The meanings and translations provided here are approximations meant to aid learning and devotion. Sanskrit, being a sacred and multi-layered language, carries depths of meaning that cannot be fully captured in English translation. Different acharyas and traditions may interpret verses differently based on their philosophical framework. For authoritative understanding and the complete essence of these sacred texts, please consult a qualified guru or traditional scholar in your sampradaya.",
+      "note": "These interpretations draw from various commentaries but are not exhaustive. The compound breakdowns (samasa vibhaga) follow traditional Sanskrit grammar but the spiritual significance goes far beyond linguistic analysis."
+    }
   },
   "sources": {
     "iast": "https://vignanam.org/english/sri-hari-stotram-jagajjalapalam.html",
@@ -25,7 +59,7 @@
       "tam": "ஶ்ரீ ஹரி ஸ்தோத்ரம் (ஜகஜ³்ஜாலபாலம்)",
       "tel": "శ్రీ హరి స్తోత్రం (జగజ్జాలపాలం)",
       "pan": "ਸ਼੍ਰੀ ਹਰਿ ਸ੍ਤੋਤ੍ਰਮ੍ (ਜਗਜ੍ਜਾਲਪਾਲਮ੍)",
-      "meaning": "",
+      "meaning": "Hymn to Lord Hari (The Protector of the Cosmic Web)",
       "chapter": "Sri Hari Stotram (Jagajjalapalam)"
     },
     {
@@ -36,7 +70,60 @@
       "tam": "ஜகஜ³்ஜாலபாலம் கனத்கண்ட²மாலம் ஶரச்சந்த்³ரபா²லம் மஹாதை³த்யகாலம் । நபோ⁴னீலகாயம் து³ராவாரமாயம் ஸுபத்³மாஸஹாயம் பஜ⁴ேஹம் பஜ⁴ேஹம்",
       "tel": "జగజ్జాలపాలం కనత్కంఠమాలం శరచ్చంద్రఫాలం మహాదైత్యకాలమ్ । నభోనీలకాయం దురావారమాయం సుపద్మాసహాయం భజేఽహం భజేఽహమ్",
       "pan": "ਜਗਜ੍ਜਾਲਪਾਲਂ ਕਨਤ੍ਕਂਠਮਾਲਂ ਸ਼ਰਚ੍ਚਂਦ੍ਰਫਾਲਂ ਮਹਾਦੈਤ੍ਯਕਾਲਮ੍ । ਨਭੋਨੀਲਕਾਯਂ ਦੁਰਾਵਾਰਮਾਯਂ ਸੁਪਦ੍ਮਾਸਹਾਯਂ ਭਜੇ਽ਹਂ ਭਜੇ਽ਹਮ੍",
-      "meaning": ""
+      "meaning": "I worship Him who protects the cosmic web, who wears a shining garland, whose forehead is like the autumn moon, who is death for great demons, whose body is sky-blue, whose maya is insurmountable, and who is accompanied by Lakshmi.",
+      "samasaVibhaga": [
+        {
+          "compound": "jagajjālapālam",
+          "breakdown": ["jagat", "jāla", "pālam"],
+          "meanings": ["world/universe", "net/web", "protector"],
+          "samasaType": "tatpurusha",
+          "combinedMeaning": "Protector of the cosmic web (the interconnected universe)"
+        },
+        {
+          "compound": "kanatkaṇṭhamālam",
+          "breakdown": ["kanat", "kaṇṭha", "mālam"],
+          "meanings": ["shining/radiant", "neck", "garland"],
+          "samasaType": "bahuvrīhi",
+          "combinedMeaning": "One who has a shining garland on the neck (Vaijayanti mala)"
+        },
+        {
+          "compound": "śarachchandraphālam",
+          "breakdown": ["śarat", "chandra", "phālam"],
+          "meanings": ["autumn", "moon", "forehead"],
+          "samasaType": "karmadhāraya",
+          "combinedMeaning": "One whose forehead is like the autumn moon (clear and radiant)"
+        },
+        {
+          "compound": "mahādaityakālam",
+          "breakdown": ["mahā", "daitya", "kālam"],
+          "meanings": ["great", "demon", "death/time"],
+          "samasaType": "tatpurusha",
+          "combinedMeaning": "Death/destroyer of great demons"
+        },
+        {
+          "compound": "nabhōnīlakāyam",
+          "breakdown": ["nabhas", "nīla", "kāyam"],
+          "meanings": ["sky", "blue", "body"],
+          "samasaType": "bahuvrīhi",
+          "combinedMeaning": "One whose body is sky-blue"
+        },
+        {
+          "compound": "durāvāramāyam",
+          "breakdown": ["dur", "āvāra", "māyam"],
+          "meanings": ["difficult", "to obstruct", "illusion"],
+          "samasaType": "bahuvrīhi",
+          "combinedMeaning": "One whose maya is difficult to overcome"
+        },
+        {
+          "compound": "supadmāsahāyam",
+          "breakdown": ["su", "padmā", "sahāyam"],
+          "meanings": ["auspicious", "Lakshmi", "companion"],
+          "samasaType": "bahuvrīhi",
+          "combinedMeaning": "One whose companion is the auspicious Lakshmi"
+        }
+      ],
+      "rasa": ["bhakti", "adbhuta"],
+      "gunaCategories": ["saundarya", "rakshana", "vyapti"]
     },
     {
       "id": "3",
@@ -46,7 +133,66 @@
       "tam": "ஸதா³ம்போ⁴தி⁴வாஸம் க³லத்புஷ்பஹாஸம் ஜக³த்ஸன்னிவாஸம் ஶதாதி³த்யபா⁴ஸம் । க³தா³சக்ரஶஸ்த்ரம் லஸத்பீதவஸ்த்ரம் ஹஸச்சாருவக்த்ரம் பஜ⁴ேஹம் பஜ⁴ேஹம்",
       "tel": "సదాంభోధివాసం గలత్పుష్పహాసం జగత్సన్నివాసం శతాదిత్యభాసమ్ । గదాచక్రశస్త్రం లసత్పీతవస్త్రం హసచ్చారువక్త్రం భజేఽహం భజేఽహమ్",
       "pan": "ਸਦਾਂਭੋਧਿਵਾਸਂ ਗਲਤ੍ਪੁਸ਼੍ਪਹਾਸਂ ਜਗਤ੍ਸਨ੍ਨਿਵਾਸਂ ਸ਼ਤਾਦਿਤ੍ਯਭਾਸਮ੍ । ਗਦਾਚਕ੍ਰਸ਼ਸ੍ਤ੍ਰਂ ਲਸਤ੍ਪੀਤਵਸ੍ਤ੍ਰਂ ਹਸਚ੍ਚਾਰੁਵਕ੍ਤ੍ਰਂ ਭਜੇ਽ਹਂ ਭਜੇ਽ਹਮ੍",
-      "meaning": ""
+      "meaning": "I worship Him who dwells in the milk ocean, whose smile is like a blossoming flower, who is the abode of the universe, who shines like a hundred suns, who holds the mace and discus, who wears resplendent yellow garments, and whose face is charmingly smiling.",
+      "samasaVibhaga": [
+        {
+          "compound": "sadāmbhōdhivāsam",
+          "breakdown": ["sat", "ambhodhi", "vāsam"],
+          "meanings": ["existence/being", "ocean", "dwelling"],
+          "samasaType": "tatpurusha",
+          "combinedMeaning": "One who dwells in the primordial ocean (Kshirasagara/Milk Ocean)"
+        },
+        {
+          "compound": "galatpuṣpahāsam",
+          "breakdown": ["galat", "puṣpa", "hāsam"],
+          "meanings": ["flowing/dripping", "flower", "smile"],
+          "samasaType": "bahuvrīhi",
+          "combinedMeaning": "One whose smile is like a blossoming flower"
+        },
+        {
+          "compound": "jagatsannivāsam",
+          "breakdown": ["jagat", "sannivāsam"],
+          "meanings": ["world/universe", "dwelling/abode"],
+          "samasaType": "tatpurusha",
+          "combinedMeaning": "The dwelling place of the entire universe; or One in whom the universe resides"
+        },
+        {
+          "compound": "śatādityabhāsam",
+          "breakdown": ["śata", "āditya", "bhāsam"],
+          "meanings": ["hundred", "sun", "radiance"],
+          "samasaType": "bahuvrīhi",
+          "combinedMeaning": "One who shines with the brilliance of a hundred suns"
+        },
+        {
+          "compound": "gadāchakraśastram",
+          "breakdown": ["gadā", "chakra", "śastram"],
+          "meanings": ["mace (Kaumodaki)", "discus (Sudarshana)", "weapon"],
+          "samasaType": "dvandva",
+          "combinedMeaning": "One who wields the mace, discus, and other weapons"
+        },
+        {
+          "compound": "lasatpītavastram",
+          "breakdown": ["lasat", "pīta", "vastram"],
+          "meanings": ["shining/resplendent", "yellow", "garment"],
+          "samasaType": "bahuvrīhi",
+          "combinedMeaning": "One who wears resplendent yellow garments (Pitambara)"
+        },
+        {
+          "compound": "hasachchāruvaktram",
+          "breakdown": ["hasat", "chāru", "vaktram"],
+          "meanings": ["smiling", "beautiful/charming", "face"],
+          "samasaType": "bahuvrīhi",
+          "combinedMeaning": "One with a beautifully smiling face"
+        }
+      ],
+      "rasa": ["bhakti", "shanta"],
+      "gunaCategories": ["saundarya", "vyapti", "shakti"],
+      "devataSvarupa": {
+        "form": "Vishnu reclining on Shesha in Kshirasagara",
+        "attributes": ["radiant like hundred suns", "flower-like smile", "beautiful face"],
+        "weapons": ["Gada (mace)", "Chakra (discus)"],
+        "ornaments": ["Pitambara (yellow silk)"]
+      }
     },
     {
       "id": "4",
@@ -56,7 +202,65 @@
       "tam": "ரமாகண்ட²ஹாரம் ஶ்ருதிவ்ராதஸாரம் ஜலாந்தர்விஹாரம் த⁴ராபா⁴ரஹாரம் । சிதா³னந்த³ரூபம் மனோஜ்ஞஸ்வரூபம் த்⁴ருதானேகரூபம் பஜ⁴ேஹம் பஜ⁴ேஹம்",
       "tel": "రమాకంఠహారం శ్రుతివ్రాతసారం జలాంతర్విహారం ధరాభారహారమ్ । చిదానందరూపం మనోజ్ఞస్వరూపం ధృతానేకరూపం భజేఽహం భజేఽహమ్",
       "pan": "ਰਮਾਕਂਠਹਾਰਂ ਸ਼੍ਰੁਤਿਵ੍ਰਾਤਸਾਰਂ ਜਲਾਂਤਰ੍ਵਿਹਾਰਂ ਧਰਾਭਾਰਹਾਰਮ੍ । ਚਿਦਾਨਂਦਰੂਪਂ ਮਨੋਜ੍ਞਸ੍ਵਰੂਪਂ ਧ੍ਰੁਰੁਇਤਾਨੇਕਰੂਪਂ ਭਜੇ਽ਹਂ ਭਜੇ਽ਹਮ੍",
-      "meaning": ""
+      "meaning": "I worship Him who is the necklace of Lakshmi's neck, the essence of all Vedas, who sports in the waters, who removes the burden of the earth, whose nature is pure consciousness and bliss, whose form is captivating, and who assumes countless forms.",
+      "samasaVibhaga": [
+        {
+          "compound": "ramākaṇṭhahāram",
+          "breakdown": ["ramā", "kaṇṭha", "hāram"],
+          "meanings": ["Lakshmi", "neck", "necklace/ornament"],
+          "samasaType": "tatpurusha",
+          "combinedMeaning": "The necklace adorning Lakshmi's neck (He is her most precious ornament)"
+        },
+        {
+          "compound": "śrutivrātasāram",
+          "breakdown": ["śruti", "vrāta", "sāram"],
+          "meanings": ["Vedas", "multitude/collection", "essence"],
+          "samasaType": "tatpurusha",
+          "combinedMeaning": "The essence of all the Vedas"
+        },
+        {
+          "compound": "jalāntarvihāram",
+          "breakdown": ["jala", "antar", "vihāram"],
+          "meanings": ["water", "within", "sporting/playing"],
+          "samasaType": "tatpurusha",
+          "combinedMeaning": "One who sports within the waters (cosmic waters, or as Matsya/Varaha avatars)"
+        },
+        {
+          "compound": "dharābhārahāram",
+          "breakdown": ["dharā", "bhāra", "hāram"],
+          "meanings": ["earth", "burden", "remover"],
+          "samasaType": "tatpurusha",
+          "combinedMeaning": "Remover of the earth's burden (as Varaha, Krishna removing adharma)"
+        },
+        {
+          "compound": "chidānandarūpam",
+          "breakdown": ["chit", "ānanda", "rūpam"],
+          "meanings": ["consciousness", "bliss", "form/nature"],
+          "samasaType": "karmadhāraya",
+          "combinedMeaning": "One whose nature is pure consciousness and bliss (Sat-Chit-Ananda)"
+        },
+        {
+          "compound": "manōjñasvarūpam",
+          "breakdown": ["manas", "jña", "svarūpam"],
+          "meanings": ["mind", "pleasing/knowing", "own form"],
+          "samasaType": "bahuvrīhi",
+          "combinedMeaning": "One whose form is captivating to the mind"
+        },
+        {
+          "compound": "dhṛtānēkarūpam",
+          "breakdown": ["dhṛta", "anēka", "rūpam"],
+          "meanings": ["held/assumed", "many", "forms"],
+          "samasaType": "bahuvrīhi",
+          "combinedMeaning": "One who has assumed countless forms (avatars)"
+        }
+      ],
+      "rasa": ["bhakti", "adbhuta"],
+      "gunaCategories": ["paramarthika", "jnana", "vyapti"],
+      "avataraSambandha": [
+        {"avatar": "Matsya", "leela": "Sports in cosmic waters"},
+        {"avatar": "Varaha", "leela": "Lifted the earth from waters, removed burden"},
+        {"avatar": "Various", "leela": "Assumes countless forms"}
+      ]
     },
     {
       "id": "5",
@@ -66,7 +270,60 @@
       "tam": "ஜராஜன்மஹீனம் பரானந்த³பீனம் ஸமாதா⁴னலீனம் ஸதை³வானவீனம் । ஜக³ஜ்ஜன்மஹேதும் ஸுரானீககேதும் த்ரிலோகைகஸேதும் பஜ⁴ேஹம் பஜ⁴ேஹம்",
       "tel": "జరాజన్మహీనం పరానందపీనం సమాధానలీనం సదైవానవీనమ్ । జగజ్జన్మహేతుం సురానీకకేతుం త్రిలోకైకసేతుం భజేఽహం భజేఽహమ్",
       "pan": "ਜਰਾਜਨ੍ਮਹੀਨਂ ਪਰਾਨਂਦਪੀਨਂ ਸਮਾਧਾਨਲੀਨਂ ਸਦੈਵਾਨਵੀਨਮ੍ । ਜਗਜ੍ਜਨ੍ਮਹੇਤੁਂ ਸੁਰਾਨੀਕਕੇਤੁਂ ਤ੍ਰਿਲੋਕੈਕਸੇਤੁਂ ਭਜੇ਽ਹਂ ਭਜੇ਽ਹਮ੍",
-      "meaning": ""
+      "meaning": "I worship Him who is free from old age and birth, who is full of supreme bliss, who is absorbed in samadhi, who is ever fresh and new, who is the cause of creation, the banner of the celestials, and the sole bridge across the three worlds.",
+      "samasaVibhaga": [
+        {
+          "compound": "jarājanmahīnam",
+          "breakdown": ["jarā", "janma", "hīnam"],
+          "meanings": ["old age", "birth", "devoid of"],
+          "samasaType": "tatpurusha",
+          "combinedMeaning": "One who is devoid of old age and birth (eternal, beyond samsara)"
+        },
+        {
+          "compound": "parānandapīnam",
+          "breakdown": ["para", "ānanda", "pīnam"],
+          "meanings": ["supreme", "bliss", "full/nourished"],
+          "samasaType": "tatpurusha",
+          "combinedMeaning": "One who is full of supreme bliss"
+        },
+        {
+          "compound": "samādhānalīnam",
+          "breakdown": ["samādhāna", "līnam"],
+          "meanings": ["contemplation/samadhi", "absorbed"],
+          "samasaType": "tatpurusha",
+          "combinedMeaning": "One absorbed in perfect equanimity/samadhi"
+        },
+        {
+          "compound": "sadaivānavīnam",
+          "breakdown": ["sadā", "eva", "anavīnam"],
+          "meanings": ["always", "indeed", "not old/ever new"],
+          "samasaType": "avyayibhava",
+          "combinedMeaning": "One who is eternally fresh and ever new"
+        },
+        {
+          "compound": "jagajjanmahētum",
+          "breakdown": ["jagat", "janma", "hētum"],
+          "meanings": ["world", "birth/creation", "cause"],
+          "samasaType": "tatpurusha",
+          "combinedMeaning": "The cause of the world's creation"
+        },
+        {
+          "compound": "surānīkakētum",
+          "breakdown": ["sura", "anīka", "kētum"],
+          "meanings": ["gods/celestials", "army", "banner/flag"],
+          "samasaType": "tatpurusha",
+          "combinedMeaning": "The banner/standard of the celestial army"
+        },
+        {
+          "compound": "trilōkaikasētum",
+          "breakdown": ["triloka", "ēka", "sētum"],
+          "meanings": ["three worlds", "sole/one", "bridge"],
+          "samasaType": "karmadhāraya",
+          "combinedMeaning": "The sole bridge across the three worlds (to liberation)"
+        }
+      ],
+      "rasa": ["shanta", "bhakti"],
+      "gunaCategories": ["paramarthika", "srishti", "rakshana"]
     },
     {
       "id": "6",
@@ -76,7 +333,60 @@
       "tam": "க்ருதாம்னாயகா³னம் க²கா³தீ⁴ஶயானம் விமுக்தேர்னிதா³னம் ஹராராதிமானம் । ஸ்வப⁴க்தானுகூலம் ஜக³த்³வ்ருக்ஷமூலம் நிரஸ்தார்தஶூலம் பஜ⁴ேஹம் பஜ⁴ேஹம்",
       "tel": "కృతామ్నాయగానం ఖగాధీశయానం విముక్తేర్నిదానం హరారాతిమానమ్ । స్వభక్తానుకూలం జగద్వృక్షమూలం నిరస్తార్తశూలం భజేఽహం భజేఽహమ్",
       "pan": "ਕ੍ਰੁਰੁਇਤਾਮ੍ਨਾਯਗਾਨਂ ਖਗਾਧੀਸ਼ਯਾਨਂ ਵਿਮੁਕ੍ਤੇਰ੍ਨਿਦਾਨਂ ਹਰਾਰਾਤਿਮਾਨਮ੍ । ਸ੍ਵਭਕ੍ਤਾਨੁਕੂਲਂ ਜਗਦ੍ਵ੍ਰੁਰੁਇਕ੍ਸ਼ਮੂਲਂ ਨਿਰਸ੍ਤਾਰ੍ਤਸ਼ੂਲਂ ਭਜੇ਽ਹਂ ਭਜੇ਽ਹਮ੍",
-      "meaning": ""
+      "meaning": "I worship Him who is praised by the Vedas, who reclines on Garuda the king of birds, who is the cause of liberation, who humbles the pride of enemies of devotees, who is favorable to His devotees, who is the root of the cosmic tree, and who destroys the afflictions of the distressed.",
+      "samasaVibhaga": [
+        {
+          "compound": "kṛtāmnāyagānam",
+          "breakdown": ["kṛta", "āmnāya", "gānam"],
+          "meanings": ["made/sung", "Vedas/tradition", "song/praise"],
+          "samasaType": "tatpurusha",
+          "combinedMeaning": "One whose praise is sung by the Vedas"
+        },
+        {
+          "compound": "khagādhīśayānam",
+          "breakdown": ["khaga", "adhīśa", "yānam"],
+          "meanings": ["bird", "lord/king", "vehicle"],
+          "samasaType": "tatpurusha",
+          "combinedMeaning": "One whose vehicle is the king of birds (Garuda)"
+        },
+        {
+          "compound": "vimuktērnidānam",
+          "breakdown": ["vimukti", "nidānam"],
+          "meanings": ["liberation", "cause/source"],
+          "samasaType": "tatpurusha",
+          "combinedMeaning": "The cause/source of liberation (moksha)"
+        },
+        {
+          "compound": "harārātimānam",
+          "breakdown": ["hari", "arāti", "mānam"],
+          "meanings": ["Hari's/devotees'", "enemies", "pride"],
+          "samasaType": "tatpurusha",
+          "combinedMeaning": "One who humbles the pride of enemies (of devotees)"
+        },
+        {
+          "compound": "svabhaktānukūlam",
+          "breakdown": ["sva", "bhakta", "anukūlam"],
+          "meanings": ["own", "devotees", "favorable"],
+          "samasaType": "tatpurusha",
+          "combinedMeaning": "One who is favorable to His own devotees"
+        },
+        {
+          "compound": "jagadvṛkṣamūlam",
+          "breakdown": ["jagat", "vṛkṣa", "mūlam"],
+          "meanings": ["world", "tree", "root"],
+          "samasaType": "tatpurusha",
+          "combinedMeaning": "The root of the cosmic tree (Ashvattha, the inverted tree of existence)"
+        },
+        {
+          "compound": "nirastārtaśūlam",
+          "breakdown": ["nirasta", "ārta", "śūlam"],
+          "meanings": ["removed/destroyed", "afflicted", "pain/thorn"],
+          "samasaType": "bahuvrīhi",
+          "combinedMeaning": "One who removes the pain of the afflicted"
+        }
+      ],
+      "rasa": ["bhakti", "karuna"],
+      "gunaCategories": ["rakshana", "anugraha", "karuna"]
     },
     {
       "id": "7",
@@ -86,7 +396,60 @@
       "tam": "ஸமஸ்தாமரேஶம் த்³விரேபா²ப⁴கேஶம் ஜக³த்³பி³ம்ப³லேஶம் ஹ்ருதா³காஶவேஶம் । ஸதா³ தி³வ்யதே³ஹம் விமுக்தாகி²லேஹம் ஸுவைகுண்ட²கே³ஹம் பஜ⁴ேஹம் பஜ⁴ேஹம்",
       "tel": "సమస్తామరేశం ద్విరేఫాభకేశం జగద్బింబలేశం హృదాకాశవేశమ్ । సదా దివ్యదేహం విముక్తాఖిలేహం సువైకుంఠగేహం భజేఽహం భజేఽహమ్",
       "pan": "ਸਮਸ੍ਤਾਮਰੇਸ਼ਂ ਦ੍ਵਿਰੇਫਾਭਕੇਸ਼ਂ ਜਗਦ੍ਬਿਂਬਲੇਸ਼ਂ ਹ੍ਰੁਰੁਇਦਾਕਾਸ਼ਵੇਸ਼ਮ੍ । ਸਦਾ ਦਿਵ੍ਯਦੇਹਂ ਵਿਮੁਕ੍ਤਾਖਿਲੇਹਂ ਸੁਵੈਕੁਂਠਗੇਹਂ ਭਜੇ਽ਹਂ ਭਜੇ਽ਹਮ੍",
-      "meaning": ""
+      "meaning": "I worship Him who is the Lord of all celestials, whose hair is black like bees, who pervades the cosmic reflection, who dwells in the space of the heart, whose body is eternally divine, who is free from all worldly attachments, and whose abode is the auspicious Vaikuntha.",
+      "samasaVibhaga": [
+        {
+          "compound": "samastāmarēśam",
+          "breakdown": ["samasta", "amara", "īśam"],
+          "meanings": ["all", "immortals/gods", "lord"],
+          "samasaType": "tatpurusha",
+          "combinedMeaning": "Lord of all celestials/immortals"
+        },
+        {
+          "compound": "dvirēphābhakēśam",
+          "breakdown": ["dvirepha", "ābha", "kēśam"],
+          "meanings": ["bee (two-winged)", "like/resembling", "hair"],
+          "samasaType": "bahuvrīhi",
+          "combinedMeaning": "One whose hair is dark like bees (lustrous black hair)"
+        },
+        {
+          "compound": "jagadbimbalēśam",
+          "breakdown": ["jagat", "bimba", "lēśam"],
+          "meanings": ["world", "reflection/image", "particle/trace"],
+          "samasaType": "tatpurusha",
+          "combinedMeaning": "The Lord who pervades even the smallest particle of the cosmic reflection"
+        },
+        {
+          "compound": "hṛdākāśavēśam",
+          "breakdown": ["hṛd", "ākāśa", "vēśam"],
+          "meanings": ["heart", "space/sky", "dwelling"],
+          "samasaType": "tatpurusha",
+          "combinedMeaning": "One who dwells in the space/cavity of the heart (antaryami)"
+        },
+        {
+          "compound": "divyadēham",
+          "breakdown": ["divya", "dēham"],
+          "meanings": ["divine", "body"],
+          "samasaType": "karmadhāraya",
+          "combinedMeaning": "One with a divine/transcendental body"
+        },
+        {
+          "compound": "vimuktākhilēham",
+          "breakdown": ["vimukta", "akhila", "īham"],
+          "meanings": ["freed/liberated", "all", "desires/efforts"],
+          "samasaType": "bahuvrīhi",
+          "combinedMeaning": "One who is free from all worldly attachments and desires"
+        },
+        {
+          "compound": "suvaikuṇṭhagēham",
+          "breakdown": ["su", "vaikuṇṭha", "gēham"],
+          "meanings": ["auspicious", "Vaikuntha", "abode"],
+          "samasaType": "tatpurusha",
+          "combinedMeaning": "One whose abode is the auspicious Vaikuntha"
+        }
+      ],
+      "rasa": ["shanta", "bhakti"],
+      "gunaCategories": ["vyapti", "paramarthika", "saundarya"]
     },
     {
       "id": "8",
@@ -96,7 +459,60 @@
       "tam": "ஸுராலீப³லிஷ்ட²ம் த்ரிலோகீவரிஷ்ட²ம் கு³ரூணாம் க³ரிஷ்ட²ம் ஸ்வரூபைகனிஷ்ட²ம் । ஸதா³ யுத்³த⁴தீ⁴ரம் மஹாவீரவீரம் ப⁴வாம்போ⁴தி⁴தீரம் பஜ⁴ேஹம் பஜ⁴ேஹம்",
       "tel": "సురాలీబలిష్ఠం త్రిలోకీవరిష్ఠం గురూణాం గరిష్ఠం స్వరూపైకనిష్ఠమ్ । సదా యుద్ధధీరం మహావీరవీరం భవాంభోధితీరం భజేఽహం భజేఽహమ్",
       "pan": "ਸੁਰਾਲੀਬਲਿਸ਼੍ਠਂ ਤ੍ਰਿਲੋਕੀਵਰਿਸ਼੍ਠਂ ਗੁਰੂਣਾਂ ਗਰਿਸ਼੍ਠਂ ਸ੍ਵਰੂਪੈਕਨਿਸ਼੍ਠਮ੍ । ਸਦਾ ਯੁਦ੍ਧਧੀਰਂ ਮਹਾਵੀਰਵੀਰਂ ਭਵਾਂਭੋਧਿਤੀਰਂ ਭਜੇ਽ਹਂ ਭਜੇ਽ਹਮ੍",
-      "meaning": ""
+      "meaning": "I worship Him who is the mightiest among celestials, the best in the three worlds, the greatest among teachers, steadfast in His own nature, ever courageous in battle, the hero of heroes, and the shore of the ocean of worldly existence.",
+      "samasaVibhaga": [
+        {
+          "compound": "surālībaliṣṭham",
+          "breakdown": ["sura", "ālī", "baliṣṭham"],
+          "meanings": ["gods", "group/row", "strongest"],
+          "samasaType": "tatpurusha",
+          "combinedMeaning": "The strongest among the celestial hosts"
+        },
+        {
+          "compound": "trilōkīvariṣṭham",
+          "breakdown": ["trilokī", "variṣṭham"],
+          "meanings": ["three worlds", "best/greatest"],
+          "samasaType": "tatpurusha",
+          "combinedMeaning": "The greatest/best in all three worlds"
+        },
+        {
+          "compound": "gurūṇāṃ gariṣṭham",
+          "breakdown": ["gurūṇām", "gariṣṭham"],
+          "meanings": ["of teachers", "most venerable"],
+          "samasaType": "tatpurusha",
+          "combinedMeaning": "The most venerable among all teachers"
+        },
+        {
+          "compound": "svarūpaikaniṣṭham",
+          "breakdown": ["svarūpa", "eka", "niṣṭham"],
+          "meanings": ["own nature", "one/sole", "steadfast"],
+          "samasaType": "bahuvrīhi",
+          "combinedMeaning": "One who is steadfastly established in His own true nature"
+        },
+        {
+          "compound": "yuddhadhīram",
+          "breakdown": ["yuddha", "dhīram"],
+          "meanings": ["battle", "courageous/steady"],
+          "samasaType": "tatpurusha",
+          "combinedMeaning": "One who is courageous and steady in battle"
+        },
+        {
+          "compound": "mahāvīravīram",
+          "breakdown": ["mahā", "vīra", "vīram"],
+          "meanings": ["great", "hero", "hero"],
+          "samasaType": "karmadhāraya",
+          "combinedMeaning": "The hero among great heroes"
+        },
+        {
+          "compound": "bhavāmbhōdhitīram",
+          "breakdown": ["bhava", "ambhodhi", "tīram"],
+          "meanings": ["worldly existence", "ocean", "shore"],
+          "samasaType": "tatpurusha",
+          "combinedMeaning": "The shore of the ocean of samsara (one who helps cross worldly existence)"
+        }
+      ],
+      "rasa": ["vira", "bhakti"],
+      "gunaCategories": ["shakti", "jnana", "rakshana"]
     },
     {
       "id": "9",
@@ -106,7 +522,60 @@
       "tam": "ரமாவாமபா⁴க³ம் தலாலக்³னநாக³ம் க்ருதாதீ⁴னயாக³ம் க³தாராக³ராக³ம் । முனீந்த்³ரைஸ்ஸுகீ³தம் ஸுரைஸ்ஸம்பரீதம் கு³ணௌகை⁴ரதீதம் பஜ⁴ேஹம் பஜ⁴ேஹம்",
       "tel": "రమావామభాగం తలాలగ్ననాగం కృతాధీనయాగం గతారాగరాగమ్ । మునీంద్రైస్సుగీతం సురైస్సంపరీతం గుణౌఘైరతీతం భజేఽహం భజేఽహమ్",
       "pan": "ਰਮਾਵਾਮਭਾਗਂ ਤਲਾਲਗ੍ਨਨਾਗਂ ਕ੍ਰੁਰੁਇਤਾਧੀਨਯਾਗਂ ਗਤਾਰਾਗਰਾਗਮ੍ । ਮੁਨੀਂਦ੍ਰੈਸ੍ਸੁਗੀਤਂ ਸੁਰੈਸ੍ਸਂਪਰੀਤਂ ਗੁਣੌਘੈਰਤੀਤਂ ਭਜੇ਽ਹਂ ਭਜੇ਽ਹਮ੍",
-      "meaning": ""
+      "meaning": "I worship Him on whose left side Lakshmi resides, at whose feet the serpent Shesha remains, for whom all sacrifices are performed, who is free from attachment and aversion, who is beautifully sung by great sages, who is surrounded by celestials, and who transcends all qualities.",
+      "samasaVibhaga": [
+        {
+          "compound": "ramāvāmabhāgam",
+          "breakdown": ["ramā", "vāma", "bhāgam"],
+          "meanings": ["Lakshmi", "left", "side/part"],
+          "samasaType": "tatpurusha",
+          "combinedMeaning": "One on whose left side Lakshmi resides (Lakshmi-Narayana form)"
+        },
+        {
+          "compound": "talālagnanāgam",
+          "breakdown": ["tala", "alagna", "nāgam"],
+          "meanings": ["sole/foot", "attached", "serpent"],
+          "samasaType": "bahuvrīhi",
+          "combinedMeaning": "One at whose feet the serpent (Adishesha) remains attached"
+        },
+        {
+          "compound": "kṛtādhīnayāgam",
+          "breakdown": ["kṛta", "adhīna", "yāgam"],
+          "meanings": ["done", "dependent/dedicated", "sacrifice"],
+          "samasaType": "bahuvrīhi",
+          "combinedMeaning": "One for whom all sacrifices are performed; all yajnas depend on Him"
+        },
+        {
+          "compound": "gatārāgarāgam",
+          "breakdown": ["gata", "arāga", "rāgam"],
+          "meanings": ["gone/free from", "without attachment", "attachment/passion"],
+          "samasaType": "bahuvrīhi",
+          "combinedMeaning": "One who is free from both attachment (raga) and aversion (araga)"
+        },
+        {
+          "compound": "munīndraissugītam",
+          "breakdown": ["muni", "indra", "su", "gītam"],
+          "meanings": ["sages", "chief/best", "well/beautifully", "sung"],
+          "samasaType": "tatpurusha",
+          "combinedMeaning": "One who is beautifully sung/praised by the greatest sages"
+        },
+        {
+          "compound": "suraissamparītam",
+          "breakdown": ["surais", "samparītam"],
+          "meanings": ["by gods", "surrounded"],
+          "samasaType": "tatpurusha",
+          "combinedMeaning": "One who is surrounded by celestials"
+        },
+        {
+          "compound": "guṇaughairatītam",
+          "breakdown": ["guṇa", "ogha", "atītam"],
+          "meanings": ["qualities (sattva, rajas, tamas)", "flood/multitude", "transcended"],
+          "samasaType": "tatpurusha",
+          "combinedMeaning": "One who transcends the flood of all material qualities (gunatita)"
+        }
+      ],
+      "rasa": ["shanta", "bhakti"],
+      "gunaCategories": ["paramarthika", "vyapti"]
     },
     {
       "id": "10",
@@ -116,7 +585,39 @@
       "tam": "ப²லஶ்ருதி । இத³ம் யஸ்து நித்யம் ஸமாதா⁴ய சித்தம் படே²த³ஷ்டகம் கண்ட²ஹாரம் முராரே: । ஸ விஷ்ணோர்விஶோகம் த்⁴ருவம் யாதி லோகம் ஜராஜன்மஶோகம் புனர்விந்த³தே நோ",
       "tel": "ఫలశ్రుతి । ఇదం యస్తు నిత్యం సమాధాయ చిత్తం పఠేదష్టకం కంఠహారం మురారేః । స విష్ణోర్విశోకం ధ్రువం యాతి లోకం జరాజన్మశోకం పునర్విందతే నో",
       "pan": "ਫਲਸ਼੍ਰੁਤਿ । ਇਦਂ ਯਸ੍ਤੁ ਨਿਤ੍ਯਂ ਸਮਾਧਾਯ ਚਿਤ੍ਤਂ ਪਠੇਦਸ਼੍ਟਕਂ ਕਂਠਹਾਰਂ ਮੁਰਾਰੇਃ । ਸ ਵਿਸ਼੍ਣੋਰ੍ਵਿਸ਼ੋਕਂ ਧ੍ਰੁਵਂ ਯਾਤਿ ਲੋਕਂ ਜਰਾਜਨ੍ਮਸ਼ੋਕਂ ਪੁਨਰ੍ਵਿਂਦਤੇ ਨੋ",
-      "meaning": ""
+      "meaning": "Phala Shruti (Fruit of Recitation): Whoever recites this ashtakam (eight verses) daily with a concentrated mind, this necklace of praise for Murari (slayer of Mura), will certainly attain the sorrowless abode of Vishnu and will never again experience the grief of old age and rebirth.",
+      "samasaVibhaga": [
+        {
+          "compound": "phalaśruti",
+          "breakdown": ["phala", "śruti"],
+          "meanings": ["fruit/result", "hearing/declaration"],
+          "samasaType": "tatpurusha",
+          "combinedMeaning": "Declaration of the fruits/benefits (of reciting)"
+        },
+        {
+          "compound": "kaṇṭhahāram",
+          "breakdown": ["kaṇṭha", "hāram"],
+          "meanings": ["neck", "necklace"],
+          "samasaType": "tatpurusha",
+          "combinedMeaning": "Necklace (this stotram is like a necklace for the Lord)"
+        },
+        {
+          "compound": "viśōkam",
+          "breakdown": ["vi", "śōkam"],
+          "meanings": ["without", "sorrow"],
+          "samasaType": "nañ",
+          "combinedMeaning": "Without sorrow, sorrowless"
+        },
+        {
+          "compound": "jarājanmaśōkam",
+          "breakdown": ["jarā", "janma", "śōkam"],
+          "meanings": ["old age", "birth", "grief"],
+          "samasaType": "dvandva",
+          "combinedMeaning": "The grief of old age and (re)birth"
+        }
+      ],
+      "rasa": ["shanta"],
+      "note": "The phala shruti promises liberation from the cycle of birth and death (samsara) for those who recite with devotion."
     },
     {
       "id": "11",
@@ -126,7 +627,7 @@
       "tam": "இதி ஶ்ரீ பரமஹம்ஸஸ்வாமி ப்³ரஹ்மானந்த³விரசிதம் ஶ்ரீஹரிஸ்தோத்ரம்",
       "tel": "ఇతి శ్రీ పరమహంసస్వామి బ్రహ్మానందవిరచితం శ్రీహరిస్తోత్రమ్",
       "pan": "ਇਤਿ ਸ਼੍ਰੀ ਪਰਮਹਂਸਸ੍ਵਾਮਿ ਬ੍ਰਹ੍ਮਾਨਂਦਵਿਰਚਿਤਂ ਸ਼੍ਰੀਹਰਿਸ੍ਤੋਤ੍ਰਮ੍",
-      "meaning": ""
+      "meaning": "Thus ends the Sri Hari Stotram composed by Paramahamsa Swami Brahmananda."
     }
   ]
 }

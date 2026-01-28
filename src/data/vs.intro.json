@@ -1,0 +1,1210 @@
+{
+  "chapterId": "intro",
+  "chapterTitle": "Invocation and Poorva Peetika",
+  "parentTitle": "Sri Vishnu Sahasranama",
+  "lineCount": 50,
+  "lines": [
+    {
+      "id": "1",
+      "deva": "श्री विष्णु सहस्र नाम स्तोत्रम्",
+      "iast": "Sree Vishnu Sahasra Nama Stotram",
+      "knda": "ಶ್ರೀ ವಿಷ್ಣು ಸಹಸ್ರ ನಾಮ ಸ್ತೋತ್ರಂ",
+      "tel": "శ్రీ విష్ణు సహస్ర నామ స్తోత్రం",
+      "tam": "ஶ்ரீ விஷ்ணு ஸஹஸ்ர நாம ஸ்தோத்ரம்",
+      "guj": "શ્રી વિષ્ણુ સહસ્ર નામ સ્તોત્રમ્",
+      "pan": "ਸ਼੍ਰੀ ਵਿਸ਼੍ਣੁ ਸਹਸ੍ਰ ਨਾਮ ਸ੍ਤੋਤ੍ਰਮ੍",
+      "mr": "श्री विष्णु सहस्र नाम स्तोत्रम्",
+      "ben": "class=\"stotramtitle\">",
+      "mal": "class=\"stotramtitle\">",
+      "meaning": "The Thousand Names of Lord Vishnu",
+      "note": "The Vishnu Sahasranama is a sacred hymn containing 1000 names of Lord Vishnu, found in the Anushasana Parva of the Mahabharata. It was revealed by the grandsire Bhishma to Yudhishthira while lying on a bed of arrows after the great war. This stotra is considered one of the most powerful and comprehensive hymns in Hindu tradition, encompassing the full glory of the Supreme Being.",
+      "chapter": "Sree Vishnu Sahasra Nama Stotram"
+    },
+    {
+      "id": "2",
+      "deva": "ॐ शुक्लाम्बरधरं विष्णुं शशिवर्णं चतुर्भुजम् ।",
+      "iast": "ōṃ śuklāmbaradharaṃ viṣṇuṃ śaśivarṇaṃ chaturbhujam ।",
+      "knda": "ಓಂ ಶುಕ್ಲಾಂಬರಧರಂ ವಿಷ್ಣುಂ ಶಶಿವರ್ಣಂ ಚತುರ್ಭುಜಮ್ ।",
+      "tel": "ఓం శుక్లాంబరధరం విష్ణుం శశివర్ణం చతుర్భుజమ్ ।",
+      "tam": "ஓம் ஶுக்லாம்ப³ரத⁴ரம் விஷ்ணும் ஶஶிவர்ணம் சதுர்பு⁴ஜம் ।",
+      "guj": "ઓં શુક્લાંબરધરં વિષ્ણું શશિવર્ણં ચતુર્ભુજમ્ ।",
+      "pan": "ਓਂ ਸ਼ੁਕ੍ਲਾਂਬਰਧਰਂ ਵਿਸ਼੍ਣੁਂ ਸ਼ਸ਼ਿਵਰ੍ਣਂ ਚਤੁਰ੍ਭੁਜਮ੍ ।",
+      "mr": "ॐ शुक्लांबरधरं विष्णुं शशिवर्णं चतुर्भुजम् ।",
+      "ben": "শ্রী বিষ্ণু সহস্র নাম স্তোত্রম্",
+      "mal": "ശ്രീ വിഷ്ണു സഹസ്ര നാമ സ്തോത്രമ്",
+      "meaning": "Om! (I meditate upon) the one clad in white garments, the all-pervading Vishnu, who is moon-complexioned and has four arms...",
+      "samasaVibhaga": [
+        {
+          "compound": "śuklāmbaradharam",
+          "breakdown": [
+            "śukla",
+            "ambara",
+            "dharam"
+          ],
+          "meanings": [
+            "white/pure",
+            "garment",
+            "wearing"
+          ],
+          "samasaType": "bahuvrīhi",
+          "combinedMeaning": "One who wears white/pure garments"
+        },
+        {
+          "compound": "śaśivarṇam",
+          "breakdown": [
+            "śaśi",
+            "varṇam"
+          ],
+          "meanings": [
+            "moon",
+            "complexion/color"
+          ],
+          "samasaType": "bahuvrīhi",
+          "combinedMeaning": "One whose complexion is like the moon (luminous, fair)"
+        },
+        {
+          "compound": "chaturbhujam",
+          "breakdown": [
+            "chatur",
+            "bhujam"
+          ],
+          "meanings": [
+            "four",
+            "arms"
+          ],
+          "samasaType": "bahuvrīhi",
+          "combinedMeaning": "One who has four arms"
+        }
+      ],
+      "note": "This is the Ganesha Dhyana Shloka, traditionally recited before beginning any sacred text. Though it describes Vishnu's form, it is addressed to Ganesha who removes all obstacles. The white garment and moon complexion describe the form of Mahaganapati."
+    },
+    {
+      "id": "3",
+      "deva": "प्रसन्नवदनं ध्यायेत् सर्वविघ्नोपशान्तये ॥",
+      "iast": "prasannavadanaṃ dhyāyēt sarvavighnōpaśāntayē ॥",
+      "knda": "ಪ್ರಸನ್ನವದನಂ ಧ್ಯಾಯೇತ್ ಸರ್ವವಿಘ್ನೋಪಶಾಂತಯೇ ॥",
+      "tel": "ప్రసన్నవదనం ధ్యాయేత్ సర్వవిఘ్నోపశాంతయే ॥",
+      "tam": "ப்ரஸன்னவத³னம் த்⁴யாயேத் ஸர்வவிக்⁴னோபஶாந்தயே ॥",
+      "guj": "પ્રસન્નવદનં ધ્યાયેત્ સર્વવિઘ્નોપશાંતયે ॥",
+      "pan": "ਪ੍ਰਸਨ੍ਨਵਦਨਂ ਧ੍ਯਾਯੇਤ੍ ਸਰ੍ਵਵਿਘ੍ਨੋਪਸ਼ਾਂਤਯੇ ॥",
+      "mr": "प्रसन्नवदनं ध्यायेत् सर्वविघ्नोपशांतये ॥",
+      "ben": "ওং শুক্লাংবরধরং বিষ্ণুং শশিবর্ণং চতুর্ভুজম্ ।",
+      "mal": "ഓം ശുക്ലാംബരധരം വിഷ്ണും ശശിവര്ണം ചതുര്ഭുജമ് ।",
+      "meaning": "One should meditate upon Him with a serene, pleasant countenance for the complete pacification of all obstacles.",
+      "samasaVibhaga": [
+        {
+          "compound": "prasannavadanam",
+          "breakdown": [
+            "prasanna",
+            "vadanam"
+          ],
+          "meanings": [
+            "serene/pleased",
+            "face"
+          ],
+          "samasaType": "bahuvrīhi",
+          "combinedMeaning": "One with a serene, pleasant face"
+        },
+        {
+          "compound": "sarvavighnōpaśāntayē",
+          "breakdown": [
+            "sarva",
+            "vighna",
+            "upaśānti"
+          ],
+          "meanings": [
+            "all",
+            "obstacles",
+            "pacification/removal"
+          ],
+          "samasaType": "tatpurusha",
+          "combinedMeaning": "For the complete removal of all obstacles"
+        }
+      ],
+      "note": "This is the second half of the Ganesha Dhyana Shloka, traditionally recited before beginning any sacred text to invoke blessings for removing obstacles."
+    },
+    {
+      "id": "5",
+      "deva": "यस्यद्विरदवक्त्राद्याः पारिषद्याः परः शतम् ।",
+      "iast": "yasyadviradavaktrādyāḥ pāriṣadyāḥ paraḥ śatam ।",
+      "knda": "ಯಸ್ಯದ್ವಿರದವಕ್ತ್ರಾದ್ಯಾಃ ಪಾರಿಷದ್ಯಾಃ ಪರಃ ಶತಮ್ ।",
+      "tel": "యస్యద్విరదవక్త్రాద్యాః పారిషద్యాః పరః శతమ్ ।",
+      "tam": "யஸ்யத்³விரத³வக்த்ராத்³யா: பாரிஷத்³யா: பர: ஶதம் ।",
+      "guj": "યસ્યદ્વિરદવક્ત્રાદ્યાઃ પારિષદ્યાઃ પરઃ શતમ્ ।",
+      "pan": "ਯਸ੍ਯਦ੍ਵਿਰਦਵਕ੍ਤ੍ਰਾਦ੍ਯਾਃ ਪਾਰਿਸ਼ਦ੍ਯਾਃ ਪਰਃ ਸ਼ਤਮ੍ ।",
+      "mr": "यस्यद्विरदवक्त्राद्याः पारिषद्याः परः शतम् ।",
+      "ben": "1 ॥",
+      "mal": "1 ॥",
+      "meaning": "He whose attendants, beginning with the elephant-faced one (Ganesha), number more than a hundred...",
+      "samasaVibhaga": [
+        {
+          "compound": "dviradavaktrādyāḥ",
+          "breakdown": [
+            "dvirada",
+            "vaktra",
+            "ādyāḥ"
+          ],
+          "meanings": [
+            "elephant (two-tusked)",
+            "faced",
+            "beginning with/and others"
+          ],
+          "samasaType": "bahuvrīhi",
+          "combinedMeaning": "Beginning with the elephant-faced one (Ganesha) and others"
+        },
+        {
+          "compound": "pāriṣadyāḥ",
+          "breakdown": [
+            "pariṣad",
+            "ya"
+          ],
+          "meanings": [
+            "assembly",
+            "belonging to"
+          ],
+          "samasaType": "taddhita",
+          "combinedMeaning": "Attendants, members of the divine assembly"
+        }
+      ],
+      "note": "This is the first half of the Vishvaksena Dhyana Shloka. Vishvaksena is the commander of Vishnu's army and is invoked before the Sahasranama."
+    },
+    {
+      "id": "6",
+      "deva": "विघ्नं निघ्नन्ति सततं विष्वक्सेनं तमाश्रये ॥",
+      "iast": "vighnaṃ nighnanti satataṃ viṣvaksēnaṃ tamāśrayē ॥",
+      "knda": "ವಿಘ್ನಂ ನಿಘ್ನಂತಿ ಸತತಂ ವಿಷ್ವಕ್ಸೇನಂ ತಮಾಶ್ರಯೇ ॥",
+      "tel": "విఘ్నం నిఘ్నంతి సతతం విష్వక్సేనం తమాశ్రయే ॥",
+      "tam": "விக்⁴னம் நிக்⁴னந்தி ஸததம் விஷ்வக்ஸேனம் தமாஶ்ரயே ॥",
+      "guj": "વિઘ્નં નિઘ્નંતિ સતતં વિષ્વક્સેનં તમાશ્રયે ॥",
+      "pan": "ਵਿਘ੍ਨਂ ਨਿਘ੍ਨਂਤਿ ਸਤਤਂ ਵਿਸ਼੍ਵਕ੍ਸੇਨਂ ਤਮਾਸ਼੍ਰਯੇ ॥",
+      "mr": "विघ्नं निघ्नंति सततं विष्वक्सेनं तमाश्रये ॥",
+      "ben": "যস্যদ্বিরদবক্ত্রাদ্য়াঃ পারিষদ্য়াঃ পরঃ শতম্ ।",
+      "mal": "യസ്യദ്വിരദവക്ത്രാദ്യാഃ പാരിഷദ്യാഃ പരഃ ശതമ് ।",
+      "meaning": "...who constantly destroy all obstacles - I take refuge in that Vishvaksena.",
+      "namaAnalysis": [
+        {
+          "nama": "विष्वक्सेन",
+          "iast": "Viṣvaksēna",
+          "etymology": {
+            "dhatu": "विष्वक् (viṣvak - in all directions) + सेना (sēnā - army)",
+            "meaning": "One whose army extends in all directions; Commander-in-chief of Vishnu's divine forces",
+            "alternates": [
+              "Lord of the cosmic army",
+              "One who leads armies everywhere"
+            ]
+          },
+          "gunaVarga": [
+            "rakshana",
+            "shakti"
+          ],
+          "relatedNamas": [
+            "Senapati",
+            "Ganapati"
+          ],
+          "note": "Vishvaksena is the general of Vishnu's divine army. In Vaishnava tradition, he is worshipped before any auspicious activity, similar to Ganesha in other traditions."
+        }
+      ],
+      "samasaVibhaga": [
+        {
+          "compound": "viṣvaksēnam",
+          "breakdown": [
+            "viṣvak",
+            "sēnam"
+          ],
+          "meanings": [
+            "in all directions",
+            "army/having army"
+          ],
+          "samasaType": "bahuvrīhi",
+          "combinedMeaning": "One whose army extends in all directions"
+        }
+      ]
+    },
+    {
+      "id": "8",
+      "deva": "पूर्व पीठिका",
+      "iast": "pūrva pīṭhikā",
+      "knda": "ಪೂರ್ವ ಪೀಠಿಕಾ",
+      "tel": "పూర్వ పీఠికా",
+      "tam": "பூர்வ பீடி²கா",
+      "guj": "પૂર્વ પીઠિકા",
+      "pan": "ਪੂਰ੍ਵ ਪੀਠਿਕਾ",
+      "mr": "पूर्व पीठिका",
+      "ben": "2 ॥",
+      "mal": "2 ॥",
+      "meaning": "Preliminary Introduction",
+      "chapter": "pūrva pīṭhikā",
+      "note": "The Poorva Peetika (Preliminary Section) contains the invocations, the setting of the dialogue between Yudhishthira and Bhishma, and the six questions that Bhishma answers with the Sahasranama."
+    },
+    {
+      "id": "9",
+      "deva": "व्यासं वसिष्ठ नप्तारं शक्तेः पौत्रमकल्मषम् ।",
+      "iast": "vyāsaṃ vasiṣṭha naptāraṃ śaktēḥ pautramakalmaṣam ।",
+      "knda": "ವ್ಯಾಸಂ ವಸಿಷ್ಠ ನಪ್ತಾರಂ ಶಕ್ತೇಃ ಪೌತ್ರಮಕಲ್ಮಷಮ್ ।",
+      "tel": "వ్యాసం వసిష్ఠ నప్తారం శక్తేః పౌత్రమకల్మషమ్ ।",
+      "tam": "வ்யாஸம் வஸிஷ்ட² நப்தாரம் ஶக்தே: பௌத்ரமகல்மஷம் ।",
+      "guj": "વ્યાસં વસિષ્ઠ નપ્તારં શક્તેઃ પૌત્રમકલ્મષમ્ ।",
+      "pan": "ਵ੍ਯਾਸਂ ਵਸਿਸ਼੍ਠ ਨਪ੍ਤਾਰਂ ਸ਼ਕ੍ਤੇਃ ਪੌਤ੍ਰਮਕਲ੍ਮਸ਼ਮ੍ ।",
+      "mr": "व्यासं वसिष्ठ नप्तारं शक्तेः पौत्रमकल्मषम् ।",
+      "ben": "পূর্ব পীঠিকা",
+      "mal": "പൂർവ പീഠികാ",
+      "meaning": "(I salute) Vyasa, great-grandson of Vasishtha, grandson of Shakti, who is pure and sinless...",
+      "samasaVibhaga": [
+        {
+          "compound": "vasiṣṭhanaptāram",
+          "breakdown": [
+            "vasiṣṭha",
+            "naptāram"
+          ],
+          "meanings": [
+            "Vasishtha",
+            "great-grandson"
+          ],
+          "samasaType": "tatpurusha",
+          "combinedMeaning": "Great-grandson of Sage Vasishtha"
+        },
+        {
+          "compound": "akalmaṣam",
+          "breakdown": [
+            "a",
+            "kalmaṣam"
+          ],
+          "meanings": [
+            "without",
+            "sin/blemish"
+          ],
+          "samasaType": "nañ",
+          "combinedMeaning": "Pure, without any blemish or sin"
+        }
+      ],
+      "note": "Vyasa's lineage: Vasishtha → Shakti → Parashara → Vyasa. This verse establishes the illustrious lineage of the compiler of the Mahabharata."
+    },
+    {
+      "id": "10",
+      "deva": "पराशरात्मजं वन्दे शुकतातं तपोनिधिम् ॥",
+      "iast": "parāśarātmajaṃ vandē śukatātaṃ tapōnidhim ॥",
+      "knda": "ಪರಾಶರಾತ್ಮಜಂ ವಂದೇ ಶುಕತಾತಂ ತಪೋನಿಧಿಮ್ ॥",
+      "tel": "పరాశరాత్మజం వందే శుకతాతం తపోనిధిమ్ ॥",
+      "tam": "பராஶராத்மஜம் வந்தே³ ஶுகதாதம் தபோனிதி⁴ம் ॥",
+      "guj": "પરાશરાત્મજં વંદે શુકતાતં તપોનિધિમ્ ॥",
+      "pan": "ਪਰਾਸ਼ਰਾਤ੍ਮਜਂ ਵਂਦੇ ਸ਼ੁਕਤਾਤਂ ਤਪੋਨਿਧਿਮ੍ ॥",
+      "mr": "पराशरात्मजं वंदे शुकतातं तपोनिधिम् ॥",
+      "ben": "ব্য়াসং বসিষ্ঠ নপ্তারং শক্তেঃ পৌত্রমকল্মষম্ ।",
+      "mal": "വ്യാസം വസിഷ്ഠ നപ്താരം ശക്തേഃ പൌത്രമകല്മഷമ് ।",
+      "meaning": "...I bow to the son of Parashara, the father of Shuka, who is a treasure-house of austerity.",
+      "samasaVibhaga": [
+        {
+          "compound": "parāśarātmajam",
+          "breakdown": [
+            "parāśara",
+            "ātmajam"
+          ],
+          "meanings": [
+            "Parashara",
+            "son"
+          ],
+          "samasaType": "tatpurusha",
+          "combinedMeaning": "Son of Sage Parashara"
+        },
+        {
+          "compound": "śukatātam",
+          "breakdown": [
+            "śuka",
+            "tātam"
+          ],
+          "meanings": [
+            "Shuka (parrot/the sage)",
+            "father"
+          ],
+          "samasaType": "tatpurusha",
+          "combinedMeaning": "Father of Sage Shuka"
+        },
+        {
+          "compound": "tapōnidhim",
+          "breakdown": [
+            "tapas",
+            "nidhim"
+          ],
+          "meanings": [
+            "austerity",
+            "treasure/repository"
+          ],
+          "samasaType": "tatpurusha",
+          "combinedMeaning": "Treasury of austerity; one who has amassed great tapas"
+        }
+      ],
+      "note": "Sage Shuka (Shukadeva) was Vyasa's illustrious son who narrated the Bhagavata Purana to King Parikshit."
+    },
+    {
+      "id": "12",
+      "deva": "व्यासाय विष्णु रूपाय व्यासरूपाय विष्णवे ।",
+      "iast": "vyāsāya viṣṇu rūpāya vyāsarūpāya viṣṇavē ।",
+      "knda": "ವ್ಯಾಸಾಯ ವಿಷ್ಣು ರೂಪಾಯ ವ್ಯಾಸರೂಪಾಯ ವಿಷ್ಣವೇ ।",
+      "tel": "వ్యాసాయ విష్ణు రూపాయ వ్యాసరూపాయ విష్ణవే ।",
+      "tam": "வ்யாஸாய விஷ்ணு ரூபாய வ்யாஸரூபாய விஷ்ணவே ।",
+      "guj": "વ્યાસાય વિષ્ણુ રૂપાય વ્યાસરૂપાય વિષ્ણવે ।",
+      "pan": "ਵ੍ਯਾਸਾਯ ਵਿਸ਼੍ਣੁ ਰੂਪਾਯ ਵ੍ਯਾਸਰੂਪਾਯ ਵਿਸ਼੍ਣਵੇ ।",
+      "mr": "व्यासाय विष्णु रूपाय व्यासरूपाय विष्णवे ।",
+      "ben": "3 ॥",
+      "mal": "3 ॥",
+      "meaning": "To Vyasa who is a form of Vishnu, and to Vishnu who has taken the form of Vyasa...",
+      "samasaVibhaga": [
+        {
+          "compound": "viṣṇurūpāya",
+          "breakdown": [
+            "viṣṇu",
+            "rūpāya"
+          ],
+          "meanings": [
+            "Vishnu",
+            "having the form of"
+          ],
+          "samasaType": "bahuvrīhi",
+          "combinedMeaning": "To one who has the form of Vishnu"
+        },
+        {
+          "compound": "vyāsarūpāya",
+          "breakdown": [
+            "vyāsa",
+            "rūpāya"
+          ],
+          "meanings": [
+            "Vyasa",
+            "having the form of"
+          ],
+          "samasaType": "bahuvrīhi",
+          "combinedMeaning": "To one who has taken the form of Vyasa"
+        }
+      ],
+      "note": "This verse establishes the identity of Vyasa with Vishnu. Vyasa is considered an avatara (incarnation) of Vishnu who descended to compile and divide the Vedas."
+    },
+    {
+      "id": "13",
+      "deva": "नमो वै ब्रह्मनिधये वासिष्ठाय नमो नमः ॥",
+      "iast": "namō vai brahmanidhayē vāsiṣṭhāya namō namaḥ ॥",
+      "knda": "ನಮೋ ವೈ ಬ್ರಹ್ಮನಿಧಯೇ ವಾಸಿಷ್ಠಾಯ ನಮೋ ನಮಃ ॥",
+      "tel": "నమో వై బ్రహ్మనిధయే వాసిష్ఠాయ నమో నమః ॥",
+      "tam": "நமோ வை ப்³ரஹ்மனித⁴யே வாஸிஷ்டா²ய நமோ நம: ॥",
+      "guj": "નમો વૈ બ્રહ્મનિધયે વાસિષ્ઠાય નમો નમઃ ॥",
+      "pan": "ਨਮੋ ਵੈ ਬ੍ਰਹ੍ਮਨਿਧਯੇ ਵਾਸਿਸ਼੍ਠਾਯ ਨਮੋ ਨਮਃ ॥",
+      "mr": "नमो वै ब्रह्मनिधये वासिष्ठाय नमो नमः ॥",
+      "ben": "ব্য়াসায় বিষ্ণু রূপায় ব্য়াসরূপায় বিষ্ণবে ।",
+      "mal": "വ്യാസായ വിഷ്ണു രൂപായ വ്യാസരൂപായ വിഷ്ണവേ ।",
+      "meaning": "...salutations to the treasure-house of Vedic knowledge (Brahman), to the descendant of Vasishtha, salutations again and again!",
+      "samasaVibhaga": [
+        {
+          "compound": "brahmanidhayē",
+          "breakdown": [
+            "brahma",
+            "nidhayē"
+          ],
+          "meanings": [
+            "Vedic knowledge/Brahman",
+            "treasure/repository"
+          ],
+          "samasaType": "tatpurusha",
+          "combinedMeaning": "To the treasury of Vedic/Brahman knowledge"
+        },
+        {
+          "compound": "vāsiṣṭhāya",
+          "breakdown": [
+            "vasiṣṭha",
+            "āya"
+          ],
+          "meanings": [
+            "Vasishtha",
+            "belonging to/descendant of"
+          ],
+          "samasaType": "taddhita",
+          "combinedMeaning": "To the descendant of the Vasishtha lineage"
+        }
+      ]
+    },
+    {
+      "id": "15",
+      "deva": "अविकाराय शुद्धाय नित्याय परमात्मने ।",
+      "iast": "avikārāya śuddhāya nityāya paramātmanē ।",
+      "knda": "ಅವಿಕಾರಾಯ ಶುದ್ಧಾಯ ನಿತ್ಯಾಯ ಪರಮಾತ್ಮನೇ ।",
+      "tel": "అవికారాయ శుద్ధాయ నిత్యాయ పరమాత్మనే ।",
+      "tam": "அவிகாராய ஶுத்³தா⁴ய நித்யாய பரமாத்மனே ।",
+      "guj": "અવિકારાય શુદ્ધાય નિત્યાય પરમાત્મને ।",
+      "pan": "ਅਵਿਕਾਰਾਯ ਸ਼ੁਦ੍ਧਾਯ ਨਿਤ੍ਯਾਯ ਪਰਮਾਤ੍ਮਨੇ ।",
+      "mr": "अविकाराय शुद्धाय नित्याय परमात्मने ।",
+      "ben": "4 ॥",
+      "mal": "4 ॥",
+      "meaning": "To the unchanging One, the pure One, the eternal One, the Supreme Self...",
+      "namaAnalysis": [
+        {
+          "nama": "अविकार",
+          "iast": "Avikāra",
+          "etymology": {
+            "dhatu": "अ (a - not) + विकार (vikāra - change/modification)",
+            "meaning": "Without modification; unchanging; immutable"
+          },
+          "gunaVarga": [
+            "nityatva",
+            "paratva"
+          ]
+        },
+        {
+          "nama": "शुद्ध",
+          "iast": "Śuddha",
+          "etymology": {
+            "dhatu": "शुध् (śudh - to purify)",
+            "meaning": "Pure; untainted; free from all impurities"
+          },
+          "gunaVarga": [
+            "shuddhata",
+            "paratva"
+          ]
+        },
+        {
+          "nama": "नित्य",
+          "iast": "Nitya",
+          "etymology": {
+            "dhatu": "नि (ni) + इ (i - to go) - that which always exists",
+            "meaning": "Eternal; permanent; ever-existing"
+          },
+          "gunaVarga": [
+            "nityatva"
+          ]
+        },
+        {
+          "nama": "परमात्मा",
+          "iast": "Paramātmā",
+          "etymology": {
+            "dhatu": "परम (parama - supreme) + आत्मा (ātmā - self)",
+            "meaning": "The Supreme Self; the highest Soul"
+          },
+          "gunaVarga": [
+            "paratva",
+            "sarveshvaratva"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "16",
+      "deva": "सदैक रूप रूपाय विष्णवे सर्वजिष्णवे ॥",
+      "iast": "sadaika rūpa rūpāya viṣṇavē sarvajiṣṇavē ॥",
+      "knda": "ಸದೈಕ ರೂಪ ರೂಪಾಯ ವಿಷ್ಣವೇ ಸರ್ವಜಿಷ್ಣವೇ ॥",
+      "tel": "సదైక రూప రూపాయ విష్ణవే సర్వజిష్ణవే ॥",
+      "tam": "ஸதை³க ரூப ரூபாய விஷ்ணவே ஸர்வஜிஷ்ணவே ॥",
+      "guj": "સદૈક રૂપ રૂપાય વિષ્ણવે સર્વજિષ્ણવે ॥",
+      "pan": "ਸਦੈਕ ਰੂਪ ਰੂਪਾਯ ਵਿਸ਼੍ਣਵੇ ਸਰ੍ਵਜਿਸ਼੍ਣਵੇ ॥",
+      "mr": "सदैक रूप रूपाय विष्णवे सर्वजिष्णवे ॥",
+      "ben": "অবিকারায় শুদ্ধায় নিত্য়ায় পরমাত্মনে ।",
+      "mal": "അവികാരായ ശുദ്ധായ നിത്യായ പരമാത്മനേ ।",
+      "meaning": "...to the One of eternally uniform form, to Vishnu, the all-conquering One!",
+      "namaAnalysis": [
+        {
+          "nama": "सदैकरूप",
+          "iast": "Sadaikarūpa",
+          "etymology": {
+            "dhatu": "सदा (sadā - always) + एक (eka - one) + रूप (rūpa - form)",
+            "meaning": "One whose form is eternally the same; unchanging in appearance"
+          },
+          "gunaVarga": [
+            "nityatva",
+            "saundarya"
+          ]
+        },
+        {
+          "nama": "विष्णु",
+          "iast": "Viṣṇu",
+          "etymology": {
+            "dhatu": "विष् (viṣ - to pervade)",
+            "meaning": "The all-pervading One; One who enters and permeates everything"
+          },
+          "gunaVarga": [
+            "vyapti",
+            "sarveshvaratva"
+          ],
+          "relatedNamas": [
+            "Narayana",
+            "Hari",
+            "Trivikrama"
+          ]
+        },
+        {
+          "nama": "सर्वजिष्णु",
+          "iast": "Sarvajiṣṇu",
+          "etymology": {
+            "dhatu": "सर्व (sarva - all) + जि (ji - to conquer) + ष्णु (ṣṇu - suffix)",
+            "meaning": "The all-conquering; victorious over everything"
+          },
+          "gunaVarga": [
+            "shakti",
+            "vijaya"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "18",
+      "deva": "यस्य स्मरणमात्रेण जन्मसंसारबन्धनात् ।",
+      "iast": "yasya smaraṇamātrēṇa janmasaṃsārabandhanāt ।",
+      "knda": "ಯಸ್ಯ ಸ್ಮರಣಮಾತ್ರೇಣ ಜನ್ಮಸಂಸಾರಬಂಧನಾತ್ ।",
+      "tel": "యస్య స్మరణమాత్రేణ జన్మసంసారబంధనాత్ ।",
+      "tam": "யஸ்ய ஸ்மரணமாத்ரேண ஜன்மஸம்ஸாரப³ந்த⁴னாத் ।",
+      "guj": "યસ્ય સ્મરણમાત્રેણ જન્મસંસારબંધનાત્ ।",
+      "pan": "ਯਸ੍ਯ ਸ੍ਮਰਣਮਾਤ੍ਰੇਣ ਜਨ੍ਮਸਂਸਾਰਬਂਧਨਾਤ੍ ।",
+      "mr": "यस्य स्मरणमात्रेण जन्मसंसारबंधनात् ।",
+      "ben": "5 ॥",
+      "mal": "5 ॥",
+      "meaning": "By merely remembering whom, from the bondage of birth and worldly existence...",
+      "samasaVibhaga": [
+        {
+          "compound": "smaraṇamātrēṇa",
+          "breakdown": [
+            "smaraṇa",
+            "mātrēṇa"
+          ],
+          "meanings": [
+            "remembrance",
+            "merely/only by"
+          ],
+          "samasaType": "tatpurusha",
+          "combinedMeaning": "By mere remembrance alone"
+        },
+        {
+          "compound": "janmasaṃsārabandhanāt",
+          "breakdown": [
+            "janma",
+            "saṃsāra",
+            "bandhanāt"
+          ],
+          "meanings": [
+            "birth",
+            "worldly cycle",
+            "bondage"
+          ],
+          "samasaType": "tatpurusha",
+          "combinedMeaning": "From the bondage of birth and the cycle of worldly existence"
+        }
+      ],
+      "note": "This is the famous verse proclaiming the power of simply remembering Vishnu's name - the foundation of Nama Japa."
+    },
+    {
+      "id": "19",
+      "deva": "विमुच्यते नमस्तस्मै विष्णवे प्रभविष्णवे ॥",
+      "iast": "vimuchyatē namastasmai viṣṇavē prabhaviṣṇavē ॥",
+      "knda": "ವಿಮುಚ್ಯತೇ ನಮಸ್ತಸ್ಮೈ ವಿಷ್ಣವೇ ಪ್ರಭವಿಷ್ಣವೇ ॥",
+      "tel": "విముచ్యతే నమస్తస్మై విష్ణవే ప్రభవిష్ణవే ॥",
+      "tam": "விமுச்யதே நமஸ்தஸ்மை விஷ்ணவே ப்ரப⁴விஷ்ணவே ॥",
+      "guj": "વિમુચ્યતે નમસ્તસ્મૈ વિષ્ણવે પ્રભવિષ્ણવે ॥",
+      "pan": "ਵਿਮੁਚ੍ਯਤੇ ਨਮਸ੍ਤਸ੍ਮੈ ਵਿਸ਼੍ਣਵੇ ਪ੍ਰਭਵਿਸ਼੍ਣਵੇ ॥",
+      "mr": "विमुच्यते नमस्तस्मै विष्णवे प्रभविष्णवे ॥",
+      "ben": "যস্য় স্মরণমাত্রেণ জন্মসংসারবংধনাত্ ।",
+      "mal": "യസ്യ സ്മരണമാത്രേണ ജന്മസംസാരബംധനാത് ।",
+      "meaning": "...one is liberated - salutations to that Vishnu, the Lord of all beings!",
+      "namaAnalysis": [
+        {
+          "nama": "प्रभविष्णु",
+          "iast": "Prabhaviṣṇu",
+          "etymology": {
+            "dhatu": "प्रभव (prabhava - origin/power) + विष्णु (viṣṇu)",
+            "meaning": "The origin of all beings; the all-powerful Lord; the source of creation",
+            "alternates": [
+              "Mighty Vishnu",
+              "Origin of all",
+              "The supremely capable"
+            ]
+          },
+          "gunaVarga": [
+            "srishti",
+            "shakti",
+            "sarveshvaratva"
+          ]
+        }
+      ],
+      "samasaVibhaga": [
+        {
+          "compound": "vimuchyate",
+          "breakdown": [
+            "vi",
+            "muc"
+          ],
+          "meanings": [
+            "completely",
+            "freed/released"
+          ],
+          "samasaType": "verbal",
+          "combinedMeaning": "One is completely liberated/freed"
+        }
+      ]
+    },
+    {
+      "id": "21",
+      "deva": "ॐ नमो विष्णवे प्रभविष्णवे ।",
+      "iast": "ōṃ namō viṣṇavē prabhaviṣṇavē ।",
+      "knda": "ಓಂ ನಮೋ ವಿಷ್ಣವೇ ಪ್ರಭವಿಷ್ಣವೇ ।",
+      "tel": "ఓం నమో విష్ణవే ప్రభవిష్ణవే ।",
+      "tam": "ஓம் நமோ விஷ்ணவே ப்ரப⁴விஷ்ணவே ।",
+      "guj": "ઓં નમો વિષ્ણવે પ્રભવિષ્ણવે ।",
+      "pan": "ਓਂ ਨਮੋ ਵਿਸ਼੍ਣਵੇ ਪ੍ਰਭਵਿਸ਼੍ਣਵੇ ।",
+      "mr": "ॐ नमो विष्णवे प्रभविष्णवे ।",
+      "ben": "6 ॥",
+      "mal": "6 ॥",
+      "meaning": "Om! Salutations to Vishnu, the origin and lord of all beings!",
+      "note": "This mantra is the essential invocation before beginning the Sahasranama. Om represents the primordial sound from which all creation emerges."
+    },
+    {
+      "id": "22",
+      "deva": "श्री वैशम्पायन उवाच",
+      "iast": "śrī vaiśampāyana uvācha",
+      "knda": "ಶ್ರೀ ವೈಶಂಪಾಯನ ಉವಾಚ",
+      "tel": "శ్రీ వైశంపాయన ఉవాచ",
+      "tam": "ஶ்ரீ வைஶம்பாயன உவாச",
+      "guj": "શ્રી વૈશંપાયન ઉવાચ",
+      "pan": "ਸ਼੍ਰੀ ਵੈਸ਼ਂਪਾਯਨ ਉਵਾਚ",
+      "mr": "श्री वैशंपायन उवाच",
+      "ben": "ওং নমো বিষ্ণবে প্রভবিষ্ণবে ।",
+      "mal": "ഓം നമോ വിഷ്ണവേ പ്രഭവിഷ്ണവേ ।",
+      "meaning": "Sri Vaishampayana said:",
+      "note": "Vaishampayana was a disciple of Vyasa who narrated the Mahabharata to King Janamejaya during the Sarpa Satra (snake sacrifice). This sets the narrative frame."
+    },
+    {
+      "id": "23",
+      "deva": "श्रुत्वा धर्मा नशेषेण पावनानि च सर्वशः ।",
+      "iast": "śrutvā dharmā naśēṣēṇa pāvanāni cha sarvaśaḥ ।",
+      "knda": "ಶ್ರುತ್ವಾ ಧರ್ಮಾ ನಶೇಷೇಣ ಪಾವನಾನಿ ಚ ಸರ್ವಶಃ ।",
+      "tel": "శ్రుత్వా ధర్మా నశేషేణ పావనాని చ సర్వశః ।",
+      "tam": "ஶ்ருத்வா த⁴ர்மா நஶேஷேண பாவனானி ச ஸர்வஶ: ।",
+      "guj": "શ્રુત્વા ધર્મા નશેષેણ પાવનાનિ ચ સર્વશઃ ।",
+      "pan": "ਸ਼੍ਰੁਤ੍ਵਾ ਧਰ੍ਮਾ ਨਸ਼ੇਸ਼ੇਣ ਪਾਵਨਾਨਿ ਚ ਸਰ੍ਵਸ਼ਃ ।",
+      "mr": "श्रुत्वा धर्मा नशेषेण पावनानि च सर्वशः ।",
+      "ben": "শ্রী বৈশংপাযন উবাচ",
+      "mal": "ശ്രീ വൈശംപായന ഉവാച",
+      "meaning": "Having heard all the dharmas completely, and all the purifying practices..."
+    },
+    {
+      "id": "24",
+      "deva": "युधिष्ठिरः शान्तनवं पुनरेवाभ्य भाषत ॥",
+      "iast": "yudhiṣṭhiraḥ śāntanavaṃ punarēvābhya bhāṣata ॥",
+      "knda": "ಯುಧಿಷ್ಠಿರಃ ಶಾಂತನವಂ ಪುನರೇವಾಭ್ಯ ಭಾಷತ ॥",
+      "tel": "యుధిష్ఠిరః శాంతనవం పునరేవాభ్య భాషత ॥",
+      "tam": "யுதி⁴ஷ்டி²ர: ஶாந்தனவம் புனரேவாப்⁴ய பா⁴ஷத ॥",
+      "guj": "યુધિષ્ઠિરઃ શાંતનવં પુનરેવાભ્ય ભાષત ॥",
+      "pan": "ਯੁਧਿਸ਼੍ਠਿਰਃ ਸ਼ਾਂਤਨਵਂ ਪੁਨਰੇਵਾਭ੍ਯ ਭਾਸ਼ਤ ॥",
+      "mr": "युधिष्ठिरः शांतनवं पुनरेवाभ्य भाषत ॥",
+      "ben": "শ্রুত্বা ধর্মা নশেষেণ পাবনানি চ সর্বশঃ ।",
+      "mal": "ശ്രുത്വാ ധര്മാ നശേഷേണ പാവനാനി ച സർവശഃ ।",
+      "meaning": "...Yudhishthira again addressed the son of Shantanu (Bhishma).",
+      "samasaVibhaga": [
+        {
+          "compound": "śāntanavam",
+          "breakdown": [
+            "śantanu",
+            "va"
+          ],
+          "meanings": [
+            "Shantanu",
+            "son of"
+          ],
+          "samasaType": "taddhita",
+          "combinedMeaning": "Son of Shantanu (i.e., Bhishma)"
+        }
+      ],
+      "note": "Bhishma, the great patriarch, lies on a bed of arrows after the Kurukshetra war, waiting for an auspicious moment to depart. Yudhishthira approaches him for final instructions."
+    },
+    {
+      "id": "26",
+      "deva": "युधिष्ठिर उवाच",
+      "iast": "yudhiṣṭhira uvācha",
+      "knda": "ಯುಧಿಷ್ಠಿರ ಉವಾಚ",
+      "tel": "యుధిష్ఠిర ఉవాచ",
+      "tam": "யுதி⁴ஷ்டி²ர உவாச",
+      "guj": "યુધિષ્ઠિર ઉવાચ",
+      "pan": "ਯੁਧਿਸ਼੍ਠਿਰ ਉਵਾਚ",
+      "mr": "युधिष्ठिर उवाच",
+      "ben": "7 ॥",
+      "mal": "7 ॥",
+      "meaning": "Yudhishthira said:",
+      "note": "Yudhishthira, the eldest Pandava known as Dharmaraja, poses six profound questions to Bhishma that form the basis of the entire Sahasranama."
+    },
+    {
+      "id": "27",
+      "deva": "किमेकं दैवतं लोके किं वाऽप्येकं परायणं",
+      "iast": "kimēkaṃ daivataṃ lōkē kiṃ vā'pyēkaṃ parāyaṇaṃ",
+      "knda": "ಕಿಮೇಕಂ ದೈವತಂ ಲೋಕೇ ಕಿಂ ವಾಽಪ್ಯೇಕಂ ಪರಾಯಣಂ",
+      "tel": "కిమేకం దైవతం లోకే కిం వాఽప్యేకం పరాయణం",
+      "tam": "கிமேகம் தை³வதம் லோகே கிம் வாப்யேகம் பராயணம்",
+      "guj": "કિમેકં દૈવતં લોકે કિં વાઽપ્યેકં પરાયણં",
+      "pan": "ਕਿਮੇਕਂ ਦੈਵਤਂ ਲੋਕੇ ਕਿਂ ਵਾ਽ਪ੍ਯੇਕਂ ਪਰਾਯਣਂ",
+      "mr": "किमेकं दैवतं लोके किं वाऽप्येकं परायणं",
+      "ben": "যুধিষ্ঠির উবাচ",
+      "mal": "യുധിഷ്ഠിര ഉവാച",
+      "meaning": "Who is the One Supreme Deity in the world? Who is the One ultimate refuge?",
+      "note": "Questions 1 & 2: These are the first of six profound questions Yudhishthira asks Bhishma. They seek to identify the supreme object of worship and the ultimate goal of life."
+    },
+    {
+      "id": "28",
+      "deva": "स्तुवन्तः कं कमर्चन्तः प्राप्नुयुर्मानवाः शुभम् ॥",
+      "iast": "stuvantaḥ kaṃ kamarchantaḥ prāpnuyurmānavāḥ śubham ॥",
+      "knda": "ಸ್ತುವಂತಃ ಕಂ ಕಮರ್ಚಂತಃ ಪ್ರಾಪ್ನುಯುರ್ಮಾನವಾಃ ಶುಭಮ್ ॥",
+      "tel": "స్తువంతః కం కమర్చంతః ప్రాప్నుయుర్మానవాః శుభమ్ ॥",
+      "tam": "ஸ்துவந்த: கம் கமர்சந்த: ப்ராப்னுயுர்மானவா: ஶுப⁴ம் ॥",
+      "guj": "સ્તુવંતઃ કં કમર્ચંતઃ પ્રાપ્નુયુર્માનવાઃ શુભમ્ ॥",
+      "pan": "ਸ੍ਤੁਵਂਤਃ ਕਂ ਕਮਰ੍ਚਂਤਃ ਪ੍ਰਾਪ੍ਨੁਯੁਰ੍ਮਾਨਵਾਃ ਸ਼ੁਭਮ੍ ॥",
+      "mr": "स्तुवंतः कं कमर्चंतः प्राप्नुयुर्मानवाः शुभम् ॥",
+      "ben": "কিমেকং দৈবতং লোকে কিং বাঽপ্য়েকং পরাযণং",
+      "mal": "കിമേകം ദൈവതം ലോകേ കിം വാഽപ്യേകം പരായണം",
+      "meaning": "By praising whom, by worshipping whom, can human beings attain auspiciousness (good fortune)?",
+      "note": "Questions 3 & 4: These questions ask about the practical means - through praise (stuti) and worship (archana) - by which humans can attain the highest good."
+    },
+    {
+      "id": "30",
+      "deva": "को धर्मः सर्वधर्माणां भवतः परमो मतः ।",
+      "iast": "kō dharmaḥ sarvadharmāṇāṃ bhavataḥ paramō mataḥ ।",
+      "knda": "ಕೋ ಧರ್ಮಃ ಸರ್ವಧರ್ಮಾಣಾಂ ಭವತಃ ಪರಮೋ ಮತಃ ।",
+      "tel": "కో ధర్మః సర్వధర్మాణాం భవతః పరమో మతః ।",
+      "tam": "கோ த⁴ர்ம: ஸர்வத⁴ர்மாணாம் ப⁴வத: பரமோ மத: ।",
+      "guj": "કો ધર્મઃ સર્વધર્માણાં ભવતઃ પરમો મતઃ ।",
+      "pan": "ਕੋ ਧਰ੍ਮਃ ਸਰ੍ਵਧਰ੍ਮਾਣਾਂ ਭਵਤਃ ਪਰਮੋ ਮਤਃ ।",
+      "mr": "को धर्मः सर्वधर्माणां भवतः परमो मतः ।",
+      "ben": "8 ॥",
+      "mal": "8 ॥",
+      "meaning": "Which dharma (righteous practice) is, in your opinion, the supreme among all dharmas?",
+      "note": "Question 5: This asks for the essence of all religious and moral duties - the one practice that encompasses all others."
+    },
+    {
+      "id": "31",
+      "deva": "किं जपन्मुच्यते जन्तुर्जन्मसंसार बन्धनात् ॥",
+      "iast": "kiṃ japanmuchyatē janturjanmasaṃsāra bandhanāt ॥",
+      "knda": "ಕಿಂ ಜಪನ್ಮುಚ್ಯತೇ ಜಂತುರ್ಜನ್ಮಸಂಸಾರ ಬಂಧನಾತ್ ॥",
+      "tel": "కిం జపన్ముచ్యతే జంతుర్జన్మసంసార బంధనాత్ ॥",
+      "tam": "கிம் ஜபன்முச்யதே ஜந்துர்ஜன்மஸம்ஸார ப³ந்த⁴னாத் ॥",
+      "guj": "કિં જપન્મુચ્યતે જંતુર્જન્મસંસાર બંધનાત્ ॥",
+      "pan": "ਕਿਂ ਜਪਨ੍ਮੁਚ੍ਯਤੇ ਜਂਤੁਰ੍ਜਨ੍ਮਸਂਸਾਰ ਬਂਧਨਾਤ੍ ॥",
+      "mr": "किं जपन्मुच्यते जंतुर्जन्मसंसार बंधनात् ॥",
+      "ben": "কো ধর্মঃ সর্বধর্মাণাং ভবতঃ পরমো মতঃ ।",
+      "mal": "കോ ധര്മഃ സർവധര്മാണാം ഭവതഃ പരമോ മതഃ ।",
+      "meaning": "By chanting what (mantra/name) can a living being be freed from the bondage of birth and worldly existence?",
+      "samasaVibhaga": [
+        {
+          "compound": "janmasaṃsārabandhanāt",
+          "breakdown": [
+            "janma",
+            "saṃsāra",
+            "bandhanāt"
+          ],
+          "meanings": [
+            "birth",
+            "worldly cycle",
+            "from bondage"
+          ],
+          "samasaType": "tatpurusha",
+          "combinedMeaning": "From the bondage of birth and the cycle of worldly existence (samsara)"
+        }
+      ],
+      "note": "Question 6: The final and most crucial question - what is the supreme mantra or name that grants liberation (moksha)? Bhishma's answer to all six questions is the Vishnu Sahasranama."
+    },
+    {
+      "id": "33",
+      "deva": "श्री भीष्म उवाच",
+      "iast": "śrī bhīṣma uvācha",
+      "knda": "ಶ್ರೀ ಭೀಷ್ಮ ಉವಾಚ",
+      "tel": "శ్రీ భీష్మ ఉవాచ",
+      "tam": "ஶ்ரீ பீ⁴ஷ்ம உவாச",
+      "guj": "શ્રી ભીષ્મ ઉવાચ",
+      "pan": "ਸ਼੍ਰੀ ਭੀਸ਼੍ਮ ਉਵਾਚ",
+      "mr": "श्री भीष्म उवाच",
+      "ben": "9 ॥",
+      "mal": "9 ॥",
+      "meaning": "Shri Bhishma said",
+      "note": "This marks the beginning of Bhishma's answer to Yudhishthira's six questions. Bhishma, the grandsire of the Kuru dynasty, was a great devotee of Vishnu and possessed the boon of choosing his own time of death (ichcha mrityu). He delivers this sacred teaching while lying on his deathbed of arrows."
+    },
+    {
+      "id": "34",
+      "deva": "जगत्प्रभुं देवदेव मनन्तं पुरुषोत्तमम् ।",
+      "iast": "jagatprabhuṃ dēvadēva manantaṃ puruṣōttamam ।",
+      "knda": "ಜಗತ್ಪ್ರಭುಂ ದೇವದೇವ ಮನಂತಂ ಪುರುಷೋತ್ತಮಮ್ ।",
+      "tel": "జగత్ప్రభుం దేవదేవ మనంతం పురుషోత్తమమ్ ।",
+      "tam": "ஜக³த்ப்ரபு⁴ம் தே³வதே³வ மனந்தம் புருஷோத்தமம் ।",
+      "guj": "જગત્પ્રભું દેવદેવ મનંતં પુરુષોત્તમમ્ ।",
+      "pan": "ਜਗਤ੍ਪ੍ਰਭੁਂ ਦੇਵਦੇਵ ਮਨਂਤਂ ਪੁਰੁਸ਼ੋਤ੍ਤਮਮ੍ ।",
+      "mr": "जगत्प्रभुं देवदेव मनंतं पुरुषोत्तमम् ।",
+      "ben": "শ্রী ভীষ্ম উবাচ",
+      "mal": "ശ്രീ ഭീഷ്മ ഉവാച",
+      "meaning": "The Lord of the universe, the God of gods, the Infinite One, the Supreme Being (Purushottama)...",
+      "samasaVibhaga": [
+        {
+          "compound": "jagatprabhum",
+          "breakdown": ["jagat", "prabhum"],
+          "meanings": ["universe/world", "lord/master"],
+          "samasaType": "tatpurusha",
+          "combinedMeaning": "The Lord of the universe"
+        },
+        {
+          "compound": "devadeva",
+          "breakdown": ["deva", "deva"],
+          "meanings": ["god", "god"],
+          "samasaType": "tatpurusha",
+          "combinedMeaning": "God of gods (the supreme deity)"
+        },
+        {
+          "compound": "purushottamam",
+          "breakdown": ["purusha", "uttamam"],
+          "meanings": ["being/person", "highest/supreme"],
+          "samasaType": "karmadhāraya",
+          "combinedMeaning": "The Supreme Being, highest among all beings"
+        }
+      ]
+    },
+    {
+      "id": "35",
+      "deva": "स्तुवन्नाम सहस्रेण पुरुषः सततोत्थितः ॥",
+      "iast": "stuvannāma sahasrēṇa puruṣaḥ satatōtthitaḥ ॥",
+      "knda": "ಸ್ತುವನ್ನಾಮ ಸಹಸ್ರೇಣ ಪುರುಷಃ ಸತತೋತ್ಥಿತಃ ॥",
+      "tel": "స్తువన్నామ సహస్రేణ పురుషః సతతోత్థితః ॥",
+      "tam": "ஸ்துவன்னாம ஸஹஸ்ரேண புருஷ: ஸததோத்தி²த: ॥",
+      "guj": "સ્તુવન્નામ સહસ્રેણ પુરુષઃ સતતોત્થિતઃ ॥",
+      "pan": "ਸ੍ਤੁਵਨ੍ਨਾਮ ਸਹਸ੍ਰੇਣ ਪੁਰੁਸ਼ਃ ਸਤਤੋਤ੍ਥਿਤਃ ॥",
+      "mr": "स्तुवन्नाम सहस्रेण पुरुषः सततोत्थितः ॥",
+      "ben": "জগত্প্রভুং দেবদেব মনংতং পুরুষোত্তমম্ ।",
+      "mal": "ജഗത്പ്രഭും ദേവദേവ മനംതം പുരുഷോത്തമമ് ।",
+      "meaning": "By praising with the thousand names, a person who is constantly uplifted (in devotion)...",
+      "note": "Bhishma begins his answer by describing the method and benefits of reciting the Sahasranama. The term 'satatotthita' indicates one who is ever alert and devoted."
+    },
+    {
+      "id": "37",
+      "deva": "तमेव चार्चयन्नित्यं भक्त्या पुरुषमव्ययम् ।",
+      "iast": "tamēva chārchayannityaṃ bhaktyā puruṣamavyayam ।",
+      "knda": "ತಮೇವ ಚಾರ್ಚಯನ್ನಿತ್ಯಂ ಭಕ್ತ್ಯಾ ಪುರುಷಮವ್ಯಯಮ್ ।",
+      "tel": "తమేవ చార్చయన్నిత్యం భక్త్యా పురుషమవ్యయమ్ ।",
+      "tam": "தமேவ சார்சயன்னித்யம் ப⁴க்த்யா புருஷமவ்யயம் ।",
+      "guj": "તમેવ ચાર્ચયન્નિત્યં ભક્ત્યા પુરુષમવ્યયમ્ ।",
+      "pan": "ਤਮੇਵ ਚਾਰ੍ਚਯਨ੍ਨਿਤ੍ਯਂ ਭਕ੍ਤ੍ਯਾ ਪੁਰੁਸ਼ਮਵ੍ਯਯਮ੍ ।",
+      "mr": "तमेव चार्चयन्नित्यं भक्त्या पुरुषमव्ययम् ।",
+      "ben": "10 ॥",
+      "mal": "10 ॥",
+      "meaning": "Worshipping Him alone daily with devotion, the Imperishable Being..."
+    },
+    {
+      "id": "38",
+      "deva": "ध्यायन् स्तुवन्नमस्यंश्च यजमानस्तमेव च ॥",
+      "iast": "dhyāyan stuvannamasyaṃścha yajamānastamēva cha ॥",
+      "knda": "ಧ್ಯಾಯನ್ ಸ್ತುವನ್ನಮಸ್ಯಂಶ್ಚ ಯಜಮಾನಸ್ತಮೇವ ಚ ॥",
+      "tel": "ధ్యాయన్ స్తువన్నమస్యంశ్చ యజమానస్తమేవ చ ॥",
+      "tam": "த்⁴யாயன் ஸ்துவன்னமஸ்யம்ஶ்ச யஜமானஸ்தமேவ ச ॥",
+      "guj": "ધ્યાયન્ સ્તુવન્નમસ્યંશ્ચ યજમાનસ્તમેવ ચ ॥",
+      "pan": "ਧ੍ਯਾਯਨ੍ ਸ੍ਤੁਵਨ੍ਨਮਸ੍ਯਂਸ਼੍ਚ ਯਜਮਾਨਸ੍ਤਮੇਵ ਚ ॥",
+      "mr": "ध्यायन् स्तुवन्नमस्यंश्च यजमानस्तमेव च ॥",
+      "ben": "তমেব চার্চযন্নিত্য়ং ভক্ত্য়া পুরুষমব্যযম্ ।",
+      "mal": "തമേവ ചാര്ചയന്നിത്യം ഭക്ത്യാ പുരുഷമവ്യയമ് ।",
+      "meaning": "Meditating, praising, bowing, and worshipping Him alone..."
+    },
+    {
+      "id": "40",
+      "deva": "अनादि निधनं विष्णुं सर्वलोक महेश्वरम् ।",
+      "iast": "anādi nidhanaṃ viṣṇuṃ sarvalōka mahēśvaram ।",
+      "knda": "ಅನಾದಿ ನಿಧನಂ ವಿಷ್ಣುಂ ಸರ್ವಲೋಕ ಮಹೇಶ್ವರಮ್ ।",
+      "tel": "అనాది నిధనం విష్ణుం సర్వలోక మహేశ్వరమ్ ।",
+      "tam": "அனாதி³ நித⁴னம் விஷ்ணும் ஸர்வலோக மஹேஶ்வரம் ।",
+      "guj": "અનાદિ નિધનં વિષ્ણું સર્વલોક મહેશ્વરમ્ ।",
+      "pan": "ਅਨਾਦਿ ਨਿਧਨਂ ਵਿਸ਼੍ਣੁਂ ਸਰ੍ਵਲੋਕ ਮਹੇਸ਼੍ਵਰਮ੍ ।",
+      "mr": "अनादि निधनं विष्णुं सर्वलोक महेश्वरम् ।",
+      "ben": "11 ॥",
+      "mal": "11 ॥",
+      "meaning": "Vishnu who is without beginning or end, the great Lord of all worlds..."
+    },
+    {
+      "id": "41",
+      "deva": "लोकाध्यक्षं स्तुवन्नित्यं सर्व दुःखातिगो भवेत् ॥",
+      "iast": "lōkādhyakṣaṃ stuvannityaṃ sarva duḥkhātigō bhavēt ॥",
+      "knda": "ಲೋಕಾಧ್ಯಕ್ಷಂ ಸ್ತುವನ್ನಿತ್ಯಂ ಸರ್ವ ದುಃಖಾತಿಗೋ ಭವೇತ್ ॥",
+      "tel": "లోకాధ్యక్షం స్తువన్నిత్యం సర్వ దుఃఖాతిగో భవేత్ ॥",
+      "tam": "லோகாத்⁴யக்ஷம் ஸ்துவன்னித்யம் ஸர்வ து³:கா²திகோ³ ப⁴வேத் ॥",
+      "guj": "લોકાધ્યક્ષં સ્તુવન્નિત્યં સર્વ દુઃખાતિગો ભવેત્ ॥",
+      "pan": "ਲੋਕਾਧ੍ਯਕ੍ਸ਼ਂ ਸ੍ਤੁਵਨ੍ਨਿਤ੍ਯਂ ਸਰ੍ਵ ਦੁਃਖਾਤਿਗੋ ਭਵੇਤ੍ ॥",
+      "mr": "लोकाध्यक्षं स्तुवन्नित्यं सर्व दुःखातिगो भवेत् ॥",
+      "ben": "অনাদি নিধনং বিষ্ণুং সর্বলোক মহেশ্বরম্ ।",
+      "mal": "അനാദി നിധനം വിഷ്ണും സർവലോക മഹേശ്വരമ് ।",
+      "meaning": "By always praising the Lord of worlds, one transcends all sorrows."
+    },
+    {
+      "id": "43",
+      "deva": "ब्रह्मण्यं सर्व धर्मज्ञं लोकानां कीर्ति वर्धनम् ।",
+      "iast": "brahmaṇyaṃ sarva dharmajñaṃ lōkānāṃ kīrti vardhanam ।",
+      "knda": "ಬ್ರಹ್ಮಣ್ಯಂ ಸರ್ವ ಧರ್ಮಜ್ಞಂ ಲೋಕಾನಾಂ ಕೀರ್ತಿ ವರ್ಧನಮ್ ।",
+      "tel": "బ్రహ్మణ్యం సర్వ ధర్మజ్ఞం లోకానాం కీర్తి వర్ధనమ్ ।",
+      "tam": "ப்³ரஹ்மண்யம் ஸர்வ த⁴ர்மஜ்ஞம் லோகானாம் கீர்தி வர்த⁴னம் ।",
+      "guj": "બ્રહ્મણ્યં સર્વ ધર્મજ્ઞં લોકાનાં કીર્તિ વર્ધનમ્ ।",
+      "pan": "ਬ੍ਰਹ੍ਮਣ੍ਯਂ ਸਰ੍ਵ ਧਰ੍ਮਜ੍ਞਂ ਲੋਕਾਨਾਂ ਕੀਰ੍ਤਿ ਵਰ੍ਧਨਮ੍ ।",
+      "mr": "ब्रह्मण्यं सर्व धर्मज्ञं लोकानां कीर्ति वर्धनम् ।",
+      "ben": "12 ॥",
+      "mal": "12 ॥",
+      "meaning": "The supporter of Brahmins, knower of all dharma, enhancer of the glory of all beings..."
+    },
+    {
+      "id": "44",
+      "deva": "लोकनाथं महद्भूतं सर्वभूत भवोद्भवम् ॥",
+      "iast": "lōkanāthaṃ mahadbhūtaṃ sarvabhūta bhavōdbhavam ॥",
+      "knda": "ಲೋಕನಾಥಂ ಮಹದ್ಭೂತಂ ಸರ್ವಭೂತ ಭವೋದ್ಭವಂ ॥",
+      "tel": "లోకనాథం మహద్భూతం సర్వభూత భవోద్భవం ॥",
+      "tam": "லோகனாத²ம் மஹத்³பூ⁴தம் ஸர்வபூ⁴த ப⁴வோத்³ப⁴வம் ॥",
+      "guj": "લોકનાથં મહદ્ભૂતં સર્વભૂત ભવોદ્ભવમ્ ॥",
+      "pan": "ਲੋਕਨਾਥਂ ਮਹਦ੍ਭੂਤਂ ਸਰ੍ਵਭੂਤ ਭਵੋਦ੍ਭਵਮ੍ ॥",
+      "mr": "लोकनाथं महद्भूतं सर्वभूत भवोद्भवम् ॥",
+      "ben": "ব্রহ্মণ্য়ং সর্ব ধর্মজ্ঞং লোকানাং কীর্তি বর্ধনম্ ।",
+      "mal": "ബ്രഹ്മണ്യം സർവ ധര്മജ്ഞം ലോകാനാം കീര്തി വര്ധനമ് ।",
+      "meaning": "The Lord of worlds, the Great Being, the source and origin of all creatures."
+    },
+    {
+      "id": "46",
+      "deva": "एष मे सर्व धर्माणां धर्मोऽधिक तमोमतः ।",
+      "iast": "ēṣa mē sarva dharmāṇāṃ dharmō'dhika tamōmataḥ ।",
+      "knda": "ಏಷ ಮೇ ಸರ್ವ ಧರ್ಮಾಣಾಂ ಧರ್ಮೋಽಧಿಕ ತಮೋಮತಃ ।",
+      "tel": "ఏష మే సర్వ ధర్మాణాం ధర్మోఽధిక తమోమతః ।",
+      "tam": "ஏஷ மே ஸர்வ த⁴ர்மாணாம் த⁴ர்மோதி⁴க தமோமத: ।",
+      "guj": "એષ મે સર્વ ધર્માણાં ધર્મોઽધિક તમોમતઃ ।",
+      "pan": "ਏਸ਼ ਮੇ ਸਰ੍ਵ ਧਰ੍ਮਾਣਾਂ ਧਰ੍ਮੋ਽ਧਿਕ ਤਮੋਮਤਃ ।",
+      "mr": "एष मे सर्व धर्माणां धर्मोऽधिक तमोमतः ।",
+      "ben": "13 ॥",
+      "mal": "13 ॥",
+      "meaning": "This, in my opinion, is the highest dharma of all dharmas..."
+    },
+    {
+      "id": "47",
+      "deva": "यद्भक्त्या पुण्डरीकाक्षं स्तवैरर्चेन्नरः सदा ॥",
+      "iast": "yadbhaktyā puṇḍarīkākṣaṃ stavairarchēnnaraḥ sadā ॥",
+      "knda": "ಯದ್ಭಕ್ತ್ಯಾ ಪುಂಡರೀಕಾಕ್ಷಂ ಸ್ತವೈರರ್ಚೇನ್ನರಃ ಸದಾ ॥",
+      "tel": "యద్భక్త్యా పుండరీకాక్షం స్తవైరర్చేన్నరః సదా ॥",
+      "tam": "யத்³ப⁴க்த்யா புண்ட³ரீகாக்ஷம் ஸ்தவைரர்சேன்னர: ஸதா³ ॥",
+      "guj": "યદ્ભક્ત્યા પુંડરીકાક્ષં સ્તવૈરર્ચેન્નરઃ સદા ॥",
+      "pan": "ਯਦ੍ਭਕ੍ਤ੍ਯਾ ਪੁਂਡਰੀਕਾਕ੍ਸ਼ਂ ਸ੍ਤਵੈਰਰ੍ਚੇਨ੍ਨਰਃ ਸਦਾ ॥",
+      "mr": "यद्भक्त्या पुंडरीकाक्षं स्तवैरर्चेन्नरः सदा ॥",
+      "ben": "এষ মে সর্ব ধর্মাণাং ধর্মোঽধিক তমোমতঃ ।",
+      "mal": "ഏഷ മേ സർവ ധര്മാണാം ധര്മോഽധിക തമോമതഃ ।",
+      "meaning": "That a person who always worships the lotus-eyed One (Pundarikaksha) with devotion and hymns..."
+    },
+    {
+      "id": "49",
+      "deva": "परमं यो महत्तेजः परमं यो महत्तपः ।",
+      "iast": "paramaṃ yō mahattējaḥ paramaṃ yō mahattapaḥ ।",
+      "knda": "ಪರಮಂ ಯೋ ಮಹತ್ತೇಜಃ ಪರಮಂ ಯೋ ಮಹತ್ತಪಃ ।",
+      "tel": "పరమం యో మహత్తేజః పరమం యో మహత్తపః ।",
+      "tam": "பரமம் யோ மஹத்தேஜ: பரமம் யோ மஹத்தப: ।",
+      "guj": "પરમં યો મહત્તેજઃ પરમં યો મહત્તપઃ ।",
+      "pan": "ਪਰਮਂ ਯੋ ਮਹਤ੍ਤੇਜਃ ਪਰਮਂ ਯੋ ਮਹਤ੍ਤਪਃ ।",
+      "mr": "परमं यो महत्तेजः परमं यो महत्तपः ।",
+      "ben": "14 ॥",
+      "mal": "14 ॥",
+      "meaning": "He who is the supreme radiance, the supreme austerity..."
+    },
+    {
+      "id": "50",
+      "deva": "परमं यो महद्ब्रह्म परमं यः परायणम् ।",
+      "iast": "paramaṃ yō mahadbrahma paramaṃ yaḥ parāyaṇam ।",
+      "knda": "ಪರಮಂ ಯೋ ಮಹದ್ಬ್ರಹ್ಮ ಪರಮಂ ಯಃ ಪರಾಯಣಮ್ ।",
+      "tel": "పరమం యో మహద్బ్రహ్మ పరమం యః పరాయణమ్ ।",
+      "tam": "பரமம் யோ மஹத்³ப்³ரஹ்ம பரமம் ய: பராயணம் ।",
+      "guj": "પરમં યો મહદ્બ્રહ્મ પરમં યઃ પરાયણમ્ ।",
+      "pan": "ਪਰਮਂ ਯੋ ਮਹਦ੍ਬ੍ਰਹ੍ਮ ਪਰਮਂ ਯਃ ਪਰਾਯਣਮ੍ ।",
+      "mr": "परमं यो महद्ब्रह्म परमं यः परायणम् ।",
+      "ben": "পরমং যো মহত্তেজঃ পরমং যো মহত্তপঃ ।",
+      "mal": "പരമം യോ മഹത്തേജഃ പരമം യോ മഹത്തപഃ ।",
+      "meaning": "He who is the Supreme Brahman, the ultimate refuge..."
+    },
+    {
+      "id": "52",
+      "deva": "पवित्राणां पवित्रं यो मङ्गलानां च मङ्गलम् ।",
+      "iast": "pavitrāṇāṃ pavitraṃ yō maṅgaḻānāṃ cha maṅgaḻam ।",
+      "knda": "ಪವಿತ್ರಾಣಾಂ ಪವಿತ್ರಂ ಯೋ ಮಂಗಳಾನಾಂ ಚ ಮಂಗಳಮ್ ।",
+      "tel": "పవిత్రాణాం పవిత్రం యో మంగళానాం చ మంగళమ్ ।",
+      "tam": "பவித்ராணாம் பவித்ரம் யோ மங்கள³ானாம் ச மங்கள³ம் ।",
+      "guj": "પવિત્રાણાં પવિત્રં યો મંગળાનાં ચ મંગળમ્ ।",
+      "pan": "ਪਵਿਤ੍ਰਾਣਾਂ ਪਵਿਤ੍ਰਂ ਯੋ ਮਂਗਲ਼ਾਨਾਂ ਚ ਮਂਗਲ਼ਮ੍ ।",
+      "mr": "पवित्राणां पवित्रं यो मंगलानां च मंगलम् ।",
+      "ben": "15 ॥",
+      "mal": "15 ॥",
+      "meaning": "He who is the purest of the pure, the most auspicious of all auspicious things..."
+    },
+    {
+      "id": "53",
+      "deva": "दैवतं देवतानां च भूतानां योऽव्ययः पिता ॥",
+      "iast": "daivataṃ dēvatānāṃ cha bhūtānāṃ yō'vyayaḥ pitā ॥",
+      "knda": "ದೈವತಂ ದೇವತಾನಾಂ ಚ ಭೂತಾನಾಂ ಯೋಽವ್ಯಯಃ ಪಿತಾ ॥",
+      "tel": "దైవతం దేవతానాం చ భూతానాం యోఽవ్యయః పితా ॥",
+      "tam": "தை³வதம் தே³வதானாம் ச பூ⁴தானாம் யோவ்யய: பிதா ॥",
+      "guj": "દૈવતં દેવતાનાં ચ ભૂતાનાં યોઽવ્યયઃ પિતા ॥",
+      "pan": "ਦੈਵਤਂ ਦੇਵਤਾਨਾਂ ਚ ਭੂਤਾਨਾਂ ਯੋ਽ਵ੍ਯਯਃ ਪਿਤਾ ॥",
+      "mr": "दैवतं देवतानां च भूतानां योऽव्ययः पिता ॥",
+      "ben": "পবিত্রাণাং পবিত্রং যো মংগলানাং চ মংগলম্ ।",
+      "mal": "പവിത്രാണാം പവിത്രം യോ മംഗളാനാം ച മംഗളമ് ।",
+      "meaning": "The God of gods, the imperishable Father of all beings."
+    },
+    {
+      "id": "55",
+      "deva": "यतः सर्वाणि भूतानि भवन्त्यादि युगागमे ।",
+      "iast": "yataḥ sarvāṇi bhūtāni bhavantyādi yugāgamē ।",
+      "knda": "ಯತಃ ಸರ್ವಾಣಿ ಭೂತಾನಿ ಭವಂತ್ಯಾದಿ ಯುಗಾಗಮೇ ।",
+      "tel": "యతః సర్వాణి భూతాని భవంత్యాది యుగాగమే ।",
+      "tam": "யத: ஸர்வாணி பூ⁴தானி ப⁴வந்த்யாதி³ யுகா³க³மே ।",
+      "guj": "યતઃ સર્વાણિ ભૂતાનિ ભવંત્યાદિ યુગાગમે ।",
+      "pan": "ਯਤਃ ਸਰ੍ਵਾਣਿ ਭੂਤਾਨਿ ਭਵਂਤ੍ਯਾਦਿ ਯੁਗਾਗਮੇ ।",
+      "mr": "यतः सर्वाणि भूतानि भवंत्यादि युगागमे ।",
+      "ben": "16 ॥",
+      "mal": "16 ॥",
+      "meaning": "From whom all beings arise at the beginning of the cosmic cycle..."
+    },
+    {
+      "id": "56",
+      "deva": "यस्मिंश्च प्रलयं यान्ति पुनरेव युगक्षये ॥",
+      "iast": "yasmiṃścha pralayaṃ yānti punarēva yugakṣayē ॥",
+      "knda": "ಯಸ್ಮಿಂಶ್ಚ ಪ್ರಲಯಂ ಯಾಂತಿ ಪುನರೇವ ಯುಗಕ್ಷಯೇ ॥",
+      "tel": "యస్మింశ్చ ప్రలయం యాంతి పునరేవ యుగక్షయే ॥",
+      "tam": "யஸ்மிம்ஶ்ச ப்ரலயம் யாந்தி புனரேவ யுக³க்ஷயே ॥",
+      "guj": "યસ્મિંશ્ચ પ્રલયં યાંતિ પુનરેવ યુગક્ષયે ॥",
+      "pan": "ਯਸ੍ਮਿਂਸ਼੍ਚ ਪ੍ਰਲਯਂ ਯਾਂਤਿ ਪੁਨਰੇਵ ਯੁਗਕ੍ਸ਼ਯੇ ॥",
+      "mr": "यस्मिंश्च प्रलयं यांति पुनरेव युगक्षये ॥",
+      "ben": "যতঃ সর্বাণি ভূতানি ভবংত্য়াদি যুগাগমে ।",
+      "mal": "യതഃ സർവാണി ഭൂതാനി ഭവംത്യാദി യുഗാഗമേ ।",
+      "meaning": "And into whom they dissolve again at the end of each cosmic age."
+    },
+    {
+      "id": "58",
+      "deva": "तस्य लोक प्रधानस्य जगन्नाथस्य भूपते ।",
+      "iast": "tasya lōka pradhānasya jagannāthasya bhūpatē ।",
+      "knda": "ತಸ್ಯ ಲೋಕ ಪ್ರಧಾನಸ್ಯ ಜಗನ್ನಾಥಸ್ಯ ಭೂಪತೇ ।",
+      "tel": "తస్య లోక ప్రధానస్య జగన్నాథస్య భూపతే ।",
+      "tam": "தஸ்ய லோக ப்ரதா⁴னஸ்ய ஜக³ன்னாத²ஸ்ய பூ⁴பதே ।",
+      "guj": "તસ્ય લોક પ્રધાનસ્ય જગન્નાથસ્ય ભૂપતે ।",
+      "pan": "ਤਸ੍ਯ ਲੋਕ ਪ੍ਰਧਾਨਸ੍ਯ ਜਗਨ੍ਨਾਥਸ੍ਯ ਭੂਪਤੇ ।",
+      "mr": "तस्य लोक प्रधानस्य जगन्नाथस्य भूपते ।",
+      "ben": "17 ॥",
+      "mal": "17 ॥",
+      "meaning": "Of that primordial Lord of the worlds, of Jagannatha, O King..."
+    },
+    {
+      "id": "59",
+      "deva": "विष्णोर्नाम सहस्रं मे श्रुणु पाप भयापहम् ॥",
+      "iast": "viṣṇōrnāma sahasraṃ mē śruṇu pāpa bhayāpaham ॥",
+      "knda": "ವಿಷ್ಣೋರ್ನಾಮ ಸಹಸ್ರಂ ಮೇ ಶ್ರುಣು ಪಾಪ ಭಯಾಪಹಮ್ ॥",
+      "tel": "విష్ణోర్నామ సహస్రం మే శ్రుణు పాప భయాపహమ్ ॥",
+      "tam": "விஷ்ணோர்னாம ஸஹஸ்ரம் மே ஶ்ருணு பாப ப⁴யாபஹம் ॥",
+      "guj": "વિષ્ણોર્નામ સહસ્રં મે શ્રુણુ પાપ ભયાપહમ્ ॥",
+      "pan": "ਵਿਸ਼੍ਣੋਰ੍ਨਾਮ ਸਹਸ੍ਰਂ ਮੇ ਸ਼੍ਰੁਣੁ ਪਾਪ ਭਯਾਪਹਮ੍ ॥",
+      "mr": "विष्णोर्नाम सहस्रं मे श्रुणु पाप भयापहम् ॥",
+      "ben": "তস্য় লোক প্রধানস্য় জগন্নাথস্য় ভূপতে ।",
+      "mal": "തസ്യ ലോക പ്രധാനസ്യ ജഗന്നാഥസ്യ ഭൂപതേ ।",
+      "meaning": "Hear from me the thousand names of Vishnu, which destroy sin and fear.",
+      "note": "This is a pivotal verse where Bhishma formally introduces the Sahasranama. He promises Yudhishthira that these names will remove all sins and fears."
+    },
+    {
+      "id": "61",
+      "deva": "यानि नामानि गौणानि विख्यातानि महात्मनः ।",
+      "iast": "yāni nāmāni gauṇāni vikhyātāni mahātmanaḥ ।",
+      "knda": "ಯಾನಿ ನಾಮಾನಿ ಗೌಣಾನಿ ವಿಖ್ಯಾತಾನಿ ಮಹಾತ್ಮನಃ ।",
+      "tel": "యాని నామాని గౌణాని విఖ్యాతాని మహాత్మనః ।",
+      "tam": "யானி நாமானி கௌ³ணானி விக்²யாதானி மஹாத்மன: ।",
+      "guj": "યાનિ નામાનિ ગૌણાનિ વિખ્યાતાનિ મહાત્મનઃ ।",
+      "pan": "ਯਾਨਿ ਨਾਮਾਨਿ ਗੌਣਾਨਿ ਵਿਖ੍ਯਾਤਾਨਿ ਮਹਾਤ੍ਮਨਃ ।",
+      "mr": "यानि नामानि गौणानि विख्यातानि महात्मनः ।",
+      "ben": "18 ॥",
+      "mal": "18 ॥",
+      "meaning": "Those famous names of the Great Soul that are based on His attributes..."
+    },
+    {
+      "id": "62",
+      "deva": "ऋषिभिः परिगीतानि तानि वक्ष्यामि भूतये ॥",
+      "iast": "ṛṣibhiḥ parigītāni tāni vakṣyāmi bhūtayē ॥",
+      "knda": "ಋಷಿಭಿಃ ಪರಿಗೀತಾನಿ ತಾನಿ ವಕ್ಷ್ಯಾಮಿ ಭೂತಯೇ ॥",
+      "tel": "ఋషిభిః పరిగీతాని తాని వక్ష్యామి భూతయే ॥",
+      "tam": "ருஷிபி⁴: பரிகீ³தானி தானி வக்ஷ்யாமி பூ⁴தயே ॥",
+      "guj": "ઋષિભિઃ પરિગીતાનિ તાનિ વક્ષ્યામિ ભૂતયે ॥",
+      "pan": "ਰੁਰੁਇਸ਼ਿਭਿਃ ਪਰਿਗੀਤਾਨਿ ਤਾਨਿ ਵਕ੍ਸ਼੍ਯਾਮਿ ਭੂਤਯੇ ॥",
+      "mr": "ऋषिभिः परिगीतानि तानि वक्ष्यामि भूतये ॥",
+      "ben": "যানি নামানি গৌণানি বিখ্য়াতানি মহাত্মনঃ ।",
+      "mal": "യാനി നാമാനി ഗൌണാനി വിഖ്യാതാനി മഹാത്മനഃ ।",
+      "meaning": "Which have been sung by the sages - these I shall recite for your welfare."
+    },
+    {
+      "id": "64",
+      "deva": "ऋषिर्नाम्नां सहस्रस्य वेदव्यासो महामुनिः ॥",
+      "iast": "ṛṣirnāmnāṃ sahasrasya vēdavyāsō mahāmuniḥ ॥",
+      "knda": "ಋಷಿರ್ನಾಮ್ನಾಂ ಸಹಸ್ರಸ್ಯ ವೇದವ್ಯಾಸೋ ಮಹಾಮುನಿಃ ॥",
+      "tel": "ఋషిర్నామ్నాం సహస్రస్య వేదవ్యాసో మహామునిః ॥",
+      "tam": "ருஷிர்னாம்னாம் ஸஹஸ்ரஸ்ய வேத³வ்யாஸோ மஹாமுனி: ॥",
+      "guj": "ઋષિર્નામ્નાં સહસ્રસ્ય વેદવ્યાસો મહામુનિઃ ॥",
+      "pan": "ਰੁਰੁਇਸ਼ਿਰ੍ਨਾਮ੍ਨਾਂ ਸਹਸ੍ਰਸ੍ਯ ਵੇਦਵ੍ਯਾਸੋ ਮਹਾਮੁਨਿਃ ॥",
+      "mr": "ऋषिर्नाम्नां सहस्रस्य वेदव्यासो महामुनिः ॥",
+      "ben": "19 ॥",
+      "mal": "19 ॥",
+      "meaning": "The Rishi of the thousand names is the great sage Veda Vyasa.",
+      "note": "This begins the viniyoga (application) portion that identifies the spiritual components of the stotra for ritual purposes."
+    },
+    {
+      "id": "65",
+      "deva": "छन्दोऽनुष्टुप् तथा देवो भगवान् देवकीसुतः ॥",
+      "iast": "Chandō'nuṣṭup tathā dēvō bhagavān dēvakīsutaḥ ॥",
+      "knda": "ಛಂದೋಽನುಷ್ಟುಪ್ ತಥಾ ದೇವೋ ಭಗವಾನ್ ದೇವಕೀಸುತಃ ॥",
+      "tel": "ఛందోఽనుష్టుప్ తథా దేవో భగవాన్ దేవకీసుతః ॥",
+      "tam": "ச²ந்தோ³னுஷ்டுப் ததா² தே³வோ ப⁴க³வான் தே³வகீஸுத: ॥",
+      "guj": "છંદોઽનુષ્ટુપ્ તથા દેવો ભગવાન્ દેવકીસુતઃ ॥",
+      "pan": "ਛਂਦੋ਽ਨੁਸ਼੍ਟੁਪ੍ ਤਥਾ ਦੇਵੋ ਭਗਵਾਨ੍ ਦੇਵਕੀਸੁਤਃ ॥",
+      "mr": "छंदोऽनुष्टुप् तथा देवो भगवान् देवकीसुतः ॥",
+      "ben": "ঋষির্নাম্নাং সহস্রস্য় বেদব্য়াসো মহামুনিঃ ॥",
+      "mal": "ഋഷിര്നാമ്നാം സഹസ്രസ്യ വേദവ്യാസോ മഹാമുനിഃ ॥",
+      "meaning": "The meter (chandas) is Anushtup; the deity is the Lord, the son of Devaki (Krishna)."
+    },
+    {
+      "id": "67",
+      "deva": "अमृतां शूद्भवो बीजं शक्तिर्देवकिनन्दनः ।",
+      "iast": "amṛtāṃ śūdbhavō bījaṃ śaktirdēvakinandanaḥ ।",
+      "knda": "ಅಮೃತಾಂ ಶೂದ್ಭವೋ ಬೀಜಂ ಶಕ್ತಿರ್ದೇವಕಿನಂದನಃ ।",
+      "tel": "అమృతాం శూద్భవో బీజం శక్తిర్దేవకినందనః ।",
+      "tam": "அம்ருதாம் ஶூத்³ப⁴வோ பீ³ஜம் ஶக்திர்தே³வகினந்த³ன: ।",
+      "guj": "અમૃતાં શૂદ્ભવો બીજં શક્તિર્દેવકિનંદનઃ ।",
+      "pan": "ਅਮ੍ਰੁਰੁਇਤਾਂ ਸ਼ੂਦ੍ਭਵੋ ਬੀਜਂ ਸ਼ਕ੍ਤਿਰ੍ਦੇਵਕਿਨਂਦਨਃ ।",
+      "mr": "अमृतां शूद्भवो बीजं शक्तिर्देवकिनंदनः ।",
+      "ben": "20 ॥",
+      "mal": "20 ॥",
+      "meaning": "The bija (seed mantra) is 'Amritam Shudbhava'; the shakti (power) is Devaki-nandana (Krishna)."
+    },
+    {
+      "id": "68",
+      "deva": "त्रिसामा हृदयं तस्य शान्त्यर्थे विनियुज्यते ॥",
+      "iast": "trisāmā hṛdayaṃ tasya śāntyarthē viniyujyatē ॥",
+      "knda": "ತ್ರಿಸಾಮಾ ಹೃದಯಂ ತಸ್ಯ ಶಾಂತ್ಯರ್ಥೇ ವಿನಿಯುಜ್ಯತೇ ॥",
+      "tel": "త్రిసామా హృదయం తస్య శాంత్యర్థే వినియుజ్యతే ॥",
+      "tam": "த்ரிஸாமா ஹ்ருத³யம் தஸ்ய ஶாந்த்யர்தே² வினியுஜ்யதே ॥",
+      "guj": "ત્રિસામા હૃદયં તસ્ય શાંત્યર્થે વિનિયુજ્યતે ॥",
+      "pan": "ਤ੍ਰਿਸਾਮਾ ਹ੍ਰੁਰੁਇਦਯਂ ਤਸ੍ਯ ਸ਼ਾਂਤ੍ਯਰ੍ਥੇ ਵਿਨਿਯੁਜ੍ਯਤੇ ॥",
+      "mr": "त्रिसामा हृदयं तस्य शांत्यर्थे विनियुज्यते ॥",
+      "ben": "অমৃতাং শূদ্ভবো বীজং শক্তির্দেবকিনংদনঃ ।",
+      "mal": "അമൃതാം ശൂദ്ഭവോ ബീജം ശക്തിര്ദേവകിനംദനഃ ।",
+      "meaning": "Trisama is the heart (hridayam) of this stotra; it is recited for peace and auspiciousness."
+    },
+    {
+      "id": "70",
+      "deva": "विष्णुं जिष्णुं महाविष्णुं प्रभविष्णुं महेश्वरम् ॥",
+      "iast": "viṣṇuṃ jiṣṇuṃ mahāviṣṇuṃ prabhaviṣṇuṃ mahēśvaram ॥",
+      "knda": "ವಿಷ್ಣುಂ ಜಿಷ್ಣುಂ ಮಹಾವಿಷ್ಣುಂ ಪ್ರಭವಿಷ್ಣುಂ ಮಹೇಶ್ವರಮ್ ॥",
+      "tel": "విష్ణుం జిష్ణుం మహావిష్ణుం ప్రభవిష్ణుం మహేశ్వరమ్ ॥",
+      "tam": "விஷ்ணும் ஜிஷ்ணும் மஹாவிஷ்ணும் ப்ரப⁴விஷ்ணும் மஹேஶ்வரம் ॥",
+      "guj": "વિષ્ણું જિષ્ણું મહાવિષ્ણું પ્રભવિષ્ણું મહેશ્વરમ્ ॥",
+      "pan": "ਵਿਸ਼੍ਣੁਂ ਜਿਸ਼੍ਣੁਂ ਮਹਾਵਿਸ਼੍ਣੁਂ ਪ੍ਰਭਵਿਸ਼੍ਣੁਂ ਮਹੇਸ਼੍ਵਰਮ੍ ॥",
+      "mr": "विष्णुं जिष्णुं महाविष्णुं प्रभविष्णुं महेश्वरम् ॥",
+      "ben": "21 ॥",
+      "mal": "21 ॥",
+      "meaning": "Vishnu, the Victorious, the Great Vishnu, the Powerful, the Great Lord..."
+    },
+    {
+      "id": "71",
+      "deva": "अनेकरूप दैत्यान्तं नमामि पुरुषोत्तमम् ॥",
+      "iast": "anēkarūpa daityāntaṃ namāmi puruṣōttamam ॥",
+      "knda": "ಅನೇಕರೂಪ ದೈತ್ಯಾಂತಂ ನಮಾಮಿ ಪುರುಷೋತ್ತಮಮ್ ॥",
+      "tel": "అనేకరూప దైత్యాంతం నమామి పురుషోత్తమమ్ ॥",
+      "tam": "அனேகரூப தை³த்யாந்தம் நமாமி புருஷோத்தமம் ॥",
+      "guj": "અનેકરૂપ દૈત્યાંતં નમામિ પુરુષોત્તમમ્ ॥",
+      "pan": "ਅਨੇਕਰੂਪ ਦੈਤ੍ਯਾਂਤਂ ਨਮਾਮਿ ਪੁਰੁਸ਼ੋਤ੍ਤਮਮ੍ ॥",
+      "mr": "अनेकरूप दैत्यांतं नमामि पुरुषोत्तमम् ॥",
+      "ben": "বিষ্ণুং জিষ্ণুং মহাবিষ্ণুং প্রভবিষ্ণুং মহেশ্বরম্ ॥",
+      "mal": "വിഷ്ണും ജിഷ്ണും മഹാവിഷ്ണും പ്രഭവിഷ്ണും മഹേശ്വരമ് ॥",
+      "meaning": "I bow to the Supreme Being (Purushottama), who has many forms and who destroys demons.",
+      "note": "This concluding verse of the Poorva Peetika prepares for the main recitation. The devotee offers salutations to Vishnu who manifests in countless forms to protect dharma."
+    }
+  ]
+}
