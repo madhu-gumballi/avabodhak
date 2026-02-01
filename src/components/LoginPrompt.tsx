@@ -1,16 +1,21 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
   Dialog,
-  DialogTitle,
   DialogContent,
-  DialogActions,
   Button,
   Typography,
   Box,
-  Divider,
+  CircularProgress,
+  Alert,
 } from '@mui/material'
 import GoogleIcon from '@mui/icons-material/Google'
-import PersonOutlineIcon from '@mui/icons-material/PersonOutline'
+import LocalFireDepartmentIcon from '@mui/icons-material/LocalFireDepartment'
+import EmojiEventsIcon from '@mui/icons-material/EmojiEvents'
+import LeaderboardIcon from '@mui/icons-material/Leaderboard'
+import CloudIcon from '@mui/icons-material/Cloud'
+import SchoolIcon from '@mui/icons-material/School'
+import ExtensionIcon from '@mui/icons-material/Extension'
+import TranslateIcon from '@mui/icons-material/Translate'
 import { useAuth } from '../context/AuthContext'
 import { isFirebaseConfigured } from '../lib/firebase'
 
@@ -19,13 +24,16 @@ interface LoginPromptProps {
 }
 
 export default function LoginPrompt({ open }: LoginPromptProps) {
-  const { signInWithGoogle, continueAsGuest, loading } = useAuth()
+  const { signInWithGoogle, loading } = useAuth()
+  const [error, setError] = useState<string | null>(null)
 
   const handleGoogleSignIn = async () => {
+    setError(null)
     try {
       await signInWithGoogle()
-    } catch (error) {
+    } catch (error: any) {
       console.error('Failed to sign in:', error)
+      setError(error?.message || 'Failed to sign in. Please try again.')
     }
   }
 
@@ -34,109 +42,179 @@ export default function LoginPrompt({ open }: LoginPromptProps) {
       open={open}
       maxWidth="sm"
       fullWidth
+      disableEscapeKeyDown
       PaperProps={{
         sx: {
-          bgcolor: 'rgba(15, 23, 42, 0.95)',
-          backdropFilter: 'blur(12px)',
+          bgcolor: 'rgba(15, 23, 42, 0.98)',
+          backdropFilter: 'blur(20px)',
           border: '1px solid rgba(255, 255, 255, 0.1)',
-          borderRadius: 3,
+          borderRadius: 4,
+          overflow: 'hidden',
         },
       }}
     >
-      <DialogTitle sx={{ textAlign: 'center', pb: 1 }}>
-        <Typography variant="h5" fontWeight="bold" color="primary.light">
-          Welcome to Avabodhak
-        </Typography>
-      </DialogTitle>
+      <DialogContent sx={{ p: 0 }}>
+        {/* Header with gradient */}
+        <Box
+          sx={{
+            background: 'linear-gradient(135deg, rgba(14, 165, 233, 0.2) 0%, rgba(139, 92, 246, 0.2) 100%)',
+            p: 4,
+            textAlign: 'center',
+          }}
+        >
+          <img
+            src="/icons/stotra-mala-logo.svg"
+            alt="Avabodhak"
+            style={{ width: 64, height: 64, marginBottom: 16, borderRadius: 12 }}
+          />
+          <Typography variant="h4" fontWeight="800" sx={{ mb: 1 }}>
+            Avabodhak
+          </Typography>
+          <Typography variant="body1" color="text.secondary">
+            Master Sanskrit stotras through interactive practice
+          </Typography>
+        </Box>
 
-      <DialogContent>
-        <Box sx={{ textAlign: 'center', mb: 3 }}>
-          <Typography variant="body1" color="text.secondary" sx={{ mb: 2 }}>
-            Learn Sanskrit stotras through practice and puzzles
+        {/* Features showcase */}
+        <Box sx={{ p: 3 }}>
+          <Typography
+            variant="overline"
+            sx={{ color: 'text.secondary', display: 'block', mb: 2, textAlign: 'center' }}
+          >
+            What you can do
           </Typography>
 
+          <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 2, mb: 3 }}>
+            <FeatureCard
+              icon={<SchoolIcon sx={{ color: '#a78bfa' }} />}
+              title="Practice Mode"
+              description="Learn verses with guided word masking"
+            />
+            <FeatureCard
+              icon={<ExtensionIcon sx={{ color: '#f472b6' }} />}
+              title="Puzzle Mode"
+              description="Test recall with word scrambles"
+            />
+            <FeatureCard
+              icon={<TranslateIcon sx={{ color: '#fbbf24' }} />}
+              title="10 Scripts"
+              description="Devanagari, Kannada, Telugu & more"
+            />
+            <FeatureCard
+              icon={<CloudIcon sx={{ color: '#38bdf8' }} />}
+              title="Cloud Sync"
+              description="Progress saved across all devices"
+            />
+          </Box>
+
+          {/* Gamification highlights */}
           <Box
             sx={{
               display: 'flex',
               justifyContent: 'center',
-              gap: 3,
-              flexWrap: 'wrap',
+              gap: 4,
+              py: 2,
+              borderTop: '1px solid rgba(255,255,255,0.1)',
+              borderBottom: '1px solid rgba(255,255,255,0.1)',
               mb: 3,
             }}
           >
-            <FeatureItem icon="🔥" text="Daily streaks" />
-            <FeatureItem icon="🏆" text="Achievements" />
-            <FeatureItem icon="📊" text="Leaderboards" />
-            <FeatureItem icon="☁️" text="Cloud sync" />
+            <Box sx={{ textAlign: 'center' }}>
+              <LocalFireDepartmentIcon sx={{ color: '#fb923c', fontSize: 28 }} />
+              <Typography variant="caption" display="block" color="text.secondary">
+                Streaks
+              </Typography>
+            </Box>
+            <Box sx={{ textAlign: 'center' }}>
+              <EmojiEventsIcon sx={{ color: '#fbbf24', fontSize: 28 }} />
+              <Typography variant="caption" display="block" color="text.secondary">
+                Achievements
+              </Typography>
+            </Box>
+            <Box sx={{ textAlign: 'center' }}>
+              <LeaderboardIcon sx={{ color: '#38bdf8', fontSize: 28 }} />
+              <Typography variant="caption" display="block" color="text.secondary">
+                Leaderboards
+              </Typography>
+            </Box>
           </Box>
-        </Box>
 
-        <Divider sx={{ my: 2 }} />
+          {/* Error message */}
+          {error && (
+            <Alert severity="error" sx={{ mb: 2 }}>
+              {error}
+            </Alert>
+          )}
 
-        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2, mt: 3 }}>
-          {isFirebaseConfigured && (
+          {/* Sign in button */}
+          {!isFirebaseConfigured ? (
+            <Alert severity="warning" sx={{ mb: 2 }}>
+              Sign-in is not configured. Please contact the administrator.
+            </Alert>
+          ) : (
             <Button
               variant="contained"
               size="large"
-              startIcon={<GoogleIcon />}
+              fullWidth
+              startIcon={loading ? <CircularProgress size={20} color="inherit" /> : <GoogleIcon />}
               onClick={handleGoogleSignIn}
               disabled={loading}
               sx={{
-                py: 1.5,
+                py: 1.75,
                 bgcolor: 'white',
-                color: 'text.primary',
+                color: '#1f2937',
+                fontSize: '1rem',
+                fontWeight: 600,
                 '&:hover': {
                   bgcolor: 'grey.100',
                 },
                 textTransform: 'none',
-                fontWeight: 600,
+                borderRadius: 2,
               }}
             >
-              Sign in with Google
+              {loading ? 'Signing in...' : 'Continue with Google'}
             </Button>
           )}
 
-          <Button
-            variant="outlined"
-            size="large"
-            startIcon={<PersonOutlineIcon />}
-            onClick={continueAsGuest}
-            disabled={loading}
-            sx={{
-              py: 1.5,
-              borderColor: 'rgba(255, 255, 255, 0.3)',
-              color: 'text.secondary',
-              '&:hover': {
-                borderColor: 'rgba(255, 255, 255, 0.5)',
-                bgcolor: 'rgba(255, 255, 255, 0.05)',
-              },
-              textTransform: 'none',
-            }}
+          <Typography
+            variant="caption"
+            color="text.secondary"
+            sx={{ display: 'block', textAlign: 'center', mt: 2 }}
           >
-            Continue as Guest
-          </Button>
+            Sign in to track your progress and compete on leaderboards
+          </Typography>
         </Box>
-
-        <Typography
-          variant="caption"
-          color="text.secondary"
-          sx={{ display: 'block', textAlign: 'center', mt: 3 }}
-        >
-          {isFirebaseConfigured
-            ? 'Sign in to save progress across devices and unlock achievements'
-            : 'Your progress will be saved locally on this device'}
-        </Typography>
       </DialogContent>
     </Dialog>
   )
 }
 
-function FeatureItem({ icon, text }: { icon: string; text: string }) {
+function FeatureCard({
+  icon,
+  title,
+  description,
+}: {
+  icon: React.ReactNode
+  title: string
+  description: string
+}) {
   return (
-    <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
-      <span style={{ fontSize: '1.25rem' }}>{icon}</span>
-      <Typography variant="body2" color="text.secondary">
-        {text}
+    <Box
+      sx={{
+        p: 2,
+        borderRadius: 2,
+        bgcolor: 'rgba(255, 255, 255, 0.03)',
+        border: '1px solid rgba(255, 255, 255, 0.06)',
+      }}
+    >
+      <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 0.5 }}>
+        {icon}
+        <Typography variant="subtitle2" fontWeight="bold">
+          {title}
+        </Typography>
+      </Box>
+      <Typography variant="caption" color="text.secondary">
+        {description}
       </Typography>
     </Box>
   )

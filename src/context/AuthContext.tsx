@@ -22,9 +22,6 @@ import {
 } from '../lib/userTypes'
 import {
   getUserDocument,
-  isGuestMode,
-  setGuestMode,
-  isFirstVisit,
   getCachedUserData,
   cacheUserData,
   updateUserPreferences,
@@ -97,24 +94,10 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
   // Initialize auth state
   useEffect(() => {
-    // Check if first visit
-    if (isFirstVisit()) {
-      setShowLoginPrompt(true)
-    }
-
-    // Check guest mode
-    if (isGuestMode()) {
-      setIsGuest(true)
-      const cached = getCachedUserData()
-      if (cached) {
-        setUserData(cached)
-      }
-      setLoading(false)
-      return
-    }
-
     // Listen to auth state if Firebase is configured
     if (!auth || !isFirebaseConfigured) {
+      // Firebase not configured - show login prompt
+      setShowLoginPrompt(true)
       setLoading(false)
       return
     }
@@ -149,7 +132,9 @@ export function AuthProvider({ children }: AuthProviderProps) {
           }
         }
       } else {
+        // User not authenticated - show login prompt
         setUserData(null)
+        setShowLoginPrompt(true)
       }
 
       setLoading(false)
@@ -170,7 +155,6 @@ export function AuthProvider({ children }: AuthProviderProps) {
       const result = await signInWithPopup(auth, googleProvider)
       setUser(result.user)
       setIsGuest(false)
-      setGuestMode(false)
       setShowLoginPrompt(false)
 
       // Get user document
@@ -208,55 +192,17 @@ export function AuthProvider({ children }: AuthProviderProps) {
     setUser(null)
     setUserData(null)
     setIsGuest(false)
-    setGuestMode(false)
     // Clear cache but keep progress data
     localStorage.removeItem('avabodhak:user')
+    // Show login prompt again
+    setShowLoginPrompt(true)
   }, [user])
 
-  // Continue as guest
+  // Continue as guest - disabled, sign-in is mandatory
   const continueAsGuest = useCallback(() => {
-    setGuestMode(true)
-    setIsGuest(true)
-    setShowLoginPrompt(false)
-
-    // Create guest user data
-    const guestData: UserDocument = {
-      profile: {
-        displayName: 'Guest',
-        email: '',
-        photoURL: null,
-        createdAt: new Date(),
-        lastLoginAt: new Date(),
-      },
-      preferences: {
-        lang: 'deva',
-        lang2: null,
-        theme: 'dark',
-        legendOpen: false,
-        learnMode: false,
-      },
-      stats: {
-        totalLinesCompleted: 0,
-        totalPuzzlesSolved: 0,
-        perfectPuzzles: 0,
-        currentStreak: 0,
-        longestStreak: 0,
-        lastActiveDate: null,
-        totalTimeSpentMs: 0,
-      },
-      dailyGoals: {
-        linesTarget: 10,
-        linesToday: 0,
-        puzzlesTarget: 5,
-        puzzlesToday: 0,
-        lastResetDate: new Date(),
-      },
-      achievements: [],
-    }
-
-    cacheUserData(guestData)
-    setUserData(guestData)
-    startSession()
+    // Guest mode is disabled - do nothing
+    // Users must sign in with Google
+    console.log('Guest mode is disabled. Please sign in with Google.')
   }, [])
 
   // Dismiss login prompt
