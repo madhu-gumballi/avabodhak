@@ -1,7 +1,7 @@
 {
   "title": "Vayu Stuti",
   "metadata": {
-    "chapters": 1,
+    "chapters": 3,
     "totalLines": 42,
     "languages": ["deva", "knda", "tel", "tam", "iast"],
     "practiceMode": true,
@@ -10,9 +10,10 @@
     "composer": "Sri Trivikrama Panditacharya",
     "composerInfo": {
       "name": "Sri Trivikrama Panditacharya",
-      "period": "13th Century CE",
+      "period": "c. 1258–1320 CE",
       "tradition": "Dvaita Vedanta",
-      "biography": "A direct disciple of Sri Madhvacharya and a great scholar of the Dvaita tradition. He composed the Vayu Stuti in praise of Mukhya Prana (Vayu/Hanuman/Bhima/Madhvacharya), celebrating the three incarnations of the Wind God."
+      "biography": "A direct disciple of Sri Madhvacharya and a great scholar of the Dvaita tradition. Initially an Advaitin, he challenged Sri Madhva to a debate that lasted 7–8 days, after which he accepted Dvaita philosophy and became his disciple. His son Narayana Panditacharya composed the famous Madhvavijaya, the biography of Sri Madhvacharya.",
+      "originStory": "According to tradition, Sri Trivikrama once witnessed through a window a wondrous sight: Hanuman worshipping Sri Rama, Bhimasena worshipping Sri Krishna, and Sri Madhvacharya worshipping Sri Veda Vyasa. Overwhelmed by awe and devotion, he hastily composed this hymn. Sri Madhvacharya, noting that the poem focused solely on his incarnations, added the Nakha Stuti (praising Lord Narasimha) at the beginning and end, thus transforming it into the complete Sri Hari Vayu Stuti."
     },
     "sampradaya": {
       "name": "Dvaita Vedanta",
@@ -78,7 +79,8 @@
       "tel": "॥ నఖస్తుతి ॥",
       "tam": "॥ நகஸ்துதி ॥",
       "meaning": "Hymn to the Divine Claw (Narasimha's Nails)",
-      "note": "The Vayu Stuti traditionally begins with the Nakha Stuti, praising Lord Narasimha's divine claws that destroyed the demon Hiranyakashipu. This invocation seeks the Lord's protection before proceeding to praise Vayu."
+      "note": "The Vayu Stuti traditionally begins with the Nakha Stuti, praising Lord Narasimha's divine claws that destroyed the demon Hiranyakashipu. This invocation seeks the Lord's protection before proceeding to praise Vayu.",
+      "chapter": "Nakha Stuti"
     },
     {
       "id": "3",
@@ -188,7 +190,8 @@
       "tel": "॥ వాయుస్తుతి ॥",
       "tam": "॥ வாயுஸ்துதி ॥",
       "meaning": "The Hymn to Vayu (Begins)",
-      "note": "The main Vayu Stuti now begins, praising Mukhya Prana through his three incarnations."
+      "note": "The main Vayu Stuti now begins, praising Mukhya Prana through his three incarnations.",
+      "chapter": "Vayu Stuti"
     },
     {
       "id": "9",
@@ -668,7 +671,8 @@
       "tel": "॥ ఫలశ్రుతి ॥",
       "tam": "॥ ப²லஶ்ருதி ॥",
       "meaning": "The Fruit of Recitation (Benefits)",
-      "note": "The following verses describe the benefits of reciting the Vayu Stuti."
+      "note": "The following verses describe the benefits of reciting the Vayu Stuti.",
+      "chapter": "Phala Shruti"
     },
     {
       "id": "38",

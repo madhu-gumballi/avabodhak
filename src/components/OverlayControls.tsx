@@ -69,6 +69,11 @@ export function OverlayControls({ visible, onVisibleChange, ttsPlaying, onTTSTog
     };
 
     const onClick = (e: MouseEvent) => {
+      // Skip if clicking on interactive elements (buttons, links, etc.)
+      const target = e.target as HTMLElement;
+      if (target.closest('button, a, [role="button"], input, select, textarea')) {
+        return;
+      }
       // Prevent click events that fire after touch events (mobile ghost clicks)
       if (Date.now() - lastTouchTimeRef.current < 500) {
         return;
@@ -95,6 +100,11 @@ export function OverlayControls({ visible, onVisibleChange, ttsPlaying, onTTSTog
     };
 
     const onTouchEnd = (e: TouchEvent) => {
+      // Skip if touching interactive elements (buttons, links, etc.)
+      const target = e.target as HTMLElement;
+      if (target.closest('button, a, [role="button"], input, select, textarea')) {
+        return;
+      }
       if (e.changedTouches.length === 0) return;
       const touch = e.changedTouches[0];
       const now = Date.now();
@@ -143,7 +153,7 @@ export function OverlayControls({ visible, onVisibleChange, ttsPlaying, onTTSTog
 
   return (
     <div ref={rootRef} className="absolute inset-0 z-20 select-none">
-      <div className={`w-full h-full`}>
+      <div className="w-full h-full">
         {visible && (
           <div className="absolute inset-0 flex items-end justify-center pb-12">
             <div className="absolute inset-0 bg-black/10" />

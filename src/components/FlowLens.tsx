@@ -1,14 +1,35 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import type { Lang, Keyword, CompoundBreakdown } from '../data/types';
 import { DIACRITIC_INFO, isIASTDiacritic, simplifyIAST, extractIASTDiacritics, classifyIASTWord } from '../lib/pronounce';
 import { basicSplit, chunkOffsetsByWord, segmentGraphemes } from '../lib/tokenize';
 import { Paper } from '@mui/material';
 import { WordInfoPopover } from './WordInfoPopover';
 
+// Copy icon SVG component
+const CopyIcon = ({ className }: { className?: string }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+  </svg>
+);
+
+// Check icon for copy feedback
+const CheckIcon = ({ className }: { className?: string }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+    <polyline points="20 6 9 17 4 12"></polyline>
+  </svg>
+);
+
 interface LineData {
   meaning?: string;
   samasaVibhaga?: CompoundBreakdown[];
   note?: string;
+}
+
+interface HighlightWord {
+  pattern: string; // Pattern to match (case-insensitive, partial match)
+  meaning?: string; // Optional tooltip meaning
+  color?: string; // Optional custom highlight color class
 }
 
 interface Props {
@@ -27,12 +48,37 @@ interface Props {
   chapter?: string;
   learnMode?: boolean; // When true, words become tappable to show etymology/meaning
   lineData?: LineData; // Enriched data for the current line
+  highlightWords?: HighlightWord[]; // Special words to highlight (e.g., divine names)
 }
 
-export function FlowLens({ tokens, rows, wordIndex, lineIndex, lang, legendOpen: legendOpenProp, onLegendOpenChange, detailsOpen, onToggleDetails, expandedProp, onExpandedChange, playing, chapter, learnMode = false, lineData }: Props) {
+export function FlowLens({ tokens, rows, wordIndex, lineIndex, lang, legendOpen: legendOpenProp, onLegendOpenChange, detailsOpen, onToggleDetails, expandedProp, onExpandedChange, playing, chapter, learnMode = false, lineData, highlightWords }: Props) {
   const [prev, curr, next] = rows;
   const [expanded, setExpanded] = useState(false);
   const [secVisible, setSecVisible] = useState(true);
+  const [copied, setCopied] = useState(false);
+
+  // Copy current line to clipboard
+  const handleCopy = useCallback(async () => {
+    if (!curr) return;
+    try {
+      await navigator.clipboard.writeText(curr);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1500);
+    } catch (err) {
+      console.error('Failed to copy:', err);
+    }
+  }, [curr]);
+
+  // Check if a word matches any highlight pattern (divine names, etc.)
+  const getHighlightMatch = useCallback((word: string): HighlightWord | undefined => {
+    if (!highlightWords?.length) return undefined;
+    const normalized = word.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+    return highlightWords.find(hw => {
+      const pattern = hw.pattern.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+      return normalized.includes(pattern) || pattern.includes(normalized.slice(0, Math.max(4, normalized.length)));
+    });
+  }, [highlightWords]);
+
   const [secExiting, setSecExiting] = useState(false);
   const [legendOpen, setLegendOpen] = useState<boolean>(!!legendOpenProp);
   const [info, setInfo] = useState<{ ch: string } | null>(null);
@@ -217,14 +263,19 @@ export function FlowLens({ tokens, rows, wordIndex, lineIndex, lang, legendOpen:
                 phoneticWords.map((w, i) => {
                   const on = i === phoneticWordIndex;
                   const strong = on && !!playing;
+                  const highlightMatch = getHighlightMatch(w);
+                  const isHighlighted = !!highlightMatch;
                   return (
                     <span
                       key={`ph-main-${i}`}
                       className={`px-1.5 py-0.5 rounded-md leading-tight break-words text-lg sm:text-xl lg:text-2xl ${
                         strong
                           ? 'bg-amber-300 text-black shadow-[0_0_18px_rgba(251,191,36,0.6)]'
-                          : 'text-slate-200'
+                          : isHighlighted
+                            ? 'text-violet-200 underline decoration-violet-400/60 decoration-2 underline-offset-4'
+                            : 'text-slate-200'
                       }`}
+                      title={highlightMatch?.meaning}
                     >
                       {w}
                     </span>
@@ -235,18 +286,39 @@ export function FlowLens({ tokens, rows, wordIndex, lineIndex, lang, legendOpen:
                 rawWords.map((w: string, i: number) => {
                   const active = i === rawWordIndex;
                   const strong = active && !!playing;
+                  const highlightMatch = getHighlightMatch(w);
+                  const isHighlighted = !!highlightMatch;
                   const base = `px-1.5 py-0.5 rounded-md leading-tight break-words text-lg sm:text-xl lg:text-2xl ${
                     strong
                       ? 'bg-amber-300 text-black shadow-[0_0_18px_rgba(251,191,36,0.6)]'
-                      : 'text-slate-200'
+                      : isHighlighted
+                        ? 'text-violet-200 underline decoration-violet-400/60 decoration-2 underline-offset-4'
+                        : 'text-slate-200'
                   }`;
-                  return <span key={`raw-${i}`} className={base}>{w}</span>;
+                  return (
+                    <span
+                      key={`raw-${i}`}
+                      className={base}
+                      title={highlightMatch?.meaning}
+                    >
+                      {w}
+                    </span>
+                  );
                 })
               )
             )}
             {/* Do not show danda marker on the main highlighted row */}
 
-            {/* Inline handles removed; use cog menu in timeline */}
+            {/* Copy button - z-30 to be above OverlayControls (z-20) */}
+            <button
+              onClick={(e) => { e.stopPropagation(); e.preventDefault(); handleCopy(); }}
+              onPointerDown={(e) => e.stopPropagation()}
+              className="absolute right-1.5 top-1.5 z-30 inline-flex items-center justify-center w-6 h-6 rounded-md bg-slate-700/90 hover:bg-slate-600 text-slate-300 hover:text-white border border-slate-500/50 transition-colors cursor-pointer active:scale-95"
+              title="Copy verse"
+              type="button"
+            >
+              {copied ? <CheckIcon className="w-3.5 h-3.5 text-emerald-400" /> : <CopyIcon className="w-3.5 h-3.5" />}
+            </button>
           </div>
 
           {/* Word breakdown – show whole words with subtle diacritic highlighting */}

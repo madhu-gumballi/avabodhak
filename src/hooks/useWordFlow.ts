@@ -36,6 +36,8 @@ export function useWordFlow(lines: Line[], lang: Lang): UseWordFlow {
   const tokens = useMemo(() => splitTokens(lineText, lang), [lineText, lang]);
   const tokensRef = useRef(tokens);
   tokensRef.current = tokens;
+  const tokensLengthRef = useRef(tokens.length);
+  tokensLengthRef.current = tokens.length;
 
   const rows: [string | undefined, string | undefined, string | undefined] = useMemo(() => {
     const prev = (lines[lineIndex - 1] as any)?.[lang] as string | undefined;
@@ -70,10 +72,11 @@ export function useWordFlow(lines: Line[], lang: Lang): UseWordFlow {
   }, [wordIndex, lineIndex]);
 
   const seekWord = useCallback((i: number) => {
-    const last = Math.max(0, tokens.length - 1);
+    // Use ref to always access current tokens length, avoiding stale closure
+    const last = Math.max(0, tokensLengthRef.current - 1);
     const clamped = Math.max(0, Math.min(i, last));
     setWordIndex(clamped);
-  }, [tokens.length]);
+  }, []); // No dependencies - uses ref for current value
 
   const restartLine = useCallback(() => {
     setWordIndex(0);

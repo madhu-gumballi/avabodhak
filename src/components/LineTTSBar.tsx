@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
-import RecordVoiceOverIcon from '@mui/icons-material/RecordVoiceOver';
-import StopIcon from '@mui/icons-material/Stop';
 import VolumeUpIcon from '@mui/icons-material/VolumeUp';
+import StopIcon from '@mui/icons-material/Stop';
 
 interface Props {
   ttsPlaying: boolean;
@@ -34,24 +33,14 @@ export function LineTTSBar({ ttsPlaying, onTTSToggle, ttsSupported, currentLine,
       style={{ bottom: bottomOffset }}
     >
       <div className="relative">
-        {/* Gradient fade effect at top */}
-        <div className="absolute bottom-full left-0 right-0 h-8 bg-gradient-to-t from-slate-900/80 to-transparent pointer-events-none" />
-        
-        {/* Main bar */}
-        <div className="bg-gradient-to-r from-slate-900/95 via-slate-800/95 to-slate-900/95 backdrop-blur-md border-t border-slate-700/50 shadow-2xl pointer-events-auto">
-          <div className="max-w-4xl mx-auto px-4 py-3">
-            <div className="flex items-center justify-between gap-4">
-              {/* Left side - Line info */}
-              <div className="flex items-center gap-3 min-w-0 flex-1">
-                <div className="flex items-center gap-2 text-slate-400">
-                  <VolumeUpIcon sx={{ fontSize: 20 }} className={pulseAnimation ? 'animate-pulse text-blue-400' : ''} />
-                  <span className="text-sm font-medium whitespace-nowrap">
-                    {currentLine && totalLines ? `Line ${currentLine}/${totalLines}` : 'Line TTS'}
-                  </span>
-                </div>
-              </div>
+        {/* Subtle gradient fade effect at top */}
+        <div className="absolute bottom-full left-0 right-0 h-6 bg-gradient-to-t from-slate-900/60 to-transparent pointer-events-none" />
 
-              {/* Center - Main TTS button */}
+        {/* Main bar - more subtle styling */}
+        <div className="bg-slate-900/80 backdrop-blur-sm border-t border-slate-700/30 pointer-events-auto">
+          <div className="max-w-4xl mx-auto px-4 py-2">
+            <div className="flex items-center justify-center gap-3">
+              {/* Compact TTS button - outline style, secondary appearance */}
               <button
                 onClick={(e) => {
                   e.stopPropagation();
@@ -59,36 +48,33 @@ export function LineTTSBar({ ttsPlaying, onTTSToggle, ttsSupported, currentLine,
                 }}
                 aria-label={ttsPlaying ? 'Stop Line TTS' : 'Play Line TTS'}
                 className={`
-                  relative flex items-center gap-3 px-8 py-3 rounded-full font-bold text-base
-                  transition-all duration-200 shadow-lg
-                  ${ttsPlaying 
-                    ? 'bg-gradient-to-r from-amber-500 to-orange-500 text-white border-2 border-amber-300 shadow-amber-500/50 scale-105' 
-                    : 'bg-gradient-to-r from-blue-600 to-blue-700 text-white border-2 border-blue-400 shadow-blue-500/40 hover:scale-105 hover:shadow-xl hover:shadow-blue-500/60 active:scale-95'
+                  flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium
+                  transition-all duration-200
+                  ${ttsPlaying
+                    ? 'bg-amber-500/20 text-amber-400 border border-amber-500/50'
+                    : 'bg-transparent text-slate-400 border border-slate-500/50 hover:text-slate-300 hover:border-slate-400/50 hover:bg-slate-800/50'
                   }
                 `}
               >
                 {ttsPlaying ? (
                   <>
-                    <StopIcon sx={{ fontSize: 28 }} />
-                    <span className="uppercase tracking-wide">Stop</span>
+                    <StopIcon sx={{ fontSize: 18 }} className="animate-pulse" />
+                    <span>Stop</span>
                   </>
                 ) : (
                   <>
-                    <RecordVoiceOverIcon sx={{ fontSize: 28 }} />
-                    <span className="uppercase tracking-wide">Play Line</span>
+                    <VolumeUpIcon sx={{ fontSize: 18 }} className={pulseAnimation ? 'animate-pulse' : ''} />
+                    <span>Play Line</span>
                   </>
-                )}
-                
-                {/* Animated border when playing */}
-                {ttsPlaying && (
-                  <div className="absolute inset-0 rounded-full border-2 border-white/30 animate-ping" />
                 )}
               </button>
 
-              {/* Right side - Hint text */}
-              <div className="hidden sm:flex items-center gap-2 text-slate-500 text-xs flex-1 justify-end">
-                <span className="whitespace-nowrap">Tap to hear current line</span>
-              </div>
+              {/* Line indicator - subtle */}
+              {currentLine && totalLines && (
+                <span className="text-xs text-slate-500">
+                  {currentLine}/{totalLines}
+                </span>
+              )}
             </div>
           </div>
         </div>

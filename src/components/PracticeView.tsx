@@ -11,6 +11,7 @@ import { MaskedWord } from './MaskedWord';
 import { shouldMaskWord, getPracticeState, savePracticeState, getHintLetterCount, isChapterOrSectionLine, type PracticeDifficulty } from '../lib/practice';
 import { basicSplit } from '../lib/tokenize';
 import { analytics } from '../lib/analytics';
+import { useAuth } from '../context/AuthContext';
 
 // Haptic feedback utility
 const triggerHaptic = (pattern: 'light' | 'medium' | 'success' | 'error' = 'light') => {
@@ -44,6 +45,7 @@ interface Props {
 }
 
 export function PracticeView({ lines, chapterIndices = [], lang, initialLineIndex = 0, onExit, onSearchRequest, onLineIndexChange, T }: Props) {
+  const { recordLineComplete } = useAuth();
   const [lineIndex, setLineIndex] = useState(initialLineIndex);
   const difficulty = 'medium'; // Fixed to medium only
   const [revealedWords, setRevealedWords] = useState<Set<number>>(new Set());
@@ -179,6 +181,8 @@ export function PracticeView({ lines, chapterIndices = [], lang, initialLineInde
       setCompletedLines(prev => new Set([...prev, lineIndex]));
       // Haptic feedback on line complete
       triggerHaptic('success');
+      // Record completion for gamification (achievements, daily goals, leaderboard)
+      recordLineComplete();
     }
   };
 

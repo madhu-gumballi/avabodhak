@@ -25,6 +25,7 @@ import {
 import { basicSplit } from '../lib/tokenize';
 import { isChapterOrSectionLine } from '../lib/practice';
 import { analytics } from '../lib/analytics';
+import { useAuth } from '../context/AuthContext';
 
 // Haptic feedback utility (reused from PracticeView)
 const triggerHaptic = (pattern: 'light' | 'medium' | 'success' | 'error' = 'light') => {
@@ -56,6 +57,7 @@ interface Props {
 }
 
 export function PuzzleView({ lines, chapterIndices = [], lang, initialLineIndex = 0, onExit, T }: Props) {
+  const { recordPuzzleComplete } = useAuth();
   const [lineIndex, setLineIndex] = useState(initialLineIndex);
   const [correctSegments, setCorrectSegments] = useState<PuzzleSegment[]>([]);
   const [availableSegments, setAvailableSegments] = useState<PuzzleSegment[]>([]);
@@ -210,7 +212,11 @@ export function PuzzleView({ lines, chapterIndices = [], lang, initialLineIndex 
           completionTime,
         };
         savePuzzleState(lang, state);
-        
+
+        // Record completion for gamification (achievements, daily goals, leaderboard)
+        // Perfect = no hints used
+        recordPuzzleComplete(hintsUsed === 0);
+
         // Trigger confetti
         triggerConfetti();
       }, 100);
@@ -264,6 +270,10 @@ export function PuzzleView({ lines, chapterIndices = [], lang, initialLineIndex 
 
       // Analytics
       analytics.practiceAction('line_complete');
+
+      // Record completion for gamification (achievements, daily goals, leaderboard)
+      // Perfect = no hints used
+      recordPuzzleComplete(hintsUsed === 0);
     } else {
       triggerHaptic('error');
       setShowFeedback(true);

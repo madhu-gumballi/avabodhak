@@ -11,6 +11,7 @@ import {
   MenuItem,
   Divider,
   Badge,
+  CircularProgress,
 } from '@mui/material';
 import type { SelectChangeEvent } from '@mui/material/Select';
 import AutoStoriesIcon from '@mui/icons-material/AutoStories';
@@ -31,6 +32,8 @@ interface MobileModeDockProps {
   lang2: Lang | '';
   languageOptions: Lang[];
   verseDetailOpen?: boolean;
+  practiceProgress?: number; // 0-100
+  puzzleProgress?: number; // 0-100
   onViewModeChange: (mode: ViewMode) => void;
   onVerseDetailToggle: () => void;
   onLangChange: (lang: Lang) => void;
@@ -45,7 +48,8 @@ interface MobileModeDockProps {
  * MobileModeDock - Floating bottom navigation for mobile devices
  * Groups mode toggles in an intuitive, thumb-friendly dock
  *
- * Layout: [ Read | Learn | Practice | Puzzle | More ]
+ * Layout: [ Practice | Puzzle | Read | Details | More ]
+ * (Practice/Puzzle first for thumb-friendly access to learning features)
  */
 export function MobileModeDock({
   viewMode,
@@ -53,6 +57,8 @@ export function MobileModeDock({
   lang2,
   languageOptions,
   verseDetailOpen = false,
+  practiceProgress,
+  puzzleProgress,
   onViewModeChange,
   onVerseDetailToggle,
   onLangChange,
@@ -71,6 +77,7 @@ export function MobileModeDock({
     icon,
     label,
     badge,
+    progress,
   }: {
     active?: boolean;
     color?: string;
@@ -78,6 +85,7 @@ export function MobileModeDock({
     icon: React.ReactNode;
     label: string;
     badge?: boolean;
+    progress?: number;
   }) => (
     <Box
       sx={{
@@ -85,6 +93,7 @@ export function MobileModeDock({
         flexDirection: 'column',
         alignItems: 'center',
         minWidth: { xs: 48, sm: 56 },
+        position: 'relative',
       }}
     >
       <IconButton
@@ -96,8 +105,23 @@ export function MobileModeDock({
             bgcolor: active ? `${color || '#0ea5e9'}30` : 'rgba(255,255,255,0.05)',
           },
           transition: 'all 0.2s ease',
+          position: 'relative',
         }}
       >
+        {/* Progress ring around icon */}
+        {progress !== undefined && progress > 0 && (
+          <CircularProgress
+            variant="determinate"
+            value={progress}
+            size={36}
+            thickness={2}
+            sx={{
+              position: 'absolute',
+              color: progress >= 100 ? '#22c55e' : color || '#0ea5e9',
+              opacity: 0.6,
+            }}
+          />
+        )}
         {badge ? (
           <Badge
             variant="dot"
@@ -127,6 +151,28 @@ export function MobileModeDock({
       >
         {label}
       </Typography>
+      {/* Completion indicator */}
+      {progress !== undefined && progress >= 100 && (
+        <Box
+          sx={{
+            position: 'absolute',
+            top: -2,
+            right: 4,
+            width: 12,
+            height: 12,
+            borderRadius: '50%',
+            bgcolor: '#22c55e',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            fontSize: '0.5rem',
+            color: 'white',
+            fontWeight: 'bold',
+          }}
+        >
+          ✓
+        </Box>
+      )}
     </Box>
   );
 
@@ -155,6 +201,29 @@ export function MobileModeDock({
             boxShadow: '0 8px 32px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.05) inset',
           }}
         >
+          {/* Practice Mode - First for thumb-friendly access */}
+          <DockButton
+            active={viewMode === 'practice'}
+            color="#3b82f6"
+            onClick={() => onViewModeChange(viewMode === 'practice' ? 'reading' : 'practice')}
+            icon={<SchoolIcon fontSize="small" />}
+            label="Practice"
+            progress={practiceProgress}
+          />
+
+          {/* Puzzle Mode */}
+          <DockButton
+            active={viewMode === 'puzzle'}
+            color="#8b5cf6"
+            onClick={() => onViewModeChange(viewMode === 'puzzle' ? 'reading' : 'puzzle')}
+            icon={<GridViewIcon fontSize="small" />}
+            label="Puzzle"
+            progress={puzzleProgress}
+          />
+
+          {/* Divider */}
+          <Divider orientation="vertical" flexItem sx={{ borderColor: 'rgba(51,65,85,0.6)', mx: 0.5 }} />
+
           {/* Read Mode */}
           <DockButton
             active={viewMode === 'reading'}
@@ -173,24 +242,6 @@ export function MobileModeDock({
             onClick={onVerseDetailToggle}
             icon={<InfoOutlinedIcon fontSize="small" />}
             label="Details"
-          />
-
-          {/* Practice Mode */}
-          <DockButton
-            active={viewMode === 'practice'}
-            color="#3b82f6"
-            onClick={() => onViewModeChange(viewMode === 'practice' ? 'reading' : 'practice')}
-            icon={<SchoolIcon fontSize="small" />}
-            label="Practice"
-          />
-
-          {/* Puzzle Mode */}
-          <DockButton
-            active={viewMode === 'puzzle'}
-            color="#8b5cf6"
-            onClick={() => onViewModeChange(viewMode === 'puzzle' ? 'reading' : 'puzzle')}
-            icon={<GridViewIcon fontSize="small" />}
-            label="Puzzle"
           />
 
           {/* Divider */}

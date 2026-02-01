@@ -1,3 +1,12 @@
+/**
+ * Puzzle Mode Utilities
+ * Handles word scrambling and validation for puzzle mode
+ * Syncs progress to both localStorage (cache) and Firestore (cloud)
+ */
+
+import { doc, getDoc, setDoc } from 'firebase/firestore'
+import { db, isFirebaseConfigured } from './firebase'
+import { auth } from './firebase'
 import { basicSplit } from './tokenize';
 import { isChapterOrSectionLine } from './practice';
 
@@ -123,7 +132,7 @@ export function applyHint(
   // Total words to reveal = hintsUsed (but never more than n-1)
   const maxHints = Math.min(4, Math.max(0, correctSegments.length - 1));
   const wordsToPlace = Math.min(hintsUsed, maxHints);
-  
+
   for (let i = 0; i < wordsToPlace; i++) {
     placeSegment(i);
   }
@@ -139,19 +148,55 @@ export function getMaxHints(wordCount: number): number {
 }
 
 /**
- * Save puzzle state to localStorage
+ * Save puzzle state to localStorage and sync to Firestore
  */
 export function savePuzzleState(lang: string, state: PuzzleState): void {
+  // Save to localStorage (cache)
   try {
     const key = `puzzle:${lang}:${state.lineNumber}`;
     localStorage.setItem(key, JSON.stringify(state));
   } catch {
     // Silent fail for localStorage issues
   }
+
+  // Sync to Firestore in background
+  syncPuzzleToFirestore(lang, state);
 }
 
 /**
- * Get puzzle state from localStorage
+ * Sync puzzle state to Firestore
+ */
+async function syncPuzzleToFirestore(lang: string, state: PuzzleState): Promise<void> {
+  if (!db || !isFirebaseConfigured) {
+    console.log('[Puzzle] Firestore not configured, skipping sync');
+    return;
+  }
+
+  if (!auth?.currentUser) {
+    console.log('[Puzzle] No authenticated user, skipping sync');
+    return;
+  }
+
+  try {
+    const userId = auth.currentUser.uid;
+    const progressRef = doc(db, 'users', userId, 'puzzleProgress', `${lang}:${state.lineNumber}`);
+
+    console.log('[Puzzle] Syncing to Firestore:', `puzzleProgress/${lang}:${state.lineNumber}`);
+
+    await setDoc(progressRef, {
+      ...state,
+      lang,
+      updatedAt: new Date(),
+    }, { merge: true });
+
+    console.log('[Puzzle] Sync successful');
+  } catch (error) {
+    console.error('[Puzzle] Failed to sync to Firestore:', error);
+  }
+}
+
+/**
+ * Get puzzle state from localStorage (cache)
  */
 export function getPuzzleState(lang: string, lineNumber: number): PuzzleState | null {
   try {
@@ -161,6 +206,103 @@ export function getPuzzleState(lang: string, lineNumber: number): PuzzleState | 
     return JSON.parse(stored);
   } catch {
     return null;
+  }
+}
+
+/**
+ * Load puzzle state from Firestore
+ */
+export async function loadPuzzleFromFirestore(lang: string, lineNumber: number): Promise<PuzzleState | null> {
+  if (!db || !isFirebaseConfigured || !auth?.currentUser) return null;
+
+  try {
+    const userId = auth.currentUser.uid;
+    const progressRef = doc(db, 'users', userId, 'puzzleProgress', `${lang}:${lineNumber}`);
+    const progressSnap = await getDoc(progressRef);
+
+    if (progressSnap.exists()) {
+      return progressSnap.data() as PuzzleState;
+    }
+  } catch (error) {
+    console.error('Failed to load puzzle from Firestore:', error);
+  }
+
+  return null;
+}
+
+/**
+ * Sync all localStorage puzzle data to Firestore
+ * @param userId - Optional user ID to use instead of auth.currentUser
+ */
+export async function syncAllPuzzleToFirestore(userId?: string): Promise<void> {
+  const uid = userId || auth?.currentUser?.uid;
+  if (!db || !isFirebaseConfigured || !uid) return;
+
+  try {
+    const keys = Object.keys(localStorage).filter(k => k.startsWith('puzzle:'));
+
+    for (const key of keys) {
+      const stored = localStorage.getItem(key);
+      if (!stored) continue;
+
+      const parts = key.split(':');
+      if (parts.length !== 3) continue;
+
+      const [, lang] = parts;
+      const data = JSON.parse(stored) as PuzzleState;
+
+      await syncPuzzleToFirestoreWithUserId(uid, lang, data);
+    }
+  } catch (error) {
+    console.error('Failed to sync all puzzle to Firestore:', error);
+  }
+}
+
+/**
+ * Sync puzzle state to Firestore with explicit userId
+ */
+async function syncPuzzleToFirestoreWithUserId(userId: string, lang: string, state: PuzzleState): Promise<void> {
+  if (!db || !isFirebaseConfigured) return;
+
+  try {
+    const progressRef = doc(db, 'users', userId, 'puzzleProgress', `${lang}:${state.lineNumber}`);
+
+    await setDoc(progressRef, {
+      ...state,
+      lang,
+      updatedAt: new Date(),
+    }, { merge: true });
+  } catch (error) {
+    console.error('Failed to sync puzzle to Firestore:', error);
+  }
+}
+
+/**
+ * Load all puzzle data from Firestore and merge with localStorage
+ */
+export async function loadAllPuzzleFromFirestore(lang: string, totalLines: number): Promise<void> {
+  if (!db || !isFirebaseConfigured || !auth?.currentUser) return;
+
+  try {
+    const userId = auth.currentUser.uid;
+
+    for (let i = 0; i < totalLines; i++) {
+      const progressRef = doc(db, 'users', userId, 'puzzleProgress', `${lang}:${i}`);
+      const progressSnap = await getDoc(progressRef);
+
+      if (progressSnap.exists()) {
+        const cloudData = progressSnap.data() as PuzzleState;
+        const localState = getPuzzleState(lang, i);
+
+        // Merge: use cloud data if more progress, otherwise keep local
+        if (!localState || (cloudData.completed && !localState.completed)) {
+          const key = `puzzle:${lang}:${i}`;
+          localStorage.setItem(key, JSON.stringify(cloudData));
+        }
+      }
+    }
+  } catch (error) {
+    console.error('Failed to load puzzle from Firestore:', error);
   }
 }
 
@@ -184,6 +326,7 @@ export function getPuzzleStats(lang: string, totalLines: number): {
   totalAttempts: number;
   averageHints: number;
   averageTime: number;
+  progress: number; // 0-100 percentage
 } {
   let completed = 0;
   let totalAttempts = 0;
@@ -211,6 +354,7 @@ export function getPuzzleStats(lang: string, totalLines: number): {
     totalAttempts,
     averageHints: completed > 0 ? totalHints / completed : 0,
     averageTime: completed > 0 ? totalTime / completed : 0,
+    progress: totalLines > 0 ? (completed / totalLines) * 100 : 0,
   };
 }
 

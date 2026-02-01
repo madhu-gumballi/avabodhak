@@ -1,6 +1,6 @@
 {
   "name": "avabodhak",
-  "version": "0.46.0",
+  "version": "0.57.0",
   "private": true,
   "type": "module",
   "scripts": {
@@ -21,6 +21,7 @@
     "@indic-transliteration/sanscript": "^1.0.2",
     "@mui/icons-material": "^7.3.5",
     "@mui/material": "^7.3.5",
+    "firebase": "^11.2.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
