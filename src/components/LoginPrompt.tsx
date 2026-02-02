@@ -75,70 +75,8 @@ export default function LoginPrompt({ open }: LoginPromptProps) {
           </Typography>
         </Box>
 
-        {/* Features showcase */}
-        <Box sx={{ p: 3 }}>
-          <Typography
-            variant="overline"
-            sx={{ color: 'text.secondary', display: 'block', mb: 2, textAlign: 'center' }}
-          >
-            What you can do
-          </Typography>
-
-          <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 2, mb: 3 }}>
-            <FeatureCard
-              icon={<SchoolIcon sx={{ color: '#a78bfa' }} />}
-              title="Practice Mode"
-              description="Learn verses with guided word masking"
-            />
-            <FeatureCard
-              icon={<ExtensionIcon sx={{ color: '#f472b6' }} />}
-              title="Puzzle Mode"
-              description="Test recall with word scrambles"
-            />
-            <FeatureCard
-              icon={<TranslateIcon sx={{ color: '#fbbf24' }} />}
-              title="10 Scripts"
-              description="Devanagari, Kannada, Telugu & more"
-            />
-            <FeatureCard
-              icon={<CloudIcon sx={{ color: '#38bdf8' }} />}
-              title="Cloud Sync"
-              description="Progress saved across all devices"
-            />
-          </Box>
-
-          {/* Gamification highlights */}
-          <Box
-            sx={{
-              display: 'flex',
-              justifyContent: 'center',
-              gap: 4,
-              py: 2,
-              borderTop: '1px solid rgba(255,255,255,0.1)',
-              borderBottom: '1px solid rgba(255,255,255,0.1)',
-              mb: 3,
-            }}
-          >
-            <Box sx={{ textAlign: 'center' }}>
-              <LocalFireDepartmentIcon sx={{ color: '#fb923c', fontSize: 28 }} />
-              <Typography variant="caption" display="block" color="text.secondary">
-                Streaks
-              </Typography>
-            </Box>
-            <Box sx={{ textAlign: 'center' }}>
-              <EmojiEventsIcon sx={{ color: '#fbbf24', fontSize: 28 }} />
-              <Typography variant="caption" display="block" color="text.secondary">
-                Achievements
-              </Typography>
-            </Box>
-            <Box sx={{ textAlign: 'center' }}>
-              <LeaderboardIcon sx={{ color: '#38bdf8', fontSize: 28 }} />
-              <Typography variant="caption" display="block" color="text.secondary">
-                Leaderboards
-              </Typography>
-            </Box>
-          </Box>
-
+        {/* Sign in section - prominent at top */}
+        <Box sx={{ px: 3, pt: 3, pb: 2 }}>
           {/* Error message */}
           {error && (
             <Alert severity="error" sx={{ mb: 2 }}>
@@ -160,16 +98,17 @@ export default function LoginPrompt({ open }: LoginPromptProps) {
               onClick={handleGoogleSignIn}
               disabled={loading}
               sx={{
-                py: 1.75,
+                py: 2,
                 bgcolor: 'white',
                 color: '#1f2937',
-                fontSize: '1rem',
-                fontWeight: 600,
+                fontSize: '1.1rem',
+                fontWeight: 700,
                 '&:hover': {
                   bgcolor: 'grey.100',
                 },
                 textTransform: 'none',
                 borderRadius: 2,
+                boxShadow: '0 4px 14px rgba(255,255,255,0.25)',
               }}
             >
               {loading ? 'Signing in...' : 'Continue with Google'}
@@ -179,10 +118,78 @@ export default function LoginPrompt({ open }: LoginPromptProps) {
           <Typography
             variant="caption"
             color="text.secondary"
-            sx={{ display: 'block', textAlign: 'center', mt: 2 }}
+            sx={{ display: 'block', textAlign: 'center', mt: 1.5 }}
           >
             Sign in to track your progress and compete on leaderboards
           </Typography>
+        </Box>
+
+        {/* Divider */}
+        <Box sx={{ px: 3 }}>
+          <Box sx={{ borderTop: '1px solid rgba(255,255,255,0.08)' }} />
+        </Box>
+
+        {/* Features showcase - scrollable on small devices */}
+        <Box sx={{ p: 3, pt: 2 }}>
+          <Typography
+            variant="overline"
+            sx={{ color: 'text.secondary', display: 'block', mb: 1.5, textAlign: 'center', fontSize: '0.65rem' }}
+          >
+            What you can do
+          </Typography>
+
+          <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 1.5, mb: 2 }}>
+            <FeatureCard
+              icon={<SchoolIcon sx={{ color: '#a78bfa', fontSize: 20 }} />}
+              title="Practice Mode"
+              description="Guided word masking"
+            />
+            <FeatureCard
+              icon={<ExtensionIcon sx={{ color: '#f472b6', fontSize: 20 }} />}
+              title="Puzzle Mode"
+              description="Word scrambles"
+            />
+            <FeatureCard
+              icon={<TranslateIcon sx={{ color: '#fbbf24', fontSize: 20 }} />}
+              title="10 Scripts"
+              description="Multiple languages"
+            />
+            <FeatureCard
+              icon={<CloudIcon sx={{ color: '#38bdf8', fontSize: 20 }} />}
+              title="Cloud Sync"
+              description="Cross-device progress"
+            />
+          </Box>
+
+          {/* Gamification highlights - compact */}
+          <Box
+            sx={{
+              display: 'flex',
+              justifyContent: 'center',
+              gap: 3,
+              py: 1.5,
+              borderTop: '1px solid rgba(255,255,255,0.06)',
+            }}
+          >
+            <Box sx={{ textAlign: 'center' }}>
+              <LocalFireDepartmentIcon sx={{ color: '#fb923c', fontSize: 22 }} />
+              <Typography variant="caption" display="block" color="text.secondary" sx={{ fontSize: '0.65rem' }}>
+                Streaks
+              </Typography>
+            </Box>
+            <Box sx={{ textAlign: 'center' }}>
+              <EmojiEventsIcon sx={{ color: '#fbbf24', fontSize: 22 }} />
+              <Typography variant="caption" display="block" color="text.secondary" sx={{ fontSize: '0.65rem' }}>
+                Achievements
+              </Typography>
+            </Box>
+            <Box sx={{ textAlign: 'center' }}>
+              <LeaderboardIcon sx={{ color: '#38bdf8', fontSize: 22 }} />
+              <Typography variant="caption" display="block" color="text.secondary" sx={{ fontSize: '0.65rem' }}>
+                Leaderboards
+              </Typography>
+            </Box>
+          </Box>
         </Box>
       </DialogContent>
     </Dialog>
@@ -201,19 +208,19 @@ function FeatureCard({
   return (
     <Box
       sx={{
-        p: 2,
-        borderRadius: 2,
+        p: 1.5,
+        borderRadius: 1.5,
         bgcolor: 'rgba(255, 255, 255, 0.03)',
-        border: '1px solid rgba(255, 255, 255, 0.06)',
+        border: '1px solid rgba(255, 255, 255, 0.05)',
       }}
     >
-      <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 0.5 }}>
+      <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.75, mb: 0.25 }}>
         {icon}
-        <Typography variant="subtitle2" fontWeight="bold">
+        <Typography variant="caption" fontWeight="bold" sx={{ fontSize: '0.75rem' }}>
           {title}
         </Typography>
       </Box>
-      <Typography variant="caption" color="text.secondary">
+      <Typography variant="caption" color="text.secondary" sx={{ fontSize: '0.65rem' }}>
         {description}
       </Typography>
     </Box>

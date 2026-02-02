@@ -246,6 +246,27 @@ interface LeaderboardRowProps {
   youLabel: string
 }
 
+// Format display name for privacy: "Ra*** G." for others, full name for current user
+function formatDisplayName(displayName: string, isCurrentUser: boolean): string {
+  if (isCurrentUser) {
+    return displayName // Show full name for current user
+  }
+
+  const parts = displayName.trim().split(/\s+/)
+  if (parts.length === 1) {
+    // Single name - show first 2 chars + asterisks
+    const name = parts[0]
+    if (name.length <= 2) return name
+    return name.slice(0, 2) + '***'
+  }
+
+  // Multiple parts - show first 2 chars + asterisks + last initial
+  const firstName = parts[0]
+  const lastInitial = parts[parts.length - 1][0]?.toUpperCase() || ''
+  const maskedFirst = firstName.length <= 2 ? firstName : firstName.slice(0, 2) + '***'
+  return `${maskedFirst} ${lastInitial}.`
+}
+
 function LeaderboardRow({ entry, isCurrentUser, position, youLabel }: LeaderboardRowProps) {
   const getMedalColor = () => {
     switch (position) {
@@ -261,6 +282,7 @@ function LeaderboardRow({ entry, isCurrentUser, position, youLabel }: Leaderboar
   }
 
   const medalColor = getMedalColor()
+  const privacyFriendlyName = formatDisplayName(entry.displayName, isCurrentUser)
 
   return (
     <Box
@@ -332,7 +354,7 @@ function LeaderboardRow({ entry, isCurrentUser, position, youLabel }: Leaderboar
             whiteSpace: 'nowrap',
           }}
         >
-          {entry.displayName}
+          {privacyFriendlyName}
           {isCurrentUser && (
             <Typography
               component="span"

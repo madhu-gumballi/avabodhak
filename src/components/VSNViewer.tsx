@@ -19,7 +19,6 @@ import { FlowLens } from './FlowLens';
 // import { FlowTransport } from './FlowTransport';
 import { FlowTimeline } from './FlowTimeline';
 import { FlowMap } from './FlowMap';
-import { FadingImage } from './FadingImage';
 import { SearchPanel } from './SearchPanel';
 import { OverlayControls } from './OverlayControls';
 import { LineTTSBar } from './LineTTSBar';
@@ -206,7 +205,6 @@ export function VSNViewer({ onBack, textOverride, subtitleOverrides, availableLa
   const [searchMarks, setSearchMarks] = useState<number[]>([]);
   const [freezing, setFreezing] = useState(false);
   const [lensH, setLensH] = useState<number | null>(null);
-  const [sideH, setSideH] = useState<number | null>(null);
   const [legendOpen, setLegendOpen] = useState(true);
   const [viewMode, setViewMode] = useState<'reading' | 'practice' | 'puzzle'>('reading');
   const [learnMode, setLearnMode] = useState<boolean>(() => {
@@ -253,15 +251,9 @@ export function VSNViewer({ onBack, textOverride, subtitleOverrides, availableLa
 
   // Always show current line number
   useEffect(() => setNavLineNumber(flow.state.lineIndex + 1), [flow.state.lineIndex]);
-  const sideWrapMobileRef = useRef<HTMLDivElement>(null);
-  const sideWrapDesktopRef = useRef<HTMLDivElement>(null);
   const measureHeights = () => {
     const a = lensWrapRef.current?.getBoundingClientRect().height || null;
-    const bm = sideWrapMobileRef.current?.getBoundingClientRect().height || 0;
-    const bd = sideWrapDesktopRef.current?.getBoundingClientRect().height || 0;
-    const b = Math.max(bm, bd) || null;
     setLensH(a);
-    setSideH(b);
   };
   useLayoutEffect(() => { if (freezing) measureHeights(); }, [freezing, flow.state.lineIndex]);
 
@@ -600,29 +592,9 @@ export function VSNViewer({ onBack, textOverride, subtitleOverrides, availableLa
     return () => window.removeEventListener('keydown', onKey);
   }, [handleLineTTS, viewMode]);
 
-  // Resolve image via media mapping (per 12-line chunk)
+  // Get current line data
   const currentLine = (text.lines as any)[flow.state.lineIndex] as any;
   const chapterLabel = currentLine?.chapter as string | undefined;
-  const mediaSrc = (() => {
-    const id = currentLine?.id;
-    const m = (text.media || []) as any[];
-    const hit = m.find((x) => Array.isArray(x.lines) && x.lines.includes(id));
-    return hit?.src || '';
-  })();
-
-  // Preload adjacent images to smooth navigation (based on neighbor lines' media mapping)
-  useEffect(() => {
-    const neighborIds = [
-      (text.lines as any)[Math.max(0, flow.state.lineIndex - 1)]?.id,
-      (text.lines as any)[Math.min(flow.totalLines - 1, flow.state.lineIndex + 1)]?.id,
-    ].filter(Boolean);
-    const sources = (text.media || []).filter((m: any) => neighborIds.some((id: string) => m.lines?.includes(id))) as any[];
-    sources.forEach((mm) => {
-      if (!mm?.src) return;
-      const img = new Image();
-      img.src = mm.src;
-    });
-  }, [flow.state.lineIndex, flow.totalLines, text.lines, text.media]);
 
   // Persist legendOpen to localStorage per language
   useEffect(() => {
@@ -1516,7 +1488,7 @@ export function VSNViewer({ onBack, textOverride, subtitleOverrides, availableLa
                             const ae = document.activeElement as HTMLElement | null;
                             if (ae && ae !== document.body) ae.blur();
                           } catch { }
-                          setTimeout(() => { setFreezing(false); setLensH(null); setSideH(null); }, 120);
+                          setTimeout(() => { setFreezing(false); setLensH(null); }, 120);
                         }}
                         lang={lang}
                         legendActive={legendOpen}
@@ -1551,20 +1523,6 @@ export function VSNViewer({ onBack, textOverride, subtitleOverrides, availableLa
                         </Typography>
                       </Box>
                     )}
-                    <Box sx={{ mt: 2, display: { xs: detailsOpen ? 'block' : 'none', md: 'none' } }} ref={sideWrapMobileRef}>
-                      <Box sx={{ transition: 'height 180ms ease', height: freezing && sideH ? `${sideH}px` : 'auto', overflow: freezing ? 'hidden' : 'visible' }}>
-                        <Paper sx={{ p: 2, borderRadius: 3 }}>
-                          <FadingImage src={mediaSrc} className="w-full" />
-                        </Paper>
-                      </Box>
-                    </Box>
-                    <Box sx={{ display: { xs: 'none', md: detailsOpen ? 'block' : 'none' }, mt: 2 }}>
-                      <Box ref={sideWrapDesktopRef as any} sx={{ transition: 'height 180ms ease', height: freezing && sideH ? `${sideH}px` : undefined, overflow: freezing ? 'hidden' : undefined }}>
-                        <Paper sx={{ p: 2, borderRadius: 3 }}>
-                          <FadingImage src={mediaSrc} className="w-full" />
-                        </Paper>
-                      </Box>
-                    </Box>
 
                     {/* Mobile Inline Verse Details - shows below main content when toggled */}
                     <Box
