@@ -4,7 +4,7 @@
  * Syncs progress to both localStorage (cache) and Firestore (cloud)
  */
 
-import { doc, getDoc, setDoc, updateDoc } from 'firebase/firestore'
+import { doc, getDoc, setDoc, updateDoc, collection, getDocs } from 'firebase/firestore'
 import { db, isFirebaseConfigured } from './firebase'
 import { auth } from './firebase'
 
@@ -377,4 +377,50 @@ export function getPracticeStats(lang: string, totalLines: number, stotraKey?: s
     totalLines,
     progress: totalLines > 0 ? completedLines / totalLines : 0
   };
+}
+
+/**
+ * Bulk-load all practice progress from Firestore into localStorage.
+ * Uses a single getDocs call on the practiceProgress collection
+ * instead of reading each line individually.
+ */
+export async function bulkLoadPracticeFromFirestore(userId: string): Promise<void> {
+  if (!db || !isFirebaseConfigured) return;
+
+  try {
+    const colRef = collection(db, 'users', userId, 'practiceProgress');
+    const snapshot = await getDocs(colRef);
+
+    snapshot.forEach((docSnap) => {
+      const data = docSnap.data() as SerializedPracticeState & { lang?: string; stotraKey?: string | null };
+      const lang = data.lang;
+      const stotraKey = data.stotraKey;
+      const lineNumber = data.lineNumber;
+      if (lang == null || lineNumber == null) return;
+
+      const key = stotraKey
+        ? `practice:${stotraKey}:${lang}:${lineNumber}`
+        : `practice:${lang}:${lineNumber}`;
+
+      // Merge: use cloud data if local doesn't exist or cloud has more progress
+      const existing = localStorage.getItem(key);
+      if (!existing) {
+        localStorage.setItem(key, JSON.stringify(data));
+      } else {
+        try {
+          const local = JSON.parse(existing) as SerializedPracticeState;
+          if (
+            (data.completed && !local.completed) ||
+            (data.revealedIndices?.length || 0) > (local.revealedIndices?.length || 0)
+          ) {
+            localStorage.setItem(key, JSON.stringify(data));
+          }
+        } catch {
+          localStorage.setItem(key, JSON.stringify(data));
+        }
+      }
+    });
+  } catch (error) {
+    console.error('[Practice] Failed to bulk-load from Firestore:', error);
+  }
 }

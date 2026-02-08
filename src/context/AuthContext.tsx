@@ -39,8 +39,8 @@ import {
 } from '../lib/userService'
 import { checkAchievementAfterAction, ACHIEVEMENTS } from '../lib/achievements'
 import { updateLeaderboardEntry } from '../lib/leaderboard'
-import { syncAllPracticeToFirestore } from '../lib/practice'
-import { syncAllPuzzleToFirestore } from '../lib/puzzle'
+import { syncAllPracticeToFirestore, bulkLoadPracticeFromFirestore } from '../lib/practice'
+import { syncAllPuzzleToFirestore, bulkLoadPuzzleFromFirestore } from '../lib/puzzle'
 
 interface AuthContextType {
   // Auth state
@@ -114,6 +114,10 @@ export function AuthProvider({ children }: AuthProviderProps) {
           const userDoc = await getUserDocument(firebaseUser)
           setUserData(userDoc)
 
+          // Load cloud progress into localStorage first (for cross-device sync)
+          await bulkLoadPracticeFromFirestore(firebaseUser.uid)
+          await bulkLoadPuzzleFromFirestore(firebaseUser.uid)
+
           // Migrate localStorage data if needed
           await migrateLocalStorageToFirestore(firebaseUser.uid)
 
@@ -163,6 +167,10 @@ export function AuthProvider({ children }: AuthProviderProps) {
       // Get user document
       const userDoc = await getUserDocument(result.user)
       setUserData(userDoc)
+
+      // Load cloud progress into localStorage first (for cross-device sync)
+      await bulkLoadPracticeFromFirestore(result.user.uid)
+      await bulkLoadPuzzleFromFirestore(result.user.uid)
 
       // Migrate localStorage data
       await migrateLocalStorageToFirestore(result.user.uid)

@@ -4,7 +4,7 @@
  * Syncs progress to both localStorage (cache) and Firestore (cloud)
  */
 
-import { doc, getDoc, setDoc } from 'firebase/firestore'
+import { doc, getDoc, setDoc, collection, getDocs } from 'firebase/firestore'
 import { db, isFirebaseConfigured } from './firebase'
 import { auth } from './firebase'
 import { basicSplit } from './tokenize';
@@ -410,4 +410,47 @@ export function getPuzzleStats(lang: string, totalLines: number, stotraKey?: str
  */
 export function isPuzzleSuitable(line: string): boolean {
   return !isChapterOrSectionLine(line) && basicSplit(line).length >= 3;
+}
+
+/**
+ * Bulk-load all puzzle progress from Firestore into localStorage.
+ * Uses a single getDocs call on the puzzleProgress collection
+ * instead of reading each line individually.
+ */
+export async function bulkLoadPuzzleFromFirestore(userId: string): Promise<void> {
+  if (!db || !isFirebaseConfigured) return;
+
+  try {
+    const colRef = collection(db, 'users', userId, 'puzzleProgress');
+    const snapshot = await getDocs(colRef);
+
+    snapshot.forEach((docSnap) => {
+      const data = docSnap.data() as PuzzleState & { lang?: string; stotraKey?: string | null };
+      const lang = data.lang;
+      const stotraKey = data.stotraKey;
+      const lineNumber = data.lineNumber;
+      if (lang == null || lineNumber == null) return;
+
+      const key = stotraKey
+        ? `puzzle:${stotraKey}:${lang}:${lineNumber}`
+        : `puzzle:${lang}:${lineNumber}`;
+
+      // Merge: use cloud data if local doesn't exist or cloud has more progress
+      const existing = localStorage.getItem(key);
+      if (!existing) {
+        localStorage.setItem(key, JSON.stringify(data));
+      } else {
+        try {
+          const local = JSON.parse(existing) as PuzzleState;
+          if (data.completed && !local.completed) {
+            localStorage.setItem(key, JSON.stringify(data));
+          }
+        } catch {
+          localStorage.setItem(key, JSON.stringify(data));
+        }
+      }
+    });
+  } catch (error) {
+    console.error('[Puzzle] Failed to bulk-load from Firestore:', error);
+  }
 }

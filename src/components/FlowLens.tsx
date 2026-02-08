@@ -321,8 +321,8 @@ export function FlowLens({ tokens, rows, wordIndex, lineIndex, lang, legendOpen:
             </button>
           </div>
 
-          {/* Word breakdown – show whole words with subtle diacritic highlighting */}
-          {!isNumericLike(curr) && secVisible && curr && (
+          {/* Word breakdown – show whole words with subtle diacritic highlighting (IAST/English only) */}
+          {lang === 'iast' && !isNumericLike(curr) && secVisible && curr && (
             <div className={`mt-3 px-2 py-1 rounded-md border w-full overflow-hidden ${learnMode ? 'bg-amber-900/20 border-amber-400/30 text-amber-200' : 'bg-slate-900/60 border-emerald-300/35 text-emerald-200'}`}>
               <div
                 className="flex flex-wrap items-center justify-center gap-1.5"
