@@ -26,6 +26,7 @@ import { basicSplit } from '../lib/tokenize';
 import { isChapterOrSectionLine } from '../lib/practice';
 import { analytics } from '../lib/analytics';
 import { useAuth } from '../context/AuthContext';
+import { playSuccessSoundIfEnabled } from '../lib/sound';
 
 // Haptic feedback utility (reused from PracticeView)
 const triggerHaptic = (pattern: 'light' | 'medium' | 'success' | 'error' = 'light') => {
@@ -51,12 +52,13 @@ interface Props {
   lines: string[];
   chapterIndices?: number[]; // indices of lines that are chapter headers
   lang: Lang;
+  stotraKey?: string; // Stotra identifier for storage isolation
   initialLineIndex?: number;
   onExit: () => void;
   T: (key: string) => string;
 }
 
-export function PuzzleView({ lines, chapterIndices = [], lang, initialLineIndex = 0, onExit, T }: Props) {
+export function PuzzleView({ lines, chapterIndices = [], lang, stotraKey, initialLineIndex = 0, onExit, T }: Props) {
   const { recordPuzzleComplete } = useAuth();
   const [lineIndex, setLineIndex] = useState(initialLineIndex);
   const [correctSegments, setCorrectSegments] = useState<PuzzleSegment[]>([]);
@@ -106,7 +108,7 @@ export function PuzzleView({ lines, chapterIndices = [], lang, initialLineIndex 
 
   // Load saved state or initialize new puzzle
   useEffect(() => {
-    const savedState = getPuzzleState(lang, lineIndex);
+    const savedState = getPuzzleState(lang, lineIndex, stotraKey);
     if (savedState) {
       // Resume saved or completed puzzle - load full state
       const words = basicSplit(currentLine);
@@ -147,7 +149,7 @@ export function PuzzleView({ lines, chapterIndices = [], lang, initialLineIndex 
     const completed = new Set<number>();
     try {
       for (let i = 0; i < lines.length; i++) {
-        const state = getPuzzleState(lang, i);
+        const state = getPuzzleState(lang, i, stotraKey);
         if (state && state.completed) {
           completed.add(i);
         }
@@ -195,10 +197,11 @@ export function PuzzleView({ lines, chapterIndices = [], lang, initialLineIndex 
       // Auto-complete with confetti
       setTimeout(() => {
         triggerHaptic('success');
+        playSuccessSoundIfEnabled();
         setIsComplete(true);
         setShowFeedback(true);
         setCompletedLines(prev => new Set([...prev, lineIndex]));
-        
+
         // Save completed state
         const completionTime = Date.now();
         const state: PuzzleState = {
@@ -211,7 +214,7 @@ export function PuzzleView({ lines, chapterIndices = [], lang, initialLineIndex 
           startTime: startTimeRef.current,
           completionTime,
         };
-        savePuzzleState(lang, state);
+        savePuzzleState(lang, state, stotraKey);
 
         // Record completion for gamification (achievements, daily goals, leaderboard)
         // Perfect = no hints used
@@ -250,6 +253,7 @@ export function PuzzleView({ lines, chapterIndices = [], lang, initialLineIndex 
 
     if (isCorrect) {
       triggerHaptic('success');
+      playSuccessSoundIfEnabled();
       setIsComplete(true);
       setShowFeedback(true);
       setCompletedLines(prev => new Set([...prev, lineIndex]));
@@ -266,7 +270,7 @@ export function PuzzleView({ lines, chapterIndices = [], lang, initialLineIndex 
         startTime: startTimeRef.current,
         completionTime,
       };
-      savePuzzleState(lang, state);
+      savePuzzleState(lang, state, stotraKey);
 
       // Analytics
       analytics.practiceAction('line_complete');
@@ -371,7 +375,7 @@ export function PuzzleView({ lines, chapterIndices = [], lang, initialLineIndex 
       startTime: startTimeRef.current,
       completionTime,
     };
-    savePuzzleState(lang, state);
+    savePuzzleState(lang, state, stotraKey);
     actionCountRef.current++;
   };
 
@@ -401,7 +405,7 @@ export function PuzzleView({ lines, chapterIndices = [], lang, initialLineIndex 
       hintsUsed,
       startTime: startTimeRef.current,
     };
-    savePuzzleState(lang, state);
+    savePuzzleState(lang, state, stotraKey);
   };
 
   // Navigation

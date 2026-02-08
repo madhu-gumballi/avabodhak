@@ -25,6 +25,7 @@ import {
   DEFAULT_STOTRA_PROGRESS,
   AchievementId,
 } from './userTypes'
+import { detectRegionFromTimezone } from './region'
 
 // Local storage keys for guest mode and caching
 const STORAGE_KEYS = {
@@ -85,6 +86,7 @@ export async function createUserDocument(user: User): Promise<UserDocument> {
       displayName: user.displayName || 'Anonymous',
       email: user.email || '',
       photoURL: user.photoURL,
+      region: detectRegionFromTimezone(),
       createdAt: now,
       lastLoginAt: now,
     },
@@ -116,6 +118,7 @@ export async function getUserDocument(user: User): Promise<UserDocument> {
         displayName: user.displayName || 'Guest',
         email: user.email || '',
         photoURL: user.photoURL,
+        region: detectRegionFromTimezone(),
         createdAt: now,
         lastLoginAt: now,
       },
@@ -134,10 +137,19 @@ export async function getUserDocument(user: User): Promise<UserDocument> {
 
   if (userSnap.exists()) {
     const data = userSnap.data() as UserDocument
-    // Update last login
-    await updateDoc(userRef, {
-      'profile.lastLoginAt': serverTimestamp(),
-    })
+    // Backfill region for existing users
+    if (!data.profile.region) {
+      data.profile.region = detectRegionFromTimezone()
+      await updateDoc(userRef, {
+        'profile.lastLoginAt': serverTimestamp(),
+        'profile.region': data.profile.region,
+      })
+    } else {
+      // Update last login
+      await updateDoc(userRef, {
+        'profile.lastLoginAt': serverTimestamp(),
+      })
+    }
     cacheUserData(data)
     return data
   }
@@ -172,6 +184,34 @@ export async function updateUserPreferences(
   const cached = getCachedUserData()
   if (cached) {
     cached.preferences = { ...cached.preferences, ...preferences }
+    cacheUserData(cached)
+  }
+}
+
+// Update user profile
+export async function updateUserProfile(
+  userId: string,
+  profile: Partial<UserProfile>
+): Promise<void> {
+  if (!db || !isFirebaseConfigured) {
+    const cached = getCachedUserData()
+    if (cached) {
+      cached.profile = { ...cached.profile, ...profile }
+      cacheUserData(cached)
+    }
+    return
+  }
+
+  const userRef = doc(db, 'users', userId)
+  const updates: Record<string, unknown> = {}
+  for (const [key, value] of Object.entries(profile)) {
+    updates[`profile.${key}`] = value
+  }
+  await updateDoc(userRef, updates)
+
+  const cached = getCachedUserData()
+  if (cached) {
+    cached.profile = { ...cached.profile, ...profile }
     cacheUserData(cached)
   }
 }
@@ -449,63 +489,85 @@ export async function migrateLocalStorageToFirestore(userId: string): Promise<vo
 
   for (const key of practiceKeys) {
     const parts = key.split(':')
-    if (parts.length === 3) {
-      const [, lang, lineNum] = parts
-      const stotraId = lang // Use language as stotra identifier for now
-      if (!stotraProgress[stotraId]) {
-        stotraProgress[stotraId] = {
-          practice: { completedLines: [], totalRevealed: 0, lastPracticedAt: null },
-        }
+    let stotraId: string
+    let lineNum: string
+
+    if (parts.length === 4) {
+      // stotra-specific: practice:stotra:lang:line
+      stotraId = `${parts[1]}:${parts[2]}`
+      lineNum = parts[3]
+    } else if (parts.length === 3) {
+      // legacy: practice:lang:line
+      stotraId = parts[1]
+      lineNum = parts[2]
+    } else {
+      continue
+    }
+
+    if (!stotraProgress[stotraId]) {
+      stotraProgress[stotraId] = {
+        practice: { completedLines: [], totalRevealed: 0, lastPracticedAt: null },
       }
-      const data = localStorage.getItem(key)
-      if (data) {
-        try {
-          const parsed = JSON.parse(data)
-          if (parsed.completed) {
-            stotraProgress[stotraId].practice!.completedLines!.push(parseInt(lineNum))
-          }
-          stotraProgress[stotraId].practice!.totalRevealed! += parsed.revealedIndices?.length || 0
-        } catch {
-          // Skip invalid data
+    }
+    const data = localStorage.getItem(key)
+    if (data) {
+      try {
+        const parsed = JSON.parse(data)
+        if (parsed.completed) {
+          stotraProgress[stotraId].practice!.completedLines!.push(parseInt(lineNum))
         }
+        stotraProgress[stotraId].practice!.totalRevealed! += parsed.revealedIndices?.length || 0
+      } catch {
+        // Skip invalid data
       }
     }
   }
 
   for (const key of puzzleKeys) {
     const parts = key.split(':')
-    if (parts.length === 3) {
-      const [, lang, lineNum] = parts
-      const stotraId = lang
-      if (!stotraProgress[stotraId]) {
-        stotraProgress[stotraId] = {
-          puzzle: { completedLines: [], perfectSolves: 0, attempts: 0, hintsUsed: 0, lastPlayedAt: null },
-        }
+    let stotraId: string
+    let lineNum: string
+
+    if (parts.length === 4) {
+      // stotra-specific: puzzle:stotra:lang:line
+      stotraId = `${parts[1]}:${parts[2]}`
+      lineNum = parts[3]
+    } else if (parts.length === 3) {
+      // legacy: puzzle:lang:line
+      stotraId = parts[1]
+      lineNum = parts[2]
+    } else {
+      continue
+    }
+
+    if (!stotraProgress[stotraId]) {
+      stotraProgress[stotraId] = {
+        puzzle: { completedLines: [], perfectSolves: 0, attempts: 0, hintsUsed: 0, lastPlayedAt: null },
       }
-      if (!stotraProgress[stotraId].puzzle) {
-        stotraProgress[stotraId].puzzle = {
-          completedLines: [],
-          perfectSolves: 0,
-          attempts: 0,
-          hintsUsed: 0,
-          lastPlayedAt: null,
-        }
+    }
+    if (!stotraProgress[stotraId].puzzle) {
+      stotraProgress[stotraId].puzzle = {
+        completedLines: [],
+        perfectSolves: 0,
+        attempts: 0,
+        hintsUsed: 0,
+        lastPlayedAt: null,
       }
-      const data = localStorage.getItem(key)
-      if (data) {
-        try {
-          const parsed = JSON.parse(data)
-          if (parsed.completed) {
-            stotraProgress[stotraId].puzzle!.completedLines!.push(parseInt(lineNum))
-            if (parsed.hintsUsed === 0) {
-              stotraProgress[stotraId].puzzle!.perfectSolves! += 1
-            }
+    }
+    const data = localStorage.getItem(key)
+    if (data) {
+      try {
+        const parsed = JSON.parse(data)
+        if (parsed.completed) {
+          stotraProgress[stotraId].puzzle!.completedLines!.push(parseInt(lineNum))
+          if (parsed.hintsUsed === 0) {
+            stotraProgress[stotraId].puzzle!.perfectSolves! += 1
           }
-          stotraProgress[stotraId].puzzle!.attempts! += parsed.attempts || 0
-          stotraProgress[stotraId].puzzle!.hintsUsed! += parsed.hintsUsed || 0
-        } catch {
-          // Skip invalid data
         }
+        stotraProgress[stotraId].puzzle!.attempts! += parsed.attempts || 0
+        stotraProgress[stotraId].puzzle!.hintsUsed! += parsed.hintsUsed || 0
+      } catch {
+        // Skip invalid data
       }
     }
   }

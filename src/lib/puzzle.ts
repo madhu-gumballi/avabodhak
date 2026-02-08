@@ -150,46 +150,48 @@ export function getMaxHints(wordCount: number): number {
 /**
  * Save puzzle state to localStorage and sync to Firestore
  */
-export function savePuzzleState(lang: string, state: PuzzleState): void {
-  // Save to localStorage (cache)
+export function savePuzzleState(lang: string, state: PuzzleState, stotraKey?: string): void {
   try {
-    const key = `puzzle:${lang}:${state.lineNumber}`;
-    localStorage.setItem(key, JSON.stringify(state));
+    if (stotraKey) {
+      // Use stotra-specific key only – avoids cross-stotra collisions
+      const newKey = `puzzle:${stotraKey}:${lang}:${state.lineNumber}`;
+      localStorage.setItem(newKey, JSON.stringify(state));
+    } else {
+      // Legacy path (no stotra context)
+      const legacyKey = `puzzle:${lang}:${state.lineNumber}`;
+      localStorage.setItem(legacyKey, JSON.stringify(state));
+    }
   } catch {
     // Silent fail for localStorage issues
   }
 
   // Sync to Firestore in background
-  syncPuzzleToFirestore(lang, state);
+  syncPuzzleToFirestore(lang, state, stotraKey);
 }
 
 /**
  * Sync puzzle state to Firestore
  */
-async function syncPuzzleToFirestore(lang: string, state: PuzzleState): Promise<void> {
+async function syncPuzzleToFirestore(lang: string, state: PuzzleState, stotraKey?: string): Promise<void> {
   if (!db || !isFirebaseConfigured) {
-    console.log('[Puzzle] Firestore not configured, skipping sync');
     return;
   }
 
   if (!auth?.currentUser) {
-    console.log('[Puzzle] No authenticated user, skipping sync');
     return;
   }
 
   try {
     const userId = auth.currentUser.uid;
-    const progressRef = doc(db, 'users', userId, 'puzzleProgress', `${lang}:${state.lineNumber}`);
-
-    console.log('[Puzzle] Syncing to Firestore:', `puzzleProgress/${lang}:${state.lineNumber}`);
+    const docId = stotraKey ? `${stotraKey}:${lang}:${state.lineNumber}` : `${lang}:${state.lineNumber}`;
+    const progressRef = doc(db, 'users', userId, 'puzzleProgress', docId);
 
     await setDoc(progressRef, {
       ...state,
       lang,
+      stotraKey: stotraKey || null,
       updatedAt: new Date(),
     }, { merge: true });
-
-    console.log('[Puzzle] Sync successful');
   } catch (error) {
     console.error('[Puzzle] Failed to sync to Firestore:', error);
   }
@@ -197,11 +199,20 @@ async function syncPuzzleToFirestore(lang: string, state: PuzzleState): Promise<
 
 /**
  * Get puzzle state from localStorage (cache)
+ * When stotraKey is provided, only reads stotra-specific key (no legacy fallback
+ * to prevent cross-stotra collisions).
  */
-export function getPuzzleState(lang: string, lineNumber: number): PuzzleState | null {
+export function getPuzzleState(lang: string, lineNumber: number, stotraKey?: string): PuzzleState | null {
   try {
-    const key = `puzzle:${lang}:${lineNumber}`;
-    const stored = localStorage.getItem(key);
+    if (stotraKey) {
+      const newKey = `puzzle:${stotraKey}:${lang}:${lineNumber}`;
+      const stored = localStorage.getItem(newKey);
+      if (stored) return JSON.parse(stored);
+      return null;
+    }
+    // Legacy path (no stotra context)
+    const legacyKey = `puzzle:${lang}:${lineNumber}`;
+    const stored = localStorage.getItem(legacyKey);
     if (!stored) return null;
     return JSON.parse(stored);
   } catch {
@@ -212,12 +223,13 @@ export function getPuzzleState(lang: string, lineNumber: number): PuzzleState | 
 /**
  * Load puzzle state from Firestore
  */
-export async function loadPuzzleFromFirestore(lang: string, lineNumber: number): Promise<PuzzleState | null> {
+export async function loadPuzzleFromFirestore(lang: string, lineNumber: number, stotraKey?: string): Promise<PuzzleState | null> {
   if (!db || !isFirebaseConfigured || !auth?.currentUser) return null;
 
   try {
     const userId = auth.currentUser.uid;
-    const progressRef = doc(db, 'users', userId, 'puzzleProgress', `${lang}:${lineNumber}`);
+    const docId = stotraKey ? `${stotraKey}:${lang}:${lineNumber}` : `${lang}:${lineNumber}`;
+    const progressRef = doc(db, 'users', userId, 'puzzleProgress', docId);
     const progressSnap = await getDoc(progressRef);
 
     if (progressSnap.exists()) {
@@ -232,6 +244,8 @@ export async function loadPuzzleFromFirestore(lang: string, lineNumber: number):
 
 /**
  * Sync all localStorage puzzle data to Firestore
+ * Handles both legacy 3-part keys (puzzle:lang:line) and
+ * stotra-specific 4-part keys (puzzle:stotra:lang:line).
  * @param userId - Optional user ID to use instead of auth.currentUser
  */
 export async function syncAllPuzzleToFirestore(userId?: string): Promise<void> {
@@ -246,12 +260,22 @@ export async function syncAllPuzzleToFirestore(userId?: string): Promise<void> {
       if (!stored) continue;
 
       const parts = key.split(':');
-      if (parts.length !== 3) continue;
+      let lang: string;
+      let stotraKey: string | undefined;
 
-      const [, lang] = parts;
+      if (parts.length === 4) {
+        // stotra-specific: puzzle:stotra:lang:line
+        stotraKey = parts[1];
+        lang = parts[2];
+      } else if (parts.length === 3) {
+        // legacy: puzzle:lang:line
+        lang = parts[1];
+      } else {
+        continue;
+      }
+
       const data = JSON.parse(stored) as PuzzleState;
-
-      await syncPuzzleToFirestoreWithUserId(uid, lang, data);
+      await syncPuzzleToFirestoreWithUserId(uid, lang, data, stotraKey);
     }
   } catch (error) {
     console.error('Failed to sync all puzzle to Firestore:', error);
@@ -261,15 +285,17 @@ export async function syncAllPuzzleToFirestore(userId?: string): Promise<void> {
 /**
  * Sync puzzle state to Firestore with explicit userId
  */
-async function syncPuzzleToFirestoreWithUserId(userId: string, lang: string, state: PuzzleState): Promise<void> {
+async function syncPuzzleToFirestoreWithUserId(userId: string, lang: string, state: PuzzleState, stotraKey?: string): Promise<void> {
   if (!db || !isFirebaseConfigured) return;
 
   try {
-    const progressRef = doc(db, 'users', userId, 'puzzleProgress', `${lang}:${state.lineNumber}`);
+    const docId = stotraKey ? `${stotraKey}:${lang}:${state.lineNumber}` : `${lang}:${state.lineNumber}`;
+    const progressRef = doc(db, 'users', userId, 'puzzleProgress', docId);
 
     await setDoc(progressRef, {
       ...state,
       lang,
+      stotraKey: stotraKey || null,
       updatedAt: new Date(),
     }, { merge: true });
   } catch (error) {
@@ -280,23 +306,24 @@ async function syncPuzzleToFirestoreWithUserId(userId: string, lang: string, sta
 /**
  * Load all puzzle data from Firestore and merge with localStorage
  */
-export async function loadAllPuzzleFromFirestore(lang: string, totalLines: number): Promise<void> {
+export async function loadAllPuzzleFromFirestore(lang: string, totalLines: number, stotraKey?: string): Promise<void> {
   if (!db || !isFirebaseConfigured || !auth?.currentUser) return;
 
   try {
     const userId = auth.currentUser.uid;
 
     for (let i = 0; i < totalLines; i++) {
-      const progressRef = doc(db, 'users', userId, 'puzzleProgress', `${lang}:${i}`);
+      const docId = stotraKey ? `${stotraKey}:${lang}:${i}` : `${lang}:${i}`;
+      const progressRef = doc(db, 'users', userId, 'puzzleProgress', docId);
       const progressSnap = await getDoc(progressRef);
 
       if (progressSnap.exists()) {
         const cloudData = progressSnap.data() as PuzzleState;
-        const localState = getPuzzleState(lang, i);
+        const localState = getPuzzleState(lang, i, stotraKey);
 
         // Merge: use cloud data if more progress, otherwise keep local
         if (!localState || (cloudData.completed && !localState.completed)) {
-          const key = `puzzle:${lang}:${i}`;
+          const key = stotraKey ? `puzzle:${stotraKey}:${lang}:${i}` : `puzzle:${lang}:${i}`;
           localStorage.setItem(key, JSON.stringify(cloudData));
         }
       }
@@ -309,10 +336,12 @@ export async function loadAllPuzzleFromFirestore(lang: string, totalLines: numbe
 /**
  * Clear puzzle state for a specific line
  */
-export function clearPuzzleState(lang: string, lineNumber: number): void {
+export function clearPuzzleState(lang: string, lineNumber: number, stotraKey?: string): void {
   try {
-    const key = `puzzle:${lang}:${lineNumber}`;
-    localStorage.removeItem(key);
+    if (stotraKey) {
+      localStorage.removeItem(`puzzle:${stotraKey}:${lang}:${lineNumber}`);
+    }
+    localStorage.removeItem(`puzzle:${lang}:${lineNumber}`);
   } catch {
     // Silent fail
   }
@@ -321,7 +350,25 @@ export function clearPuzzleState(lang: string, lineNumber: number): void {
 /**
  * Get puzzle statistics
  */
-export function getPuzzleStats(lang: string, totalLines: number): {
+/**
+ * Get the next uncompleted puzzle line index
+ * Returns 0 if all are completed
+ */
+export function getNextUncompletedPuzzleLine(lang: string, totalLines: number, stotraKey?: string): number {
+  try {
+    for (let i = 0; i < totalLines; i++) {
+      const state = getPuzzleState(lang, i, stotraKey);
+      if (!state || !state.completed) {
+        return i;
+      }
+    }
+  } catch {
+    // Silent fail
+  }
+  return 0;
+}
+
+export function getPuzzleStats(lang: string, totalLines: number, stotraKey?: string): {
   completed: number;
   totalAttempts: number;
   averageHints: number;
@@ -335,7 +382,7 @@ export function getPuzzleStats(lang: string, totalLines: number): {
 
   try {
     for (let i = 0; i < totalLines; i++) {
-      const state = getPuzzleState(lang, i);
+      const state = getPuzzleState(lang, i, stotraKey);
       if (state && state.completed) {
         completed++;
         totalAttempts += state.attempts;

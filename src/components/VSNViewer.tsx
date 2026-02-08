@@ -42,7 +42,7 @@ import LeaderboardPanel from './LeaderboardPanel';
 import { isTTSEnabled, isTTSSupportedForLang, LineTTSPlayer } from '../lib/tts';
 
 
-export function VSNViewer({ onBack, textOverride, subtitleOverrides, availableLangs, preferredLang }: { onBack: () => void; textOverride?: TextFile; subtitleOverrides?: Partial<Record<Lang, string>>; availableLangs?: Lang[]; preferredLang?: Lang }) {
+export function VSNViewer({ onBack, textOverride, subtitleOverrides, availableLangs, preferredLang, initialMode, initialLineIndex: initialLineIndexProp, stotraKey = 'vsn' }: { onBack: () => void; textOverride?: TextFile; subtitleOverrides?: Partial<Record<Lang, string>>; availableLangs?: Lang[]; preferredLang?: Lang; initialMode?: 'reading' | 'practice' | 'puzzle'; initialLineIndex?: number; stotraKey?: string }) {
   const APP_VERSION = `v${import.meta.env.VITE_APP_VERSION || '0.0.0'}`;
 
   // Auth and gamification context
@@ -206,7 +206,7 @@ export function VSNViewer({ onBack, textOverride, subtitleOverrides, availableLa
   const [freezing, setFreezing] = useState(false);
   const [lensH, setLensH] = useState<number | null>(null);
   const [legendOpen, setLegendOpen] = useState(true);
-  const [viewMode, setViewMode] = useState<'reading' | 'practice' | 'puzzle'>('reading');
+  const [viewMode, setViewMode] = useState<'reading' | 'practice' | 'puzzle'>(initialMode || 'reading');
   const [learnMode, setLearnMode] = useState<boolean>(() => {
     try {
       return localStorage.getItem('ui:learnMode') === 'true';
@@ -225,13 +225,14 @@ export function VSNViewer({ onBack, textOverride, subtitleOverrides, availableLa
   const modeActionCountRef = useRef<number>(0);
   const [practiceMode, setPracticeMode] = useState<boolean>(() => {
     try {
-      const stored = localStorage.getItem(`ui:practice:${lang}`);
+      const stored = localStorage.getItem(`ui:practice:${stotraKey}:${lang}`);
       return stored === 'true';
     } catch { return false; }
   });
   const [practiceLineIndex, setPracticeLineIndex] = useState<number>(() => {
+    if (initialLineIndexProp !== undefined) return initialLineIndexProp;
     try {
-      const stored = localStorage.getItem(`ui:practice:line:${lang}`);
+      const stored = localStorage.getItem(`ui:practice:line:${stotraKey}:${lang}`);
       return stored ? parseInt(stored) : 0;
     } catch { return 0; }
   });
@@ -606,7 +607,7 @@ export function VSNViewer({ onBack, textOverride, subtitleOverrides, availableLa
   // Persist practice line index to localStorage per language
   useEffect(() => {
     try {
-      localStorage.setItem(`ui:practice:line:${lang}`, practiceLineIndex.toString());
+      localStorage.setItem(`ui:practice:line:${stotraKey}:${lang}`, practiceLineIndex.toString());
     } catch { }
   }, [practiceLineIndex, lang]);
 
@@ -1251,7 +1252,7 @@ export function VSNViewer({ onBack, textOverride, subtitleOverrides, availableLa
 
         {/* Conditional Rendering: Puzzle View, Practice View, or Reading View */}
         {viewMode === 'puzzle' ? (
-          <Box sx={{ position: 'relative', zIndex: 10, flex: 1, display: 'flex', flexDirection: 'column' }}>
+          <Box sx={{ position: 'relative', zIndex: 10, flex: 1, display: 'flex', flexDirection: 'column', pb: { xs: 10, sm: 0 } }}>
             {modeHint === 'puzzle' && (
               <div className="px-3 pt-2 pb-1 text-[10px] sm:text-xs text-violet-100 bg-violet-900/40 border-b border-violet-700/40 text-center">
                 Hint: Tap words below to arrange them in order. Use ← → arrow keys or swipe to move between puzzles.
@@ -1262,13 +1263,14 @@ export function VSNViewer({ onBack, textOverride, subtitleOverrides, availableLa
               lines={practicePuzzleLines.lines}
               chapterIndices={practicePuzzleLines.chapterIndices}
               lang={lang}
+              stotraKey={stotraKey}
               initialLineIndex={practiceLineIndex}
               onExit={() => setViewMode('reading')}
               T={T}
             />
           </Box>
         ) : viewMode === 'practice' ? (
-          <Box sx={{ position: 'relative', zIndex: 10, flex: 1, display: 'flex', flexDirection: 'column' }}>
+          <Box sx={{ position: 'relative', zIndex: 10, flex: 1, display: 'flex', flexDirection: 'column', pb: { xs: 10, sm: 0 } }}>
             {modeHint === 'practice' && (
               <div className="px-3 pt-2 pb-1 text-[10px] sm:text-xs text-emerald-100 bg-emerald-900/40 border-b border-emerald-700/40 text-center">
                 Hint: Tap blanks to reveal words. Replay a line after you complete it to reinforce tricky phrases.
@@ -1279,6 +1281,7 @@ export function VSNViewer({ onBack, textOverride, subtitleOverrides, availableLa
               lines={practicePuzzleLines.lines}
               chapterIndices={practicePuzzleLines.chapterIndices}
               lang={lang}
+              stotraKey={stotraKey}
               initialLineIndex={practiceLineIndex}
               onExit={() => setViewMode('reading')}
               onSearchRequest={() => setSearchOpen(true)}
@@ -1288,7 +1291,7 @@ export function VSNViewer({ onBack, textOverride, subtitleOverrides, availableLa
           </Box>
         ) : (
           <Box sx={{ position: 'relative', zIndex: 10, flex: 1, display: 'grid', gridTemplateRows: '1fr auto' }}>
-            <Container maxWidth={false} sx={{ py: { xs: 3, md: 4 } }}>
+            <Container maxWidth={false} sx={{ pt: { xs: 3, md: 4 }, pb: { xs: 12, md: 4 } }}>
               <Box sx={{ mx: 'auto', width: '100%', px: { xs: 2, md: 4 } }}>
                 <Box sx={{
                   display: 'grid',
@@ -1820,8 +1823,8 @@ export function VSNViewer({ onBack, textOverride, subtitleOverrides, availableLa
             lang2={lang2}
             languageOptions={languageOptions}
             verseDetailOpen={verseDetailOpen}
-            practiceProgress={getPracticeStats(lang, flow.totalLines).progress * 100}
-            puzzleProgress={getPuzzleStats(lang, flow.totalLines).progress}
+            practiceProgress={getPracticeStats(lang, flow.totalLines, stotraKey).progress * 100}
+            puzzleProgress={getPuzzleStats(lang, flow.totalLines, stotraKey).progress}
             onViewModeChange={(newMode) => {
               const currentMode = viewMode === 'reading' ? 'play' : viewMode === 'practice' ? 'practice' : 'puzzle';
 

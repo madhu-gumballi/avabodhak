@@ -116,11 +116,23 @@ interface SerializedPracticeState {
 
 /**
  * Get practice state from localStorage (cache)
+ * When stotraKey is provided, only reads stotra-specific key (no legacy fallback
+ * to prevent cross-stotra collisions).
  */
-export function getPracticeState(lang: string, lineNumber: number): LinePracticeState | null {
+export function getPracticeState(lang: string, lineNumber: number, stotraKey?: string): LinePracticeState | null {
   try {
-    const key = `practice:${lang}:${lineNumber}`;
-    const stored = localStorage.getItem(key);
+    if (stotraKey) {
+      const newKey = `practice:${stotraKey}:${lang}:${lineNumber}`;
+      const stored = localStorage.getItem(newKey);
+      if (stored) {
+        const data = JSON.parse(stored) as SerializedPracticeState;
+        return { ...data, revealedIndices: new Set(data.revealedIndices || []) };
+      }
+      return null;
+    }
+    // Legacy path (no stotra context)
+    const legacyKey = `practice:${lang}:${lineNumber}`;
+    const stored = localStorage.getItem(legacyKey);
     if (!stored) return null;
     const data = JSON.parse(stored) as SerializedPracticeState;
     return {
@@ -135,28 +147,34 @@ export function getPracticeState(lang: string, lineNumber: number): LinePractice
 /**
  * Save practice state to localStorage and sync to Firestore
  */
-export function savePracticeState(lang: string, state: LinePracticeState): void {
+export function savePracticeState(lang: string, state: LinePracticeState, stotraKey?: string): void {
   const serialized: SerializedPracticeState = {
     ...state,
     revealedIndices: Array.from(state.revealedIndices)
   };
 
-  // Save to localStorage (cache)
   try {
-    const key = `practice:${lang}:${state.lineNumber}`;
-    localStorage.setItem(key, JSON.stringify(serialized));
+    if (stotraKey) {
+      // Use stotra-specific key only – avoids cross-stotra collisions
+      const newKey = `practice:${stotraKey}:${lang}:${state.lineNumber}`;
+      localStorage.setItem(newKey, JSON.stringify(serialized));
+    } else {
+      // Legacy path (no stotra context)
+      const legacyKey = `practice:${lang}:${state.lineNumber}`;
+      localStorage.setItem(legacyKey, JSON.stringify(serialized));
+    }
   } catch {
     // Silent fail for localStorage issues
   }
 
   // Sync to Firestore in background
-  syncPracticeToFirestore(lang, serialized);
+  syncPracticeToFirestore(lang, serialized, stotraKey);
 }
 
 /**
  * Sync practice state to Firestore
  */
-async function syncPracticeToFirestore(lang: string, state: SerializedPracticeState): Promise<void> {
+async function syncPracticeToFirestore(lang: string, state: SerializedPracticeState, stotraKey?: string): Promise<void> {
   if (!db || !isFirebaseConfigured) {
     console.log('[Practice] Firestore not configured, skipping sync');
     return;
@@ -169,17 +187,15 @@ async function syncPracticeToFirestore(lang: string, state: SerializedPracticeSt
 
   try {
     const userId = auth.currentUser.uid;
-    const progressRef = doc(db, 'users', userId, 'practiceProgress', `${lang}:${state.lineNumber}`);
-
-    console.log('[Practice] Syncing to Firestore:', `practiceProgress/${lang}:${state.lineNumber}`);
+    const docId = stotraKey ? `${stotraKey}:${lang}:${state.lineNumber}` : `${lang}:${state.lineNumber}`;
+    const progressRef = doc(db, 'users', userId, 'practiceProgress', docId);
 
     await setDoc(progressRef, {
       ...state,
       lang,
+      stotraKey: stotraKey || null,
       updatedAt: new Date(),
     }, { merge: true });
-
-    console.log('[Practice] Sync successful');
   } catch (error) {
     console.error('[Practice] Failed to sync to Firestore:', error);
   }
@@ -188,12 +204,13 @@ async function syncPracticeToFirestore(lang: string, state: SerializedPracticeSt
 /**
  * Load practice state from Firestore (called on login/app start)
  */
-export async function loadPracticeFromFirestore(lang: string, lineNumber: number): Promise<LinePracticeState | null> {
+export async function loadPracticeFromFirestore(lang: string, lineNumber: number, stotraKey?: string): Promise<LinePracticeState | null> {
   if (!db || !isFirebaseConfigured || !auth?.currentUser) return null;
 
   try {
     const userId = auth.currentUser.uid;
-    const progressRef = doc(db, 'users', userId, 'practiceProgress', `${lang}:${lineNumber}`);
+    const docId = stotraKey ? `${stotraKey}:${lang}:${lineNumber}` : `${lang}:${lineNumber}`;
+    const progressRef = doc(db, 'users', userId, 'practiceProgress', docId);
     const progressSnap = await getDoc(progressRef);
 
     if (progressSnap.exists()) {
@@ -212,6 +229,8 @@ export async function loadPracticeFromFirestore(lang: string, lineNumber: number
 
 /**
  * Sync all localStorage practice data to Firestore
+ * Handles both legacy 3-part keys (practice:lang:line) and
+ * stotra-specific 4-part keys (practice:stotra:lang:line).
  * @param userId - Optional user ID to use instead of auth.currentUser
  */
 export async function syncAllPracticeToFirestore(userId?: string): Promise<void> {
@@ -226,12 +245,22 @@ export async function syncAllPracticeToFirestore(userId?: string): Promise<void>
       if (!stored) continue;
 
       const parts = key.split(':');
-      if (parts.length !== 3) continue;
+      let lang: string;
+      let stotraKey: string | undefined;
 
-      const [, lang] = parts;
+      if (parts.length === 4) {
+        // stotra-specific: practice:stotra:lang:line
+        stotraKey = parts[1];
+        lang = parts[2];
+      } else if (parts.length === 3) {
+        // legacy: practice:lang:line
+        lang = parts[1];
+      } else {
+        continue;
+      }
+
       const data = JSON.parse(stored) as SerializedPracticeState;
-
-      await syncPracticeToFirestoreWithUserId(uid, lang, data);
+      await syncPracticeToFirestoreWithUserId(uid, lang, data, stotraKey);
     }
   } catch (error) {
     console.error('Failed to sync all practice to Firestore:', error);
@@ -241,15 +270,17 @@ export async function syncAllPracticeToFirestore(userId?: string): Promise<void>
 /**
  * Sync practice state to Firestore with explicit userId
  */
-async function syncPracticeToFirestoreWithUserId(userId: string, lang: string, state: SerializedPracticeState): Promise<void> {
+async function syncPracticeToFirestoreWithUserId(userId: string, lang: string, state: SerializedPracticeState, stotraKey?: string): Promise<void> {
   if (!db || !isFirebaseConfigured) return;
 
   try {
-    const progressRef = doc(db, 'users', userId, 'practiceProgress', `${lang}:${state.lineNumber}`);
+    const docId = stotraKey ? `${stotraKey}:${lang}:${state.lineNumber}` : `${lang}:${state.lineNumber}`;
+    const progressRef = doc(db, 'users', userId, 'practiceProgress', docId);
 
     await setDoc(progressRef, {
       ...state,
       lang,
+      stotraKey: stotraKey || null,
       updatedAt: new Date(),
     }, { merge: true });
   } catch (error) {
@@ -260,24 +291,25 @@ async function syncPracticeToFirestoreWithUserId(userId: string, lang: string, s
 /**
  * Load all practice data from Firestore and merge with localStorage
  */
-export async function loadAllPracticeFromFirestore(lang: string, totalLines: number): Promise<void> {
+export async function loadAllPracticeFromFirestore(lang: string, totalLines: number, stotraKey?: string): Promise<void> {
   if (!db || !isFirebaseConfigured || !auth?.currentUser) return;
 
   try {
     const userId = auth.currentUser.uid;
 
     for (let i = 0; i < totalLines; i++) {
-      const progressRef = doc(db, 'users', userId, 'practiceProgress', `${lang}:${i}`);
+      const docId = stotraKey ? `${stotraKey}:${lang}:${i}` : `${lang}:${i}`;
+      const progressRef = doc(db, 'users', userId, 'practiceProgress', docId);
       const progressSnap = await getDoc(progressRef);
 
       if (progressSnap.exists()) {
         const cloudData = progressSnap.data() as SerializedPracticeState;
-        const localState = getPracticeState(lang, i);
+        const localState = getPracticeState(lang, i, stotraKey);
 
         // Merge: use cloud data if more progress, otherwise keep local
         if (!localState || (cloudData.completed && !localState.completed) ||
             cloudData.revealedIndices.length > localState.revealedIndices.size) {
-          const key = `practice:${lang}:${i}`;
+          const key = stotraKey ? `practice:${stotraKey}:${lang}:${i}` : `practice:${lang}:${i}`;
           localStorage.setItem(key, JSON.stringify(cloudData));
         }
       }
@@ -290,10 +322,12 @@ export async function loadAllPracticeFromFirestore(lang: string, totalLines: num
 /**
  * Clear practice state for a line
  */
-export function clearLinePracticeState(lang: string, lineNumber: number): void {
+export function clearLinePracticeState(lang: string, lineNumber: number, stotraKey?: string): void {
   try {
-    const key = `practice:${lang}:${lineNumber}`;
-    localStorage.removeItem(key);
+    if (stotraKey) {
+      localStorage.removeItem(`practice:${stotraKey}:${lang}:${lineNumber}`);
+    }
+    localStorage.removeItem(`practice:${lang}:${lineNumber}`);
   } catch {
     // Silent fail
   }
@@ -302,7 +336,25 @@ export function clearLinePracticeState(lang: string, lineNumber: number): void {
 /**
  * Get overall practice statistics
  */
-export function getPracticeStats(lang: string, totalLines: number): {
+/**
+ * Get the next uncompleted practice line index
+ * Returns 0 if all are completed
+ */
+export function getNextUncompletedPracticeLine(lang: string, totalLines: number, stotraKey?: string): number {
+  try {
+    for (let i = 0; i < totalLines; i++) {
+      const state = getPracticeState(lang, i, stotraKey);
+      if (!state || !state.completed) {
+        return i;
+      }
+    }
+  } catch {
+    // Silent fail
+  }
+  return 0;
+}
+
+export function getPracticeStats(lang: string, totalLines: number, stotraKey?: string): {
   completedLines: number;
   totalLines: number;
   progress: number;
@@ -311,7 +363,7 @@ export function getPracticeStats(lang: string, totalLines: number): {
 
   try {
     for (let i = 0; i < totalLines; i++) {
-      const state = getPracticeState(lang, i);
+      const state = getPracticeState(lang, i, stotraKey);
       if (state && state.completed) {
         completedLines++;
       }

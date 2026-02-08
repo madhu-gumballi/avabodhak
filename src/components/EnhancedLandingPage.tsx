@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Box, Card, CardActionArea, Container, Typography, Fade, Grow, Chip, IconButton, Menu, MenuItem, LinearProgress } from '@mui/material';
+import { Box, Card, CardActionArea, Typography, Fade, Grow, Chip, IconButton, Menu, MenuItem, LinearProgress } from '@mui/material';
 import AutoStoriesIcon from '@mui/icons-material/AutoStories';
 import SpaIcon from '@mui/icons-material/Spa';
 import LanguageIcon from '@mui/icons-material/Language';
@@ -20,9 +20,10 @@ import UserMenu from './UserMenu';
 import LoginButton from './LoginButton';
 import AchievementsPanel from './AchievementsPanel';
 import LeaderboardPanel from './LeaderboardPanel';
+import MyProgressCard from './MyProgressCard';
 
 interface LandingPageProps {
-    onSelectStotra: (stotra: 'vsn' | 'hari' | 'keshava' | 'vayu', preferredLang?: Lang) => void;
+    onSelectStotra: (stotra: 'vsn' | 'hari' | 'keshava' | 'vayu', preferredLang?: Lang, mode?: 'reading' | 'practice' | 'puzzle', lineIndex?: number) => void;
 }
 
 const LANGUAGE_NAMES: Record<Lang, { native: string; english: string }> = {
@@ -99,7 +100,10 @@ export function EnhancedLandingPage({ onSelectStotra }: LandingPageProps) {
                 practiceLines: 'अभ्यास पंक्तियाँ',
                 puzzlesSolved: 'पहेलियाँ हल',
                 achievements: 'उपलब्धियाँ',
-                leaderboard: 'लीडरबोर्ड'
+                leaderboard: 'लीडरबोर्ड',
+                myProgress: 'मेरी प्रगति',
+                continue: 'जारी रखें',
+                stotras: 'स्तोत्र'
             },
             knda: {
                 title: 'ಅವಬೋಧಕ',
@@ -121,7 +125,10 @@ export function EnhancedLandingPage({ onSelectStotra }: LandingPageProps) {
                 practiceLines: 'ಅಭ್ಯಾಸ ಸಾಲುಗಳು',
                 puzzlesSolved: 'ಒಗಟುಗಳು ಬಗೆಹರಿಸಲಾಗಿದೆ',
                 achievements: 'ಸಾಧನೆಗಳು',
-                leaderboard: 'ಲೀಡರ್‌ಬೋರ್ಡ್'
+                leaderboard: 'ಲೀಡರ್‌ಬೋರ್ಡ್',
+                myProgress: 'ನನ್ನ ಪ್ರಗತಿ',
+                continue: 'ಮುಂದುವರಿಸಿ',
+                stotras: 'ಸ್ತೋತ್ರಗಳು'
             },
             tel: {
                 title: 'అవబోధక',
@@ -143,7 +150,10 @@ export function EnhancedLandingPage({ onSelectStotra }: LandingPageProps) {
                 practiceLines: 'అభ్యాస పంక్తులు',
                 puzzlesSolved: 'పజిల్స్ పరిష్కరించబడ్డాయి',
                 achievements: 'సాధనలు',
-                leaderboard: 'లీడర్‌బోర్డ్'
+                leaderboard: 'లీడర్‌బోర్డ్',
+                myProgress: 'నా ప్రగతి',
+                continue: 'కొనసాగించు',
+                stotras: 'స్తోత్రాలు'
             },
             tam: {
                 title: 'அவபோதக',
@@ -165,7 +175,10 @@ export function EnhancedLandingPage({ onSelectStotra }: LandingPageProps) {
                 practiceLines: 'பயிற்சி வரிகள்',
                 puzzlesSolved: 'புதிர்கள் தீர்க்கப்பட்டன',
                 achievements: 'சாதனைகள்',
-                leaderboard: 'லீடர்போர்டு'
+                leaderboard: 'லீடர்போர்டு',
+                myProgress: 'என் முன்னேற்றம்',
+                continue: 'தொடரவும்',
+                stotras: 'ஸ்தோத்திரங்கள்'
             },
             pan: {
                 title: 'ਅਵਬੋਧਕ',
@@ -187,7 +200,10 @@ export function EnhancedLandingPage({ onSelectStotra }: LandingPageProps) {
                 practiceLines: 'ਅਭਿਆਸ ਲਾਈਨਾਂ',
                 puzzlesSolved: 'ਪਹੇਲੀਆਂ ਹੱਲ',
                 achievements: 'ਪ੍ਰਾਪਤੀਆਂ',
-                leaderboard: 'ਲੀਡਰਬੋਰਡ'
+                leaderboard: 'ਲੀਡਰਬੋਰਡ',
+                myProgress: 'ਮੇਰੀ ਪ੍ਰਗਤੀ',
+                continue: 'ਜਾਰੀ ਰੱਖੋ',
+                stotras: 'ਸਤੋਤਰ'
             },
             guj: {
                 title: 'અવબોધક',
@@ -209,7 +225,10 @@ export function EnhancedLandingPage({ onSelectStotra }: LandingPageProps) {
                 practiceLines: 'અભ્યાસ લાઇનો',
                 puzzlesSolved: 'પઝલ ઉકેલાયા',
                 achievements: 'સિદ્ધિઓ',
-                leaderboard: 'લીડરબોર્ડ'
+                leaderboard: 'લીડરબોર્ડ',
+                myProgress: 'મારી પ્રગતિ',
+                continue: 'ચાલુ રાખો',
+                stotras: 'સ્તોત્રો'
             },
             iast: {
                 title: 'Avabodhak',
@@ -231,7 +250,10 @@ export function EnhancedLandingPage({ onSelectStotra }: LandingPageProps) {
                 practiceLines: 'Practice Lines',
                 puzzlesSolved: 'Puzzles Solved',
                 achievements: 'Achievements',
-                leaderboard: 'Leaderboard'
+                leaderboard: 'Leaderboard',
+                myProgress: 'My Progress',
+                continue: 'Continue',
+                stotras: 'Stotras'
             },
             mr: {
                 title: 'अवबोधक',
@@ -253,7 +275,10 @@ export function EnhancedLandingPage({ onSelectStotra }: LandingPageProps) {
                 practiceLines: 'सराव ओळी',
                 puzzlesSolved: 'कोडी सोडवली',
                 achievements: 'साध्ये',
-                leaderboard: 'लीडरबोर्ड'
+                leaderboard: 'लीडरबोर्ड',
+                myProgress: 'माझी प्रगती',
+                continue: 'सुरू ठेवा',
+                stotras: 'स्तोत्रे'
             },
             ben: {
                 title: 'অববোধক',
@@ -275,7 +300,10 @@ export function EnhancedLandingPage({ onSelectStotra }: LandingPageProps) {
                 practiceLines: 'অনুশীলন লাইন',
                 puzzlesSolved: 'ধাঁধা সমাধান',
                 achievements: 'অর্জন',
-                leaderboard: 'লিডারবোর্ড'
+                leaderboard: 'লিডারবোর্ড',
+                myProgress: 'আমার অগ্রগতি',
+                continue: 'চালিয়ে যান',
+                stotras: 'স্তোত্র'
             },
             mal: {
                 title: 'അവബോധക',
@@ -297,7 +325,10 @@ export function EnhancedLandingPage({ onSelectStotra }: LandingPageProps) {
                 practiceLines: 'പരിശീലന വരികൾ',
                 puzzlesSolved: 'പസിലുകൾ പരിഹരിച്ചു',
                 achievements: 'നേട്ടങ്ങൾ',
-                leaderboard: 'ലീഡർബോർഡ്'
+                leaderboard: 'ലീഡർബോർഡ്',
+                myProgress: 'എന്റെ പുരോഗതി',
+                continue: 'തുടരുക',
+                stotras: 'സ്തോത്രങ്ങൾ'
             }
         };
 
@@ -315,151 +346,130 @@ export function EnhancedLandingPage({ onSelectStotra }: LandingPageProps) {
         const stotraTitleKey = `stotra_${stotra}`;
 
         return (
-            <Grow in timeout={delay}>
+            <Grow in timeout={delay} key={stotra}>
                 <Card
                     sx={{
-                        width: { xs: '100%', sm: 320 },
                         bgcolor: 'rgba(30, 41, 59, 0.6)',
                         backdropFilter: 'blur(12px)',
                         border: '1px solid rgba(148, 163, 184, 0.1)',
-                        borderRadius: 4,
+                        borderRadius: 3,
                         transition: 'transform 0.2s, box-shadow 0.2s',
                         '&:hover': {
-                            transform: 'translateY(-4px)',
-                            boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
+                            transform: 'translateY(-2px)',
+                            boxShadow: '0 12px 20px -4px rgba(0, 0, 0, 0.2)',
                             bgcolor: 'rgba(30, 41, 59, 0.8)'
                         }
                     }}
                 >
                     <CardActionArea
                         onClick={() => handleStotraClick(stotra)}
-                        sx={{ height: '100%', p: 3, display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: 1.5 }}
+                        sx={{ p: { xs: 1.5, sm: 2 }, display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: 1 }}
                     >
                         {/* Header with icon and title */}
-                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, width: '100%' }}>
+                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, width: '100%' }}>
                             <Box
                                 sx={{
-                                    p: 2,
+                                    p: 1,
                                     borderRadius: '50%',
                                     bgcolor: `${color}15`,
                                     color: color,
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
                                 }}
                             >
                                 {icon}
                             </Box>
-                            <Box sx={{ flex: 1 }}>
-                                <Typography variant="h6" fontWeight="700" sx={{ mb: 0, lineHeight: 1.3 }}>
-                                    {getTranslation(stotraTitleKey)}
-                                </Typography>
-                            </Box>
+                            <Typography variant="body1" fontWeight="700" sx={{ lineHeight: 1.3, flex: 1 }}>
+                                {getTranslation(stotraTitleKey)}
+                            </Typography>
                         </Box>
 
                         {metadata && (
                             <>
-                                {/* Composer section */}
+                                {/* Composer - compact single line */}
                                 {(metadata.composer || metadata.revealedBy) && (
-                                    <Box sx={{
-                                        width: '100%',
-                                        py: 1,
-                                        px: 1.5,
-                                        borderRadius: 1.5,
-                                        bgcolor: 'rgba(100, 116, 139, 0.08)',
-                                        border: '1px solid rgba(148, 163, 184, 0.1)'
-                                    }}>
-                                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                                            <SpaIcon sx={{ fontSize: 14, color: 'rgba(148, 163, 184, 0.6)' }} />
-                                            <Typography variant="caption" sx={{ color: 'rgba(203, 213, 225, 0.9)', fontSize: '0.7rem', lineHeight: 1.4 }}>
-                                                {metadata.composer && (
-                                                    <span>
-                                                        <strong style={{ color: 'rgba(226, 232, 240, 1)' }}>{getTranslation('composer')}:</strong> {metadata.composer}
-                                                    </span>
-                                                )}
-                                                {metadata.composer && metadata.revealedBy && <br />}
-                                                {metadata.revealedBy && (
-                                                    <span>
-                                                        <strong style={{ color: 'rgba(226, 232, 240, 1)' }}>{getTranslation('revealedBy')}:</strong> {metadata.revealedBy}
-                                                    </span>
-                                                )}
-                                            </Typography>
-                                        </Box>
-                                    </Box>
+                                    <Typography variant="caption" sx={{ color: 'rgba(148, 163, 184, 0.8)', fontSize: '0.65rem', lineHeight: 1.3, pl: 0.5 }}>
+                                        {metadata.composer && <>{metadata.composer}</>}
+                                        {metadata.composer && metadata.revealedBy && ' / '}
+                                        {metadata.revealedBy && <>{metadata.revealedBy}</>}
+                                    </Typography>
                                 )}
 
-                                {/* Stats chips */}
-                                <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap', width: '100%' }}>
+                                {/* Stats + mode chips in one compact row */}
+                                <Box sx={{ display: 'flex', gap: 0.5, flexWrap: 'wrap', width: '100%' }}>
                                     <Chip
-                                        icon={<FormatListNumberedIcon sx={{ fontSize: 14 }} />}
-                                        label={`${metadata.totalLines} ${getTranslation('lines')}`}
+                                        icon={<FormatListNumberedIcon sx={{ fontSize: 12 }} />}
+                                        label={`${metadata.totalLines}`}
                                         size="small"
                                         sx={{
                                             bgcolor: 'rgba(16, 185, 129, 0.12)',
                                             color: '#34d399',
-                                            border: '1px solid rgba(16, 185, 129, 0.25)',
-                                            fontSize: '0.7rem',
-                                            height: 24
+                                            border: '1px solid rgba(16, 185, 129, 0.2)',
+                                            fontSize: '0.65rem',
+                                            height: 20,
+                                            '& .MuiChip-icon': { ml: 0.5 },
                                         }}
                                     />
                                     <Chip
-                                        icon={<TranslateIcon sx={{ fontSize: 14 }} />}
-                                        label={`${metadata.languages.length} ${getTranslation('languages')}`}
+                                        icon={<TranslateIcon sx={{ fontSize: 12 }} />}
+                                        label={`${metadata.languages.length}`}
                                         size="small"
                                         sx={{
                                             bgcolor: 'rgba(245, 158, 11, 0.12)',
                                             color: '#fbbf24',
-                                            border: '1px solid rgba(245, 158, 11, 0.25)',
-                                            fontSize: '0.7rem',
-                                            height: 24
+                                            border: '1px solid rgba(245, 158, 11, 0.2)',
+                                            fontSize: '0.65rem',
+                                            height: 20,
+                                            '& .MuiChip-icon': { ml: 0.5 },
                                         }}
                                     />
                                     {metadata.chapters > 1 && (
                                         <Chip
-                                            icon={<MenuBookIcon sx={{ fontSize: 14 }} />}
-                                            label={`${metadata.chapters} ${getTranslation('chapters')}`}
+                                            icon={<MenuBookIcon sx={{ fontSize: 12 }} />}
+                                            label={`${metadata.chapters}`}
                                             size="small"
                                             sx={{
                                                 bgcolor: 'rgba(59, 130, 246, 0.12)',
                                                 color: '#60a5fa',
-                                                border: '1px solid rgba(59, 130, 246, 0.25)',
-                                                fontSize: '0.7rem',
-                                                height: 24
+                                                border: '1px solid rgba(59, 130, 246, 0.2)',
+                                                fontSize: '0.65rem',
+                                                height: 20,
+                                                '& .MuiChip-icon': { ml: 0.5 },
+                                            }}
+                                        />
+                                    )}
+                                    {metadata.practiceMode && (
+                                        <Chip
+                                            icon={<SchoolIcon sx={{ fontSize: 11 }} />}
+                                            label={getTranslation('practice')}
+                                            size="small"
+                                            sx={{
+                                                bgcolor: 'rgba(139, 92, 246, 0.12)',
+                                                color: '#a78bfa',
+                                                border: '1px solid rgba(139, 92, 246, 0.2)',
+                                                fontSize: '0.6rem',
+                                                height: 20,
+                                                '& .MuiChip-icon': { ml: 0.5 },
+                                            }}
+                                        />
+                                    )}
+                                    {metadata.puzzleMode && (
+                                        <Chip
+                                            icon={<ExtensionIcon sx={{ fontSize: 11 }} />}
+                                            label={getTranslation('puzzle')}
+                                            size="small"
+                                            sx={{
+                                                bgcolor: 'rgba(236, 72, 153, 0.12)',
+                                                color: '#f472b6',
+                                                border: '1px solid rgba(236, 72, 153, 0.2)',
+                                                fontSize: '0.6rem',
+                                                height: 20,
+                                                '& .MuiChip-icon': { ml: 0.5 },
                                             }}
                                         />
                                     )}
                                 </Box>
-
-                                {/* Mode badges */}
-                                {(metadata.practiceMode || metadata.puzzleMode) && (
-                                    <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap', width: '100%' }}>
-                                        {metadata.practiceMode && (
-                                            <Chip
-                                                icon={<SchoolIcon sx={{ fontSize: 13 }} />}
-                                                label={getTranslation('practice')}
-                                                size="small"
-                                                sx={{
-                                                    bgcolor: 'rgba(139, 92, 246, 0.12)',
-                                                    color: '#a78bfa',
-                                                    border: '1px solid rgba(139, 92, 246, 0.25)',
-                                                    fontSize: '0.68rem',
-                                                    height: 22
-                                                }}
-                                            />
-                                        )}
-                                        {metadata.puzzleMode && (
-                                            <Chip
-                                                icon={<ExtensionIcon sx={{ fontSize: 13 }} />}
-                                                label={getTranslation('puzzle')}
-                                                size="small"
-                                                sx={{
-                                                    bgcolor: 'rgba(236, 72, 153, 0.12)',
-                                                    color: '#f472b6',
-                                                    border: '1px solid rgba(236, 72, 153, 0.25)',
-                                                    fontSize: '0.68rem',
-                                                    height: 22
-                                                }}
-                                            />
-                                        )}
-                                    </Box>
-                                )}
                             </>
                         )}
                     </CardActionArea>
@@ -474,262 +484,295 @@ export function EnhancedLandingPage({ onSelectStotra }: LandingPageProps) {
                 minHeight: '100vh',
                 display: 'flex',
                 flexDirection: 'column',
-                alignItems: 'center',
-                justifyContent: 'center',
                 background: 'linear-gradient(to bottom, #0f172a, #1e293b)',
                 color: 'white',
-                p: 3,
-                textAlign: 'center'
             }}
         >
-            {/* Top Bar: Language Selector + User Menu */}
-            <Box sx={{ position: 'absolute', top: 16, right: 16, display: 'flex', alignItems: 'center', gap: 1 }}>
-                <IconButton
-                    onClick={handleLanguageMenuOpen}
-                    sx={{
-                        bgcolor: 'rgba(30, 41, 59, 0.8)',
-                        backdropFilter: 'blur(12px)',
-                        border: '1px solid rgba(148, 163, 184, 0.2)',
-                        color: 'white',
-                        '&:hover': {
-                            bgcolor: 'rgba(30, 41, 59, 0.95)',
-                        }
-                    }}
-                >
-                    <LanguageIcon />
-                </IconButton>
-                {/* User menu or login button */}
-                {(user || isGuest) ? (
-                    <UserMenu
-                        onShowAchievements={() => setAchievementsPanelOpen(true)}
-                        onShowLeaderboard={() => setLeaderboardPanelOpen(true)}
-                    />
-                ) : (
-                    <LoginButton variant="icon" />
-                )}
-                <Menu
-                    anchorEl={langMenuAnchor}
-                    open={Boolean(langMenuAnchor)}
-                    onClose={handleLanguageMenuClose}
-                    PaperProps={{
-                        sx: {
-                            bgcolor: 'rgba(30, 41, 59, 0.95)',
-                            backdropFilter: 'blur(12px)',
-                            border: '1px solid rgba(148, 163, 184, 0.2)',
-                            maxHeight: 400
-                        }
-                    }}
-                >
-                    {Object.entries(LANGUAGE_NAMES).map(([code, names]) => (
-                        <MenuItem
-                            key={code}
-                            onClick={() => handleLanguageSelect(code as Lang)}
-                            selected={selectedLang === code}
-                            sx={{
-                                color: 'white',
-                                '&.Mui-selected': {
-                                    bgcolor: 'rgba(59, 130, 246, 0.2)',
-                                }
-                            }}
-                        >
-                            <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
-                                <Typography variant="body2" fontWeight="600">{names.native}</Typography>
-                                <Typography variant="caption" sx={{ opacity: 0.6 }}>{names.english}</Typography>
-                            </Box>
-                        </MenuItem>
-                    ))}
-                </Menu>
-            </Box>
+            {/* ===== Compact Header Bar ===== */}
+            <Box
+                sx={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    px: { xs: 2, sm: 3 },
+                    py: 1.5,
+                    borderBottom: '1px solid rgba(148, 163, 184, 0.08)',
+                }}
+            >
+                {/* Logo + Title */}
+                <Fade in timeout={600}>
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
+                        <img
+                            src="/icons/stotra-mala-logo.svg"
+                            alt="Avabodhak Logo"
+                            style={{ width: 36, height: 36, borderRadius: 8 }}
+                        />
+                        <Box>
+                            <Typography variant="h6" fontWeight="800" sx={{ lineHeight: 1.1, letterSpacing: '-0.01em' }}>
+                                {getTranslation('title')}
+                            </Typography>
+                            <Typography variant="caption" sx={{ opacity: 0.5, fontSize: '0.65rem', lineHeight: 1 }}>
+                                {getTranslation('subtitle')}
+                            </Typography>
+                        </Box>
+                    </Box>
+                </Fade>
 
-            <Fade in timeout={1000}>
-                <Box mb={6} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                    <img
-                        src="/icons/stotra-mala-logo.svg"
-                        alt="Avabodhak Logo"
-                        style={{ width: 80, height: 80, marginBottom: 16, borderRadius: 16 }}
-                    />
-                    <Typography variant="h3" component="h1" fontWeight="800" gutterBottom sx={{ letterSpacing: '-0.02em', mb: 1 }}>
-                        {getTranslation('title')}
-                    </Typography>
-                    <Typography variant="subtitle1" sx={{ opacity: 0.7, maxWidth: 500, mx: 'auto' }}>
-                        {getTranslation('subtitle')}
-                    </Typography>
-                </Box>
-            </Fade>
-
-            <Container maxWidth="lg">
-                <Box sx={{ display: 'flex', gap: 3, flexDirection: { xs: 'column', sm: 'row' }, justifyContent: 'center', flexWrap: 'wrap' }}>
-                    {renderStotraCard(
-                        'vsn',
-                        vsnLines as TextFile,
-                        <AutoStoriesIcon sx={{ fontSize: 40 }} />,
-                        '#0ea5e9',
-                        1200
+                {/* Actions */}
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
+                    <IconButton
+                        size="small"
+                        onClick={handleLanguageMenuOpen}
+                        sx={{
+                            color: 'rgba(148, 163, 184, 0.8)',
+                            '&:hover': { color: 'white' },
+                        }}
+                    >
+                        <LanguageIcon fontSize="small" />
+                    </IconButton>
+                    {(user || isGuest) ? (
+                        <UserMenu
+                            onShowAchievements={() => setAchievementsPanelOpen(true)}
+                            onShowLeaderboard={() => setLeaderboardPanelOpen(true)}
+                        />
+                    ) : (
+                        <LoginButton variant="icon" />
                     )}
-                    {renderStotraCard(
-                        'hari',
-                        hariLines as TextFile,
-                        <SpaIcon sx={{ fontSize: 40 }} />,
-                        '#f59e0b',
-                        1400
-                    )}
-                    {renderStotraCard(
-                        'keshava',
-                        keshavaLines as TextFile,
-                        <SpaIcon sx={{ fontSize: 40 }} />,
-                        '#8b5cf6',
-                        1600
-                    )}
-                    {renderStotraCard(
-                        'vayu',
-                        vayuLines as TextFile,
-                        <SpaIcon sx={{ fontSize: 40 }} />,
-                        '#10b981',
-                        1800
-                    )}
-                </Box>
-            </Container>
-
-            {/* Daily Goals Widget - shown when user is logged in */}
-            {userData && (
-                <Fade in timeout={1500}>
-                    <Box sx={{ mt: 4, maxWidth: 400, width: '100%' }}>
-                        <Card
-                            sx={{
-                                bgcolor: 'rgba(30, 41, 59, 0.6)',
+                    <Menu
+                        anchorEl={langMenuAnchor}
+                        open={Boolean(langMenuAnchor)}
+                        onClose={handleLanguageMenuClose}
+                        PaperProps={{
+                            sx: {
+                                bgcolor: 'rgba(30, 41, 59, 0.95)',
                                 backdropFilter: 'blur(12px)',
                                 border: '1px solid rgba(148, 163, 184, 0.2)',
-                                borderRadius: 3,
-                                p: 2,
-                            }}
-                        >
-                            <Typography variant="subtitle2" sx={{ color: '#94a3b8', mb: 2, fontWeight: 600 }}>
-                                {getTranslation('dailyGoals')}
-                            </Typography>
+                                maxHeight: 400
+                            }
+                        }}
+                    >
+                        {Object.entries(LANGUAGE_NAMES).map(([code, names]) => (
+                            <MenuItem
+                                key={code}
+                                onClick={() => handleLanguageSelect(code as Lang)}
+                                selected={selectedLang === code}
+                                sx={{
+                                    color: 'white',
+                                    '&.Mui-selected': {
+                                        bgcolor: 'rgba(59, 130, 246, 0.2)',
+                                    }
+                                }}
+                            >
+                                <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
+                                    <Typography variant="body2" fontWeight="600">{names.native}</Typography>
+                                    <Typography variant="caption" sx={{ opacity: 0.6 }}>{names.english}</Typography>
+                                </Box>
+                            </MenuItem>
+                        ))}
+                    </Menu>
+                </Box>
+            </Box>
 
-                            {/* Lines goal */}
-                            <Box sx={{ mb: 2 }}>
-                                <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 0.5 }}>
-                                    <Typography variant="body2" sx={{ color: '#94a3b8' }}>
-                                        {getTranslation('practiceLines')}
-                                    </Typography>
-                                    <Typography
-                                        variant="body2"
-                                        sx={{
-                                            color: userData.dailyGoals.linesToday >= userData.dailyGoals.linesTarget ? '#22c55e' : 'white',
-                                            fontWeight: userData.dailyGoals.linesToday >= userData.dailyGoals.linesTarget ? 600 : 400,
-                                        }}
-                                    >
-                                        {userData.dailyGoals.linesToday}/{userData.dailyGoals.linesTarget}
-                                    </Typography>
-                                </Box>
-                                <LinearProgress
-                                    variant="determinate"
-                                    value={Math.min((userData.dailyGoals.linesToday / userData.dailyGoals.linesTarget) * 100, 100)}
-                                    sx={{
-                                        height: 6,
-                                        borderRadius: 3,
-                                        bgcolor: 'rgba(255, 255, 255, 0.1)',
-                                        '& .MuiLinearProgress-bar': {
-                                            bgcolor: userData.dailyGoals.linesToday >= userData.dailyGoals.linesTarget ? '#22c55e' : '#0ea5e9',
-                                            borderRadius: 3,
-                                        },
-                                    }}
-                                />
-                            </Box>
+            {/* ===== Scrollable Content ===== */}
+            <Box sx={{ flex: 1, overflow: 'auto', px: { xs: 2, sm: 3 }, py: { xs: 2, sm: 3 } }}>
 
-                            {/* Puzzles goal */}
-                            <Box>
-                                <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 0.5 }}>
-                                    <Typography variant="body2" sx={{ color: '#94a3b8' }}>
-                                        {getTranslation('puzzlesSolved')}
+                {/* ===== Engagement Section (Goals + Progress + Quick Actions) ===== */}
+                {userData && (
+                    <Fade in timeout={800}>
+                        <Box sx={{ mb: 3, maxWidth: { xs: 700, md: 1000 }, mx: 'auto' }}>
+                            {/* Daily Goals - compact inline version */}
+                            <Card
+                                sx={{
+                                    bgcolor: 'rgba(30, 41, 59, 0.6)',
+                                    backdropFilter: 'blur(12px)',
+                                    border: '1px solid rgba(148, 163, 184, 0.15)',
+                                    borderRadius: 3,
+                                    p: { xs: 1.5, sm: 2 },
+                                    mb: 1.5,
+                                }}
+                            >
+                                <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 1.5 }}>
+                                    <Typography variant="caption" sx={{ color: '#94a3b8', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em', fontSize: '0.65rem' }}>
+                                        {getTranslation('dailyGoals')}
                                     </Typography>
-                                    <Typography
-                                        variant="body2"
-                                        sx={{
-                                            color: userData.dailyGoals.puzzlesToday >= userData.dailyGoals.puzzlesTarget ? '#22c55e' : 'white',
-                                            fontWeight: userData.dailyGoals.puzzlesToday >= userData.dailyGoals.puzzlesTarget ? 600 : 400,
-                                        }}
-                                    >
-                                        {userData.dailyGoals.puzzlesToday}/{userData.dailyGoals.puzzlesTarget}
-                                    </Typography>
+                                    {/* Quick action buttons */}
+                                    <Box sx={{ display: 'flex', gap: 0.5 }}>
+                                        <Box
+                                            onClick={() => setAchievementsPanelOpen(true)}
+                                            sx={{
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                gap: 0.5,
+                                                px: 1,
+                                                py: 0.25,
+                                                borderRadius: 1.5,
+                                                bgcolor: 'rgba(245, 158, 11, 0.1)',
+                                                border: '1px solid rgba(245, 158, 11, 0.15)',
+                                                cursor: 'pointer',
+                                                '&:hover': { bgcolor: 'rgba(245, 158, 11, 0.2)' },
+                                            }}
+                                        >
+                                            <EmojiEventsIcon sx={{ fontSize: 14, color: '#f59e0b' }} />
+                                            <Typography variant="caption" sx={{ color: '#f59e0b', fontWeight: 500, fontSize: '0.65rem' }}>
+                                                {userData.achievements.length}
+                                            </Typography>
+                                        </Box>
+                                        <Box
+                                            onClick={() => setLeaderboardPanelOpen(true)}
+                                            sx={{
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                gap: 0.5,
+                                                px: 1,
+                                                py: 0.25,
+                                                borderRadius: 1.5,
+                                                bgcolor: 'rgba(14, 165, 233, 0.1)',
+                                                border: '1px solid rgba(14, 165, 233, 0.15)',
+                                                cursor: 'pointer',
+                                                '&:hover': { bgcolor: 'rgba(14, 165, 233, 0.2)' },
+                                            }}
+                                        >
+                                            <LeaderboardIcon sx={{ fontSize: 14, color: '#0ea5e9' }} />
+                                        </Box>
+                                    </Box>
                                 </Box>
-                                <LinearProgress
-                                    variant="determinate"
-                                    value={Math.min((userData.dailyGoals.puzzlesToday / userData.dailyGoals.puzzlesTarget) * 100, 100)}
-                                    sx={{
-                                        height: 6,
-                                        borderRadius: 3,
-                                        bgcolor: 'rgba(255, 255, 255, 0.1)',
-                                        '& .MuiLinearProgress-bar': {
-                                            bgcolor: userData.dailyGoals.puzzlesToday >= userData.dailyGoals.puzzlesTarget ? '#22c55e' : '#8b5cf6',
-                                            borderRadius: 3,
-                                        },
-                                    }}
-                                />
-                            </Box>
 
-                            {/* Quick actions */}
-                            <Box sx={{ display: 'flex', gap: 1, mt: 2, pt: 2, borderTop: '1px solid rgba(148, 163, 184, 0.1)' }}>
-                                <Box
-                                    onClick={() => setAchievementsPanelOpen(true)}
-                                    sx={{
-                                        flex: 1,
-                                        display: 'flex',
-                                        alignItems: 'center',
-                                        justifyContent: 'center',
-                                        gap: 0.5,
-                                        py: 1,
-                                        borderRadius: 2,
-                                        bgcolor: 'rgba(245, 158, 11, 0.1)',
-                                        border: '1px solid rgba(245, 158, 11, 0.2)',
-                                        cursor: 'pointer',
-                                        '&:hover': { bgcolor: 'rgba(245, 158, 11, 0.15)' },
-                                    }}
-                                >
-                                    <EmojiEventsIcon sx={{ fontSize: 16, color: '#f59e0b' }} />
-                                    <Typography variant="caption" sx={{ color: '#f59e0b', fontWeight: 500 }}>
-                                        {getTranslation('achievements')} ({userData.achievements.length})
-                                    </Typography>
+                                {/* Two progress bars side by side */}
+                                <Box sx={{ display: 'flex', gap: { xs: 2, sm: 3 } }}>
+                                    {/* Lines goal */}
+                                    <Box sx={{ flex: 1 }}>
+                                        <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 0.5 }}>
+                                            <Typography variant="caption" sx={{ color: '#94a3b8', fontSize: '0.65rem' }}>
+                                                {getTranslation('practiceLines')}
+                                            </Typography>
+                                            <Typography
+                                                variant="caption"
+                                                sx={{
+                                                    color: userData.dailyGoals.linesToday >= userData.dailyGoals.linesTarget ? '#22c55e' : 'white',
+                                                    fontWeight: 600,
+                                                    fontSize: '0.65rem',
+                                                }}
+                                            >
+                                                {userData.dailyGoals.linesToday}/{userData.dailyGoals.linesTarget}
+                                            </Typography>
+                                        </Box>
+                                        <LinearProgress
+                                            variant="determinate"
+                                            value={Math.min((userData.dailyGoals.linesToday / userData.dailyGoals.linesTarget) * 100, 100)}
+                                            sx={{
+                                                height: 5,
+                                                borderRadius: 3,
+                                                bgcolor: 'rgba(255, 255, 255, 0.08)',
+                                                '& .MuiLinearProgress-bar': {
+                                                    bgcolor: userData.dailyGoals.linesToday >= userData.dailyGoals.linesTarget ? '#22c55e' : '#0ea5e9',
+                                                    borderRadius: 3,
+                                                },
+                                            }}
+                                        />
+                                    </Box>
+                                    {/* Puzzles goal */}
+                                    <Box sx={{ flex: 1 }}>
+                                        <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 0.5 }}>
+                                            <Typography variant="caption" sx={{ color: '#94a3b8', fontSize: '0.65rem' }}>
+                                                {getTranslation('puzzlesSolved')}
+                                            </Typography>
+                                            <Typography
+                                                variant="caption"
+                                                sx={{
+                                                    color: userData.dailyGoals.puzzlesToday >= userData.dailyGoals.puzzlesTarget ? '#22c55e' : 'white',
+                                                    fontWeight: 600,
+                                                    fontSize: '0.65rem',
+                                                }}
+                                            >
+                                                {userData.dailyGoals.puzzlesToday}/{userData.dailyGoals.puzzlesTarget}
+                                            </Typography>
+                                        </Box>
+                                        <LinearProgress
+                                            variant="determinate"
+                                            value={Math.min((userData.dailyGoals.puzzlesToday / userData.dailyGoals.puzzlesTarget) * 100, 100)}
+                                            sx={{
+                                                height: 5,
+                                                borderRadius: 3,
+                                                bgcolor: 'rgba(255, 255, 255, 0.08)',
+                                                '& .MuiLinearProgress-bar': {
+                                                    bgcolor: userData.dailyGoals.puzzlesToday >= userData.dailyGoals.puzzlesTarget ? '#22c55e' : '#8b5cf6',
+                                                    borderRadius: 3,
+                                                },
+                                            }}
+                                        />
+                                    </Box>
                                 </Box>
-                                <Box
-                                    onClick={() => setLeaderboardPanelOpen(true)}
-                                    sx={{
-                                        flex: 1,
-                                        display: 'flex',
-                                        alignItems: 'center',
-                                        justifyContent: 'center',
-                                        gap: 0.5,
-                                        py: 1,
-                                        borderRadius: 2,
-                                        bgcolor: 'rgba(14, 165, 233, 0.1)',
-                                        border: '1px solid rgba(14, 165, 233, 0.2)',
-                                        cursor: 'pointer',
-                                        '&:hover': { bgcolor: 'rgba(14, 165, 233, 0.15)' },
-                                    }}
-                                >
-                                    <LeaderboardIcon sx={{ fontSize: 16, color: '#0ea5e9' }} />
-                                    <Typography variant="caption" sx={{ color: '#0ea5e9', fontWeight: 500 }}>
-                                        {getTranslation('leaderboard')}
-                                    </Typography>
-                                </Box>
-                            </Box>
-                        </Card>
+                            </Card>
+
+                            {/* My Progress Card */}
+                            <MyProgressCard
+                                onContinue={(stotra, lang, mode, lineIndex) => {
+                                    onSelectStotra(stotra, lang, mode, lineIndex);
+                                }}
+                                getTranslation={getTranslation}
+                            />
+                        </Box>
+                    </Fade>
+                )}
+
+                {/* Guest mode banner */}
+                {isGuest && (
+                    <Fade in timeout={800}>
+                        <Box sx={{ mb: 2, maxWidth: { xs: 700, md: 1000 }, mx: 'auto' }}>
+                            <LoginButton variant="banner" />
+                        </Box>
+                    </Fade>
+                )}
+
+                {/* ===== Stotra Grid Section ===== */}
+                <Box sx={{ maxWidth: { xs: 700, md: 1000 }, mx: 'auto' }}>
+                    <Typography variant="caption" sx={{ color: '#64748b', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em', fontSize: '0.6rem', mb: 1.5, display: 'block' }}>
+                        {getTranslation('stotras')}
+                    </Typography>
+
+                    {/* 2-column grid on mobile, auto on desktop */}
+                    <Box
+                        sx={{
+                            display: 'grid',
+                            gridTemplateColumns: { xs: '1fr 1fr', sm: '1fr 1fr', md: 'repeat(4, 1fr)' },
+                            gap: { xs: 1.5, sm: 2 },
+                        }}
+                    >
+                        {renderStotraCard(
+                            'vsn',
+                            vsnLines as TextFile,
+                            <AutoStoriesIcon sx={{ fontSize: { xs: 24, sm: 28 } }} />,
+                            '#0ea5e9',
+                            600
+                        )}
+                        {renderStotraCard(
+                            'hari',
+                            hariLines as TextFile,
+                            <SpaIcon sx={{ fontSize: { xs: 24, sm: 28 } }} />,
+                            '#f59e0b',
+                            700
+                        )}
+                        {renderStotraCard(
+                            'keshava',
+                            keshavaLines as TextFile,
+                            <SpaIcon sx={{ fontSize: { xs: 24, sm: 28 } }} />,
+                            '#8b5cf6',
+                            800
+                        )}
+                        {renderStotraCard(
+                            'vayu',
+                            vayuLines as TextFile,
+                            <SpaIcon sx={{ fontSize: { xs: 24, sm: 28 } }} />,
+                            '#10b981',
+                            900
+                        )}
                     </Box>
-                </Fade>
-            )}
+                </Box>
+            </Box>
 
-            {/* Guest mode banner */}
-            {isGuest && (
-                <Fade in timeout={1500}>
-                    <Box sx={{ mt: 3 }}>
-                        <LoginButton variant="banner" />
-                    </Box>
-                </Fade>
-            )}
-
-            <Box sx={{ mt: 'auto', py: 4, opacity: 0.4 }}>
-                <Typography variant="caption">
+            {/* ===== Footer ===== */}
+            <Box sx={{ py: 2, textAlign: 'center', opacity: 0.3 }}>
+                <Typography variant="caption" sx={{ fontSize: '0.6rem' }}>
                     {getTranslation('credits')}
                 </Typography>
             </Box>
