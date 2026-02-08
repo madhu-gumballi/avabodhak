@@ -5,6 +5,7 @@ export interface UserProfile {
   displayName: string
   email: string
   photoURL: string | null
+  region: string | null
   createdAt: Timestamp | Date
   lastLoginAt: Timestamp | Date
 }
@@ -15,6 +16,7 @@ export interface UserPreferences {
   theme: 'dark' | 'light'
   legendOpen: boolean
   learnMode: boolean
+  soundEnabled: boolean
 }
 
 export interface UserStats {
@@ -75,6 +77,7 @@ export interface LeaderboardEntry {
   userId: string
   displayName: string
   photoURL: string | null
+  region: string | null
   score: number
   rank: number
 }
@@ -133,6 +136,7 @@ export const DEFAULT_USER_PREFERENCES: UserPreferences = {
   theme: 'dark',
   legendOpen: false,
   learnMode: false,
+  soundEnabled: true,
 }
 
 export const DEFAULT_USER_STATS: UserStats = {

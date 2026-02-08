@@ -158,10 +158,10 @@ export function OverlayControls({ visible, onVisibleChange, ttsPlaying, onTTSTog
           <div className="absolute inset-0 flex items-end justify-center pb-12">
             <div className="absolute inset-0 bg-black/10" />
             <div className="flex items-center justify-between w-full px-8">
-              <button aria-label="Prev Line" onClick={(e) => { e.stopPropagation(); onPrevLine(); onNudged && onNudged('prev'); }} className="rounded-full bg-slate-900/70 backdrop-blur-sm border border-slate-600/70 text-slate-100 p-4 hover:bg-slate-800/80 hover:scale-110 transition-all shadow-lg">
+              <button aria-label="Prev Line" onClick={(e) => { e.stopPropagation(); onPrevLine(); onNudged && onNudged('prev'); }} className="rounded-full bg-slate-900/40 backdrop-blur-sm border border-slate-600/30 text-slate-300/70 p-4 hover:bg-slate-800/60 hover:text-slate-100 hover:scale-110 transition-all shadow-lg">
                 <ChevronLeftIcon fontSize="large" />
               </button>
-              <button aria-label="Next Line" onClick={(e) => { e.stopPropagation(); onNextLine(); onNudged && onNudged('next'); }} className="rounded-full bg-slate-900/70 backdrop-blur-sm border border-slate-600/70 text-slate-100 p-4 hover:bg-slate-800/80 hover:scale-110 transition-all shadow-lg">
+              <button aria-label="Next Line" onClick={(e) => { e.stopPropagation(); onNextLine(); onNudged && onNudged('next'); }} className="rounded-full bg-slate-900/40 backdrop-blur-sm border border-slate-600/30 text-slate-300/70 p-4 hover:bg-slate-800/60 hover:text-slate-100 hover:scale-110 transition-all shadow-lg">
                 <ChevronRightIcon fontSize="large" />
               </button>
             </div>

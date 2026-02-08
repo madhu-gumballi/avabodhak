@@ -19,6 +19,7 @@ import {
   formatTimeUntilReset,
 } from '../lib/leaderboard'
 import { LeaderboardEntry, LeaderboardPeriod } from '../lib/userTypes'
+import { getRegionFlag } from '../lib/region'
 import type { Lang } from '../data/types'
 
 interface LeaderboardPanelProps {
@@ -366,6 +367,11 @@ function LeaderboardRow({ entry, isCurrentUser, position, youLabel }: Leaderboar
             </Typography>
           )}
         </Typography>
+        {entry.region && (
+          <Typography variant="caption" color="text.secondary" sx={{ fontSize: '0.65rem' }}>
+            {getRegionFlag(entry.region)} {entry.region}
+          </Typography>
+        )}
       </Box>
 
       {/* Score */}

@@ -15,6 +15,7 @@ import {
 import { auth, googleProvider, isFirebaseConfigured } from '../lib/firebase'
 import {
   UserDocument,
+  UserProfile,
   UserStats,
   DailyGoals,
   UserPreferences,
@@ -25,6 +26,7 @@ import {
   getCachedUserData,
   cacheUserData,
   updateUserPreferences,
+  updateUserProfile,
   updateUserStats,
   updateDailyGoals,
   updateStreak,
@@ -56,6 +58,7 @@ interface AuthContextType {
 
   // User data actions
   updatePreferences: (prefs: Partial<UserPreferences>) => Promise<void>
+  updateProfile: (profile: Partial<UserProfile>) => Promise<void>
   updateStats: (stats: Partial<UserStats>) => Promise<void>
   updateGoals: (goals: Partial<DailyGoals>) => Promise<void>
   refreshUserData: () => Promise<void>
@@ -229,6 +232,25 @@ export function AuthProvider({ children }: AuthProviderProps) {
     [user, userData]
   )
 
+  // Update profile
+  const updateProfile = useCallback(
+    async (profile: Partial<UserProfile>) => {
+      const userId = user?.uid || 'guest'
+      await updateUserProfile(userId, profile)
+
+      // Update local state
+      if (userData) {
+        const updated = {
+          ...userData,
+          profile: { ...userData.profile, ...profile },
+        }
+        setUserData(updated)
+        cacheUserData(updated)
+      }
+    },
+    [user, userData]
+  )
+
   // Update stats
   const updateStats = useCallback(
     async (stats: Partial<UserStats>) => {
@@ -306,7 +328,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
       await updateLeaderboardEntry(
         user.uid,
         userData.profile.displayName,
-        userData.profile.photoURL
+        userData.profile.photoURL,
+        userData.profile.region ?? null
       )
     }
 
@@ -345,7 +368,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
         await updateLeaderboardEntry(
           user.uid,
           userData.profile.displayName,
-          userData.profile.photoURL
+          userData.profile.photoURL,
+          userData.profile.region ?? null
         )
       }
 
@@ -385,6 +409,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     continueAsGuest,
     dismissLoginPrompt,
     updatePreferences,
+    updateProfile,
     updateStats,
     updateGoals,
     refreshUserData,

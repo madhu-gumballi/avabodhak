@@ -9,14 +9,21 @@ import {
   Divider,
   Typography,
   Box,
+  Switch,
+  Select,
 } from '@mui/material'
+import type { SelectChangeEvent } from '@mui/material/Select'
 import LogoutIcon from '@mui/icons-material/Logout'
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents'
 import LeaderboardIcon from '@mui/icons-material/Leaderboard'
 import SettingsIcon from '@mui/icons-material/Settings'
 import PersonIcon from '@mui/icons-material/Person'
+import VolumeUpIcon from '@mui/icons-material/VolumeUp'
+import VolumeOffIcon from '@mui/icons-material/VolumeOff'
+import PublicIcon from '@mui/icons-material/Public'
 import { useAuth } from '../context/AuthContext'
 import StreakBadge from './StreakBadge'
+import { REGION_OPTIONS, getRegionFlag } from '../lib/region'
 
 interface UserMenuProps {
   onShowAchievements?: () => void
@@ -29,7 +36,7 @@ export default function UserMenu({
   onShowLeaderboard,
   onShowSettings,
 }: UserMenuProps) {
-  const { user, userData, isGuest, signOut } = useAuth()
+  const { user, userData, isGuest, signOut, updatePreferences, updateProfile } = useAuth()
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null)
 
   const handleOpen = (event: React.MouseEvent<HTMLElement>) => {
@@ -160,6 +167,81 @@ export default function UserMenu({
           </ListItemIcon>
           <ListItemText>Leaderboard</ListItemText>
         </MenuItem>
+
+        <Divider sx={{ borderColor: 'rgba(255, 255, 255, 0.1)' }} />
+
+        {/* Sound toggle */}
+        <MenuItem
+          onClick={() => {
+            const current = userData?.preferences?.soundEnabled ?? true
+            updatePreferences({ soundEnabled: !current })
+          }}
+          sx={{ py: 0.5 }}
+        >
+          <ListItemIcon>
+            {(userData?.preferences?.soundEnabled ?? true) ? (
+              <VolumeUpIcon fontSize="small" sx={{ color: '#22c55e' }} />
+            ) : (
+              <VolumeOffIcon fontSize="small" sx={{ color: 'text.secondary' }} />
+            )}
+          </ListItemIcon>
+          <ListItemText>Sound</ListItemText>
+          <Switch
+            size="small"
+            checked={userData?.preferences?.soundEnabled ?? true}
+            onChange={() => {
+              const current = userData?.preferences?.soundEnabled ?? true
+              updatePreferences({ soundEnabled: !current })
+            }}
+            onClick={(e) => e.stopPropagation()}
+            sx={{ ml: 1 }}
+          />
+        </MenuItem>
+
+        {/* Region selector */}
+        <Box sx={{ px: 2, py: 1 }}>
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 0.5 }}>
+            <PublicIcon fontSize="small" sx={{ color: 'text.secondary' }} />
+            <Typography variant="caption" color="text.secondary">
+              Region
+            </Typography>
+          </Box>
+          <Select
+            size="small"
+            value={userData?.profile?.region || ''}
+            onChange={(e: SelectChangeEvent) => {
+              updateProfile({ region: e.target.value })
+            }}
+            displayEmpty
+            fullWidth
+            renderValue={(value) => {
+              if (!value) return 'Select region'
+              return `${getRegionFlag(value)} ${value}`
+            }}
+            sx={{
+              fontSize: '0.75rem',
+              height: 32,
+              bgcolor: 'rgba(255,255,255,0.05)',
+              '& .MuiSelect-select': { py: 0.5 },
+            }}
+            MenuProps={{
+              PaperProps: {
+                sx: {
+                  maxHeight: 200,
+                  bgcolor: 'rgba(15, 23, 42, 0.95)',
+                  backdropFilter: 'blur(12px)',
+                  border: '1px solid rgba(255, 255, 255, 0.1)',
+                },
+              },
+            }}
+          >
+            {REGION_OPTIONS.map((region) => (
+              <MenuItem key={region} value={region} sx={{ fontSize: '0.75rem' }}>
+                {getRegionFlag(region)} {region}
+              </MenuItem>
+            ))}
+          </Select>
+        </Box>
 
         {onShowSettings && (
           <MenuItem onClick={handleSettings}>

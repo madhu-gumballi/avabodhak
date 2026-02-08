@@ -124,7 +124,8 @@ export async function getUserRank(
 export async function updateLeaderboardEntry(
   userId: string,
   displayName: string,
-  photoURL: string | null
+  photoURL: string | null,
+  region: string | null = null
 ): Promise<void> {
   if (!db || !isFirebaseConfigured) return
 
@@ -152,6 +153,7 @@ export async function updateLeaderboardEntry(
         userId,
         displayName,
         photoURL,
+        region,
         score,
         rank: 0, // Will be recalculated
       }

@@ -29,17 +29,23 @@ const theme = createTheme({
 function AppContent() {
   const [view, setView] = useState<ViewState>('landing');
   const [preferredLang, setPreferredLang] = useState<Lang | undefined>(undefined);
+  const [initialMode, setInitialMode] = useState<'reading' | 'practice' | 'puzzle' | undefined>(undefined);
+  const [initialLineIndex, setInitialLineIndex] = useState<number | undefined>(undefined);
   const { showLoginPrompt, loading } = useAuth();
 
-  const handleStotraSelect = (stotra: 'vsn' | 'hari' | 'keshava' | 'vayu', lang?: Lang) => {
+  const handleStotraSelect = (stotra: 'vsn' | 'hari' | 'keshava' | 'vayu', lang?: Lang, mode?: 'reading' | 'practice' | 'puzzle', lineIndex?: number) => {
     setView(stotra);
     setPreferredLang(lang);
+    setInitialMode(mode);
+    setInitialLineIndex(lineIndex);
     analytics.selectStotra(stotra);
   };
 
   const handleBack = () => {
     setView('landing');
     setPreferredLang(undefined);
+    setInitialMode(undefined);
+    setInitialLineIndex(undefined);
   };
 
   // Show nothing while loading auth state
@@ -60,16 +66,16 @@ function AppContent() {
         <EnhancedLandingPage onSelectStotra={handleStotraSelect} />
       )}
       {view === 'vsn' && (
-        <VSNViewer onBack={handleBack} preferredLang={preferredLang} />
+        <VSNViewer onBack={handleBack} preferredLang={preferredLang} initialMode={initialMode} initialLineIndex={initialLineIndex} />
       )}
       {view === 'hari' && (
-        <HariStotramViewer onBack={handleBack} preferredLang={preferredLang} />
+        <HariStotramViewer onBack={handleBack} preferredLang={preferredLang} initialMode={initialMode} initialLineIndex={initialLineIndex} />
       )}
       {view === 'keshava' && (
-        <KeshavaNamaViewer onBack={handleBack} preferredLang={preferredLang} />
+        <KeshavaNamaViewer onBack={handleBack} preferredLang={preferredLang} initialMode={initialMode} initialLineIndex={initialLineIndex} />
       )}
       {view === 'vayu' && (
-        <VayuStutiViewer onBack={handleBack} preferredLang={preferredLang} />
+        <VayuStutiViewer onBack={handleBack} preferredLang={preferredLang} initialMode={initialMode} initialLineIndex={initialLineIndex} />
       )}
     </>
   );

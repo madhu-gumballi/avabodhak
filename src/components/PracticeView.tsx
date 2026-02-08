@@ -12,6 +12,7 @@ import { shouldMaskWord, getPracticeState, savePracticeState, getHintLetterCount
 import { basicSplit } from '../lib/tokenize';
 import { analytics } from '../lib/analytics';
 import { useAuth } from '../context/AuthContext';
+import { playSuccessSoundIfEnabled } from '../lib/sound';
 
 // Haptic feedback utility
 const triggerHaptic = (pattern: 'light' | 'medium' | 'success' | 'error' = 'light') => {
@@ -37,6 +38,7 @@ interface Props {
   lines: string[]; // All lines in current language
   chapterIndices?: number[]; // indices of lines that are chapter headers
   lang: Lang;
+  stotraKey?: string; // Stotra identifier for storage isolation
   initialLineIndex?: number;
   onExit: () => void;
   onSearchRequest?: () => void; // Callback to open search panel
@@ -44,7 +46,7 @@ interface Props {
   T: (key: string) => string; // Translation function
 }
 
-export function PracticeView({ lines, chapterIndices = [], lang, initialLineIndex = 0, onExit, onSearchRequest, onLineIndexChange, T }: Props) {
+export function PracticeView({ lines, chapterIndices = [], lang, stotraKey, initialLineIndex = 0, onExit, onSearchRequest, onLineIndexChange, T }: Props) {
   const { recordLineComplete } = useAuth();
   const [lineIndex, setLineIndex] = useState(initialLineIndex);
   const difficulty = 'medium'; // Fixed to medium only
@@ -88,7 +90,7 @@ export function PracticeView({ lines, chapterIndices = [], lang, initialLineInde
     const completed = new Set<number>();
     try {
       for (let i = 0; i < lines.length; i++) {
-        const state = getPracticeState(lang, i);
+        const state = getPracticeState(lang, i, stotraKey);
         if (state && state.completed) {
           completed.add(i);
         }
@@ -101,7 +103,7 @@ export function PracticeView({ lines, chapterIndices = [], lang, initialLineInde
 
   // Load saved progress when line changes
   useEffect(() => {
-    const state = getPracticeState(lang, lineIndex);
+    const state = getPracticeState(lang, lineIndex, stotraKey);
     if (state) {
       setRevealedWords(state.revealedIndices);
       if (state.completed) {
@@ -120,7 +122,7 @@ export function PracticeView({ lines, chapterIndices = [], lang, initialLineInde
           revealedIndices: new Set(allIndices),
           totalMasked: allIndices.length,
           completed: true,
-        });
+        }, stotraKey);
       } else {
         setRevealedWords(new Set());
       }
@@ -169,7 +171,7 @@ export function PracticeView({ lines, chapterIndices = [], lang, initialLineInde
       revealedIndices: newRevealed,
       totalMasked,
       completed,
-    });
+    }, stotraKey);
 
     // Track analytics
     actionCountRef.current++;
@@ -181,6 +183,7 @@ export function PracticeView({ lines, chapterIndices = [], lang, initialLineInde
       setCompletedLines(prev => new Set([...prev, lineIndex]));
       // Haptic feedback on line complete
       triggerHaptic('success');
+      playSuccessSoundIfEnabled();
       // Record completion for gamification (achievements, daily goals, leaderboard)
       recordLineComplete();
     }
@@ -534,7 +537,7 @@ export function PracticeView({ lines, chapterIndices = [], lang, initialLineInde
                     revealedIndices: resetRevealed,
                     totalMasked,
                     completed: false,
-                  });
+                  }, stotraKey);
                 }}
                 sx={{
                   color: '#10b981',
@@ -567,6 +570,7 @@ export function PracticeView({ lines, chapterIndices = [], lang, initialLineInde
                   actionCountRef.current++;
                   analytics.practiceAction('complete_line');
                   triggerHaptic('success');
+                  playSuccessSoundIfEnabled();
                   const allRevealed = new Set<number>(maskedIndices);
                   setRevealedWords(allRevealed);
                   setCompletedLines(prev => new Set([...prev, lineIndex]));
@@ -576,7 +580,7 @@ export function PracticeView({ lines, chapterIndices = [], lang, initialLineInde
                     revealedIndices: allRevealed,
                     totalMasked,
                     completed: true,
-                  });
+                  }, stotraKey);
                 }}
                 sx={{
                   fontSize: '0.7rem',

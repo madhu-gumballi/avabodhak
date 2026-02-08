@@ -92,7 +92,7 @@ export function MobileModeDock({
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        minWidth: { xs: 48, sm: 56 },
+        minWidth: { xs: 40, sm: 56 },
         position: 'relative',
       }}
     >
@@ -192,11 +192,12 @@ export function MobileModeDock({
             bgcolor: 'rgba(15, 23, 42, 0.95)',
             backdropFilter: 'blur(12px)',
             border: '1px solid rgba(51, 65, 85, 0.6)',
-            px: 1,
+            px: { xs: 0.25, sm: 1 },
             py: 0.75,
             display: 'flex',
             justifyContent: 'center',
-            gap: 0.5,
+            flexWrap: 'nowrap',
+            gap: { xs: 0, sm: 0.5 },
             zIndex: 1200,
             boxShadow: '0 8px 32px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.05) inset',
           }}
@@ -221,8 +222,8 @@ export function MobileModeDock({
             progress={puzzleProgress}
           />
 
-          {/* Divider */}
-          <Divider orientation="vertical" flexItem sx={{ borderColor: 'rgba(51,65,85,0.6)', mx: 0.5 }} />
+          {/* Divider - hidden on very small screens */}
+          <Divider orientation="vertical" flexItem sx={{ borderColor: 'rgba(51,65,85,0.6)', mx: 0.5, display: { xs: 'none', sm: 'block' } }} />
 
           {/* Read Mode */}
           <DockButton
@@ -244,8 +245,8 @@ export function MobileModeDock({
             label="Details"
           />
 
-          {/* Divider */}
-          <Divider orientation="vertical" flexItem sx={{ borderColor: 'rgba(51,65,85,0.6)', mx: 0.5 }} />
+          {/* Divider - hidden on very small screens */}
+          <Divider orientation="vertical" flexItem sx={{ borderColor: 'rgba(51,65,85,0.6)', mx: 0.5, display: { xs: 'none', sm: 'block' } }} />
 
           {/* Settings/More */}
           <DockButton
