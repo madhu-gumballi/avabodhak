@@ -19,6 +19,8 @@ import {
   savePuzzleState,
   getPuzzleState,
   isPuzzleSuitable,
+  getPuzzleStats,
+  incrementPuzzleCompletionCount,
   type PuzzleSegment,
   type PuzzleState,
 } from '../lib/puzzle';
@@ -69,6 +71,8 @@ export function PuzzleView({ lines, chapterIndices = [], lang, stotraKey, initia
   const [completedLines, setCompletedLines] = useState<Set<number>>(new Set());
   const [isComplete, setIsComplete] = useState(false);
   const [showFeedback, setShowFeedback] = useState(false);
+  const [showStotraComplete, setShowStotraComplete] = useState(false);
+  const [stotraCompletionCount, setStotraCompletionCount] = useState(0);
   const startTimeRef = useRef(Date.now());
   const actionCountRef = useRef(0);
 
@@ -83,6 +87,17 @@ export function PuzzleView({ lines, chapterIndices = [], lang, stotraKey, initia
     const line = lines[idx] || '';
     return !isPuzzleSuitable(line);
   }, [chapterIndexSet, lines]);
+
+  /** Check if all suitable puzzle lines in the stotra are now complete */
+  const checkStotraComplete = useCallback(() => {
+    if (!stotraKey) return;
+    const stats = getPuzzleStats(lang, lines.length, stotraKey, lines, chapterIndexSet);
+    if (stats.total > 0 && stats.completed >= stats.total) {
+      const count = incrementPuzzleCompletionCount(lang, stotraKey);
+      setStotraCompletionCount(count);
+      setShowStotraComplete(true);
+    }
+  }, [lang, lines, stotraKey]);
 
   const currentLine = lines[lineIndex] || '';
 
@@ -222,6 +237,9 @@ export function PuzzleView({ lines, chapterIndices = [], lang, stotraKey, initia
 
         // Trigger confetti
         triggerConfetti();
+
+        // Check if entire stotra is now complete
+        setTimeout(() => checkStotraComplete(), 200);
       }, 100);
     }
   };
@@ -278,6 +296,9 @@ export function PuzzleView({ lines, chapterIndices = [], lang, stotraKey, initia
       // Record completion for gamification (achievements, daily goals, leaderboard)
       // Perfect = no hints used
       recordPuzzleComplete(hintsUsed === 0);
+
+      // Check if entire stotra is now complete
+      setTimeout(() => checkStotraComplete(), 200);
     } else {
       triggerHaptic('error');
       setShowFeedback(true);
@@ -377,6 +398,9 @@ export function PuzzleView({ lines, chapterIndices = [], lang, stotraKey, initia
     };
     savePuzzleState(lang, state, stotraKey);
     actionCountRef.current++;
+
+    // Check if entire stotra is now complete
+    setTimeout(() => checkStotraComplete(), 200);
   };
 
   // Replay completed puzzle
@@ -970,6 +994,46 @@ export function PuzzleView({ lines, chapterIndices = [], lang, stotraKey, initia
           {T('keyboard_shortcuts')}: ← → {T('to_navigate')}
         </Typography>
       </Box>
+
+      {/* Stotra completion overlay */}
+      {showStotraComplete && (
+        <Box
+          sx={{
+            position: 'fixed',
+            inset: 0,
+            zIndex: 9999,
+            bgcolor: 'rgba(0,0,0,0.8)',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: 3,
+          }}
+        >
+          <Typography variant="h4" sx={{ color: '#fbbf24', fontWeight: 700 }}>
+            {T('puzzle_complete')}!
+          </Typography>
+          <Typography variant="h6" sx={{ color: 'white' }}>
+            x{stotraCompletionCount}
+          </Typography>
+          <Box sx={{ display: 'flex', gap: 2 }}>
+            <Button
+              variant="outlined"
+              onClick={() => {
+                setShowStotraComplete(false);
+                onExit();
+              }}
+              sx={{
+                color: 'white',
+                borderColor: 'rgba(255,255,255,0.4)',
+                '&:hover': { borderColor: 'white', bgcolor: 'rgba(255,255,255,0.1)' },
+              }}
+            >
+              {T('exit_puzzle')}
+            </Button>
+          </Box>
+        </Box>
+      )}
     </Box>
   );
 }

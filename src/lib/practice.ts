@@ -424,3 +424,69 @@ export async function bulkLoadPracticeFromFirestore(userId: string): Promise<voi
     console.error('[Practice] Failed to bulk-load from Firestore:', error);
   }
 }
+
+// ---------------------------------------------------------------------------
+// Stotra-level completion counts (how many times fully completed)
+// ---------------------------------------------------------------------------
+
+function completionKey(stotraKey: string, lang: string): string {
+  return `completions:${stotraKey}:${lang}:practice`;
+}
+
+/** Read the number of times a stotra practice has been fully completed. */
+export function getPracticeCompletionCount(lang: string, stotraKey: string): number {
+  try {
+    const val = localStorage.getItem(completionKey(stotraKey, lang));
+    return val ? parseInt(val, 10) || 0 : 0;
+  } catch {
+    return 0;
+  }
+}
+
+/** Increment the stotra practice completion count and sync to Firestore. */
+export function incrementPracticeCompletionCount(lang: string, stotraKey: string): number {
+  const key = completionKey(stotraKey, lang);
+  const next = getPracticeCompletionCount(lang, stotraKey) + 1;
+  try {
+    localStorage.setItem(key, String(next));
+  } catch { /* silent */ }
+  syncCompletionCountToFirestore(lang, stotraKey, next);
+  return next;
+}
+
+async function syncCompletionCountToFirestore(lang: string, stotraKey: string, count: number): Promise<void> {
+  if (!db || !isFirebaseConfigured || !auth?.currentUser) return;
+  try {
+    const userId = auth.currentUser.uid;
+    const docId = `${stotraKey}:${lang}:practice`;
+    const ref = doc(db, 'users', userId, 'stotraCompletions', docId);
+    await setDoc(ref, { stotraKey, lang, mode: 'practice', count, updatedAt: new Date() }, { merge: true });
+  } catch (error) {
+    console.error('[Practice] Failed to sync completion count:', error);
+  }
+}
+
+/** Reset all per-line practice progress for a stotra/lang so the user can redo it. */
+export function resetPracticeProgress(lang: string, totalLines: number, stotraKey: string): void {
+  try {
+    for (let i = 0; i < totalLines; i++) {
+      localStorage.removeItem(`practice:${stotraKey}:${lang}:${i}`);
+      localStorage.removeItem(`practice:${lang}:${i}`);
+    }
+  } catch { /* silent */ }
+  syncPracticeResetToFirestore(lang, totalLines, stotraKey);
+}
+
+async function syncPracticeResetToFirestore(lang: string, totalLines: number, stotraKey: string): Promise<void> {
+  if (!db || !isFirebaseConfigured || !auth?.currentUser) return;
+  try {
+    const userId = auth.currentUser.uid;
+    for (let i = 0; i < totalLines; i++) {
+      const docId = `${stotraKey}:${lang}:${i}`;
+      const ref = doc(db, 'users', userId, 'practiceProgress', docId);
+      await setDoc(ref, { completed: false, updatedAt: new Date() }, { merge: true });
+    }
+  } catch (error) {
+    console.error('[Practice] Failed to sync reset:', error);
+  }
+}

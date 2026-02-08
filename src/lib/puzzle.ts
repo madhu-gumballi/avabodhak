@@ -348,15 +348,31 @@ export function clearPuzzleState(lang: string, lineNumber: number, stotraKey?: s
 }
 
 /**
- * Get puzzle statistics
+ * Check whether a line should be skipped for puzzle purposes.
+ * Skips chapter-header indices AND lines that fail isPuzzleSuitable.
  */
+function shouldSkipPuzzleLine(i: number, lines?: string[], chapterIndices?: Set<number>): boolean {
+  if (chapterIndices && chapterIndices.has(i)) return true;
+  if (lines && !isPuzzleSuitable(lines[i])) return true;
+  return false;
+}
+
 /**
- * Get the next uncompleted puzzle line index
- * Returns 0 if all are completed
+ * Get the next uncompleted puzzle line index.
+ * When `lines` / `chapterIndices` are provided, skips lines that are not
+ * puzzle-suitable or are chapter headers, matching PuzzleView's skip logic.
+ * Returns 0 if all suitable lines are completed.
  */
-export function getNextUncompletedPuzzleLine(lang: string, totalLines: number, stotraKey?: string): number {
+export function getNextUncompletedPuzzleLine(
+  lang: string,
+  totalLines: number,
+  stotraKey?: string,
+  lines?: string[],
+  chapterIndices?: Set<number>,
+): number {
   try {
     for (let i = 0; i < totalLines; i++) {
+      if (shouldSkipPuzzleLine(i, lines, chapterIndices)) continue;
       const state = getPuzzleState(lang, i, stotraKey);
       if (!state || !state.completed) {
         return i;
@@ -368,20 +384,35 @@ export function getNextUncompletedPuzzleLine(lang: string, totalLines: number, s
   return 0;
 }
 
-export function getPuzzleStats(lang: string, totalLines: number, stotraKey?: string): {
+/**
+ * Get puzzle statistics.
+ * When `lines` / `chapterIndices` are provided, only counts puzzle-suitable
+ * non-chapter lines in the total so progress percentage is accurate.
+ */
+export function getPuzzleStats(
+  lang: string,
+  totalLines: number,
+  stotraKey?: string,
+  lines?: string[],
+  chapterIndices?: Set<number>,
+): {
   completed: number;
+  total: number;
   totalAttempts: number;
   averageHints: number;
   averageTime: number;
   progress: number; // 0-100 percentage
 } {
   let completed = 0;
+  let total = 0;
   let totalAttempts = 0;
   let totalHints = 0;
   let totalTime = 0;
 
   try {
     for (let i = 0; i < totalLines; i++) {
+      if (shouldSkipPuzzleLine(i, lines, chapterIndices)) continue;
+      total++;
       const state = getPuzzleState(lang, i, stotraKey);
       if (state && state.completed) {
         completed++;
@@ -396,12 +427,16 @@ export function getPuzzleStats(lang: string, totalLines: number, stotraKey?: str
     // Silent fail
   }
 
+  // If no lines array provided, total = totalLines (legacy behaviour)
+  if (!lines) total = totalLines;
+
   return {
     completed,
+    total,
     totalAttempts,
     averageHints: completed > 0 ? totalHints / completed : 0,
     averageTime: completed > 0 ? totalTime / completed : 0,
-    progress: totalLines > 0 ? (completed / totalLines) * 100 : 0,
+    progress: total > 0 ? (completed / total) * 100 : 0,
   };
 }
 
@@ -452,5 +487,94 @@ export async function bulkLoadPuzzleFromFirestore(userId: string): Promise<void>
     });
   } catch (error) {
     console.error('[Puzzle] Failed to bulk-load from Firestore:', error);
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Stotra-level completion counts (how many times fully completed)
+// ---------------------------------------------------------------------------
+
+function completionKey(stotraKey: string, lang: string): string {
+  return `completions:${stotraKey}:${lang}:puzzle`;
+}
+
+/** Read the number of times a stotra puzzle has been fully completed. */
+export function getPuzzleCompletionCount(lang: string, stotraKey: string): number {
+  try {
+    const val = localStorage.getItem(completionKey(stotraKey, lang));
+    return val ? parseInt(val, 10) || 0 : 0;
+  } catch {
+    return 0;
+  }
+}
+
+/** Increment the stotra puzzle completion count and sync to Firestore. */
+export function incrementPuzzleCompletionCount(lang: string, stotraKey: string): number {
+  const key = completionKey(stotraKey, lang);
+  const next = getPuzzleCompletionCount(lang, stotraKey) + 1;
+  try {
+    localStorage.setItem(key, String(next));
+  } catch { /* silent */ }
+  syncCompletionCountToFirestore(lang, stotraKey, next);
+  return next;
+}
+
+async function syncCompletionCountToFirestore(lang: string, stotraKey: string, count: number): Promise<void> {
+  if (!db || !isFirebaseConfigured || !auth?.currentUser) return;
+  try {
+    const userId = auth.currentUser.uid;
+    const docId = `${stotraKey}:${lang}:puzzle`;
+    const ref = doc(db, 'users', userId, 'stotraCompletions', docId);
+    await setDoc(ref, { stotraKey, lang, mode: 'puzzle', count, updatedAt: new Date() }, { merge: true });
+  } catch (error) {
+    console.error('[Puzzle] Failed to sync completion count:', error);
+  }
+}
+
+/** Reset all per-line puzzle progress for a stotra/lang so the user can redo it. */
+export function resetPuzzleProgress(lang: string, totalLines: number, stotraKey: string): void {
+  try {
+    for (let i = 0; i < totalLines; i++) {
+      localStorage.removeItem(`puzzle:${stotraKey}:${lang}:${i}`);
+      localStorage.removeItem(`puzzle:${lang}:${i}`);
+    }
+  } catch { /* silent */ }
+  syncPuzzleResetToFirestore(lang, totalLines, stotraKey);
+}
+
+async function syncPuzzleResetToFirestore(lang: string, totalLines: number, stotraKey: string): Promise<void> {
+  if (!db || !isFirebaseConfigured || !auth?.currentUser) return;
+  try {
+    const userId = auth.currentUser.uid;
+    for (let i = 0; i < totalLines; i++) {
+      const docId = `${stotraKey}:${lang}:${i}`;
+      const ref = doc(db, 'users', userId, 'puzzleProgress', docId);
+      await setDoc(ref, { completed: false, updatedAt: new Date() }, { merge: true });
+    }
+  } catch (error) {
+    console.error('[Puzzle] Failed to sync reset:', error);
+  }
+}
+
+/**
+ * Bulk-load all stotra completion counts from Firestore into localStorage.
+ */
+export async function bulkLoadPuzzleCompletionsFromFirestore(userId: string): Promise<void> {
+  if (!db || !isFirebaseConfigured) return;
+  try {
+    const colRef = collection(db, 'users', userId, 'stotraCompletions');
+    const snapshot = await getDocs(colRef);
+    snapshot.forEach((docSnap) => {
+      const data = docSnap.data() as { stotraKey?: string; lang?: string; mode?: string; count?: number };
+      if (!data.stotraKey || !data.lang || !data.mode) return;
+      const key = `completions:${data.stotraKey}:${data.lang}:${data.mode}`;
+      const local = parseInt(localStorage.getItem(key) || '0', 10) || 0;
+      const cloud = data.count || 0;
+      if (cloud > local) {
+        localStorage.setItem(key, String(cloud));
+      }
+    });
+  } catch (error) {
+    console.error('[Puzzle] Failed to bulk-load completions:', error);
   }
 }

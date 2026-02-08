@@ -8,7 +8,7 @@ import LastPageIcon from '@mui/icons-material/LastPage';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import type { Lang } from '../data/types';
 import { MaskedWord } from './MaskedWord';
-import { shouldMaskWord, getPracticeState, savePracticeState, getHintLetterCount, isChapterOrSectionLine, type PracticeDifficulty } from '../lib/practice';
+import { shouldMaskWord, getPracticeState, savePracticeState, getHintLetterCount, isChapterOrSectionLine, getPracticeStats, incrementPracticeCompletionCount, type PracticeDifficulty } from '../lib/practice';
 import { basicSplit } from '../lib/tokenize';
 import { analytics } from '../lib/analytics';
 import { useAuth } from '../context/AuthContext';
@@ -53,6 +53,8 @@ export function PracticeView({ lines, chapterIndices = [], lang, stotraKey, init
   const [revealedWords, setRevealedWords] = useState<Set<number>>(new Set());
   const [completedLines, setCompletedLines] = useState<Set<number>>(new Set());
   const [jumpInput, setJumpInput] = useState('');
+  const [showStotraComplete, setShowStotraComplete] = useState(false);
+  const [stotraCompletionCount, setStotraCompletionCount] = useState(0);
   const actionCountRef = useRef(0);
   
   // Swipe gesture detection
@@ -66,6 +68,17 @@ export function PracticeView({ lines, chapterIndices = [], lang, stotraKey, init
     const line = lines[idx] || '';
     return isChapterOrSectionLine(line);
   }, [chapterIndexSet, lines]);
+
+  /** Check if all practice lines in the stotra are now complete */
+  const checkStotraComplete = useCallback(() => {
+    if (!stotraKey) return;
+    const stats = getPracticeStats(lang, lines.length, stotraKey);
+    if (stats.totalLines > 0 && stats.completedLines >= stats.totalLines) {
+      const count = incrementPracticeCompletionCount(lang, stotraKey);
+      setStotraCompletionCount(count);
+      setShowStotraComplete(true);
+    }
+  }, [lang, lines.length, stotraKey]);
 
   const currentLine = lines[lineIndex] || '';
   const words = basicSplit(currentLine);
@@ -186,6 +199,8 @@ export function PracticeView({ lines, chapterIndices = [], lang, stotraKey, init
       playSuccessSoundIfEnabled();
       // Record completion for gamification (achievements, daily goals, leaderboard)
       recordLineComplete();
+      // Check if entire stotra is now complete
+      setTimeout(() => checkStotraComplete(), 200);
     }
   };
 
@@ -581,6 +596,8 @@ export function PracticeView({ lines, chapterIndices = [], lang, stotraKey, init
                     totalMasked,
                     completed: true,
                   }, stotraKey);
+                  recordLineComplete();
+                  setTimeout(() => checkStotraComplete(), 200);
                 }}
                 sx={{
                   fontSize: '0.7rem',
@@ -831,6 +848,46 @@ export function PracticeView({ lines, chapterIndices = [], lang, stotraKey, init
           {T('tip_practice_navigate')}
         </Typography>
       </Box>
+
+      {/* Stotra completion overlay */}
+      {showStotraComplete && (
+        <Box
+          sx={{
+            position: 'fixed',
+            inset: 0,
+            zIndex: 9999,
+            bgcolor: 'rgba(0,0,0,0.8)',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: 3,
+          }}
+        >
+          <Typography variant="h4" sx={{ color: '#fbbf24', fontWeight: 700 }}>
+            {T('practice_complete')}!
+          </Typography>
+          <Typography variant="h6" sx={{ color: 'white' }}>
+            x{stotraCompletionCount}
+          </Typography>
+          <Box sx={{ display: 'flex', gap: 2 }}>
+            <Button
+              variant="outlined"
+              onClick={() => {
+                setShowStotraComplete(false);
+                onExit();
+              }}
+              sx={{
+                color: 'white',
+                borderColor: 'rgba(255,255,255,0.4)',
+                '&:hover': { borderColor: 'white', bgcolor: 'rgba(255,255,255,0.1)' },
+              }}
+            >
+              {T('exit_practice')}
+            </Button>
+          </Box>
+        </Box>
+      )}
     </Box>
   );
 }
