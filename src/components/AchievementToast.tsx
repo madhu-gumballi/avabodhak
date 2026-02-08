@@ -18,6 +18,7 @@ import {
   isNativeShareAvailable,
 } from '../lib/share'
 import type { AchievementId } from '../lib/userTypes'
+import { playCelebrationSoundIfEnabled } from '../lib/sound'
 
 function SlideTransition(props: SlideProps) {
   return <Slide {...props} direction="up" />
@@ -32,6 +33,7 @@ export default function AchievementToast() {
   useEffect(() => {
     if (newAchievement) {
       setOpen(true)
+      playCelebrationSoundIfEnabled()
     }
   }, [newAchievement])
 

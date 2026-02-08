@@ -156,22 +156,24 @@ export function FlowTimeline({
           />
         </Box>
 
-        {/* Settings button */}
-        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: 1, bgcolor: 'rgba(15,23,42,0.4)', borderRadius: 2, px: 1, py: 0.5 }}>
-          <Tooltip title={T('settings')}>
-            <IconButton
-              onClick={(e) => setSettingsAnchor(e.currentTarget)}
-              aria-label="Settings"
-              size="small"
-              sx={{
-                '&:hover': { bgcolor: 'rgba(255,255,255,0.08)' },
-                transition: 'all 0.2s ease',
-              }}
-            >
-              <SettingsIcon fontSize="small" />
-            </IconButton>
-          </Tooltip>
-        </Box>
+        {/* Settings button — only shown for IAST since it only contains the pronunciation helper toggle */}
+        {lang === 'iast' && (
+          <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: 1, bgcolor: 'rgba(15,23,42,0.4)', borderRadius: 2, px: 1, py: 0.5 }}>
+            <Tooltip title={T('settings')}>
+              <IconButton
+                onClick={(e) => setSettingsAnchor(e.currentTarget)}
+                aria-label="Settings"
+                size="small"
+                sx={{
+                  '&:hover': { bgcolor: 'rgba(255,255,255,0.08)' },
+                  transition: 'all 0.2s ease',
+                }}
+              >
+                <SettingsIcon fontSize="small" />
+              </IconButton>
+            </Tooltip>
+          </Box>
+        )}
       </Box>
 
       {/* Settings popover */}

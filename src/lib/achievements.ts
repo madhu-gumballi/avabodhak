@@ -22,6 +22,27 @@ export const ACHIEVEMENTS: Record<AchievementId, AchievementDefinition> = {
     icon: '📜',
     criteria: 'Complete all lines in practice mode for any stotra',
   },
+  streak_2: {
+    id: 'streak_2',
+    name: 'Getting Started',
+    description: '2-day streak',
+    icon: '🔥',
+    criteria: 'Practice for 2 consecutive days',
+  },
+  streak_3: {
+    id: 'streak_3',
+    name: 'Three-peat',
+    description: '3-day streak',
+    icon: '🔥',
+    criteria: 'Practice for 3 consecutive days',
+  },
+  streak_5: {
+    id: 'streak_5',
+    name: 'High Five',
+    description: '5-day streak',
+    icon: '🔥',
+    criteria: 'Practice for 5 consecutive days',
+  },
   streak_7: {
     id: 'streak_7',
     name: 'Week Warrior',
@@ -29,12 +50,40 @@ export const ACHIEVEMENTS: Record<AchievementId, AchievementDefinition> = {
     icon: '🔥',
     criteria: 'Practice for 7 consecutive days',
   },
+  streak_14: {
+    id: 'streak_14',
+    name: 'Fortnight Force',
+    description: '14-day streak',
+    icon: '🔥',
+    criteria: 'Practice for 14 consecutive days',
+  },
+  streak_21: {
+    id: 'streak_21',
+    name: 'Habit Formed',
+    description: '21-day streak',
+    icon: '🔥',
+    criteria: 'Practice for 21 consecutive days',
+  },
   streak_30: {
     id: 'streak_30',
     name: 'Monthly Master',
     description: '30-day streak',
     icon: '🏆',
     criteria: 'Practice for 30 consecutive days',
+  },
+  streak_60: {
+    id: 'streak_60',
+    name: 'Two-Month Titan',
+    description: '60-day streak',
+    icon: '🏆',
+    criteria: 'Practice for 60 consecutive days',
+  },
+  streak_100: {
+    id: 'streak_100',
+    name: 'Centurion',
+    description: '100-day streak',
+    icon: '💎',
+    criteria: 'Practice for 100 consecutive days',
   },
   puzzle_perfect_10: {
     id: 'puzzle_perfect_10',
@@ -154,12 +203,40 @@ const checkers: Record<AchievementId, AchievementChecker> = {
     return false
   },
 
+  streak_2: (userData) => {
+    return userData.stats.currentStreak >= 2 || userData.stats.longestStreak >= 2
+  },
+
+  streak_3: (userData) => {
+    return userData.stats.currentStreak >= 3 || userData.stats.longestStreak >= 3
+  },
+
+  streak_5: (userData) => {
+    return userData.stats.currentStreak >= 5 || userData.stats.longestStreak >= 5
+  },
+
   streak_7: (userData) => {
     return userData.stats.currentStreak >= 7 || userData.stats.longestStreak >= 7
   },
 
+  streak_14: (userData) => {
+    return userData.stats.currentStreak >= 14 || userData.stats.longestStreak >= 14
+  },
+
+  streak_21: (userData) => {
+    return userData.stats.currentStreak >= 21 || userData.stats.longestStreak >= 21
+  },
+
   streak_30: (userData) => {
     return userData.stats.currentStreak >= 30 || userData.stats.longestStreak >= 30
+  },
+
+  streak_60: (userData) => {
+    return userData.stats.currentStreak >= 60 || userData.stats.longestStreak >= 60
+  },
+
+  streak_100: (userData) => {
+    return userData.stats.currentStreak >= 100 || userData.stats.longestStreak >= 100
   },
 
   puzzle_perfect_10: (userData) => {
@@ -282,7 +359,7 @@ export async function checkAchievementAfterAction(
       toCheck.push('vsn_master', 'hari_master', 'keshava_master', 'vayu_master')
       break
     case 'streak_update':
-      toCheck.push('streak_7', 'streak_30')
+      toCheck.push('streak_2', 'streak_3', 'streak_5', 'streak_7', 'streak_14', 'streak_21', 'streak_30', 'streak_60', 'streak_100')
       break
     case 'session_lines':
       toCheck.push('speed_learner')
@@ -326,27 +403,23 @@ export function getAchievementProgress(
         target: 100,
         percentage: Math.min((userData.stats.totalLinesCompleted / 100) * 100, 100),
       }
+    case 'streak_2':
+    case 'streak_3':
+    case 'streak_5':
     case 'streak_7':
-      return {
-        current: Math.min(Math.max(userData.stats.currentStreak, userData.stats.longestStreak), 7),
-        target: 7,
-        percentage: Math.min(
-          (Math.max(userData.stats.currentStreak, userData.stats.longestStreak) / 7) * 100,
-          100
-        ),
-      }
+    case 'streak_14':
+    case 'streak_21':
     case 'streak_30':
+    case 'streak_60':
+    case 'streak_100': {
+      const target = parseInt(achievementId.split('_')[1])
+      const best = Math.max(userData.stats.currentStreak, userData.stats.longestStreak)
       return {
-        current: Math.min(
-          Math.max(userData.stats.currentStreak, userData.stats.longestStreak),
-          30
-        ),
-        target: 30,
-        percentage: Math.min(
-          (Math.max(userData.stats.currentStreak, userData.stats.longestStreak) / 30) * 100,
-          100
-        ),
+        current: Math.min(best, target),
+        target,
+        percentage: Math.min((best / target) * 100, 100),
       }
+    }
     case 'puzzle_perfect_10':
       return {
         current: Math.min(userData.stats.perfectPuzzles, 10),

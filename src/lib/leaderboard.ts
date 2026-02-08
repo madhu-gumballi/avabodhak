@@ -71,6 +71,14 @@ function getCachedLeaderboard(period: LeaderboardPeriod): LeaderboardDocument | 
   }
 }
 
+// Invalidate all leaderboard caches so next fetch reads from Firestore
+export function invalidateLeaderboardCache(): void {
+  const periods: LeaderboardPeriod[] = ['weekly', 'monthly', 'allTime']
+  for (const period of periods) {
+    localStorage.removeItem(LEADERBOARD_CACHE_PREFIX + period)
+  }
+}
+
 // Cache leaderboard to localStorage
 function cacheLeaderboard(period: LeaderboardPeriod, data: LeaderboardDocument): void {
   const cached: CachedLeaderboard = {

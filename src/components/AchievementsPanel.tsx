@@ -52,6 +52,42 @@ const ACHIEVEMENT_NAMES: Record<AchievementId, Record<Lang, string>> = {
     mal: 'സ്തോത്രസിദ്ധി',
     iast: 'Stotra Siddhi'
   },
+  streak_2: {
+    deva: 'द्विदिनव्रत',
+    knda: 'ದ್ವಿದಿನವ್ರತ',
+    tel: 'ద్విదినవ్రత',
+    tam: 'த்விதினவிரதம்',
+    pan: 'ਦ੍ਵਿਦਿਨਵ੍ਰਤ',
+    guj: 'દ્વિદિનવ્રત',
+    mr: 'द्विदिनव्रत',
+    ben: 'দ্বিদিনব্রত',
+    mal: 'ദ്വിദിനവ്രതം',
+    iast: 'Dvi Dina Vrata'
+  },
+  streak_3: {
+    deva: 'त्रिदिनव्रत',
+    knda: 'ತ್ರಿದಿನವ್ರತ',
+    tel: 'త్రిదినవ్రత',
+    tam: 'த்ரிதினவிரதம்',
+    pan: 'ਤ੍ਰਿਦਿਨਵ੍ਰਤ',
+    guj: 'ત્રિદિનવ્રત',
+    mr: 'त्रिदिनव्रत',
+    ben: 'ত্রিদিনব্রত',
+    mal: 'ത്രിദിനവ്രതം',
+    iast: 'Tri Dina Vrata'
+  },
+  streak_5: {
+    deva: 'पञ्चदिनव्रत',
+    knda: 'ಪಂಚದಿನವ್ರತ',
+    tel: 'పంచదినవ్రత',
+    tam: 'பஞ்சதினவிரதம்',
+    pan: 'ਪੰਚਦਿਨਵ੍ਰਤ',
+    guj: 'પંચદિનવ્રત',
+    mr: 'पंचदिनव्रत',
+    ben: 'পঞ্চদিনব্রত',
+    mal: 'പഞ്ചദിനവ്രതം',
+    iast: 'Pancha Dina Vrata'
+  },
   streak_7: {
     deva: 'सप्तदिनव्रत',
     knda: 'ಸಪ್ತದಿನವ್ರತ',
@@ -64,6 +100,30 @@ const ACHIEVEMENT_NAMES: Record<AchievementId, Record<Lang, string>> = {
     mal: 'സപ്തദിനവ്രതം',
     iast: 'Sapta Dina Vrata'
   },
+  streak_14: {
+    deva: 'पक्षव्रत',
+    knda: 'ಪಕ್ಷವ್ರತ',
+    tel: 'పక్షవ్రత',
+    tam: 'பக்ஷவிரதம்',
+    pan: 'ਪਕ੍ਸ਼ਵ੍ਰਤ',
+    guj: 'પક્ષવ્રત',
+    mr: 'पक्षव्रत',
+    ben: 'পক্ষব্রত',
+    mal: 'പക്ഷവ്രതം',
+    iast: 'Paksha Vrata'
+  },
+  streak_21: {
+    deva: 'त्रिसप्ताहव्रत',
+    knda: 'ತ್ರಿಸಪ್ತಾಹವ್ರತ',
+    tel: 'త్రిసప్తాహవ్రత',
+    tam: 'த்ரிசப்தாஹவிரதம்',
+    pan: 'ਤ੍ਰਿਸਪ੍ਤਾਹਵ੍ਰਤ',
+    guj: 'ત્રિસપ્તાહવ્રત',
+    mr: 'त्रिसप्ताहव्रत',
+    ben: 'ত্রিসপ্তাহব্রত',
+    mal: 'ത്രിസപ്താഹവ്രതം',
+    iast: 'Tri Saptaha Vrata'
+  },
   streak_30: {
     deva: 'मासव्रत',
     knda: 'ಮಾಸವ್ರತ',
@@ -75,6 +135,30 @@ const ACHIEVEMENT_NAMES: Record<AchievementId, Record<Lang, string>> = {
     ben: 'মাসব্রত',
     mal: 'മാസവ്രതം',
     iast: 'Masa Vrata'
+  },
+  streak_60: {
+    deva: 'द्विमासव्रत',
+    knda: 'ದ್ವಿಮಾಸವ್ರತ',
+    tel: 'ద్విమాసవ్రత',
+    tam: 'த்விமாசவிரதம்',
+    pan: 'ਦ੍ਵਿਮਾਸਵ੍ਰਤ',
+    guj: 'દ્વિમાસવ્રત',
+    mr: 'द्विमासव्रत',
+    ben: 'দ্বিমাসব্রত',
+    mal: 'ദ്വിമാസവ്രതം',
+    iast: 'Dvi Masa Vrata'
+  },
+  streak_100: {
+    deva: 'शतदिनव्रत',
+    knda: 'ಶತದಿನವ್ರತ',
+    tel: 'శతదినవ్రత',
+    tam: 'சததினவிரதம்',
+    pan: 'ਸ਼ਤਦਿਨਵ੍ਰਤ',
+    guj: 'શતદિનવ્રત',
+    mr: 'शतदिनव्रत',
+    ben: 'শতদিনব্রত',
+    mal: 'ശതദിനവ്രതം',
+    iast: 'Shata Dina Vrata'
   },
   puzzle_perfect_10: {
     deva: 'दशपहेलीविद्',
@@ -200,6 +284,42 @@ const ACHIEVEMENT_DESCRIPTIONS: Record<AchievementId, Record<Lang, string>> = {
     mal: 'ഏതെങ്കിലും സ്തോത്രത്തിന്റെ എല്ലാ വരികളും പൂര്‍ത്തിയാക്കുക',
     iast: 'Complete all lines of any stotra'
   },
+  streak_2: {
+    deva: '२ दिन की निरंतर अभ्यास',
+    knda: '೨ ದಿನಗಳ ನಿರಂತರ ಅಭ್ಯಾಸ',
+    tel: '౨ రోజుల నిరంతర అభ్యాసం',
+    tam: '௨ நாள் தொடர் பயிற்சி',
+    pan: '੨ ਦਿਨਾਂ ਦਾ ਲਗਾਤਾਰ ਅਭਿਆਸ',
+    guj: '૨ દિવસનો સતત અભ્યાસ',
+    mr: '२ दिवसांचा सलग सराव',
+    ben: '২ দিনের ধারাবাহিক অনুশীলন',
+    mal: '൨ ദിവസത്തെ തുടര്‍ച്ചയായ പരിശീലനം',
+    iast: '2 consecutive days of practice'
+  },
+  streak_3: {
+    deva: '३ दिन की निरंतर अभ्यास',
+    knda: '೩ ದಿನಗಳ ನಿರಂತರ ಅಭ್ಯಾಸ',
+    tel: '౩ రోజుల నిరంతర అభ్యాసం',
+    tam: '௩ நாள் தொடர் பயிற்சி',
+    pan: '੩ ਦਿਨਾਂ ਦਾ ਲਗਾਤਾਰ ਅਭਿਆਸ',
+    guj: '૩ દિવસનો સતત અભ્યાસ',
+    mr: '३ दिवसांचा सलग सराव',
+    ben: '৩ দিনের ধারাবাহিক অনুশীলন',
+    mal: '൩ ദിവസത്തെ തുടര്‍ച്ചയായ പരിശീലനം',
+    iast: '3 consecutive days of practice'
+  },
+  streak_5: {
+    deva: '५ दिन की निरंतर अभ्यास',
+    knda: '೫ ದಿನಗಳ ನಿರಂತರ ಅಭ್ಯಾಸ',
+    tel: '౫ రోజుల నిరంతర అభ్యాసం',
+    tam: '௫ நாள் தொடர் பயிற்சி',
+    pan: '੫ ਦਿਨਾਂ ਦਾ ਲਗਾਤਾਰ ਅਭਿਆਸ',
+    guj: '૫ દિવસનો સતત અભ્યાસ',
+    mr: '५ दिवसांचा सलग सराव',
+    ben: '৫ দিনের ধারাবাহিক অনুশীলন',
+    mal: '൫ ദിവസത്തെ തുടര്‍ച്ചയായ പരിശീലനം',
+    iast: '5 consecutive days of practice'
+  },
   streak_7: {
     deva: '७ दिन की निरंतर अभ्यास',
     knda: '೭ ದಿನಗಳ ನಿರಂತರ ಅಭ್ಯಾಸ',
@@ -212,6 +332,30 @@ const ACHIEVEMENT_DESCRIPTIONS: Record<AchievementId, Record<Lang, string>> = {
     mal: '൭ ദിവസത്തെ തുടര്‍ച്ചയായ പരിശീലനം',
     iast: '7 consecutive days of practice'
   },
+  streak_14: {
+    deva: '१४ दिन की निरंतर अभ्यास',
+    knda: '೧೪ ದಿನಗಳ ನಿರಂತರ ಅಭ್ಯಾಸ',
+    tel: '౧౪ రోజుల నిరంతర అభ్యాసం',
+    tam: '௧௪ நாள் தொடர் பயிற்சி',
+    pan: '੧੪ ਦਿਨਾਂ ਦਾ ਲਗਾਤਾਰ ਅਭਿਆਸ',
+    guj: '૧૪ દિવસનો સતત અભ્યાસ',
+    mr: '१४ दिवसांचा सलग सराव',
+    ben: '১৪ দিনের ধারাবাহিক অনুশীলন',
+    mal: '൧൪ ദിവസത്തെ തുടര്‍ച്ചയായ പരിശീലനം',
+    iast: '14 consecutive days of practice'
+  },
+  streak_21: {
+    deva: '२१ दिन की निरंतर अभ्यास',
+    knda: '೨೧ ದಿನಗಳ ನಿರಂತರ ಅಭ್ಯಾಸ',
+    tel: '౨౧ రోజుల నిరంతర అభ్యాసం',
+    tam: '௨௧ நாள் தொடர் பயிற்சி',
+    pan: '੨੧ ਦਿਨਾਂ ਦਾ ਲਗਾਤਾਰ ਅਭਿਆਸ',
+    guj: '૨૧ દિવસનો સતત અભ્યાસ',
+    mr: '२१ दिवसांचा सलग सराव',
+    ben: '২১ দিনের ধারাবাহিক অনুশীলন',
+    mal: '൨൧ ദിവസത്തെ തുടര്‍ച്ചയായ പരിശീലനം',
+    iast: '21 consecutive days of practice'
+  },
   streak_30: {
     deva: '३० दिन की निरंतर अभ्यास',
     knda: '೩೦ ದಿನಗಳ ನಿರಂತರ ಅಭ್ಯಾಸ',
@@ -223,6 +367,30 @@ const ACHIEVEMENT_DESCRIPTIONS: Record<AchievementId, Record<Lang, string>> = {
     ben: '৩০ দিনের ধারাবাহিক অনুশীলন',
     mal: '൩൦ ദിവസത്തെ തുടര്‍ച്ചയായ പരിശീലനം',
     iast: '30 consecutive days of practice'
+  },
+  streak_60: {
+    deva: '६० दिन की निरंतर अभ्यास',
+    knda: '೬೦ ದಿನಗಳ ನಿರಂತರ ಅಭ್ಯಾಸ',
+    tel: '౬౦ రోజుల నిరంతర అభ్యాసం',
+    tam: '௬௦ நாள் தொடர் பயிற்சி',
+    pan: '੬੦ ਦਿਨਾਂ ਦਾ ਲਗਾਤਾਰ ਅਭਿਆਸ',
+    guj: '૬૦ દિવસનો સતત અભ્યાસ',
+    mr: '६० दिवसांचा सलग सराव',
+    ben: '৬০ দিনের ধারাবাহিক অনুশীলন',
+    mal: '൬൦ ദിവസത്തെ തുടര്‍ച്ചയായ പരിശീലനം',
+    iast: '60 consecutive days of practice'
+  },
+  streak_100: {
+    deva: '१०० दिन की निरंतर अभ्यास',
+    knda: '೧೦೦ ದಿನಗಳ ನಿರಂತರ ಅಭ್ಯಾಸ',
+    tel: '౧౦౦ రోజుల నిరంతర అభ్యాసం',
+    tam: '௧௦௦ நாள் தொடர் பயிற்சி',
+    pan: '੧੦੦ ਦਿਨਾਂ ਦਾ ਲਗਾਤਾਰ ਅਭਿਆਸ',
+    guj: '૧૦૦ દિવસનો સતત અભ્યાસ',
+    mr: '१०० दिवसांचा सलग सराव',
+    ben: '১০০ দিনের ধারাবাহিক অনুশীলন',
+    mal: '൧൦൦ ദിവസത്തെ തുടര്‍ച്ചയായ പരിശീലനം',
+    iast: '100 consecutive days of practice'
   },
   puzzle_perfect_10: {
     deva: 'बिना संकेत के १० पहेलियाँ हल करें',
@@ -432,6 +600,30 @@ const UI_TEXT: Record<string, Record<Lang, string>> = {
     mal: 'ആഴ്ച മുമ്പ്',
     iast: 'weeks ago'
   },
+  bestStreak: {
+    deva: 'सर्वश्रेष्ठ धारा',
+    knda: 'ಅತ್ಯುತ್ತಮ ಸರಣಿ',
+    tel: 'అత్యుత్తమ స్ట్రీక్',
+    tam: 'சிறந்த தொடர்',
+    pan: 'ਸਰਬੋਤਮ ਲੜੀ',
+    guj: 'શ્રેષ્ઠ શ્રેણી',
+    mr: 'सर्वोत्तम मालिका',
+    ben: 'সেরা ধারা',
+    mal: 'ഏറ്റവും നല്ല സ്ട്രീക്ക്',
+    iast: 'Best Streak'
+  },
+  days: {
+    deva: 'दिन',
+    knda: 'ದಿನಗಳು',
+    tel: 'రోజులు',
+    tam: 'நாட்கள்',
+    pan: 'ਦਿਨ',
+    guj: 'દિવસ',
+    mr: 'दिवस',
+    ben: 'দিন',
+    mal: 'ദിവസം',
+    iast: 'days'
+  },
 }
 
 export default function AchievementsPanel({ open, onClose, lang = 'deva' }: AchievementsPanelProps) {
@@ -505,6 +697,29 @@ export default function AchievementsPanel({ open, onClose, lang = 'deva' }: Achi
       </DialogTitle>
 
       <DialogContent>
+        {/* Best Streak banner */}
+        {userData.stats.longestStreak > 0 && (
+          <Box
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: 1.5,
+              mb: 3,
+              p: 1.5,
+              borderRadius: 2,
+              bgcolor: 'rgba(245, 158, 11, 0.1)',
+              border: '1px solid rgba(245, 158, 11, 0.25)',
+            }}
+          >
+            <Typography sx={{ fontSize: '1.5rem', lineHeight: 1 }}>
+              {'\uD83D\uDD25'}
+            </Typography>
+            <Typography variant="subtitle2" fontWeight="bold" sx={{ color: 'rgb(245, 158, 11)' }}>
+              {getUIText('bestStreak')}: {userData.stats.longestStreak} {getUIText('days')}
+            </Typography>
+          </Box>
+        )}
+
         {/* Unlocked achievements */}
         {unlocked.length > 0 && (
           <Box sx={{ mb: 3 }}>

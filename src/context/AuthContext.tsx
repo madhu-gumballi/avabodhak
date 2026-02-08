@@ -38,9 +38,9 @@ import {
   endSession,
 } from '../lib/userService'
 import { checkAchievementAfterAction, ACHIEVEMENTS } from '../lib/achievements'
-import { updateLeaderboardEntry } from '../lib/leaderboard'
+import { updateLeaderboardEntry, invalidateLeaderboardCache } from '../lib/leaderboard'
 import { syncAllPracticeToFirestore, bulkLoadPracticeFromFirestore } from '../lib/practice'
-import { syncAllPuzzleToFirestore, bulkLoadPuzzleFromFirestore } from '../lib/puzzle'
+import { syncAllPuzzleToFirestore, bulkLoadPuzzleFromFirestore, bulkLoadPuzzleCompletionsFromFirestore } from '../lib/puzzle'
 
 interface AuthContextType {
   // Auth state
@@ -114,22 +114,23 @@ export function AuthProvider({ children }: AuthProviderProps) {
           const userDoc = await getUserDocument(firebaseUser)
           setUserData(userDoc)
 
-          // Load cloud progress into localStorage first (for cross-device sync)
-          await bulkLoadPracticeFromFirestore(firebaseUser.uid)
-          await bulkLoadPuzzleFromFirestore(firebaseUser.uid)
-
-          // Migrate localStorage data if needed
-          await migrateLocalStorageToFirestore(firebaseUser.uid)
-
-          // Sync practice and puzzle progress to Firestore
-          await syncAllPracticeToFirestore(firebaseUser.uid)
-          await syncAllPuzzleToFirestore(firebaseUser.uid)
+          // Load cloud progress into localStorage in parallel (for cross-device sync)
+          await Promise.all([
+            bulkLoadPracticeFromFirestore(firebaseUser.uid),
+            bulkLoadPuzzleFromFirestore(firebaseUser.uid),
+            bulkLoadPuzzleCompletionsFromFirestore(firebaseUser.uid),
+          ])
 
           // Check and reset daily goals
           await checkAndResetDailyGoals(firebaseUser.uid)
 
           // Start session tracking
           startSession()
+
+          // Sync local → cloud in background (fire-and-forget, don't block UI)
+          migrateLocalStorageToFirestore(firebaseUser.uid).catch(() => {})
+          syncAllPracticeToFirestore(firebaseUser.uid).catch(() => {})
+          syncAllPuzzleToFirestore(firebaseUser.uid).catch(() => {})
         } catch (error) {
           console.error('Error loading user data:', error)
           // Fall back to cached data
@@ -168,19 +169,20 @@ export function AuthProvider({ children }: AuthProviderProps) {
       const userDoc = await getUserDocument(result.user)
       setUserData(userDoc)
 
-      // Load cloud progress into localStorage first (for cross-device sync)
-      await bulkLoadPracticeFromFirestore(result.user.uid)
-      await bulkLoadPuzzleFromFirestore(result.user.uid)
-
-      // Migrate localStorage data
-      await migrateLocalStorageToFirestore(result.user.uid)
-
-      // Sync practice and puzzle progress to Firestore
-      await syncAllPracticeToFirestore(result.user.uid)
-      await syncAllPuzzleToFirestore(result.user.uid)
+      // Load cloud progress into localStorage in parallel (for cross-device sync)
+      await Promise.all([
+        bulkLoadPracticeFromFirestore(result.user.uid),
+        bulkLoadPuzzleFromFirestore(result.user.uid),
+        bulkLoadPuzzleCompletionsFromFirestore(result.user.uid),
+      ])
 
       // Start session
       startSession()
+
+      // Sync local → cloud in background (fire-and-forget, don't block UI)
+      migrateLocalStorageToFirestore(result.user.uid).catch(() => {})
+      syncAllPracticeToFirestore(result.user.uid).catch(() => {})
+      syncAllPuzzleToFirestore(result.user.uid).catch(() => {})
     } catch (error) {
       console.error('Sign in error:', error)
       throw error
@@ -254,6 +256,17 @@ export function AuthProvider({ children }: AuthProviderProps) {
         }
         setUserData(updated)
         cacheUserData(updated)
+
+        // Sync region/displayName/photoURL changes to leaderboard
+        if (user && ('region' in profile || 'displayName' in profile || 'photoURL' in profile)) {
+          invalidateLeaderboardCache()
+          await updateLeaderboardEntry(
+            user.uid,
+            updated.profile.displayName,
+            updated.profile.photoURL,
+            updated.profile.region ?? null
+          )
+        }
       }
     },
     [user, userData]
