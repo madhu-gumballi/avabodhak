@@ -46,7 +46,7 @@ export function VSNViewer({ onBack, textOverride, subtitleOverrides, availableLa
   const APP_VERSION = `v${import.meta.env.VITE_APP_VERSION || '0.0.0'}`;
 
   // Auth and gamification context
-  const { user, userData, isGuest, recordActivity } = useAuth();
+  const { user, userData, isGuest, recordActivity, updatePreferences } = useAuth();
   const [achievementsPanelOpen, setAchievementsPanelOpen] = useState(false);
   const [leaderboardPanelOpen, setLeaderboardPanelOpen] = useState(false);
 
@@ -114,9 +114,13 @@ export function VSNViewer({ onBack, textOverride, subtitleOverrides, availableLa
   const fallbackLang2 = (languageOptions.find((l) => l !== fallbackLang) || '') as Lang | '';
   const ttsEnabled = isTTSEnabled();
   const [lang, setLang] = useState<Lang>(() => {
-    // Priority: preferredLang (if supported) > localStorage > fallbackLang
+    // Priority: preferredLang > userData (Firestore) > localStorage > fallbackLang
     if (preferredLang && languageOptions.includes(preferredLang)) {
       return preferredLang;
+    }
+    const userPref = userData?.preferences?.lang as Lang | undefined;
+    if (userPref && languageOptions.includes(userPref)) {
+      return userPref;
     }
     try {
       const raw = localStorage.getItem('lang') as Lang | null;
@@ -124,14 +128,41 @@ export function VSNViewer({ onBack, textOverride, subtitleOverrides, availableLa
     } catch { return fallbackLang; }
   });
   const [lang2, setLang2] = useState<Lang | ''>(() => {
+    const userPref2 = userData?.preferences?.lang2 as Lang | null | undefined;
+    if (userPref2 && languageOptions.includes(userPref2) && userPref2 !== fallbackLang) {
+      return userPref2;
+    }
     try {
       const raw = localStorage.getItem('lang2') as Lang | null;
       if (raw && languageOptions.includes(raw) && raw !== fallbackLang) return raw;
       return fallbackLang2;
     } catch { return fallbackLang2; }
   });
-  useEffect(() => { try { localStorage.setItem('lang', lang); } catch { } }, [lang]);
-  useEffect(() => { try { localStorage.setItem('lang2', lang2 || ''); } catch { } }, [lang2]);
+  // Persist language to localStorage and Firestore
+  useEffect(() => {
+    try { localStorage.setItem('lang', lang); } catch { }
+    if (user) { updatePreferences({ lang }).catch(() => {}); }
+  }, [lang]);
+  useEffect(() => {
+    try { localStorage.setItem('lang2', lang2 || ''); } catch { }
+    if (user) { updatePreferences({ lang2: lang2 || null }).catch(() => {}); }
+  }, [lang2]);
+  // When userData loads asynchronously (e.g. auto-login on new session),
+  // sync the language from Firestore preferences so it overrides localStorage defaults.
+  const userDataLangRef = useRef(false);
+  useEffect(() => {
+    if (userData?.preferences?.lang && !preferredLang && !userDataLangRef.current) {
+      const savedLang = userData.preferences.lang as Lang;
+      if (languageOptions.includes(savedLang) && savedLang !== lang) {
+        setLang(savedLang);
+      }
+      const savedLang2 = userData.preferences.lang2 as Lang | null | undefined;
+      if (savedLang2 && languageOptions.includes(savedLang2) && savedLang2 !== lang2) {
+        setLang2(savedLang2);
+      }
+      userDataLangRef.current = true;
+    }
+  }, [userData]);
   useEffect(() => {
     if (lang2 && (lang2 === lang || !languageOptions.includes(lang2))) {
       setLang2(fallbackLang2);
@@ -1875,12 +1906,14 @@ export function VSNViewer({ onBack, textOverride, subtitleOverrides, availableLa
         <AchievementsPanel
           open={achievementsPanelOpen}
           onClose={() => setAchievementsPanelOpen(false)}
+          lang={lang}
         />
 
         {/* Leaderboard Panel */}
         <LeaderboardPanel
           open={leaderboardPanelOpen}
           onClose={() => setLeaderboardPanelOpen(false)}
+          lang={lang}
         />
 
       </div>

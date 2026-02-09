@@ -128,13 +128,22 @@ export function applyHint(
     }
   };
 
-  // Each hint reveals one more word from the beginning
-  // Total words to reveal = hintsUsed (but never more than n-1)
+  // Reveal words from the beginning, but skip positions the user already
+  // got correct on their own so hints aren't wasted on already-solved slots.
   const maxHints = Math.min(4, Math.max(0, correctSegments.length - 1));
-  const wordsToPlace = Math.min(hintsUsed, maxHints);
+  const wordsToReveal = Math.min(hintsUsed, maxHints);
 
-  for (let i = 0; i < wordsToPlace; i++) {
+  let hintCount = 0;
+  for (let i = 0; i < correctSegments.length && hintCount < wordsToReveal; i++) {
+    // Skip positions the user already placed correctly
+    if (
+      newArrangement[i] !== null &&
+      newArrangement[i]!.text === correctSegments[i].text
+    ) {
+      continue;
+    }
     placeSegment(i);
+    hintCount++;
   }
 
   return { newArrangement, newAvailable, wordsRevealed };

@@ -47,7 +47,6 @@ export function ExploreDrawer({
   // Get color for a verse based on its position
   const getVerseColor = (index: number) => {
     if (chapterMarks.includes(index)) return '#a78bfa'; // Chapter start - violet
-    if (sectionMarks.includes(index)) return '#38bdf8'; // Section end - sky
     return '#475569'; // Normal - slate
   };
 
@@ -169,10 +168,6 @@ export function ExploreDrawer({
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
             <Box sx={{ width: 12, height: 12, borderRadius: 0.5, bgcolor: '#a78bfa' }} />
             <Typography variant="caption" sx={{ color: '#94a3b8' }}>Chapter</Typography>
-          </Box>
-          <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
-            <Box sx={{ width: 12, height: 12, borderRadius: 0.5, bgcolor: '#38bdf8' }} />
-            <Typography variant="caption" sx={{ color: '#94a3b8' }}>Verse End</Typography>
           </Box>
         </Box>
 
