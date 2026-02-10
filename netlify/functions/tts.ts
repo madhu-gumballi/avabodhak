@@ -1,6 +1,9 @@
 import { Handler } from '@netlify/functions';
+import { connectLambda, getStore } from '@netlify/blobs';
 
-// Map language codes to Google Cloud TTS language codes
+const TTS_BLOB_STORE = 'tts-cache';
+
+// Map language codes to BCP-47 language codes for Sarvam.ai
 function getLanguageCode(lang: string): string {
     const langMap: Record<string, string> = {
         'deva': 'hi-IN',   // Devanagari → Hindi
@@ -17,25 +20,15 @@ function getLanguageCode(lang: string): string {
     return langMap[lang] || 'hi-IN';
 }
 
-// Get voice name for better quality
-function getVoiceName(lang: string): string {
-    // Google Cloud TTS WaveNet voices for higher quality
-    const voiceMap: Record<string, string> = {
-        'deva': 'hi-IN-Wavenet-A',
-        'knda': 'kn-IN-Wavenet-A',
-        'tel': 'te-IN-Standard-A',
-        'tam': 'ta-IN-Wavenet-A',
-        'guj': 'gu-IN-Wavenet-A',
-        'pan': 'pa-IN-Wavenet-A',
-        'mr': 'mr-IN-Wavenet-A',
-        'ben': 'bn-IN-Wavenet-A',
-        'mal': 'ml-IN-Wavenet-A',
-        'iast': 'en-IN-Wavenet-A',
-    };
-    return process.env.GCLOUD_TTS_VOICE_NAME || voiceMap[lang] || '';
+// Build a cache key from language + text
+function blobCacheKey(lang: string, text: string): string {
+    return `${lang}/${text}`;
 }
 
 const handler: Handler = async (event, context) => {
+    // Initialize Netlify Blobs for Lambda-compatible functions
+    connectLambda(event);
+
     // Only allow POST
     if (event.httpMethod !== 'POST') {
         return {
@@ -60,7 +53,7 @@ const handler: Handler = async (event, context) => {
 
     try {
         const body = JSON.parse(event.body || '{}');
-        const { text, lang, granularity } = body;
+        const { text, lang } = body;
 
         if (!text) {
             return {
@@ -69,16 +62,16 @@ const handler: Handler = async (event, context) => {
             };
         }
 
-        if (text.length > 800) {
+        if (text.length > 2500) {
             return {
                 statusCode: 400,
-                body: JSON.stringify({ error: 'Text too long (max 800 characters)' })
+                body: JSON.stringify({ error: 'Text too long (max 2500 characters)' })
             };
         }
 
-        const apiKey = process.env.GCLOUD_TTS_API_KEY;
+        const apiKey = process.env.SARVAM_API_KEY;
         if (!apiKey) {
-            console.error('GCLOUD_TTS_API_KEY not set');
+            console.error('SARVAM_API_KEY not set');
             return {
                 statusCode: 500,
                 body: JSON.stringify({ error: 'TTS service not configured' })
@@ -86,69 +79,85 @@ const handler: Handler = async (event, context) => {
         }
 
         const languageCode = getLanguageCode(lang);
-        const voiceName = getVoiceName(lang);
+        const cacheKey = blobCacheKey(lang, text);
 
-        // Build request body for Google Cloud TTS
-        const requestBody: {
-            input: { text: string };
-            voice: { languageCode: string; name?: string };
-            audioConfig: { audioEncoding: string; speakingRate: number };
-        } = {
-            input: { text },
-            voice: {
-                languageCode,
-            },
-            audioConfig: {
-                audioEncoding: 'MP3',
-                speakingRate: granularity === 'verse' ? 0.85 : granularity === 'line' ? 0.9 : 1.0,
-            },
-        };
-
-        // Add specific voice name if available
-        if (voiceName) {
-            requestBody.voice.name = voiceName;
+        // Check Netlify Blob cache first
+        let audioBase64: string | undefined;
+        try {
+            const store = getStore(TTS_BLOB_STORE);
+            const cached = await store.get(cacheKey);
+            if (cached) {
+                console.log(`TTS blob cache hit: ${cacheKey.substring(0, 40)}`);
+                audioBase64 = cached;
+            }
+        } catch (err) {
+            console.warn('Blob cache read error (proceeding without cache):', err);
         }
 
-        // Call Google Cloud TTS REST API
-        const url = `https://texttospeech.googleapis.com/v1/text:synthesize?key=${apiKey}`;
-        const response = await fetch(url, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json; charset=utf-8',
-            },
-            body: JSON.stringify(requestBody),
-        });
+        // Cache miss — call Sarvam API
+        if (!audioBase64) {
+            console.log(`TTS blob cache miss: ${cacheKey.substring(0, 40)}`);
 
-        if (!response.ok) {
-            const errorText = await response.text();
-            console.error(`Google TTS error: ${response.status} - ${errorText}`);
-            return {
-                statusCode: 500,
-                body: JSON.stringify({ error: 'TTS synthesis failed' })
+            const sarvamBody = {
+                text,
+                target_language_code: languageCode,
+                model: 'bulbul:v3',
+                speaker: 'amit',
+                output_audio_codec: 'mp3',
             };
+
+            const response = await fetch('https://api.sarvam.ai/text-to-speech', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'api-subscription-key': apiKey,
+                },
+                body: JSON.stringify(sarvamBody),
+            });
+
+            if (!response.ok) {
+                const errorText = await response.text();
+                console.error(`Sarvam TTS error: ${response.status} - ${errorText}`);
+                return {
+                    statusCode: 500,
+                    body: JSON.stringify({ error: 'TTS synthesis failed' })
+                };
+            }
+
+            const data = await response.json() as { audios?: string[] };
+
+            if (!data.audios?.[0]) {
+                console.error('Sarvam TTS returned empty audios');
+                return {
+                    statusCode: 500,
+                    body: JSON.stringify({ error: 'TTS returned no audio' })
+                };
+            }
+
+            audioBase64 = data.audios[0];
+
+            // Store in Netlify Blob cache (fire-and-forget, don't block response)
+            try {
+                const store = getStore(TTS_BLOB_STORE);
+                await store.set(cacheKey, audioBase64);
+                console.log(`TTS blob cache stored: ${cacheKey.substring(0, 40)}`);
+            } catch (err) {
+                console.warn('Blob cache write error:', err);
+            }
         }
 
-        const data = await response.json() as { audioContent?: string };
-
-        if (!data.audioContent) {
-            console.error('Google TTS returned empty audioContent');
-            return {
-                statusCode: 500,
-                body: JSON.stringify({ error: 'TTS returned no audio' })
-            };
-        }
-
-        // Return base64-encoded audio
+        // Return base64-encoded MP3 audio
         return {
             statusCode: 200,
             headers: {
                 'Content-Type': 'audio/mpeg',
                 'Access-Control-Allow-Origin': '*',
                 'Access-Control-Allow-Headers': 'Content-Type',
-                'X-TTS-Provider': 'gcloud',
+                'X-TTS-Provider': 'sarvam',
                 'X-TTS-Lang': languageCode,
+                'X-TTS-Cache': audioBase64 === undefined ? 'miss' : 'hit',
             },
-            body: data.audioContent,
+            body: audioBase64,
             isBase64Encoded: true
         };
 

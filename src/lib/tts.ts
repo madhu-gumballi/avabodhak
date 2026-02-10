@@ -1,6 +1,7 @@
 /**
  * Text-to-Speech utilities for Avabodhak
  * Simplified to only support line-level TTS (entire line playback)
+ * Uses Sarvam.ai backend with browser Cache API for offline repeat plays
  */
 
 const TTS_ENABLED = import.meta.env.VITE_FEATURE_TTS === 'true';
@@ -10,11 +11,57 @@ export function isTTSEnabled(): boolean {
 }
 
 // Supported languages for TTS
-// Note: Support depends on the backend TTS service (Google Cloud TTS)
 export function isTTSSupportedForLang(lang: string): boolean {
-  // All languages supported by Google Cloud TTS, including IAST (English-India)
   const supported = ['deva', 'knda', 'tel', 'tam', 'pan', 'guj', 'mr', 'ben', 'mal', 'iast'];
   return supported.includes(lang);
+}
+
+// --------------- Cache API infrastructure ---------------
+
+const TTS_CACHE_NAME = 'tts-sarvam-v1';
+
+function ttsCacheKey(lang: string, text: string): string {
+  return `https://tts-cache/${lang}/${encodeURIComponent(text)}`;
+}
+
+async function getCachedAudio(lang: string, text: string): Promise<Response | undefined> {
+  try {
+    const cache = await caches.open(TTS_CACHE_NAME);
+    const match = await cache.match(ttsCacheKey(lang, text));
+    return match || undefined;
+  } catch {
+    return undefined;
+  }
+}
+
+async function putCachedAudio(lang: string, text: string, response: Response): Promise<void> {
+  try {
+    const cache = await caches.open(TTS_CACHE_NAME);
+    await cache.put(ttsCacheKey(lang, text), response.clone());
+  } catch {
+    // Cache API unavailable (e.g. Firefox private browsing)
+  }
+}
+
+// --------------- Client-side word-timing estimation ---------------
+
+function estimateTimepoints(words: string[], duration: number): { word: number; time: number }[] {
+  if (words.length === 0 || duration <= 0) return [];
+
+  // Weight each word by character count
+  const charCounts = words.map(w => w.length);
+  const totalChars = charCounts.reduce((sum, c) => sum + c, 0);
+  if (totalChars === 0) return [];
+
+  const timepoints: { word: number; time: number }[] = [];
+  let elapsed = 0;
+
+  for (let i = 0; i < words.length; i++) {
+    timepoints.push({ word: i, time: elapsed });
+    elapsed += (charCounts[i] / totalChars) * duration;
+  }
+
+  return timepoints;
 }
 
 /**
@@ -29,7 +76,8 @@ export interface LineTTSCallbacks {
 
 /**
  * LineTTSPlayer - Plays audio for entire lines of text
- * Uses the /api/tts endpoint (backed by Google Cloud TTS)
+ * Uses the /api/tts endpoint (backed by Sarvam.ai)
+ * Caches audio in browser Cache API for instant repeat plays
  */
 export class LineTTSPlayer {
   private currentAudio: HTMLAudioElement | null = null;
@@ -103,51 +151,43 @@ export class LineTTSPlayer {
         .replace(/\s+/g, ' ')
         .trim();
 
-      // Determine if we should use word-level timing
       const useWordTiming = Array.isArray(words) && words.length > 0 && this.callbacks.onWordChange;
 
       console.log('LineTTS: playLine start', { lang, length: ttsText.length, wordSync: useWordTiming });
 
-      // Fetch line audio from TTS API
-      const controller = new AbortController();
-      const timeoutId = window.setTimeout(() => controller.abort(), 15000); // 15s timeout
-
-      const requestBody: any = { text: ttsText, lang };
-      if (useWordTiming) {
-        requestBody.words = words;
-      }
-
-      const res = await fetch('/api/tts', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(requestBody),
-        signal: controller.signal,
-      });
-
-      window.clearTimeout(timeoutId);
-
-      if (!res.ok) {
-        console.error('LineTTS: TTS request failed', res.status, res.statusText);
-        throw new Error(`TTS request failed: ${res.status}`);
-      }
-
-      const contentType = res.headers.get('Content-Type');
-      console.log('LineTTS: response OK', { status: res.status, contentType });
-
+      // Check cache before fetching from network
       let blob: Blob;
 
-      // Handle JSON response (with word timing) vs binary audio
-      if (contentType?.includes('application/json')) {
-        const data = await res.json();
-        this.timepoints = data.timepoints || [];
-        console.log('LineTTS: got timepoints', { count: this.timepoints.length });
-
-        // Convert base64 audio to blob
-        const audioBytes = Uint8Array.from(atob(data.audio), c => c.charCodeAt(0));
-        blob = new Blob([audioBytes], { type: 'audio/mpeg' });
+      const cached = await getCachedAudio(lang, ttsText);
+      if (cached) {
+        console.log('LineTTS: cache hit');
+        blob = await cached.blob();
       } else {
+        console.log('LineTTS: cache miss');
+
+        // Fetch line audio from TTS API
+        const controller = new AbortController();
+        const timeoutId = window.setTimeout(() => controller.abort(), 15000); // 15s timeout
+
+        const res = await fetch('/api/tts', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ text: ttsText, lang }),
+          signal: controller.signal,
+        });
+
+        window.clearTimeout(timeoutId);
+
+        if (!res.ok) {
+          console.error('LineTTS: TTS request failed', res.status, res.statusText);
+          throw new Error(`TTS request failed: ${res.status}`);
+        }
+
+        console.log('LineTTS: response OK', { status: res.status });
+
+        // Store in cache before consuming the response body
+        await putCachedAudio(lang, ttsText, res);
         blob = await res.blob();
-        this.timepoints = [];
       }
 
       console.log('LineTTS: got blob', { size: blob.size });
@@ -178,6 +218,20 @@ export class LineTTSPlayer {
       this.currentAudio = audio;
       this.currentUrl = url;
       this.currentWordIndex = -1;
+
+      // Wait for loadedmetadata to get duration, then estimate word timepoints
+      if (useWordTiming && words) {
+        await new Promise<void>((resolve) => {
+          audio.addEventListener('loadedmetadata', () => {
+            console.log('LineTTS: loadedmetadata', { duration: audio.duration });
+            this.timepoints = estimateTimepoints(words, audio.duration);
+            console.log('LineTTS: estimated timepoints', { count: this.timepoints.length });
+            resolve();
+          }, { once: true });
+          // Also resolve on error to avoid hanging
+          audio.addEventListener('error', () => resolve(), { once: true });
+        });
+      }
 
       // Set up word tracking if we have timepoints
       if (this.timepoints.length > 0 && this.callbacks.onWordChange) {
@@ -228,10 +282,6 @@ export class LineTTSPlayer {
           this.cleanup();
           reject(err);
         };
-
-        this.currentAudio.addEventListener('loadedmetadata', () => {
-          console.log('LineTTS: loadedmetadata', { duration: this.currentAudio?.duration });
-        }, { once: true });
 
         this.currentAudio.addEventListener('ended', handleEnded, { once: true });
         this.currentAudio.addEventListener('error', handleError, { once: true });

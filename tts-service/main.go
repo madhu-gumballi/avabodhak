@@ -72,7 +72,6 @@ func handleTTS(w http.ResponseWriter, r *http.Request) {
 
 	var req ttsRequest
 	dec := json.NewDecoder(r.Body)
-	dec.DisallowUnknownFields()
 	if err := dec.Decode(&req); err != nil {
 		http.Error(w, "invalid JSON", http.StatusBadRequest)
 		return
@@ -84,12 +83,12 @@ func handleTTS(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if len([]rune(text)) > 800 {
+	if len([]rune(text)) > 2500 {
 		http.Error(w, "text too long", http.StatusBadRequest)
 		return
 	}
 
-	ctx, cancel := context.WithTimeout(r.Context(), 5*time.Second)
+	ctx, cancel := context.WithTimeout(r.Context(), 15*time.Second)
 	defer cancel()
 
 	// Common informational headers
@@ -100,10 +99,10 @@ func handleTTS(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("X-TTS-Granularity", req.Granularity)
 
 	provider := os.Getenv("TTS_PROVIDER")
-	if provider == "gcloud" {
-		w.Header().Set("X-TTS-Provider", "gcloud")
-		if err := synthesizeWithGoogleTTS(ctx, w, text, req); err != nil {
-			log.Printf("google tts error: %v", err)
+	if provider == "sarvam" {
+		w.Header().Set("X-TTS-Provider", "sarvam")
+		if err := synthesizeWithSarvam(ctx, w, text, req); err != nil {
+			log.Printf("sarvam tts error: %v", err)
 			http.Error(w, "tts error", http.StatusInternalServerError)
 		}
 		return
@@ -265,36 +264,22 @@ func synthesizeWithMac(ctx context.Context, w http.ResponseWriter, text string, 
 	return nil
 }
 
-// synthesizeWithGoogleTTS uses Google Cloud Text-to-Speech via REST.
-// It expects GCLOUD_TTS_API_KEY to be set and writes an MP3 audio response.
-func synthesizeWithGoogleTTS(ctx context.Context, w http.ResponseWriter, text string, req ttsRequest) error {
-	apiKey := os.Getenv("GCLOUD_TTS_API_KEY")
+// synthesizeWithSarvam uses the Sarvam.ai Text-to-Speech API.
+// It expects SARVAM_API_KEY to be set and writes an MP3 audio response.
+func synthesizeWithSarvam(ctx context.Context, w http.ResponseWriter, text string, req ttsRequest) error {
+	apiKey := os.Getenv("SARVAM_API_KEY")
 	if apiKey == "" {
-		return fmt.Errorf("GCLOUD_TTS_API_KEY not set")
+		return fmt.Errorf("SARVAM_API_KEY not set")
 	}
 
-	langCode, defaultVoiceName := gcloudVoiceParams(req.Lang)
-
-	voiceName := os.Getenv("GCLOUD_TTS_VOICE_NAME")
-	if voiceName == "" {
-		voiceName = defaultVoiceName
-	}
+	langCode := sarvamLangCode(req.Lang)
 
 	body := map[string]any{
-		"input": map[string]any{
-			"text": text,
-		},
-		"voice": map[string]any{
-			"languageCode": langCode,
-		},
-		"audioConfig": map[string]any{
-			"audioEncoding": "MP3",
-		},
-	}
-	if voiceName != "" {
-		if v, ok := body["voice"].(map[string]any); ok {
-			v["name"] = voiceName
-		}
+		"text":                 text,
+		"target_language_code": langCode,
+		"model":               "bulbul:v3",
+		"speaker":             "amit",
+		"output_audio_codec":  "mp3",
 	}
 
 	payload, err := json.Marshal(body)
@@ -302,12 +287,12 @@ func synthesizeWithGoogleTTS(ctx context.Context, w http.ResponseWriter, text st
 		return err
 	}
 
-	url := "https://texttospeech.googleapis.com/v1/text:synthesize?key=" + apiKey
-	reqHTTP, err := http.NewRequestWithContext(ctx, http.MethodPost, url, bytes.NewReader(payload))
+	reqHTTP, err := http.NewRequestWithContext(ctx, http.MethodPost, "https://api.sarvam.ai/text-to-speech", bytes.NewReader(payload))
 	if err != nil {
 		return err
 	}
-	reqHTTP.Header.Set("Content-Type", "application/json; charset=utf-8")
+	reqHTTP.Header.Set("Content-Type", "application/json")
+	reqHTTP.Header.Set("api-subscription-key", apiKey)
 
 	resp, err := http.DefaultClient.Do(reqHTTP)
 	if err != nil {
@@ -316,22 +301,22 @@ func synthesizeWithGoogleTTS(ctx context.Context, w http.ResponseWriter, text st
 	defer resp.Body.Close()
 
 	if resp.StatusCode != http.StatusOK {
-		log.Printf("gcloud tts http status %d", resp.StatusCode)
-		return fmt.Errorf("gcloud tts status %d", resp.StatusCode)
+		log.Printf("sarvam tts http status %d", resp.StatusCode)
+		return fmt.Errorf("sarvam tts status %d", resp.StatusCode)
 	}
 
 	var respBody struct {
-		AudioContent string `json:"audioContent"`
+		Audios []string `json:"audios"`
 	}
 	if err := json.NewDecoder(resp.Body).Decode(&respBody); err != nil {
 		return err
 	}
 
-	if respBody.AudioContent == "" {
-		return fmt.Errorf("gcloud tts empty audioContent")
+	if len(respBody.Audios) == 0 || respBody.Audios[0] == "" {
+		return fmt.Errorf("sarvam tts empty audios")
 	}
 
-	data, err := base64.StdEncoding.DecodeString(respBody.AudioContent)
+	data, err := base64.StdEncoding.DecodeString(respBody.Audios[0])
 	if err != nil {
 		return err
 	}
@@ -341,34 +326,34 @@ func synthesizeWithGoogleTTS(ctx context.Context, w http.ResponseWriter, text st
 		return err
 	}
 
-	log.Printf("tts[gcloud]: len=%d, lang=%q, voice=%q, bytes=%d", len([]rune(text)), req.Lang, voiceName, len(data))
+	log.Printf("tts[sarvam]: len=%d, lang=%q, bytes=%d", len([]rune(text)), req.Lang, len(data))
 	return nil
 }
 
-// gcloudVoiceParams maps our primary language codes to Google Cloud TTS language codes / voices.
-func gcloudVoiceParams(lang string) (languageCode, voiceName string) {
+// sarvamLangCode maps our primary language codes to BCP-47 codes for Sarvam.ai.
+func sarvamLangCode(lang string) string {
 	switch lang {
 	case "deva":
-		return "hi-IN", ""
+		return "hi-IN"
 	case "iast":
-		return "en-IN", "" // English (India) for transliteration
+		return "en-IN" // English (India) for transliteration
 	case "knda":
-		return "kn-IN", ""
+		return "kn-IN"
 	case "tel":
-		return "te-IN", ""
+		return "te-IN"
 	case "tam":
-		return "ta-IN", ""
+		return "ta-IN"
 	case "guj":
-		return "gu-IN", ""
+		return "gu-IN"
 	case "pan":
-		return "pa-IN", ""
+		return "pa-IN"
 	case "mr":
-		return "mr-IN", ""
+		return "mr-IN"
 	case "ben":
-		return "bn-IN", ""
+		return "bn-IN"
 	case "mal":
-		return "ml-IN", ""
+		return "ml-IN"
 	default:
-		return "hi-IN", ""
+		return "hi-IN"
 	}
 }
