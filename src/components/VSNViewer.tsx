@@ -470,7 +470,17 @@ export function VSNViewer({ onBack, textOverride, subtitleOverrides, availableLa
       const value = (ln as any)[lang] as string | undefined;
       if (!value) return;
       const idx = linesArr.length;
-      linesArr.push(value);
+      // Clean dandas and verse numbers for practice/puzzle modes
+      const cleaned = value
+        .replace(/॥\s*[०-९೦-೯౦-౯௦-௯\d]+\s*॥/g, '')
+        .replace(/\|\|\s*\d+\s*\|\|/g, '')
+        .replace(/॥/g, '')
+        .replace(/\|\|/g, '')
+        .replace(/[।|]/g, '')
+        .replace(/\s+\d+\s*$/, '')
+        .replace(/\s+/g, ' ')
+        .trim();
+      linesArr.push(cleaned);
       if (ln.chapter) chapterIdxs.push(idx);
     });
     return { lines: linesArr, chapterIndices: chapterIdxs };

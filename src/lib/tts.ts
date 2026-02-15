@@ -130,23 +130,20 @@ export class LineTTSPlayer {
     this.callbacks.onStart?.();
 
     try {
-      // Clean text for TTS: remove verse numbers like "॥ १ ॥", "॥ 1 ॥", "|| 1 ||"
-      // Also handles Kannada (೧), Telugu (౧), Tamil (௧) numerals
+      // Clean text for TTS: remove dandas, verse numbers, and punctuation marks
+      // that cause unintended audio rendering
       let ttsText = text.trim()
-        // Remove Devanagari double danda with numbers: ॥ १ ॥, ॥ १२ ॥, etc.
-        .replace(/॥\s*[०-९]+\s*॥/g, '')
-        // Remove with regular numbers: ॥ 1 ॥, ॥ 12 ॥
-        .replace(/॥\s*\d+\s*॥/g, '')
-        // Remove ASCII version: || 1 ||, || 12 ||
+        // Remove double danda with numbers: ॥ १ ॥, ॥ 1 ॥, ॥ ೧ ॥, ॥ ౧ ॥, ॥ ௧ ॥
+        .replace(/॥\s*[०-९೦-೯౦-౯௦-௯\d]+\s*॥/g, '')
+        // Remove ASCII double-pipe with numbers: || 1 ||, || 12 ||
         .replace(/\|\|\s*\d+\s*\|\|/g, '')
-        // Remove Kannada numerals: ॥ ೧ ॥
-        .replace(/॥\s*[೦-೯]+\s*॥/g, '')
-        // Remove Telugu numerals: ॥ ౧ ॥
-        .replace(/॥\s*[౦-౯]+\s*॥/g, '')
-        // Remove Tamil numerals: ॥ ௧ ॥
-        .replace(/॥\s*[௦-௯]+\s*॥/g, '')
-        // Remove single danda at end: । or |
-        .replace(/[।|]\s*$/, '')
+        // Remove remaining double dandas: ॥ or ||
+        .replace(/॥/g, '')
+        .replace(/\|\|/g, '')
+        // Remove remaining single dandas: । or | (pada separators)
+        .replace(/[।|]/g, '')
+        // Remove trailing verse/line numbers (standalone digits at end)
+        .replace(/\s+\d+\s*$/, '')
         // Clean up extra whitespace
         .replace(/\s+/g, ' ')
         .trim();
