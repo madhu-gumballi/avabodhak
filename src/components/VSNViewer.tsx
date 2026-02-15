@@ -1151,6 +1151,13 @@ export function VSNViewer({ onBack, textOverride, subtitleOverrides, availableLa
                     const durationSeconds = Math.round((Date.now() - modeStartTimeRef.current) / 1000);
                     analytics.modeExit(currentMode === 'puzzle' ? 'practice' : currentMode as 'play' | 'practice', durationSeconds, modeActionCountRef.current);
 
+                    // Sync line position across modes
+                    if (newMode === 'practice') {
+                      setPracticeLineIndex(flow.state.lineIndex);
+                    } else {
+                      flow.seekLine(practiceLineIndex);
+                    }
+
                     // Enter new mode
                     setViewMode(newMode);
                     analytics.modeEnter(newMode === 'reading' ? 'play' : 'practice', flow.state.lineIndex);
@@ -1185,6 +1192,13 @@ export function VSNViewer({ onBack, textOverride, subtitleOverrides, availableLa
                     // Track mode exit with time spent and actions
                     const durationSeconds = Math.round((Date.now() - modeStartTimeRef.current) / 1000);
                     analytics.modeExit(currentMode === 'puzzle' ? 'practice' : currentMode as 'play' | 'practice', durationSeconds, modeActionCountRef.current);
+
+                    // Sync line position across modes
+                    if (newMode === 'puzzle') {
+                      setPracticeLineIndex(flow.state.lineIndex);
+                    } else {
+                      flow.seekLine(practiceLineIndex);
+                    }
 
                     // Enter new mode
                     setViewMode(newMode);
@@ -1296,7 +1310,8 @@ export function VSNViewer({ onBack, textOverride, subtitleOverrides, availableLa
               lang={lang}
               stotraKey={stotraKey}
               initialLineIndex={practiceLineIndex}
-              onExit={() => setViewMode('reading')}
+              onExit={() => { flow.seekLine(practiceLineIndex); setViewMode('reading'); }}
+              onLineIndexChange={setPracticeLineIndex}
               T={T}
             />
           </Box>
@@ -1314,7 +1329,7 @@ export function VSNViewer({ onBack, textOverride, subtitleOverrides, availableLa
               lang={lang}
               stotraKey={stotraKey}
               initialLineIndex={practiceLineIndex}
-              onExit={() => setViewMode('reading')}
+              onExit={() => { flow.seekLine(practiceLineIndex); setViewMode('reading'); }}
               onSearchRequest={() => setSearchOpen(true)}
               onLineIndexChange={setPracticeLineIndex}
               T={T}
@@ -1868,6 +1883,13 @@ export function VSNViewer({ onBack, textOverride, subtitleOverrides, availableLa
               // Track mode exit
               const durationSeconds = Math.round((Date.now() - modeStartTimeRef.current) / 1000);
               analytics.modeExit(currentMode === 'puzzle' ? 'practice' : currentMode as 'play' | 'practice', durationSeconds, modeActionCountRef.current);
+
+              // Sync line position across modes
+              if (newMode === 'reading') {
+                flow.seekLine(practiceLineIndex);
+              } else if (viewMode === 'reading') {
+                setPracticeLineIndex(flow.state.lineIndex);
+              }
 
               // Enter new mode
               setViewMode(newMode);

@@ -1,0 +1,159 @@
+{
+  "title": "Sri Venkatesha Stotram",
+  "metadata": {
+    "chapters": 1,
+    "totalLines": 18,
+    "languages": ["knda"],
+    "practiceMode": true,
+    "puzzleMode": true,
+    "stotraType": "verse",
+    "devataPrimary": "Venkateshwara/Vishnu",
+    "composer": "Brahmanda Purana",
+    "revealedBy": "Brahma-Narada Samvada",
+    "credits": {
+      "textSource": "Brahmanda Purana, Brahma-Narada Samvada",
+      "scriptSources": {
+        "kannada": "Scanned from printed Kannada text"
+      },
+      "attribution": "Sri Venkatesha Stotram from Brahmanda Purana. Transcribed from Kannada printed source."
+    },
+    "disclaimer": {
+      "text": "The text provided here is for learning and devotion. For authoritative understanding, please consult a qualified guru or traditional scholar."
+    }
+  },
+  "sources": {
+    "deva": "",
+    "knda": "https://vignanam.org/kannada/sri-venkateswara-stotram.html",
+    "iast": ""
+  },
+  "lines": [
+    {
+      "id": "1",
+      "knda": "ಶ್ರೀ ವೇಂಕಟೇಶಸ್ತೋತ್ರಮ್",
+      "deva": "",
+      "iast": "Sri Venkatesha Stotram",
+      "chapter": "Sri Venkatesha Stotram",
+      "meaning": "Hymn in Praise of Lord Venkatesha",
+      "note": "Found in the Brahmanda Purana, this stotra occurs in the dialogue between Brahma and sage Narada on the greatness of Venkatachala hill. Through 16 verses, it enumerates the divine names of Lord Venkatesha - Vasudeva, Narayana, Srinivasa, Govinda - and describes the phala (fruit) of recitation: freedom from sin, fear, disease, and bondage, and the attainment of all desires. The concluding verse declares that no place in the universe equals Venkatadri, and no deity equals Venkateshwara."
+    },
+    {
+      "id": "2",
+      "knda": "ವೇಂಕಟೇಶೋ ವಾಸುದೇವಃ ಪ್ರದ್ಯುಮ್ನೋಽಮಿತವಿಕ್ರಮಃ | ಸಂಕರ್ಷಣೋಽನಿರುದ್ಧಶ್ಚ ಶೇಷಾದ್ರಿಪತಿರೇವ ಚ ||",
+      "deva": "",
+      "iast": "",
+      "meaning": "Venkateshwara, Vasudeva, Pradyumna of limitless valor, Sankarshana, Aniruddha - He is verily the Lord of Sheshadri."
+    },
+    {
+      "id": "3",
+      "knda": "ಜನಾರ್ದನಃ ಪದ್ಮನಾಭೋ ವೇಂಕಟಾಚಲವಾಸನಃ | ಸೃಷ್ಟಿಕರ್ತಾ ಜಗನ್ನಾಥೋ ಮಾಧವೋ ಭಕ್ತವತ್ಸಲಃ ||",
+      "deva": "",
+      "iast": "",
+      "meaning": "Janardana, Padmanabha, the dweller of Venkata hill, the Creator, Lord of the universe, Madhava, the one who loves His devotees."
+    },
+    {
+      "id": "4",
+      "knda": "ಗೋವಿಂದೋ ಗೋಪತಿಃ ಕೃಷ್ಣಃ ಕೇಶವೋ ಗರುಡಧ್ವಜಃ | ವರಾಹೋ ವಾಮನಶ್ಚೈವ ನಾರಾಯಣ ಅಧೋಕ್ಷಜಃ ||",
+      "deva": "",
+      "iast": "",
+      "meaning": "Govinda, Lord of cows, Krishna, Keshava, He whose banner bears Garuda, Varaha, Vamana, Narayana, the imperishable one."
+    },
+    {
+      "id": "5",
+      "knda": "ಶ್ರೀಧರಃ ಪುಂಡರೀಕಾಕ್ಷಃ ಸರ್ವದೇವಸ್ತುತೋ ಹರಿಃ | ಶ್ರೀನೃಸಿಂಹೋ ಮಹಾಸಿಂಹಃ ಸೂತ್ರಾಕಾರಃ ಪುರಾತನಃ ||",
+      "deva": "",
+      "iast": "",
+      "meaning": "Sridhara, the lotus-eyed one, praised by all the gods, Hari, Sri Narasimha, the great lion, the architect of creation, the most ancient one."
+    },
+    {
+      "id": "6",
+      "knda": "ರಮಾನಾಥೋ ಮಹೀಭರ್ತಾ ಭೂವರಾಹಃ ಪುರುಷೋತ್ತಮಃ | ಚೋಲಪುತ್ರೈಕಯೋಃ ಶಾಂತೇಃ ಬ್ರಹ್ಮಾದೀನಾಂ ವರಪ್ರದಃ ||",
+      "deva": "",
+      "iast": "",
+      "meaning": "The Lord of Lakshmi, the supporter of the earth, the great Varaha, the supreme person, the bestower of boons to Brahma and all the gods."
+    },
+    {
+      "id": "7",
+      "knda": "ಶ್ರೀನಿಧಿಃ ಸರ್ವಭೂತಾನಾಂ ಭಯಕೃದ್ಭಯನಾಶಕಃ | ಶ್ರೀರಾಮೋ ರಾಮಭದ್ರಶ್ಚ ಭವಬಂಧೈಕಮೋಚಕಃ ||",
+      "deva": "",
+      "iast": "",
+      "meaning": "The treasure of Lakshmi, the creator and destroyer of fear for all beings, Sri Rama, Ramabhadra, the sole liberator from the bonds of worldly existence."
+    },
+    {
+      "id": "8",
+      "knda": "ಭೂತವಾಸೋ ಗಿರಾವಾಸಃ ಶ್ರೀನಿವಾಸಃ ಶ್ರಿಯಃ ಪತಿಃ | ಅಚ್ಯುತಾನಂತಗೋವಿಂದೋ ವಿಷ್ಣುರ್ವೇಂಕಟನಾಯಕಃ ||",
+      "deva": "",
+      "iast": "",
+      "meaning": "The dweller in all beings, the mountain dweller, Srinivasa, the Lord of Sri (Lakshmi), Achyuta, Ananta, Govinda, Vishnu, the Lord of Venkata."
+    },
+    {
+      "id": "9",
+      "knda": "ಸರ್ವದೇವೈಕಶರಣಂ ಸರ್ವದೇವೈಕದೈವತಮ್ | ಸಮಸ್ತದೇವಕವಚಂ ಸರ್ವದೇವಶಿಖಾಮಣಿಃ ||",
+      "deva": "",
+      "iast": "",
+      "meaning": "The sole refuge of all gods, the sole deity of all gods, the armor of all gods, the crest-jewel of all gods."
+    },
+    {
+      "id": "10",
+      "knda": "ಇತೀದಂ ಕೀರ್ತನೀಯಸ್ಯ ವಿಷ್ಣೋರಮಿತತೇಜಸಃ | ತ್ರಿಕಾಲೇ ಯಃ ಪಠೇನ್ನಿತ್ಯಂ ಪಾಪಂ ತಸ್ಯ ನ ವಿದ್ಯತೇ ||",
+      "deva": "",
+      "iast": "",
+      "meaning": "Thus, whoever recites this hymn of Vishnu of immeasurable brilliance three times daily, no sin touches them."
+    },
+    {
+      "id": "11",
+      "knda": "ರಾಜದ್ವಾರೇ ಪಠೇದ್ಘೋರೇ ಸಂಗ್ರಾಮೇ ರಿಪುಸಂಕಟೇ | ಭೂತಸರ್ಪವಿಷಾಗ್ನ್ಯೌಘೈರ್ಭಯಂ ನಾಸ್ತಿ ಕದಾಚನ ||",
+      "deva": "",
+      "iast": "",
+      "meaning": "Whether recited at the king's gate, in terrible danger, in battle, or when surrounded by enemies - there is no fear from evil spirits, serpents, poison, fire, or floods."
+    },
+    {
+      "id": "12",
+      "knda": "ಅಪುತ್ರೋ ಲಭತೇ ಪುತ್ರಾನ್ ನಿರ್ಧನೋ ಧನವಾನ್ ಭವೇತ್ | ರೋಗಾರ್ತೋ ಮುಕ್ತರೋಗಶ್ಚ ಬಂಧನೋ ಮುಕ್ತಿಬಂಧನಾತ್ ||",
+      "deva": "",
+      "iast": "",
+      "meaning": "The childless one obtains sons, the poor becomes wealthy, the diseased is freed from illness, the bound one is freed from bondage."
+    },
+    {
+      "id": "13",
+      "knda": "ಯದಭೀಷ್ಟತಮಂ ಲೋಕೇ ತತ್ತತ್ಪ್ರಾಪ್ನೋತ್ಯಸಂಶಯಮ್ | ಐಶ್ವರ್ಯಂ ರಾಜಸನ್ಮಾನಂ ಭುಕ್ತಿಮುಕ್ತಿಫಲಪ್ರದಮ್ ||",
+      "deva": "",
+      "iast": "",
+      "meaning": "Whatever is most desired in this world, one attains it without doubt. It bestows prosperity, royal honor, and the fruits of both worldly enjoyment and liberation."
+    },
+    {
+      "id": "14",
+      "knda": "ವಿಷ್ಣೋರ್ಲೋಕೈಕಮಹಾಮಂತ್ರಃ ಸರ್ವಪಾಪಕ್ಷಯಂಕರಃ | ಸರ್ವೈಶ್ವರ್ಯಪ್ರದಂ ನೃಣಾಂ ಸರ್ವಮಾಂಗಲ್ಯಕಾರಣಮ್ ||",
+      "deva": "",
+      "iast": "",
+      "meaning": "This is the greatest mantra of Lord Vishnu in all the worlds, the destroyer of all sins, bestowing all prosperity upon humanity, the cause of all auspiciousness."
+    },
+    {
+      "id": "15",
+      "knda": "ಮಾಯಾವೀ ಪರಮಾನಂದಂ ತ್ಯಕ್ತ್ವಾ ವೈಕುಂಠಮುತ್ತಮಮ್ | ಸ್ವಾಮಿಪುಷ್ಕರಿಣೀತೀರೇ ರಮಯಾ ಸಹ ಮೋದತೇ ||",
+      "deva": "",
+      "iast": "",
+      "meaning": "The Lord of Maya, leaving the supreme bliss of Vaikuntha, delights with Lakshmi on the banks of Swami Pushkarini."
+    },
+    {
+      "id": "16",
+      "knda": "ಕಲ್ಯಾಣಾದ್ಭುತಗಾತ್ರಾಯ ಕಾಮಿತಾರ್ಥಪ್ರದಾಯಿನೇ | ಶ್ರೀಮದ್ವೇಂಕಟನಾಥಾಯ ಶ್ರೀನಿವಾಸಾಯ ತೇ ನಮಃ ||",
+      "deva": "",
+      "iast": "",
+      "meaning": "To Him of wondrous and auspicious form, the granter of all desired objects, to the glorious Lord of Venkata, to Srinivasa - salutations to Thee."
+    },
+    {
+      "id": "17",
+      "knda": "ವೇಂಕಟಾದ್ರಿ ಸಮಂ ಸ್ಥಾನಂ ಬ್ರಹ್ಮಾಂಡೇ ನಾಸ್ತಿ ಕಿಂಚನ | ವೇಂಕಟೇಶ ಸಮೋ ದೇವೋ ನ ಭೂತೋ ನ ಭವಿಷ್ಯತಿ | ಏವೇನ ಸತ್ಯವಾಕ್ಯೇನ ಸರ್ವಾರ್ಥಾನ್ ಸಾಧಯಾಮ್ಯಹಮ್ ||",
+      "deva": "",
+      "iast": "",
+      "meaning": "There is no place in the universe equal to Venkatadri. There is no god equal to Venkateshwara, nor has there ever been, nor will there ever be. By this truthful declaration, I accomplish all my goals."
+    },
+    {
+      "id": "18",
+      "knda": "|| ಇತಿ ಶ್ರೀ ಬ್ರಹ್ಮಾಂಡಪುರಾಣೇ ಬ್ರಹ್ಮನಾರದಸಂವಾದೇ ಶ್ರೀ ವೇಂಕಟೇಶಸ್ತೋತ್ರಮ್ ||",
+      "deva": "",
+      "iast": "",
+      "meaning": "Thus ends the Sri Venkatesha Stotram from the Brahmanda Purana, in the dialogue between Brahma and Narada."
+    }
+  ]
+}

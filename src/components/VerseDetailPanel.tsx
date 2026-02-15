@@ -563,14 +563,14 @@ export function VerseDetailPanel({
                 sx={{
                   color: '#64748b',
                   display: 'block',
-                  fontSize: '0.7rem',
+                  fontSize: '0.78rem',
                   lineHeight: 1.5,
                   textAlign: 'center',
                   fontStyle: 'italic',
                 }}
               >
-                Translations and interpretations are approximations for learning purposes.
-                For deeper understanding, please consult a qualified guru or attend traditional satsangs.
+                Translations are approximations and may not fully convey the intended meaning in the original language due to
+                interpretive and transcription limitations. Consult a qualified guru for deeper understanding.
               </Typography>
             </Box>
           </>
@@ -1080,13 +1080,14 @@ export function VerseDetailInline({
                 sx={{
                   color: '#64748b',
                   display: 'block',
-                  fontSize: compact ? '0.55rem' : '0.6rem',
+                  fontSize: compact ? '0.63rem' : '0.68rem',
                   lineHeight: 1.4,
                   textAlign: 'center',
                   fontStyle: 'italic',
                 }}
               >
-                Translations are approximations. Consult a qualified guru for deeper understanding.
+                Translations are approximations and may not fully convey the intended meaning in the original language due to
+                interpretive and transcription limitations. Consult a qualified guru for deeper understanding.
               </Typography>
             </Box>
           </Box>

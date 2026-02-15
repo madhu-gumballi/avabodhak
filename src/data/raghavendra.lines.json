@@ -1,0 +1,409 @@
+{
+  "title": "Sri Raghavendra Stotram",
+  "metadata": {
+    "chapters": 1,
+    "totalLines": 39,
+    "languages": [
+      "deva",
+      "knda",
+      "tel",
+      "tam",
+      "iast"
+    ],
+    "practiceMode": true,
+    "puzzleMode": true,
+    "stotraType": "verse",
+    "composer": "Sri Appannacharya",
+    "composerInfo": {
+      "name": "Sri Appannacharya",
+      "tradition": "Dvaita Vedanta",
+      "biography": "A devoted disciple of Sri Raghavendra Swami and composer of this famous stotra praising the great saint of Mantralayam."
+    },
+    "devataPrimary": "Sri Raghavendra Swami",
+    "devataSecondary": [
+      "Vishnu",
+      "Hari"
+    ],
+    "historicalContext": "Sri Raghavendra Swami (1595-1671 CE) was a great saint of the Dvaita Vedanta tradition who entered Brindavana (sacred samadhi) at Mantralayam. This stotra, composed by his disciple Appannacharya, is one of the most recited hymns in the Madhva tradition.",
+    "rasa": [
+      "bhakti",
+      "shanta"
+    ],
+    "gunaCategories": [
+      "jnana",
+      "bhakti",
+      "rakshana"
+    ],
+    "credits": {
+      "textSource": "Vaidika Vignanam",
+      "textSourceUrl": "https://vignanam.org/",
+      "tradition": "Dvaita Vedanta / Madhva Sampradaya",
+      "attribution": "Text content sourced from vignanam.org. We are grateful for making these sacred texts available."
+    },
+    "disclaimer": {
+      "text": "The text provided here is for learning and devotion. For authoritative understanding, please consult a qualified guru or traditional scholar in the Dvaita Vedanta tradition."
+    }
+  },
+  "sources": {
+    "iast": "https://vignanam.org/english/sri-raghavendra-stotram.html",
+    "deva": "https://vignanam.org/devanagari/sri-raghavendra-stotram.html",
+    "knda": "https://vignanam.org/kannada/sri-raghavendra-stotram.html",
+    "tel": "https://vignanam.org/telugu/sri-raghavendra-stotram.html",
+    "tam": "https://vignanam.org/tamil/sri-raghavendra-stotram.html"
+  },
+  "lines": [
+    {
+      "id": "1",
+      "iast": "Sri Raghavendra Stotram",
+      "deva": "श्री राघवेन्द्र स्तोत्रम्",
+      "knda": "ಶ್ರೀ ರಾಘವೇಂದ್ರ ಸ್ತೋತ್ರಂ",
+      "tel": "శ్రీ రాఘవేంద్ర స్తోత్రం",
+      "tam": "ஶ்ரீ ராக⁴வேந்த்³ர ஸ்தோத்ரம்",
+      "chapter": "Sri Raghavendra Stotram",
+      "meaning": "Hymn in Praise of Sri Raghavendra Swami",
+      "note": "Composed by Sri Appannacharya, a devoted disciple of Sri Raghavendra Swami (1595-1671 CE), the great saint of the Dvaita Vedanta tradition who entered Brindavana at Mantralayam. This stotra of 21 verses was composed as Appannacharya rushed to witness his Guru's final moments. Remarkably, the Guru himself completed the last three words of the stotra from within his Brindavana, giving his divine seal of approval. It is among the most recited hymns in the Madhva tradition."
+    },
+    {
+      "id": "2",
+      "iast": "śrīpūrṇabōdhagurutīrthapayōbdhipārā kāmārimākṣaviṣamākṣaśiraḥ spṛśantī । pūrvōttarāmitataraṅgacharatsuhaṃsā dēvāḻisēvitaparāṅghripayōjalagnā ॥ 1 ॥",
+      "deva": "श्रीपूर्णबोधगुरुतीर्थपयोब्धिपारा कामारिमाक्षविषमाक्षशिरः स्पृशन्ती। पूर्वोत्तरामिततरङ्गचरत्सुहंसा देवालिसेवितपराङ्घ्रिपयोजलग्ना॥",
+      "knda": "ಶ್ರೀಪೂರ್ಣಬೋಧಗುರುತೀರ್ಥಪಯೋಬ್ಧಿಪಾರಾ ಕಾಮಾರಿಮಾಕ್ಷವಿಷಮಾಕ್ಷಶಿರಃ ಸ್ಪೃಶಂತೀ। ಪೂರ್ವೋತ್ತರಾಮಿತತರಂಗಚರತ್ಸುಹಂಸಾ ದೇವಾಳಿಸೇವಿತಪರಾಂಘ್ರಿಪಯೋಜಲಗ್ನಾ ॥ 1 ॥",
+      "tel": "శ్రీపూర్ణబోధగురుతీర్థపయోబ్ధిపారా కామారిమాక్షవిషమాక్షశిరః స్పృశంతీ । పూర్వోత్తరామితతరంగచరత్సుహంసా దేవాళిసేవితపరాంఘ్రిపయోజలగ్నా ॥ 1 ॥",
+      "tam": "ஶ்ரீபூர்ணபோ³த⁴கு³ருதீர்த²பயோப்³தி⁴பாரா காமாரிமாக்ஷவிஷமாக்ஷஶிர: ஸ்ப்ருஶந்தீ பூர்வோத்தராமிததரங்க³சரத்ஸுஹம்ஸா தே³வாளிஸேவிதபராங்க்⁴ரிபயோஜலக்³னா ॥ 1 ॥",
+      "meaning": "May the river of eloquence of Guru Raghavendra, which reaches the shore of the ocean of Sri Purnabodharu's teachings, touches the heads of Shiva and other gods, flows with countless waves of past and future wisdom, where divine swans sport, and which clings to the lotus feet worshipped by celestials, purify us."
+    },
+    {
+      "id": "3",
+      "iast": "jīvēśabhēdaguṇapūrtijagatsusattva-nīchōchchabhāvamukhanakragaṇaiḥ samētā । durvādyajāpatigiḻairgururāghavēndra-vāgdēvatāsaridamuṃ vimalī karōtu ॥ 2 ॥",
+      "deva": "जीवेशभेदगुणपूर्तिजगत्सुसत्त्व नीचोच्चभावमुखनक्रगणैः समेता। दुर्वाद्यजापतिगिलैर्गुरुराघवेन्द्र वाग्देवतासरिदमुं विमली करोतु॥",
+      "knda": "ಜೀವೇಶಭೇದಗುಣಪೂರ್ತಿಜಗತ್ಸುಸತ್ತ್ವ ನೀಚೋಚ್ಚಭಾವಮುಖನಕ್ರಗಣೈಃ ಸಮೇತಾ। ದುರ್ವಾದ್ಯಜಾಪತಿಗಿಳೈರ್ಗುರುರಾಘವೇಂದ್ರ ವಾಗ್ದೇವತಾಸರಿದಮುಂ ವಿಮಲೀ ಕರೋತು ॥ 2 ॥",
+      "tel": "జీవేశభేదగుణపూర్తిజగత్సుసత్త్వ-నీచోచ్చభావముఖనక్రగణైః సమేతా । దుర్వాద్యజాపతిగిళైర్గురురాఘవేంద్ర-వాగ్దేవతాసరిదముం విమలీ కరోతు ॥ 2 ॥",
+      "tam": "ஜீவேஶபே⁴த³கு³ணபூர்திஜக³த்ஸுஸத்த்வ நீசோச்சபா⁴வமுக²னக்ரக³ணை: ஸமேதா து³ர்வாத்³யஜாபதிகி³ளைர்கு³ருராக⁴வேந்த்³ர வாக்³தே³வதாஸரித³மும் விமலீ கரோது ॥ 2 ॥",
+      "meaning": "May the river of speech of Guru Raghavendra, full of crocodiles representing the difference between soul and God, fullness of divine qualities, goodness of the universe, and distinction of high and low, and which swallows the crocodiles of opposing philosophies, purify us."
+    },
+    {
+      "id": "4",
+      "iast": "śrīrāghavēndraḥ sakalapradātā svapādakañjadvayabhaktimadbhyaḥ । aghādrisambhēdanadṛṣṭivajraḥ kṣamāsurēndrō'vatu māṃ sadā'yam ॥ 3 ॥",
+      "deva": "श्रीराघवेन्द्रः सकलप्रदाता स्वपादकञ्जद्वयभक्तिमद्भ्यः। अघाद्रिसम्भेदनदृष्टिवज्रः क्षमासुरेन्द्रोऽवतु मां सदाऽयम्॥",
+      "knda": "ಶ್ರೀರಾಘವೇಂದ್ರಃ ಸಕಲಪ್ರದಾತಾ ಸ್ವಪಾದಕಂಜದ್ವಯಭಕ್ತಿಮದ್ಭ್ಯಃ। ಅಘಾದ್ರಿಸಂಭೇದನದೃಷ್ಟಿವಜ್ರಃ ಕ್ಷಮಾಸುರೇಂದ್ರೋಽವತು ಮಾಂ ಸದಾಽಯಮ್ ॥ 3 ॥",
+      "tel": "శ్రీరాఘవేంద్రః సకలప్రదాతా స్వపాదకంజద్వయభక్తిమద్భ్యః । అఘాద్రిసంభేదనదృష్టివజ్రః క్షమాసురేంద్రోఽవతు మాం సదాఽయమ్ ॥ 3 ॥",
+      "tam": "ஶ்ரீராக⁴வேந்த்³ர: ஸகலப்ரதா³தா ஸ்வபாத³கஞ்ஜத்³வயப⁴க்திமத்³ப்⁴ய: அகா⁴த்³ரிஸம்பே⁴த³னத்³ருஷ்டிவஜ்ர: க்ஷமாஸுரேந்த்³ரோவது மாம் ஸதா³யம் ॥ 3 ॥",
+      "meaning": "Sri Raghavendra, the giver of all blessings to those devoted to his twin lotus feet, whose glance is a thunderbolt that shatters mountains of sin, the lord of patience - may he always protect me."
+    },
+    {
+      "id": "5",
+      "iast": "śrīrāghavēndrō haripādakañja-niṣēvaṇāllabdhasamastasampat । dēvasvabhāvō divijadrumō'ya-miṣṭapradō mē satataṃ sa bhūyāt ॥ 4 ॥",
+      "deva": "श्रीराघवेन्द्रो हरिपादकञ्ज निषेवणाल्लब्धसमस्तसम्पत्। देवस्वभावो दिविजद्रुमोऽय मिष्टप्रदो मे सततं स भूयात्॥",
+      "knda": "ಶ್ರೀರಾಘವೇಂದ್ರೋ ಹರಿಪಾದಕಂಜ ನಿಷೇವಣಾಲ್ಲಬ್ಧಸಮಸ್ತಸಂಪತ್। ದೇವಸ್ವಭಾವೋ ದಿವಿಜದ್ರುಮೋಽಯ ಮಿಷ್ಟಪ್ರದೋ ಮೇ ಸತತಂ ಸ ಭೂಯಾತ್ ॥ 4 ॥",
+      "tel": "శ్రీరాఘవేంద్రో హరిపాదకంజ-నిషేవణాల్లబ్ధసమస్తసంపత్ । దేవస్వభావో దివిజద్రుమోఽయ-మిష్టప్రదో మే సతతం స భూయాత్ ॥ 4 ॥",
+      "tam": "ஶ்ரீராக⁴வேந்த்³ரோ ஹரிபாத³கஞ்ஜ னிஷேவணால்லப்³த⁴ஸமஸ்தஸம்பத் தே³வஸ்வபா⁴வோ தி³விஜத்³ருமோய மிஷ்டப்ரதோ³ மே ஸததம் ஸ பூ⁴யாத் ॥ 4 ॥",
+      "meaning": "Sri Raghavendra, who attained all wealth through devoted service at the lotus feet of Lord Hari, who is divine by nature, like a wish-fulfilling tree for the celestials - may he always grant my desires."
+    },
+    {
+      "id": "6",
+      "iast": "bhavyasvarūpō bhavaduḥkhatūla-saṅghāgnicharyaḥ sukhadhairyaśālī । samastaduṣṭagrahanigrahēśō duratyayōpaplavasindhusētuḥ ॥ 5 ॥",
+      "deva": "भव्यस्वरूपो भवदुःखतूल सङ्घाग्निचर्यः सुखधैर्यशाली। समस्तदुष्टग्रहनिग्रहेशो दुरत्ययोपप्लवसिन्धुसेतुः॥",
+      "knda": "ಭವ್ಯಸ್ವರೂಪೋ ಭವದುಃಖತೂಲ ಸಂಘಾಗ್ನಿಚರ್ಯಃ ಸುಖಧೈರ್ಯಶಾಲೀ। ಸಮಸ್ತದುಷ್ಟಗ್ರಹನಿಗ್ರಹೇಶೋ ದುರತ್ಯಯೋಪಪ್ಲವಸಿಂಧುಸೇತುಃ ॥ 5 ॥",
+      "tel": "భవ్యస్వరూపో భవదుఃఖతూల-సంఘాగ్నిచర్యః సుఖధైర్యశాలీ । సమస్తదుష్టగ్రహనిగ్రహేశో దురత్యయోపప్లవసింధుసేతుః ॥ 5 ॥",
+      "tam": "ப⁴வ்யஸ்வரூபோ ப⁴வது³:க²தூல ஸங்கா⁴க்³னிசர்ய: ஸுக²தை⁴ர்யஶாலீ ஸமஸ்தது³ஷ்டக்³ரஹனிக்³ரஹேஶோ து³ரத்யயோப³ப்லவஸிந்து⁴ஸேது: ॥ 5 ॥",
+      "meaning": "He of beautiful form, who burns away the cotton of worldly sorrows like fire, endowed with bliss and fortitude, the lord who controls all evil planetary influences, a bridge across the insurmountable ocean of calamities."
+    },
+    {
+      "id": "7",
+      "iast": "nirastadōṣō niravadyavēṣaḥ pratyarthimūkattvanidānabhāṣaḥ । vidvatparijñēyamahāviśēṣō vāgvaikharīnirjitabhavyaśēṣaḥ ॥ 6 ॥",
+      "deva": "निरस्तदोषो निरवद्यवेषः प्रत्यर्थिमूकत्त्वनिदानभाषः। विद्वत्परिज्ञेयमहाविशेषो वाग्वैखरीनिर्जितभव्यशेषः॥",
+      "knda": "ನಿರಸ್ತದೋಷೋ ನಿರವದ್ಯವೇಷಃ ಪ್ರತ್ಯರ್ಥಿಮೂಕತ್ತ್ವನಿದಾನಭಾಷಃ। ವಿದ್ವತ್ಪರಿಜ್ಞೇಯಮಹಾವಿಶೇಷೋ ವಾಗ್ವೈಖರೀನಿರ್ಜಿತಭವ್ಯಶೇಷಃ ॥ 6 ॥",
+      "tel": "నిరస్తదోషో నిరవద్యవేషః ప్రత్యర్థిమూకత్త్వనిదానభాషః । విద్వత్పరిజ్ఞేయమహావిశేషో వాగ్వైఖరీనిర్జితభవ్యశేషః ॥ 6 ॥",
+      "tam": "நிரஸ்ததோ³ஷோ நிரவத்³யவேஷ: ப்ரத்யர்தி²மூகத்த்வனிதா³னபா⁴ஷ: வித்³வத்பரிஜ்ஞேயமஹாவிஶேஷோ வாக்³வைக²ரீனிர்ஜிதப⁴வ்யஶேஷ: ॥ 6 ॥",
+      "meaning": "Free from all faults, of impeccable appearance, whose speech silences all opponents, whose greatness is known to the learned, who conquers even the eloquent Shesha with his words."
+    },
+    {
+      "id": "8",
+      "iast": "santānasampatpariśuddhabhakti-vijñānavāgdēhasupāṭavādīn । datvā śarīrōtthasamastadōṣān hattvā sa nō'vyādgururāghavēndraḥ ॥ 7 ॥",
+      "deva": "सन्तानसम्पत्परिशुद्धभक्ति विज्ञानवाग्देहसुपाटवादीन्। दत्वा शरीरोत्थसमस्तदोषान् हत्त्वा स नोऽव्याद्गुरुराघवेन्द्रः॥",
+      "knda": "ಸಂತಾನಸಂಪತ್ಪರಿಶುದ್ಧಭಕ್ತಿ ವಿಜ್ಞಾನವಾಗ್ದೇಹಸುಪಾಟವಾದೀನ್। ದತ್ವಾ ಶರೀರೋತ್ಥಸಮಸ್ತದೋಷಾನ್ ಹತ್ತ್ವಾ ಸ ನೋಽವ್ಯಾದ್ಗುರುರಾಘವೇಂದ್ರಃ ॥ 7 ॥",
+      "tel": "సంతానసంపత్పరిశుద్ధభక్తి-విజ్ఞానవాగ్దేహసుపాటవాదీన్ । దత్వా శరీరోత్థసమస్తదోషాన్ హత్త్వా స నోఽవ్యాద్గురురాఘవేంద్రః ॥ 7 ॥",
+      "tam": "ஸந்தானஸம்பத்பரிஶுத்³த⁴ப⁴க்தி விஜ்ஞானவாக்³தே³ஹஸுபாடவாதீ³ன் த³த்வா ஶரீரோத்த²ஸமஸ்ததோ³ஷான் ஹத்த்வா ஸ நோவ்யாத்³கு³ருராக⁴வேந்த்³ர: ॥ 7 ॥",
+      "meaning": "May Guru Raghavendra protect us, granting progeny, wealth, pure devotion, knowledge, eloquence and bodily health, while destroying all bodily afflictions."
+    },
+    {
+      "id": "9",
+      "iast": "yatpādōdakasañchayaḥ suranadīmukhyāpagāsāditā-saṅkhyānuttamapuṇyasaṅghavilasatprakhyātapuṇyāvahaḥ । dustāpatrayanāśanō bhuvi mahāvandhyāsuputrapradō vyaṅgasvaṅgasamṛddhidō grahamahāpāpāpahastaṃ śrayē ॥ 8 ॥",
+      "deva": "यत्पादोदकसञ्चयः सुरनदीमुख्यापगासादिता सङ्ख्यानुत्तमपुण्यसङ्घविलसत्प्रख्यातपुण्यावहः। दुस्तापत्रयनाशनो भुवि महावन्ध्यासुपुत्रप्रदो व्यङ्गस्वङ्गसमृद्धिदो ग्रहमहापापापहस्तं श्रये॥",
+      "knda": "ಯತ್ಪಾದೋದಕಸಂಚಯಃ ಸುರನದೀಮುಖ್ಯಾಪಗಾಸಾದಿತಾ ಸಂಖ್ಯಾನುತ್ತಮಪುಣ್ಯಸಂಘವಿಲಸತ್ಪ್ರಖ್ಯಾತಪುಣ್ಯಾವಹಃ। ದುಸ್ತಾಪತ್ರಯನಾಶನೋ ಭುವಿ ಮಹಾವಂಧ್ಯಾಸುಪುತ್ರಪ್ರದೋ ವ್ಯಂಗಸ್ವಂಗಸಮೃದ್ಧಿದೋ ಗ್ರಹಮಹಾಪಾಪಾಪಹಸ್ತಂ ಶ್ರಯೇ ॥ 8 ॥",
+      "tel": "యత్పాదోదకసంచయః సురనదీముఖ్యాపగాసాదితా-సంఖ్యానుత్తమపుణ్యసంఘవిలసత్ప్రఖ్యాతపుణ్యావహః । దుస్తాపత్రయనాశనో భువి మహావంధ్యాసుపుత్రప్రదో వ్యంగస్వంగసమృద్ధిదో గ్రహమహాపాపాపహస్తం శ్రయే ॥ 8 ॥",
+      "tam": "யத்பாத³ோத³கஸஞ்சய: ஸுரனதீ³முக்²யாபகா³ஸாதி³தா ஸங்க்³யானுத்தமபுண்யஸங்க⁴விலஸத்ப்ரக்²யாதபுண்யாவஹ: து³ஸ்தாபத்ரயனாஶனோ பு⁴வி மஹாவந்த்⁴யாஸுபுத்ரப்ரதோ³ வ்யங்க³ஸ்வங்க³ஸம்ருத்³தி⁴தோ³ க்³ரஹமஹாபாபாபஹஸ்தம் ஶ்ரயே ॥ 8 ॥",
+      "meaning": "I take refuge in him whose sacred foot-water, like the holy rivers headed by the Ganga, bestows immeasurable merit, destroys the three afflictions, grants sons to the barren, restores limbs to the disabled, and removes the effects of malefic planets."
+    },
+    {
+      "id": "10",
+      "iast": "yatpādakañjarajasā paribhūṣitāṅgā yatpādapadmamadhupāyitamānasā yē । yatpādapadmaparikīrtanajīrṇavācha-staddarśanaṃ duritakānanadāvabhūtam ॥ 9 ॥",
+      "deva": "यत्पादकञ्जरजसा परिभूषिताङ्गा यत्पादपद्ममधुपायितमानसा ये। यत्पादपद्मपरिकीर्तनजीर्णवाच स्तद्दर्शनं दुरितकाननदावभूतम्॥",
+      "knda": "ಯತ್ಪಾದಕಂಜರಜಸಾ ಪರಿಭೂಷಿತಾಂಗಾ ಯತ್ಪಾದಪದ್ಮಮಧುಪಾಯಿತಮಾನಸಾ ಯೇ। ಯತ್ಪಾದಪದ್ಮಪರಿಕೀರ್ತನಜೀರ್ಣವಾಚ ಸ್ತದ್ದರ್ಶನಂ ದುರಿತಕಾನನದಾವಭೂತಮ್ ॥ 9 ॥",
+      "tel": "యత్పాదకంజరజసా పరిభూషితాంగా యత్పాదపద్మమధుపాయితమానసా యే । యత్పాదపద్మపరికీర్తనజీర్ణవాచ-స్తద్దర్శనం దురితకాననదావభూతమ్ ॥ 9 ॥",
+      "tam": "யத்பாத³கஞ்ஜரஜஸா பரிபூ⁴ஷிதாங்கா³ யத்பாத³பத்³மமது⁴பாயிதமானஸா யே யத்பாத³பத்³மபரிகீர்தனஜீர்ணவாச ஸ்தத்³த³ர்ஶனம் து³ரிதகானநதா³வபூ⁴தம் ॥ 9 ॥",
+      "meaning": "Those whose bodies are adorned with the dust of his lotus feet, whose minds are like bees drawn to his lotus feet, whose voices are worn out praising his lotus feet - for them, his very sight becomes a forest fire that burns away all sins."
+    },
+    {
+      "id": "11",
+      "iast": "sarvatantrasvatantrō'sau śrīmadhvamatavardhanaḥ vijayīndrakarābjōtthasudhīndravaraputrakaḥ ॥ 10 ॥",
+      "deva": "सर्वतन्त्रस्वतन्त्रोऽसौ श्रीमध्वमतवर्धनः विजयीन्द्रकराब्जोत्थसुधीन्द्रवरपुत्रकः॥",
+      "knda": "ಸರ್ವತಂತ್ರಸ್ವತಂತ್ರೋಽಸೌ ಶ್ರೀಮಧ್ವಮತವರ್ಧನಃ ವಿಜಯೀಂದ್ರಕರಾಬ್ಜೋತ್ಥಸುಧೀಂದ್ರವರಪುತ್ರಕಃ ॥ 10 ॥",
+      "tel": "సర్వతంత్రస్వతంత్రోఽసౌ శ్రీమధ్వమతవర్ధనః విజయీంద్రకరాబ్జోత్థసుధీంద్రవరపుత్రకః ॥ 10 ॥",
+      "tam": "ஸர்வதந்த்ரஸ்வதந்த்ரோஸௌ ஶ்ரீமத்⁴வமதவர்த⁴ன: விஜயீந்த்³ரகராப்³ஜோத்த²ஸுதீ⁴ந்த்³ரவரபுத்ரக: ॥ 10 ॥",
+      "meaning": "He is independent in all branches of knowledge, the promoter of Sri Madhva's philosophy, the worthy son of Sudhindra Tirtha who emerged from the lotus hands of Vijayindra Tirtha."
+    },
+    {
+      "id": "12",
+      "iast": "śrīrāghavēndraḥ yatirāṭ gururmē syādbhayāpahaḥ jñānabhaktisuputrāyuryaśaḥ śrīpuṇyavardhanaḥ ॥ 11 ॥",
+      "deva": "श्रीराघवेन्द्रो यतिराट् गुरुर्मे स्याद्भयापहः ज्ञानभक्तिसुपुत्रायुर्यशः श्रीपुण्यवर्धनः॥",
+      "knda": "ಶ್ರೀರಾಘವೇಂದ್ರೋ ಯತಿರಾಟ್ ಗುರುರ್ಮೇ ಸ್ಯಾದ್ಭಯಾಪಹಃ ಜ್ಞಾನಭಕ್ತಿಸುಪುತ್ರಾಯುರ್ಯಶಃ ಶ್ರೀಪುಣ್ಯವರ್ಧನಃ ॥ 11 ॥",
+      "tel": "శ్రీరాఘవేంద్రో యతిరాట్ గురుర్మే స్యాద్భయాపహః జ్ఞానభక్తిసుపుత్రాయుర్యశః శ్రీపుణ్యవర్ధనః ॥ 11 ॥",
+      "tam": "ஶ்ரீராக⁴வேந்த்³ரோ யதிராட் கு³ருர்மே ஸ்யாத்³ப⁴யாபஹ: ஜ்ஞானப⁴க்திஸுபுத்ராயு: யஶ: ஶ்ரீபுண்யவர்த⁴ன: ॥ 11 ॥",
+      "meaning": "May Sri Raghavendra, the king of ascetics, be my guru, removing all fears, and increasing knowledge, devotion, worthy sons, longevity, fame, prosperity and merit."
+    },
+    {
+      "id": "13",
+      "iast": "prativādijayasvāntabhēdachihnādarō guruḥ । sarvavidyāpravīṇō'nyō rāghavēndrānna vidyatē ॥ 12 ॥",
+      "deva": "प्रतिवादिजयस्वान्तभेदचिह्नादरो गुरुः। सर्वविद्याप्रवीणोऽन्यो राघवेन्द्रान्न विद्यते॥",
+      "knda": "ಪ್ರತಿವಾದಿಜಯಸ್ವಾಂತಭೇದಚಿಹ್ನಾದರೋ ಗುರುಃ। ಸರ್ವವಿದ್ಯಾಪ್ರವೀಣೋಽನ್ಯೋ ರಾಘವೇಂದ್ರಾನ್ನ ವಿದ್ಯತೇ ॥ 12 ॥",
+      "tel": "ప్రతివాదిజయస్వాంతభేదచిహ్నాదరో గురుః । సర్వవిద్యాప్రవీణోఽన్యో రాఘవేంద్రాన్న విద్యతే ॥ 12 ॥",
+      "tam": "ப்ரதிவாதி³ஜயஸ்வாந்தபே⁴த³சிஹ்னாத³ரோ கு³ரு: ஸர்வித்³யாப்ரவீணோன்யோ ராக⁴வேந்த்³ரான்ன வித்³யதே ॥ 12 ॥",
+      "meaning": "The guru who proudly bears the mark of victory over all opponents - there is none other as proficient in all branches of learning as Raghavendra."
+    },
+    {
+      "id": "14",
+      "iast": "aparōkṣīkṛtaśrīśaḥ samupēkṣitabhāvajaḥ । apēkṣitapradātā'nyō rāghavēndrānna vidyatē ॥ 13 ॥",
+      "deva": "अपरोक्षीकृतश्रीशः समुपेक्षितभावजः। अपेक्षितप्रदाताऽन्यो राघवेन्द्रान्न विद्यते॥",
+      "knda": "ಅಪರೋಕ್ಷೀಕೃತಶ್ರೀಶಃ ಸಮುಪೇಕ್ಷಿತಭಾವಜಃ। ಅಪೇಕ್ಷಿತಪ್ರದಾತಾಽನ್ಯೋ ರಾಘವೇಂದ್ರಾನ್ನ ವಿದ್ಯತೇ ॥ 13 ॥",
+      "tel": "అపరోక్షీకృతశ్రీశః సముపేక్షితభావజః । అపేక్షితప్రదాతాఽన్యో రాఘవేంద్రాన్న విద్యతే ॥ 13 ॥",
+      "tam": "அபரோக்ஷீக்ருதஶ்ரீஶ: ஸமுபேக்ஷிதபா⁴வஜ: அபேக்ஷிதப்ரதா³தான்யோ ராக⁴வேந்த்³ரான்ன வித்³யதே ॥ 13 ॥",
+      "meaning": "He who has directly realized the Lord, who has transcended worldly desires, who grants all that is sought - there is none other like Raghavendra."
+    },
+    {
+      "id": "15",
+      "iast": "dayādākṣiṇyavairāgyavākpāṭavamukhāṅkitaḥ । śāpānugrahaśaktō'nyō rāghavēndrānna vidyatē ॥ 14 ॥",
+      "deva": "दयादाक्षिण्यवैराग्यवाक्पाटवमुखाङ्कितः। शापानुग्रहशक्तोऽन्यो राघवेन्द्रान्न विद्यते॥",
+      "knda": "ದಯಾದಾಕ್ಷಿಣ್ಯವೈರಾಗ್ಯವಾಕ್ಪಾಟವಮುಖಾಂಕಿತಃ। ಶಾಪಾನುಗ್ರಹಶಕ್ತೋಽನ್ಯೋ ರಾಘವೇಂದ್ರಾನ್ನ ವಿದ್ಯತೇ ॥ 14 ॥",
+      "tel": "దయాదాక్షిణ్యవైరాగ్యవాక్పాటవముఖాంకితః । శాపానుగ్రహశక్తోఽన్యో రాఘవేంద్రాన్న విద్యతే ॥ 14 ॥",
+      "tam": "த³யாதா³க்ஷிண்யவைராக்³யவாக்பாடவமுகா²ங்கித: ஶாபானுக்³ரஹஶக்தோன்யோ ராக⁴வேந்த்³ரான்ன வித்³யதே ॥ 14 ॥",
+      "meaning": "Adorned with compassion, generosity, detachment and eloquence, possessing the power to both curse and bless - there is none other like Raghavendra."
+    },
+    {
+      "id": "16",
+      "iast": "ajñānavismṛtibhrāntisaṃśayā'pasmṛtikṣayāḥ । tandrākampavachaḥkauṇṭhyamukhā yē chēndriyōdbhavāḥ । dōṣāstē nāśamāyānti rāghavēndraprasādataḥ ॥ 15 ॥",
+      "deva": "अज्ञानविस्मृतिभ्रान्तिसंशयाऽपस्मृतिक्षयाः। तन्द्राकम्पवचःकौण्ठ्यमुखा ये चेन्द्रियोद्भवाः। दोषास्ते नाशमायान्ति राघवेन्द्रप्रसादतः॥",
+      "knda": "ಅಜ್ಞಾನವಿಸ್ಮೃತಿಭ್ರಾಂತಿಸಂಶಯಾಽಪಸ್ಮೃತಿಕ್ಷಯಾಃ। ತಂದ್ರಾಕಂಪವಚಃಕೌಂಠ್ಯಮುಖಾ ಯೇ ಚೆಂದ್ರಿಯೋದ್ಭವಾಃ। ದೋಷಾಸ್ತೇ ನಾಶಮಾಯಾಂತಿ ರಾಘವೇಂದ್ರಪ್ರಸಾದತಃ ॥ 15 ॥",
+      "tel": "అజ్ఞానవిస్మృతిభ్రాంతిసంశయాఽపస్మృతిక్షయాః । తంద్రాకంపవచఃకౌంఠ్యముఖా యే చేంద్రియోద్భవాః । దోషాస్తే నాశమాయాంతి రాఘవేంద్రప్రసాదతః ॥ 15 ॥",
+      "tam": "அஜ்ஞானவிஸ்ம்ருதிப்⁴ராந்திஸம்ஶயாபஸ்ம்ருதிக்ஷயா: தந்த்³ராகம்பவச:கௌண்ட்²யமுகா² யே சேந்த்³ரியோத்³ப⁴வா: தோ³ஷாஸ்தே நாஶமாயாந்தி ராக⁴வேந்த்³ரப்ரஸாத³த: ॥ 15 ॥",
+      "meaning": "Ignorance, forgetfulness, delusion, doubt, loss of memory, dullness, trembling, stammering and other defects arising from the senses - all these are destroyed by the grace of Raghavendra."
+    },
+    {
+      "id": "17",
+      "iast": "ōṃ śrīrāghavēndrāya namaḥ itya'ṣṭākṣaramantrataḥ । japitādbhāvitānnityaṃ iṣṭārthāḥ syurna saṃśayaḥ ॥ 16 ॥",
+      "deva": "ॐ श्रीराघवेन्द्राय नमः इत्यऽष्टाक्षरमन्त्रतः। जपिताद्भावितान्नित्यं इष्टार्थाः स्युर्न संशयः॥",
+      "knda": "ಓಂ ಶ್ರೀರಾಘವೇಂದ್ರಾಯ ನಮಃ ಇತ್ಯಽಷ್ಟಾಕ್ಷರಮಂತ್ರತಃ। ಜಪಿತಾದ್ಭಾವಿತಾನ್ನಿತ್ಯಂ ಇಷ್ಟಾರ್ಥಾಃ ಸ್ಯುರ್ನ ಸಂಶಯಃ ॥ 16 ॥",
+      "tel": "ఓం శ్రీరాఘవేంద్రాయ నమః ఇత్యఽష్టాక్షరమంత్రతః । జపితాద్భావితాన్నిత్యం ఇష్టార్థాః స్యుర్న సంశయః ॥ 16 ॥",
+      "tam": "ஓம் ஶ்ரீராக⁴வேந்த்³ராய நம: இத்யஷ்டாக்ஷரமந்த்ரத: ஜபிதாத்³பா⁴விதான்னித்யம் இஷ்டார்த²: ஸ்யுர்ன ஸம்ஶய: ॥ 16 ॥",
+      "meaning": "By constantly chanting the eight-syllable mantra 'Om Sri Raghavendraya Namah' with devotion and meditation, all desired objects are attained without doubt."
+    },
+    {
+      "id": "18",
+      "iast": "hantu naḥ kāyajān dōṣān ātmātmīyasamudbhavān । sarvānapi pumarthāṃścha dadātu gururātmavit ॥ 17 ॥",
+      "deva": "हन्तु नः कायजान् दोषान् आत्मात्मीयसमुद्भवान्। सर्वानपि पुमर्थांश्च ददातु गुरुरात्मवित्॥",
+      "knda": "ಹಂತು ನಃ ಕಾಯಜಾನ್ ದೋಷಾನ್ ಆತ್ಮಾತ್ಮೀಯಸಮುದ್ಭವಾನ್। ಸರ್ವಾನಪಿ ಪುಮರ್ಥಾಂಶ್ಚ ದದಾತು ಗುರುರಾತ್ಮವಿತ್ ॥ 17 ॥",
+      "tel": "హంతు నః కాయజాన్ దోషాన్ ఆత్మాత్మీయసముద్భవాన్ । సర్వానపి పుమర్థాంశ్చ దదాతు గురురాత్మవిత్ ॥ 17 ॥",
+      "tam": "ஹந்து ந: காயஜான் தோ³ஷான் ஆத்மாத்மீயஸமுத்³ப⁴வான் ஸர்வானபி புமர்த²ம்ஶ்ச த³தா³து கு³ருராத்மவித் ॥ 17 ॥",
+      "meaning": "May the self-knowing guru destroy our bodily sins and those arising from our own actions, and grant us all the four goals of human life."
+    },
+    {
+      "id": "19",
+      "iast": "iti kālatrayē nityaṃ prārthanāṃ yaḥ karōti saḥ । ihāmutrāptasarvēṣṭō mōdatē nātra saṃśayaḥ ॥ 18 ॥",
+      "deva": "इति कालत्रये नित्यं प्रार्थनां यः करोति सः। इहामुत्राप्तसर्वेष्टो मोदते नात्र संशयः॥",
+      "knda": "ಇತಿ ಕಾಲತ್ರಯೇ ನಿತ್ಯಂ ಪ್ರಾರ್ಥನಾಂ ಯಃ ಕರೋತಿ ಸಃ। ಇಹಾಮುತ್ರಾಪ್ತಸರ್ವೇಷ್ಟೋ ಮೋದತೇ ನಾತ್ರ ಸಂಶಯಃ ॥ 18 ॥",
+      "tel": "ఇతి కాలత్రయే నిత్యం ప్రార్థనాం యః కరోతి సః । ఇహాముత్రాప్తసర్వేష్టో మోదతే నాత్ర సంశయః ॥ 18 ॥",
+      "tam": "இதி காலத்ரயே நித்யம் ப்ரார்த²னாம் ய: கரோதி ஸ: இஹாமுத்ராப்தஸர்வேஷ்டோ மோத³தே நாத்ர ஸம்ஶய: ॥ 18 ॥",
+      "meaning": "One who offers this prayer three times daily attains all desires in this world and the next, and rejoices - there is no doubt about this."
+    },
+    {
+      "id": "20",
+      "iast": "agamyamahimā lōkē rāghavēndrō mahāyaśāḥ । śrīmadhvamatadugdhābdhichandrō'vatu sadā'naghaḥ ॥ 19 ॥",
+      "deva": "अगम्यमहिमा लोके राघवेन्द्रो महायशाः। श्रीमध्वमतदुग्धाब्धिचन्द्रोऽवतु सदाऽनघः॥",
+      "knda": "ಅಗಮ್ಯಮಹಿಮಾ ಲೋಕೆ ರಾಘವೇಂದ್ರೋ ಮಹಾಯಶಾಃ। ಶ್ರೀಮಧ್ವಮತದುಗ್ಧಾಬ್ಧಿಚಂದ್ರೋಽವತು ಸದಾಽನಘಃ ॥ 19 ॥",
+      "tel": "అగమ్యమహిమా లోకే రాఘవేంద్రో మహాయశాః । శ్రీమధ్వమతదుగ్ధాబ్ధిచంద్రోఽవతు సదాఽనఘః ॥ 19 ॥",
+      "tam": "அக³ம்யமஹிமா லோகே ராக⁴வேந்த்³ரோ மஹாயஶா: ஶ்ரீமத்⁴வமதது³க்³தா⁴ப்³தி⁴சந்த்³ரோவது ஸதா³னக⁴: ॥ 19 ॥",
+      "meaning": "Raghavendra, whose glory is beyond comprehension, of great fame, the moon of the milk-ocean of Sri Madhva's philosophy - may the sinless one always protect us."
+    },
+    {
+      "id": "21",
+      "iast": "sarvayātrāphalāvāptyai yathāśaktipradakṣiṇam । karōmi tava siddhasya bṛndāvanagataṃ jalam ॥ 20 ॥",
+      "deva": "सर्वयात्राफलावाप्त्यै यथाशक्तिप्रदक्षिणम्। करोमि तव सिद्धस्य बृन्दावनगतं जलम्॥",
+      "knda": "ಸರ್ವಯಾತ್ರಾಫಲಾವಾಪ್ತ್ಯೈ ಯತಿಶಕ್ತಿಪ್ರದಕ್ಷಿಣಮ್। ಕರೋಮಿ ತವ ಸಿದ್ಧಸ್ಯ ಬೃಂದಾವನಗತಂ ಜಲಮ್ ॥ 20 ॥",
+      "tel": "సర్వయాత్రాఫలావాప్త్యై యథాశక్తిప్రదక్షిణమ్ । కరోమి తవ సిద్ధస్య బృందావనగతం జలమ్ ॥ 20 ॥",
+      "tam": "ஸர்வயாத்ராப²லாவாப்த்யை யதா²ஶக்திப்ரத³க்ஷிணம் கரோமி தவ ஸித்³த⁴ஸ்ய ப்³ருந்தா³வனக³தம் ஜலம் ॥ 20 ॥",
+      "meaning": "To obtain the merit of all pilgrimages, I circumambulate according to my ability, and take the water from the Brindavana of this perfected saint."
+    },
+    {
+      "id": "22",
+      "iast": "śirasā dhārayāmyadya sarvatīrthaphalāptayē । sarvābhīṣṭārthasiddhyarthaṃ namaskāraṃ karōmyaham । tava saṅkīrtanaṃ vēdaśāstrārthajñānasiddhayē ॥ 21 ॥",
+      "deva": "शिरसा धारयाम्यद्य सर्वतीर्थफलाप्तये। सर्वाभीष्टार्थसिद्ध्यर्थं नमस्कारं करोम्यहम्। तव सङ्कीर्तनं वेदशास्त्रार्थज्ञानसिद्धये॥",
+      "knda": "ಶಿರಸಾ ಧಾರಯಾಮ್ಯದ್ಯ ಸರ್ವತೀರ್ಥಫಲಾಪ್ತಯೆ। ಸರ್ವಾಭೀಷ್ಟಾರ್ಥಸಿದ್ಧ್ಯರ್ಥಂ ನಮಸ್ಕಾರಂ ಕರೋಮ್ಯಹಮ್। ತವ ಸಂಕೀರ್ತನಂ ವೇದಶಾಸ್ತ್ರಾರ್ಥಜ್ಞಾನಸಿದ್ಧಯೆ ॥ 21 ॥",
+      "tel": "శిరసా ధారయామ్యద్య సర్వతీర్థఫలాప్తయే । సర్వాభీష్టార్థసిద్ధ్యర్థం నమస్కారం కరోమ్యహమ్ । తవ సంకీర్తనం వేదశాస్త్రార్థజ్ఞానసిద్ధయే ॥ 21 ॥",
+      "tam": "ஶிரஸா தா⁴ரயாம்யத்³ய ஸர்வதீர்த²ப²லாப்தயே ஸர்வாபீ⁴ஷ்டார்த²ஸித்³த்⁴யர்த²ம் நமஸ்காரம் கரோம்யஹம் தவ ஸங்கீர்தனம் வேத³ஶாஸ்த்ரார்தஜ²்ஞானஸித்³த⁴யே ॥ 21 ॥",
+      "meaning": "I place this water on my head today to obtain the fruit of all holy places. I bow down for the fulfillment of all desires. I sing your praises for the attainment of knowledge of Vedas and Shastras."
+    },
+    {
+      "id": "23",
+      "iast": "saṃsārē'kṣayasāgarē prakṛtitō'gādhē sadā dustarē sarvāvadyajalagrahairanupamaiḥ kāmādibhaṅgākulē । nānāvibhramadurbhramē'mitabhayastōmādiphēnōtkaṭē duḥkhōtkṛṣṭaviṣē samuddhara gurō mā magnarūpaṃ sadā ॥ 22 ॥",
+      "deva": "संसारेऽक्षयसागरे प्रकृतितोऽगाधे सदा दुस्तरे सर्वावद्यजलग्रहैरनुपमैः कामादिभङ्गाकुले। नानाविभ्रमदुर्भ्रमेऽमितभयस्तोमादिफेनोत्कटे दुःखोत्कृष्टविषे समुद्धर गुरो मा मग्नरूपं सदा॥",
+      "knda": "ಸಂಸಾರೇಽಕ್ಷಯಸಾಗರೆ ಪ್ರಕೃತಿತೋಽಗಾಧೆ ಸದಾ ದುಸ್ತರೆ ಸರ್ವಾವದ್ಯಜಲಗ್ರಹೈರನುಪಮೈಃ ಕಾಮಾದಿಭಂಗಾಕುಲೆ। ನಾನಾವಿಭ್ರಮದುರ್ಭ್ರಮೆಽಮಿತಭಯಸ್ತೋಮಾದಿಫೇನೋತ್ಕಟೆ ದುಃಖೋತ್ಕೃಷ್ಟವಿಷೇ ಸಮುದ್ಧರ ಗುರೋ ಮಾ ಮಗ್ನರೂಪಂ ಸದಾ ॥ 22 ॥",
+      "tel": "సంసారేఽక్షయసాగరే ప్రకృతితోఽగాధే సదా దుస్తరే సర్వావద్యజలగ్రహైరనుపమైః కామాదిభంగాకులే । నానావిభ్రమదుర్భ్రమేఽమితభయస్తోమాదిఫేనోత్కటే దుఃఖోత్కృష్టవిషే సముద్ధర గురో మా మగ్నరూపం సదా ॥ 22 ॥",
+      "tam": "ஸம்ஸாரேக்ஷயஸாக³ரே ப்ரக்ருதிதோகா³தே⁴ ஸதா³ து³ஸ்தரே ஸர்வாவத்³யஜலக்³ரஹைரனுபமை: காமாதி³ப⁴ங்கா³குலே நானாவிப்⁴ரமது³ர்ப்⁴ரமேமிதப⁴யஸ்தோமாதி³பே²நோத்கடே து:கோ²த்க்ருஷ்டவிஷே ஸமுத்³த⁴ர கு³ரோ மா மக்³னரூபம் ஸதா³ ॥ 22 ॥",
+      "meaning": "O Guru, in this endless ocean of worldly existence, naturally unfathomable and ever difficult to cross, full of incomparable crocodiles of sin, agitated by waves of desire, full of dangerous whirlpools of delusion, frightening with foam of countless fears, poisonous with intense suffering - always rescue me who am drowning."
+    },
+    {
+      "id": "24",
+      "iast": "rāghavēndragurustōtraṃ yaḥ paṭhēdbhaktipūrvakam । tasya kuṣṭhādirōgāṇāṃ nivṛttistvarayā bhavēt ॥ 23 ॥",
+      "deva": "राघवेन्द्रगुरुस्तोत्रं यः पठेद्भक्तिपूर्वकम्। तस्य कुष्ठादिरोगाणां निवृत्तिस्त्वरया भवेत्॥",
+      "knda": "ರಾಘವೇಂದ್ರಗುರುಸ್ತೋತ್ರಂ ಯಃ ಪಠೇದ್ಭಕ್ತಿಪೂರ್ವಕಮ್। ತಸ್ಯ ಕುಷ್ಠಾದಿರೋಗಾಣಾಂ ನಿವೃತ್ತಿಸ್ತ್ವರಯಾ ಭವೇತ್ ॥ 23 ॥",
+      "tel": "రాఘవేంద్రగురుస్తోత్రం యః పఠేద్భక్తిపూర్వకమ్ । తస్య కుష్ఠాదిరోగాణాం నివృత్తిస్త్వరయా భవేత్ ॥ 23 ॥",
+      "tam": "ராக⁴வேந்த்³ரகு³ருஸ்தோத்ரம் ய: படே²த்³ப⁴க்திபூர்வகம் தஸ்ய குஷ்டா²தி³ரோகா³ணாம் நிவ்ருத்திஸ்த்வரயா ப⁴வேத் ॥ 23 ॥",
+      "meaning": "One who recites the Raghavendra Guru Stotram with devotion will swiftly be cured of leprosy and all other diseases."
+    },
+    {
+      "id": "25",
+      "iast": "andhō'pi divyadṛṣṭiḥ syādēḍamūkō'pi vākpatiḥ । pūrṇāyuḥ pūrṇasampattiḥ stōtrasyā'sya japādbhavēt ॥ 24 ॥",
+      "deva": "अन्धोऽपि दिव्यदृष्टिः स्यादेडमूकोऽपि वाक्पतिः। पूर्णायुः पूर्णसम्पत्तिः स्तोत्रस्याऽस्य जपाद्भवेत्॥",
+      "knda": "ಅಂಧೋಽಪಿ ದಿವ್ಯದೃಷ್ಟಿಃ ಸ್ಯಾದೇಡಮೂಕೋಽಪಿ ವಾಕ್ಪತಿಃ। ಪೂರ್ಣಾಯುಃ ಪೂರ್ಣಸಂಪತ್ತಿಃ ಸ್ತೋತ್ರಸ್ಯಾಽಸ್ಯ ಜಪಾದ್ಭವೇತ್ ॥ 24 ॥",
+      "tel": "అంధోఽపి దివ్యదృష్టిః స్యాదేడమూకోఽపి వాక్పతిః । పూర్ణాయుః పూర్ణసంపత్తిః స్తోత్రస్యాఽస్య జపాద్భవేత్ ॥ 24 ॥",
+      "tam": "அந்தோ⁴பி தி³வ்யத்³ருஷ்டி: ஸ்யாதே³ட³மூகோபி வாக்பதி: பூர்ணாயு: பூர்ணஸம்பத்தி: ஸ்தோத்ரஸ்யாஸ்ய ஜபாத்³ப⁴வேத் ॥ 24 ॥",
+      "meaning": "Even the blind will gain divine sight, even the dumb will become eloquent. Full lifespan and complete wealth come from reciting this stotram."
+    },
+    {
+      "id": "26",
+      "iast": "yaḥ pibējjalamētēna stōtrēṇaivābhimantritam । tasya kukṣigatā dōṣāḥ sarvē naśyanti tat kṣaṇāt ॥ 25 ॥",
+      "deva": "यः पिबेज्जलमेतेन स्तोत्रेणैवाभिमन्त्रितम्। तस्य कुक्षिगता दोषाः सर्वे नश्यन्ति तत् क्षणात्॥",
+      "knda": "ಯಃ ಪಿಬೇಜ್ಜಲಮೇತೇನ ಸ್ತೋತ್ರೆಣೈವಾಭಿಮಂತ್ರಿತಮ್। ತಸ್ಯ ಕುಕ್ಷಿಗತಾ ದೋಷಾಃ ಸರ್ವೆ ನಶ್ಯಂತಿ ತತ್ ಕ್ಷಣಾತ್ ॥ 25 ॥",
+      "tel": "యః పిబేజ్జలమేతేన స్తోత్రేణైవాభిమంత్రితమ్ । తస్య కుక్షిగతా దోషాః సర్వే నశ్యంతి తత్ క్షణాత్ ॥ 25 ॥",
+      "tam": "ய: பிபே³ஜ்ஜலமேதேன ஸ்தோத்ரேணைவாபி⁴மந்த்ரிதம் தஸ்ய குக்ஷிக³தா தோ³ஷா: ஸர்வே நஶ்யந்தி தத் க்ஷணாத் ॥ 25 ॥",
+      "meaning": "One who drinks water sanctified by this stotram - all ailments in their stomach are destroyed instantly."
+    },
+    {
+      "id": "27",
+      "iast": "yadvṛndāvanamāsādya paṅguḥ khañjō'pi vā janaḥ । stōtrēṇānēna yaḥ kuryāt pradakṣiṇanamaskṛtī ॥ 26 ॥",
+      "deva": "यद्वृन्दावनमासाद्य पङ्गुः खञ्जोऽपि वा जनः। स्तोत्रेणानेन यः कुर्यात् प्रदक्षिणनमस्कृती॥",
+      "knda": "ಯದ್ವೃಂದಾವನಮಾಸಾದ್ಯ ಪಂಗುಃ ಖಂಜೋಽಪಿ ವಾ ಜನಃ। ಸ್ತೋತ್ರೆಣಾನೇನ ಯಃ ಕುರ್ಯಾತ್ ಪ್ರದಕ್ಷಿಣನಮಸ್ಕೃತೀ ॥ 26 ॥",
+      "tel": "యద్వృందావనమాసాద్య పంగుః ఖంజోఽపి వా జనః । స్తోత్రేణానేన యః కుర్యాత్ ప్రదక్షిణనమస్కృతీ ॥ 26 ॥",
+      "tam": "யத்³வ்ருந்தா³வனமாஸாத்³ய பங்கு³: க²ஞ்ஜோபி வா ஜன: ஸ்தோத்ரேணானேன ய: குர்யாத் ப்ரத³க்ஷிணனமஸ்க்ருதீ ॥ 26 ॥",
+      "meaning": "Even a lame or crippled person who reaches the Brindavana and performs circumambulation and prostration while reciting this stotram..."
+    },
+    {
+      "id": "28",
+      "iast": "sa jaṅghālō bhavēdēva gururājaprasādataḥ । sōmasūryōparāgē cha puṣyārkādisamāgamē ॥ 27 ॥",
+      "deva": "स जङ्घालो भवेदेव गुरुराजप्रसादतः। सोमसूर्योपरागे च पुष्यार्कादिसमागमे॥",
+      "knda": "ಸ ಜಂಘಾಲೋ ಭವೆದೇವ ಗುರುರಾಜಪ್ರಸಾದತಃ। ಸೋಮಸೂರ್ಯೋಪರಾಗೆ ಚ ಪುಷ್ಯಾರ್ಕಾದಿಸಮಾಗಮೆ ॥ 27 ॥",
+      "tel": "స జంఘాలో భవేదేవ గురురాజప్రసాదతః । సోమసూర్యోపరాగే చ పుష్యార్కాదిసమాగమే ॥ 27 ॥",
+      "tam": "ஸ ஜங்கா⁴லோ ப⁴வேதே³வ கு³ருராஜப்ரஸாத³த: ஸோமஸூர்யோபராகே³ ச புஷ்யார்காதி³ஸமாக³மே ॥ 27 ॥",
+      "meaning": "...will become fleet-footed by the grace of Guru Raja. During solar and lunar eclipses and auspicious planetary conjunctions..."
+    },
+    {
+      "id": "29",
+      "iast": "yō'nuttamamidaṃ stōtramaṣṭōttaraśataṃ japēt । bhūtaprētapiśāchādi pīḍā tasya na jāyatē ॥ 28 ॥",
+      "deva": "योऽनुत्तममिदं स्तोत्रमष्टोत्तरशतं जपेत्। भूतप्रेतपिशाचादि पीडा तस्य न जायते॥",
+      "knda": "ಯೋಽನುತ್ತಮಮಿದಂ ಸ್ತೋತ್ರಮಷ್ಟೋತ್ತರಶತಂ ಜಪೇತ್। ಭೂತಪ್ರೇತಪಿಶಾಚಾದಿ ಪೀಡಾ ತಸ್ಯ ನ ಜಾಯತೇ ॥ 28 ॥",
+      "tel": "యోఽనుత్తమమిదం స్తోత్రమష్టోత్తరశతం జపేత్ । భూతప్రేతపిశాచాది పీడా తస్య న జాయతే ॥ 28 ॥",
+      "tam": "யோனுத்தமமித³ம் ஸ்தோத்ரமஷ்டோத்தரஶதம் ஜபேத் பூ⁴தப்ரேதபிஶாசாதி³ பீடா³ தஸ்ய ந ஜாயதே ॥ 28 ॥",
+      "meaning": "One who recites this supreme stotram 108 times will never be troubled by evil spirits, ghosts, or demons."
+    },
+    {
+      "id": "30",
+      "iast": "ētat stōtraṃ samuchchārya gurōrvṛndāvanāntikē । dīpasaṃyōjanājjñānaṃ putralābhō bhavēddhruvam ॥ 29 ॥",
+      "deva": "एतत् स्तोत्रं समुच्चार्य गुरोर्वृन्दावनान्तिके। दीपसंयोजनाज्ज्ञानं पुत्रलाभो भवेद्ध्रुवम्॥",
+      "knda": "ಏತತ್ ಸ್ತೋತ್ರಂ ಸಮುಚ್ಚಾರ್ಯ ಗುರೋರ್ವೃಂದಾವನಾಂತಿಕೆ। ದೀಪಸಂಯೋಜನಾಜ್ಜ್ಞಾನಂ ಪುತ್ರಲಾಭೋ ಭವೆದ್ಧ್ರುವಮ್ ॥ 29 ॥",
+      "tel": "ఏతత్ స్తోత్రం సముచ్చార్య గురోర్వృందావనాంతికే । దీపసంయోజనాజ్జ్ఞానం పుత్రలాభో భవేద్ధ్రువమ్ ॥ 29 ॥",
+      "tam": "ஏதத் ஸ்தோத்ரம் ஸமுச்சார்ய கு³ரோர்வ்ருந்தா³வனாந்திகே தீ³பஸம்யோஜனாஜ்ஜ்ஞானம் புத்ரலாபோ⁴ ப⁴வேத்³த்⁴ருவம் ॥ 29 ॥",
+      "meaning": "By reciting this stotram near the Guru's Brindavana and lighting a lamp, one surely gains knowledge and the blessing of children."
+    },
+    {
+      "id": "31",
+      "iast": "paravādijayō divyajñānabhaktyādivardhanam । sarvābhīṣṭapravṛddhiḥ syānnātra kāryā vichāraṇā ॥ 30 ॥",
+      "deva": "परवादिजयो दिव्यज्ञानभक्त्यादिवर्धनम्। सर्वाभीष्टप्रवृद्धिः स्यान्नात्र कार्या विचारणा॥",
+      "knda": "ಪರವಾದಿಜಯೋ ದಿವ್ಯಜ್ಞಾನಭಕ್ತ್ಯಾದಿವರ್ಧನಮ್। ಸರ್ವಾಭೀಷ್ಟಪ್ರವೃದ್ಧಿಃ ಸ್ಯಾನ್ನಾತ್ರ ಕಾರ್ಯಾ ವಿಚಾರಣಾ ॥ 30 ॥",
+      "tel": "పరవాదిజయో దివ్యజ్ఞానభక్త్యాదివర్ధనమ్ । సర్వాభీష్టప్రవృద్ధిః స్యాన్నాత్ర కార్యా విచారణా ॥ 30 ॥",
+      "tam": "பரவாதி³ஜயோ தி³வ்யஜ்ஞானப⁴க்த்யாதி³வர்த⁴னம் ஸர்வாபீ⁴ஷ்டப்ரவ்ருத்³தி⁴: ஸ்யான்நாத்ர கார்யா விசாரணா ॥ 30 ॥",
+      "meaning": "Victory over opposing philosophers, increase in divine knowledge and devotion, and growth of all desired objects - there should be no doubt about this."
+    },
+    {
+      "id": "32",
+      "iast": "rājachōramahāvyāghrasarpanakrādipīḍanam । na jāyatē'sya stōtrasya prabhāvānnātra saṃśayaḥ ॥ 31 ॥",
+      "deva": "राजचोरमहाव्याघ्रसर्पनक्रादिपीडनम्। न जायतेऽस्य स्तोत्रस्य प्रभावान्नात्र संशयः॥",
+      "knda": "ರಾಜಚೋರಮಹಾವ್ಯಾಘ್ರಸರ್ಪನಕ್ರಾದಿಪೀಡನಮ್। ನ ಜಾಯತೆಽಸ್ಯ ಸ್ತೋತ್ರಸ್ಯ ಪ್ರಭಾವಾನ್ನಾತ್ರ ಸಂಶಯಃ ॥ 31 ॥",
+      "tel": "రాజచోరమహావ్యాఘ్రసర్పనక్రాదిపీడనమ్ । న జాయతేఽస్య స్తోత్రస్య ప్రభావాన్నాత్ర సంశయః ॥ 31 ॥",
+      "tam": "ராஜசோரமஹாவ்யாக்⁴ரஸர்பனக்ராதி³பீட³னம் ந ஜாயதேஸ்ய ஸ்தோத்ரஸ்ய ப்ரபா⁴வான்நாத்ர ஸம்ஶய: ॥ 31 ॥",
+      "meaning": "Troubles from kings, thieves, mighty tigers, serpents, crocodiles and others do not arise for one protected by this stotram - there is no doubt."
+    },
+    {
+      "id": "33",
+      "iast": "yō bhaktyā gururāghavēndracharaṇadvandvaṃ smaran yaḥ paṭhēt stōtraṃ divyamidaṃ sadā na hi bhavēttasyāsukhaṃ kiñchana । kiṃ tviṣṭārthasamṛddhirēva kamalānāthaprasādōdayāt kīrtirdigviditā vibhūtiratulā sākṣī hayāsyō'tra hi ॥ 32 ॥",
+      "deva": "यो भक्त्या गुरुराघवेन्द्रचरणद्वन्द्वं स्मरन् यः पठेत् स्तोत्रं दिव्यमिदं सदा न हि भवेत्तस्यासुखं किञ्चन। किं त्विष्टार्थसमृद्धिरेव कमलानाथप्रसादोदयात् कीर्तिर्दिग्विदिता विभूतिरतुला साक्षी हयास्योऽत्र हि॥",
+      "knda": "ಯೋ ಭಕ್ತ್ಯಾ ಗುರುರಾಘವೇಂದ್ರಚರಣದ್ವಂದ್ವಂ ಸ್ಮರನ್ ಯಃ ಪಠೇತ್ ಸ್ತೋತ್ರಂ ದಿವ್ಯಮಿದಂ ಸದಾ ನ ಹಿ ಭವೇತ್ತಸ್ಯಾಸುಖಂ ಕಿಂಚನ। ಕಿಂ ತ್ವಿಷ್ಟಾರ್ಥಸಮೃದ್ಧಿರೇವ ಕಮಲಾನಾಥಪ್ರಸಾದೋದಯಾತ್ ಕೀರ್ತಿರ್ದಿಗ್ವಿದಿತಾ ವಿಭೂತಿರತುಲಾ ಸಾಕ್ಷೀ ಹಯಾಸ್ಯೋಽತ್ರ ಹಿ ॥ 32 ॥",
+      "tel": "యో భక్త్యా గురురాఘవేంద్రచరణద్వంద్వం స్మరన్ యః పఠేత్ స్తోత్రం దివ్యమిదం సదా న హి భవేత్తస్యాసుఖం కించన । కిం త్విష్టార్థసమృద్ధిరేవ కమలానాథప్రసాదోదయాత్ కీర్తిర్దిగ్విదితా విభూతిరతులా సాక్షీ హయాస్యోఽత్ర హి ॥ 32 ॥",
+      "tam": "யோ ப⁴க்த்யா கு³ருராக⁴வேந்த்³ரசரணத்³வந்த்³வம் ஸ்மரன் ய: படே²த் ஸ்தோத்ரம் தி³வ்யமித³ம் ஸதா³ ந ஹி ப⁴வேத்தஸ்யாஸுக²ம் கிஞ்சன கிம் த்விஷ்டார்த²ஸம்ருத்³தி⁴ரேவ கமலானாத²ப்ரஸாதோ³த³யாத் கீர்திர்தி³க்³விதி³தா விபூ⁴திரதுலா ஸாக்ஷீ ஹயாஸ்யோத்ர ஹி ॥ 32 ॥",
+      "meaning": "One who devotedly remembers the twin feet of Guru Raghavendra and recites this divine stotram will never face any sorrow. Indeed, all desired wealth manifests by the grace of Lord Lakshmi-Narayana. His fame spreads in all directions and his glory is incomparable - Hayagriva himself is witness to this."
+    },
+    {
+      "id": "34",
+      "iast": "iti śrī rāghavēndrārya gururājaprasādataḥ । kṛtaṃ stōtramidaṃ puṇyaṃ śrīmadbhirhyappaṇābhidaiḥ ॥",
+      "deva": "इति श्री राघवेन्द्रार्य गुरुराजप्रसादतः। कृतं स्तोत्रमिदं पुण्यं श्रीमद्भिर्ह्यप्पणाभिदैः॥",
+      "knda": "ಇತಿ ಶ್ರೀ ರಾಘವೇಂದ್ರಾರ್ಯ ಗುರುರಾಜಪ್ರಸಾದತಃ। ಕೃತಂ ಸ್ತೋತ್ರಮಿದಂ ಪುಣ್ಯಂ ಶ್ರೀಮದ್ಭಿರ್ಹ್ಯಪ್ಪಣಾಭಿದೈಃ ॥",
+      "tel": "ఇతి శ్రీ రాఘవేంద్రార్య గురురాజప్రసాదతః । కృతం స్తోత్రమిదం పుణ్యం శ్రీమద్భిర్హ్యప్పణాభిదైః ॥",
+      "tam": "இதி ஶ்ரீ ராக⁴வேந்த்³ரார்ய கு³ருராஜப்ரஸாத³த: க்ருதம் ஸ்தோத்ரமித³ம் புண்யம் ஶ்ரீமத்³பி⁴ர்ஹ்யப்பணாபி⁴தை³: ॥",
+      "meaning": "Thus, by the grace of the noble Raghavendra Guru Raja, this sacred stotram was composed by the revered Appanna."
+    },
+    {
+      "id": "35",
+      "iast": "pūjyāya rāghavēndrāya satyadharmaratāya cha । bhajatāṃ kalpavṛkṣāya namatāṃ kāmadhēnavē ॥",
+      "deva": "पूज्याय राघवेन्द्राय सत्यधर्मरताय च। भजतां कल्पवृक्षाय नमतां कामधेनवे॥",
+      "knda": "ಪೂಜ್ಯಾಯ ರಾಘವೇಂದ್ರಾಯ ಸತ್ಯಧರ್ಮರತಾಯ ಚ। ಭಜತಾಂ ಕಲ್ಪವೃಕ್ಷಾಯ ನಮತಾಂ ಕಾಮಧೇನವೆ ॥",
+      "tel": "పూజ్యాయ రాఘవేంద్రాయ సత్యధర్మరతాయ చ । భజతాం కల్పవృక్షాయ నమతాం కామధేనవే ॥",
+      "tam": "பூஜ்யாய ராக⁴வேந்த்³ராய ஸத்யத⁴ர்மரதாய ச பஜ⁴தாம் கல்பவ்ருக்ஷாய நமதாம் காமதே⁴னவே ॥",
+      "meaning": "To the worshipful Raghavendra, devoted to truth and dharma, who is a wish-fulfilling tree for those who worship him, and a Kamadhenu for those who bow to him."
+    },
+    {
+      "id": "36",
+      "iast": "āpādamauḻiparyantaṃ gurūṇāmākṛtiṃ smarēt । tēna vighnaḥ praṇaśyanti siddhyanti cha manōrathāḥ ॥",
+      "deva": "आपादमौलिपर्यन्तं गुरूणामाकृतिं स्मरेत्। तेन विघ्नः प्रणश्यन्ति सिद्ध्यन्ति च मनोरथाः॥",
+      "knda": "ಆಪಾದಮೌಳಿಪರ್ಯಂತಂ ಗುರೂಣಾಮಾಕೃತಿಂ ಸ್ಮರೇತ್। ತೇನ ವಿಘ್ನಃ ಪ್ರಣಶ್ಯಂತಿ ಸಿದ್ಧ್ಯಂತಿ ಚ ಮನೋರಥಾಃ ॥",
+      "tel": "ఆపాదమౌళిపర్యంతం గురూణామాకృతిం స్మరేత్ । తేన విఘ్నః ప్రణశ్యంతి సిద్ధ్యంతి చ మనోరథాః ॥",
+      "tam": "ஆபாத³மௌளிபர்யந்தம் கு³ரூணாமாக்ருதிம் ஸ்மரேத் தேன விக்⁴ன: ப்ரணஶ்யந்தி ஸித்³த்⁴யந்தி ச மனோரத²: ॥",
+      "meaning": "One should meditate on the form of the Guru from head to toe. By doing so, all obstacles perish and all desires are fulfilled."
+    },
+    {
+      "id": "37",
+      "iast": "durvādidhvāntaravayē vaiṣṇavēndīvarēndavē । śrīrāghavēndra guravē namō'tyantadayāḻavē ॥",
+      "deva": "दुर्वादिध्वान्तरवये वैष्णवेन्दीवरेन्दवे। श्रीराघवेन्द्र गुरवे नमोऽत्यन्तदयालवे॥",
+      "knda": "ದುರ್ವಾದಿಧ್ವಾಂತರವಯೆ ವೈಷ್ಣವೇಂದೀವರೇಂದವೆ। ಶ್ರೀರಾಘವೇಂದ್ರ ಗುರವೇ ನಮೋಽತ್ಯಂತದಯಾಳವೇ ॥",
+      "tel": "దుర్వాదిధ్వాంతరవయే వైష్ణవేందీవరేందవే । శ్రీరాఘవేంద్ర గురవే నమోఽత్యంతదయాళవే ॥",
+      "tam": "து³ர்வாதி³த்⁴வாந்தரவயே வைஷ்ணவேந்தீ³வரேந்த³வே ஶ்ரீராக⁴வேந்த்³ர கு³ரவே நமோத்யந்தத³யாளவே ॥",
+      "meaning": "To Sri Raghavendra Guru, who is the sun that dispels the darkness of evil philosophies, the moon among Vaishnava devotees, I offer my salutations, O most compassionate one."
+    },
+    {
+      "id": "38",
+      "iast": "mūkō'pi yatprasādēna mukundaśayanāya tē । rājarājāyatē riktō rāghavēndraṃ tamāśrayē ॥",
+      "deva": "मूकोऽपि यत्प्रसादेन मुकुन्दशयनाय ते। राजराजायते रिक्तो राघवेन्द्रं तमाश्रये॥",
+      "knda": "ಮೂಕೋಽಪಿ ಯತ್ಪ್ರಸಾದೇನ ಮುಕುಂದಶಯನಾಯ ತೇ। ರಾಜರಾಜಾಯತೇ ರಿಕ್ತೋ ರಾಘವೇಂದ್ರಂ ತಮಾಶ್ರಯೇ ॥",
+      "tel": "మూకోఽపి యత్ప్రసాదేన ముకుందశయనాయ తే । రాజరాజాయతే రిక్తో రాఘవేంద్రం తమాశ్రయే ॥",
+      "tam": "மூகோபி யத்ப்ரஸாதே³ன முகுந்த³ஶயனாய தே ராஜராஜாயதே ரிக்தோ ராக⁴வேந்த்³ரம் தமாஶ்ரயே ॥",
+      "meaning": "Even the mute becomes an eloquent speaker by his grace, even the destitute becomes a king of kings - I take refuge in that Raghavendra."
+    },
+    {
+      "id": "39",
+      "iast": "iti śrī appaṇṇāchāryavirachitaṃ śrīrāghavēndra stōtraṃ sampūrṇam ॥",
+      "deva": "इति श्री अप्पण्णाचार्यविरचितं श्रीराघवेन्द्र स्तोत्रं सम्पूर्णम्॥",
+      "knda": "ಇತಿ ಶ್ರೀ ಅಪ್ಪಣ್ಣಾಚಾರ್ಯವಿರಚಿತಂ ಶ್ರೀರಾಘವೇಂದ್ರ ಸ್ತೋತ್ರಂ ಸಂಪೂರ್ಣಮ್ ॥",
+      "tel": "ఇతి శ్రీ అప్పణ్ణాచార్యవిరచితం శ్రీరాఘవేంద్ర స్తోత్రం సంపూర్ణమ్ ॥",
+      "tam": "இதி ஶ்ரீ அப்பண்ணாசார்யவிரசிதம் ஶ்ரீராக⁴வேந்த்³ர ஸ்தோத்ரம் ஸம்பூர்ணம் ॥",
+      "meaning": "Thus ends the Sri Raghavendra Stotram composed by Sri Appannacharya."
+    }
+  ]
+}

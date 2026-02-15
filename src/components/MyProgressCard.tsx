@@ -12,7 +12,7 @@ import { getPuzzleStats, getNextUncompletedPuzzleLine, getPuzzleCompletionCount,
 import { STOTRAS, getStotraLines, getStotraChapterIndices, type StotraInfo } from '../lib/stotraConfig';
 
 interface MyProgressCardProps {
-  onContinue: (stotra: 'vsn' | 'hari' | 'keshava' | 'vayu', lang: Lang, mode: 'practice' | 'puzzle', lineIndex: number) => void;
+  onContinue: (stotra: 'vsn' | 'hari' | 'keshava' | 'vayu' | 'raghavendra' | 'yantrodharaka' | 'venkateshwara', lang: Lang, mode: 'practice' | 'puzzle', lineIndex: number) => void;
   getTranslation: (key: string) => string;
 }
 
@@ -82,7 +82,7 @@ const MAX_VISIBLE = 3;
 
 export default function MyProgressCard({ onContinue, getTranslation }: MyProgressCardProps) {
   const [expanded, setExpanded] = useState(false);
-  const rows = STOTRAS.map(getBestProgress);
+  const rows = STOTRAS.filter((s) => !s.hidden).map(getBestProgress);
 
   const withProgress = rows.filter((r) => r.hasProgress);
   if (withProgress.length === 0) return null;

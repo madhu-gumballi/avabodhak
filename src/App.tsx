@@ -6,12 +6,15 @@ import { VSNViewer } from './components/VSNViewer';
 import { HariStotramViewer } from './components/HariStotramViewer';
 import { KeshavaNamaViewer } from './components/KeshavaNamaViewer';
 import { VayuStutiViewer } from './components/VayuStutiViewer';
+import { RaghavendraStotramViewer } from './components/RaghavendraStotramViewer';
+import { YantrodharakaHanumanViewer } from './components/YantrodharakaHanumanViewer';
+import { VenkateshwaraStotramViewer } from './components/VenkateshwaraStotramViewer';
 import LoginPrompt from './components/LoginPrompt';
 import AchievementToast from './components/AchievementToast';
 import { analytics } from './lib/analytics';
 import type { Lang } from './data/types';
 
-type ViewState = 'landing' | 'vsn' | 'hari' | 'keshava' | 'vayu';
+type ViewState = 'landing' | 'vsn' | 'hari' | 'keshava' | 'vayu' | 'raghavendra' | 'yantrodharaka' | 'venkateshwara';
 
 // Simple dark theme for the outer shell/landing page
 const theme = createTheme({
@@ -33,7 +36,7 @@ function AppContent() {
   const [initialLineIndex, setInitialLineIndex] = useState<number | undefined>(undefined);
   const { showLoginPrompt, loading } = useAuth();
 
-  const handleStotraSelect = (stotra: 'vsn' | 'hari' | 'keshava' | 'vayu', lang?: Lang, mode?: 'reading' | 'practice' | 'puzzle', lineIndex?: number) => {
+  const handleStotraSelect = (stotra: 'vsn' | 'hari' | 'keshava' | 'vayu' | 'raghavendra' | 'yantrodharaka' | 'venkateshwara', lang?: Lang, mode?: 'reading' | 'practice' | 'puzzle', lineIndex?: number) => {
     setView(stotra);
     setPreferredLang(lang);
     setInitialMode(mode);
@@ -76,6 +79,15 @@ function AppContent() {
       )}
       {view === 'vayu' && (
         <VayuStutiViewer onBack={handleBack} preferredLang={preferredLang} initialMode={initialMode} initialLineIndex={initialLineIndex} />
+      )}
+      {view === 'raghavendra' && (
+        <RaghavendraStotramViewer onBack={handleBack} preferredLang={preferredLang} initialMode={initialMode} initialLineIndex={initialLineIndex} />
+      )}
+      {view === 'yantrodharaka' && (
+        <YantrodharakaHanumanViewer onBack={handleBack} preferredLang={preferredLang} initialMode={initialMode} initialLineIndex={initialLineIndex} />
+      )}
+      {view === 'venkateshwara' && (
+        <VenkateshwaraStotramViewer onBack={handleBack} preferredLang={preferredLang} initialMode={initialMode} initialLineIndex={initialLineIndex} />
       )}
     </>
   );

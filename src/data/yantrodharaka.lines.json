@@ -1,0 +1,186 @@
+{
+  "title": "Sri Yantrodharaka Hanuman Stotram",
+  "metadata": {
+    "chapters": 1,
+    "totalLines": 17,
+    "languages": ["deva", "knda", "tel", "iast"],
+    "practiceMode": true,
+    "puzzleMode": true,
+    "stotraType": "verse",
+    "composer": "Sri Vyasaraja Tirtha",
+    "composerInfo": {
+      "name": "Sri Vyasaraja Tirtha",
+      "period": "c. 1447–1539 CE",
+      "tradition": "Dvaita Vedanta",
+      "biography": "One of the greatest saints and scholars of the Dvaita Vedanta tradition. He was the rajaguru of the Vijayanagara Empire and composed numerous devotional works. He installed 732 Hanuman idols across South India."
+    },
+    "devataPrimary": "Hanuman/Vayu",
+    "devataSecondary": ["Rama", "Vishnu"],
+    "historicalContext": "This stotra is dedicated to Lord Hanuman in the Yantrodharaka form, where the deity holds a divine yantra. The idol was consecrated by Sri Vyasaraja Tirtha at Hampi. The stotra praises Hanuman as the messenger of Rama, the life-giver of Lakshmana, and the destroyer of Lanka.",
+    "rasa": ["bhakti", "vira"],
+    "gunaCategories": ["shakti", "bhakti", "rakshana"],
+    "credits": {
+      "textSource": "StotraNidhi.com",
+      "textSourceUrl": "https://stotranidhi.com/",
+      "tradition": "Dvaita Vedanta / Madhva Sampradaya",
+      "attribution": "Text content sourced from StotraNidhi.com. We are grateful for making these sacred texts available."
+    },
+    "disclaimer": {
+      "text": "The text provided here is for learning and devotion. For authoritative understanding, please consult a qualified guru or traditional scholar in the Dvaita Vedanta tradition."
+    }
+  },
+  "sources": {
+    "iast": "https://stotranidhi.com/en/sri-yantrodharaka-hanuman-stotram-in-english/",
+    "deva": "https://stotranidhi.com/hi/sri-yantrodharaka-hanuman-stotram-in-sanskrit/",
+    "knda": "https://stotranidhi.com/kn/sri-yantrodharaka-hanuman-stotram-in-kannada/",
+    "tel": "https://stotranidhi.com/te/sri-yantrodharaka-hanuman-stotram-in-telugu/"
+  },
+  "lines": [
+    {
+      "id": "1",
+      "deva": "श्री यन्त्रोधारक हनुमत् स्तोत्रम्",
+      "iast": "Sri Yantrodharaka Hanuman Stotram",
+      "knda": "ಶ್ರೀ ಯಂತ್ರೋಧಾರಕ ಹನುಮತ್ ಸ್ತೋತ್ರಂ",
+      "tel": "శ్రీ యంత్రోధారక హనుమత్ స్తోత్రమ్",
+      "chapter": "Sri Yantrodharaka Hanuman Stotram",
+      "meaning": "Hymn to Hanuman, the Bearer of the Sacred Yantra",
+      "note": "Composed by Sri Vyasaraja Tirtha (c. 1447-1539 CE), the great saint of the Dvaita tradition and rajaguru of the Vijayanagara Empire. While meditating on the banks of the Tungabhadra at Hampi, Vyasaraja had a vision of Lord Hanuman and drew his image on a rock. When the image came alive and vanished, Vyasaraja confined the Lord within a sacred yantra. This 16-verse stotra was composed at that divine site, praising Hanuman as Rama's messenger, Lakshmana's life-restorer, and the destroyer of Lanka."
+    },
+    {
+      "id": "2",
+      "deva": "नमामि दूतं रामस्य सुखदं च सुरद्रुमम् । श्री मारुतात्मसम्भूतं विद्युत्काञ्चन सन्निभम् ॥ 1 ॥",
+      "iast": "namāmi dūtaṁ rāmasya sukhadaṁ ca suradrumam | śrī mārutātmasambhūtaṁ vidyutkāñcana sannibham || 1 ||",
+      "knda": "ನಮಾಮಿ ದೂತಂ ರಾಮಸ್ಯ ಸುಖದಂ ಚ ಸುರದ್ರುಮಮ್ । ಶ್ರೀ ಮಾರುತಾತ್ಮಸಂಭೂತಂ ವಿದ್ಯುತ್ಕಾಂಚನ ಸನ್ನಿಭಮ್ ॥ 1 ॥",
+      "tel": "నమామి దూతం రామస్య సుఖదం చ సురద్రుమం । శ్రీ మారుతాత్మసంభూతం విద్యుత్కాంచన సన్నిభమ్ ॥ 1 ॥",
+      "meaning": "I bow to the messenger of Lord Rama, the giver of happiness, the wish-fulfilling tree among the celestials, born of the wind-god's essence, radiant like lightning and gold."
+    },
+    {
+      "id": "3",
+      "deva": "पीनवृत्तं महाबाहुं सर्वशत्रुनिवारणम् । रामप्रियतमं देवं भक्ताभीष्टप्रदायकम् ॥ 2 ॥",
+      "iast": "pīnavr̥ttaṁ mahābāhuṁ sarvaśatrunivāraṇam | rāmapriyatamaṁ dēvaṁ bhaktābhīṣṭapradāyakam || 2 ||",
+      "knda": "ಪೀನವೃತ್ತಂ ಮಹಾಬಾಹುಂ ಸರ್ವಶತ್ರುನಿವಾರಣಮ್ । ರಾಮಪ್ರಿಯತಮಂ ದೇವಂ ಭಕ್ತಾಭೀಷ್ಟಪ್ರದಾಯಕಮ್ ॥ 2 ॥",
+      "tel": "పీనవృత్తం మహాబాహుం సర్వశత్రునివారణమ్ । రామప్రియతమం దేవం భక్తాభీష్టప్రదాయకమ్ ॥ 2 ॥",
+      "meaning": "Strong and round-armed, the mighty one who wards off all enemies, most beloved of Lord Rama, the divine one who fulfills the wishes of devotees."
+    },
+    {
+      "id": "4",
+      "deva": "नानारत्नसमायुक्तं कुण्डलादिविराजितम् । द्वात्रिंशल्लक्षणोपेतं स्वर्णपीठविराजितम् ॥ 3 ॥",
+      "iast": "nānāratnasamāyuktaṁ kuṇḍalādivirājitam | dvātriṁśallakṣaṇōpētaṁ svarṇapīṭhavirājitam || 3 ||",
+      "knda": "ನಾನಾರತ್ನಸಮಾಯುಕ್ತಂ ಕುಂಡಲಾದಿವಿರಾಜಿತಮ್ । ದ್ವಾತ್ರಿಂಶಲ್ಲಕ್ಷಣೋಪೇತಂ ಸ್ವರ್ಣಪೀಠವಿರಾಜಿತಮ್ ॥ 3 ॥",
+      "tel": "నానారత్నసమాయుక్తం కుండలాదివిరాజితమ్ । ద్వాత్రింశల్లక్షణోపేతం స్వర్ణపీఠవిరాజితమ్ ॥ 3 ॥",
+      "meaning": "Adorned with various gems and shining earrings, endowed with the thirty-two auspicious marks, resplendent on a golden seat."
+    },
+    {
+      "id": "5",
+      "deva": "त्रिंशत्कोटिबीजसम्युक्तं द्वादशावर्ति प्रतिष्ठितम् । पद्मासनस्थितं देवं षट्कोणमण्डलमध्यगम् ॥ 4 ॥",
+      "iast": "triṁśatkōṭibījasamyuktaṁ dvādaśāvarti pratiṣṭhitam | padmāsanasthitaṁ dēvaṁ ṣaṭkōṇamaṇḍalamadhyagam || 4 ||",
+      "knda": "ತ್ರಿಂಶತ್ಕೋಟಿಬೀಜಸಂಯುಕ್ತಂ ದ್ವಾಡಶಾವರ್ತಿ ಪ್ರತಿಷ್ಠಿತಮ್ । ಪದ್ಮಾಸನಸ್ಥಿತಂ ದೇವಂ ಷಟ್ಕೋಣಮಂಡಲಮಧ್ಯಗಮ್ ॥ 4 ॥",
+      "tel": "త్రింశత్కోటిబీజసంయుక్తం ద్వాదశావర్తి ప్రతిష్ఠితమ్ । పద్మాసనస్థితం దేవం షట్కోణమండలమధ్యగమ్ ॥ 4 ॥",
+      "meaning": "United with thirty crore seed-mantras, established in twelve cycles, seated in lotus posture, dwelling in the center of a hexagonal mandala."
+    },
+    {
+      "id": "6",
+      "deva": "चतुर्भुजं महाकायं सर्ववैष्णवशेखरम् । गदाऽभयकरं हस्तौ हृदिस्थो सुकृताञ्जलिम् ॥ 5 ॥",
+      "iast": "caturbhujaṁ mahākāyaṁ sarvavaiṣṇavaśēkharam | gadā'bhayakaraṁ hastau hr̥disthō sukr̥tāñjalim || 5 ||",
+      "knda": "ಚತುರ್ಭುಜಂ ಮಹಾಕಾಯಂ ಸರ್ವವೈಷ್ಣವಶೇಖರಮ್ । ಗದಾಽಭಯಕರಂ ಹಸ್ತೌ ಹೃದಿಸ್ಥೋ ಸುಕೃತಾಂಜಲಿಮ್ ॥ 5 ॥",
+      "tel": "చతుర్భుజం మహాకాయం సర్వవైష్ణవశేఖరమ్ । గదాఽభయకరం హస్తౌ హృదిస్థో సుకృతాంజలిమ్ ॥ 5 ॥",
+      "meaning": "Four-armed, mighty-bodied, the crest-jewel of all Vaishnavas, holding a mace and the gesture of fearlessness, with folded hands held at the heart."
+    },
+    {
+      "id": "7",
+      "deva": "हंसमन्त्र प्रवक्तारं सर्वजीवनियामकम् । प्रभञ्जनशब्दवाच्येण सर्वदुर्मतभञ्जकम् ॥ 6 ॥",
+      "iast": "haṁsamantra pravaktāraṁ sarvajīvaniyāmakam | prabhañjanaśabdavācyēṇa sarvadurmatabhañjakam || 6 ||",
+      "knda": "ಹಂಸಮಂತ್ರ ಪ್ರವಕ್ತಾರಂ ಸರ್ವಜೀವನಿಯಾಮಕಮ್ । ಪ್ರಭಂಜನಶಬ್ದವಾಚ್ಯೇಣ ಸರ್ವದುರ್ಮತಭಂಜಕಮ್ ॥ 6 ॥",
+      "tel": "హంసమంత్ర ప్రవక్తారం సర్వజీవనియామకమ్ । ప్రభంజనశబ్దవాచ్యేణ సర్వదుర్మతభంజకమ్ ॥ 6 ॥",
+      "meaning": "The expounder of the Hamsa mantra, the controller of all living beings, known by the name Prabhanjana (the wind), the destroyer of all false doctrines."
+    },
+    {
+      "id": "8",
+      "deva": "सर्वदाऽभीष्टदातारं सतां वै दृढमहवे । अञ्जनागर्भसम्भूतं सर्वशास्त्रविशारदम् ॥ 7 ॥",
+      "iast": "sarvadā'bhīṣṭadātāraṁ satāṁ vai dr̥ḍhamahavē | añjanāgarbhasambhūtaṁ sarvaśāstraviśāradam || 7 ||",
+      "knda": "ಸರ್ವದಾಽಭೀಷ್ಟದಾತಾರಂ ಸತಾಂ ವೈ ದೃಢಮಹವೇ । ಅಂಜನಾಗರ್ಭಸಂಭೂತಂ ಸರ್ವಶಾಸ್ತ್ರವಿಶಾರದಮ್ ॥ 7 ॥",
+      "tel": "సర్వదాఽభీష్టదాతారం సతాం వై దృఢమహవే । అంజనాగర్భసంభూతం సర్వశాస్త్రవిశారదమ్ ॥ 7 ॥",
+      "meaning": "Ever the granter of all desires, truly firm in devotion to the righteous, born from the womb of Anjana, proficient in all scriptures."
+    },
+    {
+      "id": "9",
+      "deva": "कपीनां प्राणदातारं सीतान्वेषणतत्परम् । अक्षादिप्राणहन्तारं लङ्कादहनतत्परम् ॥ 8 ॥",
+      "iast": "kapīnāṁ prāṇadātāraṁ sītānvēṣaṇatatparam | akṣādiprāṇahantāraṁ laṅkādahanatatparam || 8 ||",
+      "knda": "ಕಪೀನಾಂ ಪ್ರಾಣದಾತಾರಂ ಸೀತಾನ್ವೇಷಣತತ್ಪರಮ್ । ಅಕ್ಷಾದಿಪ್ರಾಣಹಂತಾರಂ ಲಂಕಾದಹನತತ್ಪರಮ್ ॥ 8 ॥",
+      "tel": "కపీనాం ప్రాణదాతారం సీతాన్వేషణతత్పరమ్ । అక్షాదిప్రాణహంతారం లంకాదహనతత్పరమ్ ॥ 8 ॥",
+      "meaning": "The life-giver of the monkeys, devoted to searching for Sita, the slayer of Aksha and other demons, devoted to burning Lanka."
+    },
+    {
+      "id": "10",
+      "deva": "लक्ष्मणप्राणदातारं सर्ववानरयूथपम् । किङ्कराः सर्वदेवाद्याः जानकीनाथस्य किङ्करम् ॥ 9 ॥",
+      "iast": "lakṣmaṇaprāṇadātāraṁ sarvavānarayūthapam | kiṅkarāḥ sarvadēvādyāḥ jānakīnāthasya kiṅkaram || 9 ||",
+      "knda": "ಲಕ್ಷ್ಮಣಪ್ರಾಣದಾತಾರಂ ಸರ್ವವಾನರಯೂಥಪಮ್ । ಕಿಂಕರಾಃ ಸರ್ವದೇವಾದ್ಯಾಃ ಜಾನಕೀನಾಥಸ್ಯ ಕಿಂಕರಮ್ ॥ 9 ॥",
+      "tel": "లక్ష్మణప్రాణదాతారం సర్వవానరయూథపమ్ । కింకరాః సర్వదేవాద్యాః జానకీనాథస్య కింకరమ్ ॥ 9 ॥",
+      "meaning": "The one who restored Lakshmana's life, the leader of all monkey armies. All the gods and others are servants, and he is the servant of Lord Rama."
+    },
+    {
+      "id": "11",
+      "deva": "वासिनं चक्रतीर्थस्य दक्षिणस्थ गिरौ सदा । तुङ्गाम्भोदि तरङ्गस्य वातेन परिशोभिते ॥ 10 ॥",
+      "iast": "vāsinaṁ cakratīrthasya dakṣiṇastha girau sadā | tuṅgāmbhōdi taraṅgasya vātēna pariśōbhitē || 10 ||",
+      "knda": "ವಾಸಿನಂ ಚಕ್ರತೀರ್ಥಸ್ಯ ದಕ್ಷಿಣಸ್ಥ ಗಿರೌ ಸದಾ । ತುಂಗಾಂಭೋದಿ ತರಂಗಸ್ಯ ವಾತೇನ ಪರಿಶೋಭಿತೇ ॥ 10 ॥",
+      "tel": "వాసినం చక్రతీర్థస్య దక్షిణస్థ గిరౌ సదా । తుంగాంభోది తరంగస్య వాతేన పరిశోభితే ॥ 10 ॥",
+      "meaning": "He who always dwells on the southern hill near Chakra Tirtha, beautified by the breeze carrying the waves of the Tungabhadra river."
+    },
+    {
+      "id": "12",
+      "deva": "नानादेशगतैः सद्भिः सेव्यमानं नृपोत्तमैः । धूपदीपादि नैवेद्यैः पञ्चखाद्यैश्च शक्तितः ॥ 11 ॥",
+      "iast": "nānādēśagataiḥ sadbhiḥ sēvyamānaṁ nr̥pōttamaiḥ | dhūpadīpādi naivēdyaiḥ pañcakhādyaiśca śaktitaḥ || 11 ||",
+      "knda": "ನಾನಾದೇಶಗತೈಃ ಸದ್ಭಿಃ ಸೇವ್ಯಮಾನಂ ನೃಪೋತ್ತಮೈಃ । ಧೂಪದೀಪಾದಿ ನೈವೇದ್ಯೈಃ ಪಂಚಖಾದ್ಯೈಶ್ಚ ಶಕ್ತಿತಃ ॥ 11 ॥",
+      "tel": "నానాదేశగతైః సద్భిః సేవ్యమానం నృపోత్తమైః । ధూపదీపాది నైవేద్యైః పంచఖాద్యైశ్చ శక్తితః ॥ 11 ॥",
+      "meaning": "Worshipped by noble kings who come from various lands, with incense, lamps, food offerings, and five types of delicacies according to one's ability."
+    },
+    {
+      "id": "13",
+      "deva": "भजामि श्रीहनूमन्तं हेमकान्तिसमप्रभम् । व्यासतीर्थयतीन्द्रेण पूजितं च विधानतः ॥ 12 ॥",
+      "iast": "bhajāmi śrīhanūmantaṁ hēmakāntisamaprabham | vyāsatīrthayatīndrēṇa pūjitaṁ ca vidhānataḥ || 12 ||",
+      "knda": "ಭಜಾಮಿ ಶ್ರೀಹನೂಮಂತಂ ಹೇಮಕಾಂತಿಸಮಪ್ರಭಮ್ । ವ್ಯಾಸತೀರ್ಥಯತೀಂದ್ರೇಣ ಪೂಜಿತಂ ಚ ವಿಧಾನತಃ ॥ 12 ॥",
+      "tel": "భజామి శ్రీహనూమంతం హేమకాంతిసమప్రభమ్ । వ్యాసతీర్థయతీంద్రేణ పూజితం చ విధానతః ॥ 12 ॥",
+      "meaning": "I worship Sri Hanuman, radiant as gold, who was worshipped with proper rituals by the great ascetic Vyasa Tirtha."
+    },
+    {
+      "id": "14",
+      "deva": "त्रिवारं यः पठेन्नित्यं स्तोत्रम् भक्त्या द्विजोत्तमः । वाञ्छितं लभतेऽभीष्टं षण्मासाभ्यन्तरे खलु ॥ 13 ॥",
+      "iast": "trivāraṁ yaḥ paṭhēnnityaṁ stōtram bhaktyā dvijōttamaḥ | vāñchitaṁ labhatē'bhīṣṭaṁ ṣaṇmāsābhyantarē khalu || 13 ||",
+      "knda": "ತ್ರಿವಾರಂ ಯಃ ಪಠೇನ್ನಿತ್ಯಂ ಸ್ತೋತ್ರಂ ಭಕ್ತ್ಯಾ ದ್ವಿಜೋತ್ತಮಃ । ವಾಂಛಿತಂ ಲಭತೇಽಭೀಷ್ಟಂ ಷಣ್ಮಾಸಾಭ್ಯಂತರೇ ಖಲು ॥ 13 ॥",
+      "tel": "త్రివారం యః పఠేన్నిత్యం స్తోత్రం భక్త్యా ద్విజోత్తమః । వాంఛితం లభతేఽభీష్టం షణ్మాసాభ్యంతరే ఖలు ॥ 13 ॥",
+      "meaning": "A learned brahmin who recites this stotram three times daily with devotion will attain his desired objects within six months, without doubt."
+    },
+    {
+      "id": "15",
+      "deva": "पुत्रार्थी लभते पुत्रं यशोऽर्थी लभते यशः । विद्यार्थी लभते विद्यां धनार्थी लभते धनम् ॥ 14 ॥",
+      "iast": "putrārthī labhatē putraṁ yaśō'rthī labhatē yaśaḥ | vidyārthī labhatē vidyāṁ dhanārthī labhatē dhanam || 14 ||",
+      "knda": "ಪುತ್ರಾರ್ಥೀ ಲಭತೇ ಪುತ್ರಂ ಯಶೋಽರ್ಥೀ ಲಭತೇ ಯಶಃ । ವಿದ್ಯಾರ್ಥೀ ಲಭತೇ ವಿದ್ಯಾಂ ಧನಾರ್ಥೀ ಲಭತೇ ಧನಮ್ ॥ 14 ॥",
+      "tel": "పుత్రార్థీ లభతే పుత్రం యశోఽర్థీ లభతే యశః । విద్యార్థీ లభతే విద్యాం ధనార్థీ లభతే ధనమ్ ॥ 14 ॥",
+      "meaning": "One desiring sons obtains sons, one desiring fame obtains fame, one desiring knowledge obtains knowledge, one desiring wealth obtains wealth."
+    },
+    {
+      "id": "16",
+      "deva": "सर्वथा माऽस्तु सन्देहो हरिः साक्षी जगत्पतिः । यः करोत्यत्र सन्देहं स याति नरकं ध्रुवम् ॥ 15 ॥",
+      "iast": "sarvathā mā'stu sandēhō hariḥ sākṣī jagatpatiḥ | yaḥ karōtyatra sandēhaṁ sa yāti narakaṁ dhruvam || 15 ||",
+      "knda": "ಸರ್ವಥಾ ಮಾಽಸ್ತು ಸಂದೇಹೋ ಹರಿಃ ಸಾಕ್ಷೀ ಜಗತ್ಪತಿಃ । ಯಃ ಕರೋತ್ಯತ್ರ ಸಂದೇಹಂ ಸ ಯಾತಿ ನರಕಂ ಧ್ರುವಮ್ ॥ 15 ॥",
+      "tel": "సర్వథా మాఽస్తు సందేహో హరిః సాక్షీ జగత్పతిః । యః కరోత్యత్ర సందేహం స యాతి నరకం ధ్రువమ్ ॥ 15 ॥",
+      "meaning": "Let there be absolutely no doubt about this - Lord Hari, the master of the universe, is witness. One who doubts this will surely go to hell."
+    },
+    {
+      "id": "17",
+      "deva": "यन्त्रोधारकस्तोत्रम् षोडशश्लोकसम्युतम् । श्रवणं कीर्तनं वा सर्वपापैः प्रमुच्यते ॥ 16 ॥",
+      "iast": "yantrōdhārakastōtram ṣōḍaśaślōkasamyutam | śravaṇaṁ kīrtanaṁ vā sarvapāpaiḥ pramucyatē || 16 ||",
+      "knda": "ಯಂತ್ರೋಧಾರಕಸ್ತೋತ್ರಂ ಷೋಡಶಶ್ಲೋಕಸಂಯುತಮ್ । ಶ್ರವಣಂ ಕೀರ್ತನಂ ವಾ ಸರ್ವಪಾಪೈಃ ಪ್ರಮುಚ್ಯತೇ ॥ 16 ॥",
+      "tel": "యంత్రోధారకస్తోత్రం షోడశశ్లోకసంయుతమ్ । శ్రవణం కీర్తనం వా సర్వపాపైః ప్రముచ్యతే ॥ 16 ॥",
+      "meaning": "This Yantrodharaka Stotram, consisting of sixteen verses - by hearing or reciting it, one is freed from all sins."
+    },
+    {
+      "id": "18",
+      "deva": "इति श्री व्यासराजकृत यन्त्रोधारक हनुमत् स्तोत्रम् ॥",
+      "iast": "iti śrī vyāsarājakr̥ta yantrōdhāraka hanumat stōtram ||",
+      "knda": "ಇತಿ ಶ್ರೀ ವ್ಯಾಸರಾಜಕೃತ ಯಂತ್ರೋಧಾರಕ ಹನುಮತ್ ಸ್ತೋತ್ರಮ್ ॥",
+      "tel": "ఇతి శ్రీ వ్యాసరాజకృత యంత్రోధారక హనుమత్ స్తోత్రమ్ ॥",
+      "meaning": "Thus ends the Yantrodharaka Hanumat Stotram composed by Sri Vyasaraja."
+    }
+  ]
+}

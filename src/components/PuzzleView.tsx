@@ -57,10 +57,11 @@ interface Props {
   stotraKey?: string; // Stotra identifier for storage isolation
   initialLineIndex?: number;
   onExit: () => void;
+  onLineIndexChange?: (index: number) => void;
   T: (key: string) => string;
 }
 
-export function PuzzleView({ lines, chapterIndices = [], lang, stotraKey, initialLineIndex = 0, onExit, T }: Props) {
+export function PuzzleView({ lines, chapterIndices = [], lang, stotraKey, initialLineIndex = 0, onExit, onLineIndexChange, T }: Props) {
   const { recordPuzzleComplete } = useAuth();
   const [lineIndex, setLineIndex] = useState(initialLineIndex);
   const [correctSegments, setCorrectSegments] = useState<PuzzleSegment[]>([]);
@@ -75,6 +76,11 @@ export function PuzzleView({ lines, chapterIndices = [], lang, stotraKey, initia
   const [stotraCompletionCount, setStotraCompletionCount] = useState(0);
   const startTimeRef = useRef(Date.now());
   const actionCountRef = useRef(0);
+
+  // Notify parent of line index changes
+  useEffect(() => {
+    onLineIndexChange?.(lineIndex);
+  }, [lineIndex]);
 
   // Swipe gesture detection
   const touchStartRef = useRef<{ x: number; y: number; time: number } | null>(null);

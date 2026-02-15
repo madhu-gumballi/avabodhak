@@ -7,13 +7,17 @@ import vsnLines from '../data/vs.lines.new.json';
 import hariLines from '../data/hari.lines.json';
 import keshavaLines from '../data/keshava.lines.json';
 import vayuLines from '../data/vayu.lines.json';
+import raghavendraLines from '../data/raghavendra.lines.json';
+import yantrodharakaLines from '../data/yantrodharaka.lines.json';
+import venkateshwaraLines from '../data/venkateshwara.lines.json';
 import type { TextFile, Lang, Line } from '../data/types';
 
 export interface StotraInfo {
-  key: 'vsn' | 'hari' | 'keshava' | 'vayu';
+  key: 'vsn' | 'hari' | 'keshava' | 'vayu' | 'raghavendra' | 'yantrodharaka' | 'venkateshwara';
   totalLines: number;
   languages: Lang[];
   data: TextFile;
+  hidden?: boolean;
 }
 
 export const STOTRAS: StotraInfo[] = [
@@ -21,6 +25,9 @@ export const STOTRAS: StotraInfo[] = [
   { key: 'hari', totalLines: (hariLines as TextFile).lines.length, languages: ['deva', 'knda', 'tel', 'tam', 'pan', 'iast'], data: hariLines as TextFile },
   { key: 'keshava', totalLines: (keshavaLines as TextFile).lines.length, languages: ['deva', 'knda', 'tel', 'tam', 'pan', 'guj', 'iast'], data: keshavaLines as TextFile },
   { key: 'vayu', totalLines: (vayuLines as TextFile).lines.length, languages: ['deva', 'knda', 'tel', 'tam', 'iast'], data: vayuLines as TextFile },
+  { key: 'raghavendra', totalLines: (raghavendraLines as TextFile).lines.length, languages: ['deva', 'knda', 'tel', 'tam', 'iast'], data: raghavendraLines as TextFile },
+  { key: 'yantrodharaka', totalLines: (yantrodharakaLines as TextFile).lines.length, languages: ['deva', 'knda', 'tel', 'iast'], data: yantrodharakaLines as TextFile },
+  { key: 'venkateshwara', totalLines: (venkateshwaraLines as TextFile).lines.length, languages: ['knda'], data: venkateshwaraLines as TextFile },
 ];
 
 /**

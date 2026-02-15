@@ -14,6 +14,9 @@ import vsnLines from '../data/vs.lines.new.json';
 import hariLines from '../data/hari.lines.json';
 import keshavaLines from '../data/keshava.lines.json';
 import vayuLines from '../data/vayu.lines.json';
+import raghavendraLines from '../data/raghavendra.lines.json';
+import yantrodharakaLines from '../data/yantrodharaka.lines.json';
+import venkateshwaraLines from '../data/venkateshwara.lines.json';
 import type { TextFile, Lang } from '../data/types';
 import { useAuth } from '../context/AuthContext';
 import UserMenu from './UserMenu';
@@ -23,7 +26,7 @@ import LeaderboardPanel from './LeaderboardPanel';
 import MyProgressCard from './MyProgressCard';
 
 interface LandingPageProps {
-    onSelectStotra: (stotra: 'vsn' | 'hari' | 'keshava' | 'vayu', preferredLang?: Lang, mode?: 'reading' | 'practice' | 'puzzle', lineIndex?: number) => void;
+    onSelectStotra: (stotra: 'vsn' | 'hari' | 'keshava' | 'vayu' | 'raghavendra' | 'yantrodharaka' | 'venkateshwara', preferredLang?: Lang, mode?: 'reading' | 'practice' | 'puzzle', lineIndex?: number) => void;
 }
 
 const LANGUAGE_NAMES: Record<Lang, { native: string; english: string }> = {
@@ -74,7 +77,7 @@ export function EnhancedLandingPage({ onSelectStotra }: LandingPageProps) {
         handleLanguageMenuClose();
     };
 
-    const handleStotraClick = (stotra: 'vsn' | 'hari' | 'keshava' | 'vayu') => {
+    const handleStotraClick = (stotra: 'vsn' | 'hari' | 'keshava' | 'vayu' | 'raghavendra' | 'yantrodharaka' | 'venkateshwara') => {
         onSelectStotra(stotra, selectedLang);
     };
 
@@ -92,6 +95,9 @@ export function EnhancedLandingPage({ onSelectStotra }: LandingPageProps) {
                 stotra_hari: 'श्री हरि स्तुति',
                 stotra_keshava: 'श्री केशव नाम',
                 stotra_vayu: 'श्री वायु स्तुति',
+                stotra_raghavendra: 'श्री राघवेन्द्र स्तोत्रम्',
+                stotra_yantrodharaka: 'श्री यन्त्रोधारक हनुमत् स्तोत्रम्',
+                stotra_venkateshwara: 'श्री वेङ्कटेश्वर स्तोत्रम्',
                 composer: 'रचयिता',
                 revealedBy: 'प्रकाशक',
                 practice: 'अभ्यास',
@@ -117,6 +123,9 @@ export function EnhancedLandingPage({ onSelectStotra }: LandingPageProps) {
                 stotra_hari: 'ಶ್ರೀ ಹರಿ ಸ್ತುತಿ',
                 stotra_keshava: 'ಶ್ರೀ ಕೇಶವ ನಾಮ',
                 stotra_vayu: 'ಶ್ರೀ ವಾಯು ಸ್ತುತಿ',
+                stotra_raghavendra: 'ಶ್ರೀ ರಾಘವೇಂದ್ರ ಸ್ತೋತ್ರಂ',
+                stotra_yantrodharaka: 'ಶ್ರೀ ಯಂತ್ರೋಧಾರಕ ಹನುಮತ್ ಸ್ತೋತ್ರಂ',
+                stotra_venkateshwara: 'ಶ್ರೀ ವೇಂಕಟೇಶ್ವರ ಸ್ತೋತ್ರಂ',
                 composer: 'ರಚನೆಕಾರ',
                 revealedBy: 'ಪ್ರಕಾಶಕ',
                 practice: 'ಅಭ್ಯಾಸ',
@@ -142,6 +151,9 @@ export function EnhancedLandingPage({ onSelectStotra }: LandingPageProps) {
                 stotra_hari: 'శ్రీ హరి స్తుతి',
                 stotra_keshava: 'శ్రీ కేశవ నామ',
                 stotra_vayu: 'శ్రీ వాయు స్తుతి',
+                stotra_raghavendra: 'శ్రీ రాఘవేంద్ర స్తోత్రం',
+                stotra_yantrodharaka: 'శ్రీ యంత్రోధారక హనుమత్ స్తోత్రం',
+                stotra_venkateshwara: 'శ్రీ వేంకటేశ్వర స్తోత్రం',
                 composer: 'రచయిత',
                 revealedBy: 'ప్రకాశకుడు',
                 practice: 'అభ్యాసం',
@@ -167,6 +179,9 @@ export function EnhancedLandingPage({ onSelectStotra }: LandingPageProps) {
                 stotra_hari: 'ஸ்ரீ ஹரி ஸ்துதி',
                 stotra_keshava: 'ஸ்ரீ கேசவ நாம',
                 stotra_vayu: 'ஸ்ரீ வாயு ஸ்துதி',
+                stotra_raghavendra: 'ஸ்ரீ ராகவேந்த்ர ஸ்தோத்ரம்',
+                stotra_yantrodharaka: 'ஸ்ரீ யந்த்ரோதாரக ஹநுமத் ஸ்தோத்ரம்',
+                stotra_venkateshwara: 'ஸ்ரீ வேங்கடேஸ்வர ஸ்தோத்ரம்',
                 composer: 'இயற்றியவர்',
                 revealedBy: 'வெளிப்படுத்தியவர்',
                 practice: 'பயிற்சி',
@@ -192,6 +207,9 @@ export function EnhancedLandingPage({ onSelectStotra }: LandingPageProps) {
                 stotra_hari: 'ਸ਼੍ਰੀ ਹਰਿ ਸਤੁਤਿ',
                 stotra_keshava: 'ਸ਼੍ਰੀ ਕੇਸ਼ਵ ਨਾਮ',
                 stotra_vayu: 'ਸ਼੍ਰੀ ਵਾਯੁ ਸਤੁਤਿ',
+                stotra_raghavendra: 'ਸ਼੍ਰੀ ਰਾਘਵੇਂਦ੍ਰ ਸਤੋਤ੍ਰਮ੍',
+                stotra_yantrodharaka: 'ਸ਼੍ਰੀ ਯੰਤ੍ਰੋਧਾਰਕ ਹਨੁਮਤ੍ ਸਤੋਤ੍ਰਮ੍',
+                stotra_venkateshwara: 'ਸ਼੍ਰੀ ਵੇਂਕਟੇਸ਼੍ਵਰ ਸਤੋਤ੍ਰਮ੍',
                 composer: 'ਰਚਨਾਕਾਰ',
                 revealedBy: 'ਪ੍ਰਕਾਸ਼ਕ',
                 practice: 'ਅਭਿਆਸ',
@@ -217,6 +235,9 @@ export function EnhancedLandingPage({ onSelectStotra }: LandingPageProps) {
                 stotra_hari: 'શ્રી હરિ સ્તુતિ',
                 stotra_keshava: 'શ્રી કેશવ નામ',
                 stotra_vayu: 'શ્રી વાયુ સ્તુતિ',
+                stotra_raghavendra: 'શ્રી રાઘવેન્દ્ર સ્તોત્રમ્',
+                stotra_yantrodharaka: 'શ્રી યન્ત્રોધારક હનુમત્ સ્તોત્રમ્',
+                stotra_venkateshwara: 'શ્રી વેંકટેશ્વર સ્તોત્રમ્',
                 composer: 'રચયિતા',
                 revealedBy: 'પ્રકાશક',
                 practice: 'અભ્યાસ',
@@ -242,6 +263,9 @@ export function EnhancedLandingPage({ onSelectStotra }: LandingPageProps) {
                 stotra_hari: 'Sri Hari Stuti',
                 stotra_keshava: 'Sri Keshava Nama',
                 stotra_vayu: 'Sri Vayu Stuti',
+                stotra_raghavendra: 'Sri Raghavendra Stotram',
+                stotra_yantrodharaka: 'Sri Yantrodharaka Hanuman Stotram',
+                stotra_venkateshwara: 'Sri Venkateshwara Stotram',
                 composer: 'Composer',
                 revealedBy: 'Revealed by',
                 practice: 'Practice',
@@ -267,6 +291,9 @@ export function EnhancedLandingPage({ onSelectStotra }: LandingPageProps) {
                 stotra_hari: 'श्री हरी स्तुती',
                 stotra_keshava: 'श्री केशव नाम',
                 stotra_vayu: 'श्री वायू स्तुती',
+                stotra_raghavendra: 'श्री राघवेंद्र स्तोत्रम्',
+                stotra_yantrodharaka: 'श्री यंत्रोधारक हनुमत् स्तोत्रम्',
+                stotra_venkateshwara: 'श्री वेंकटेश्वर स्तोत्रम्',
                 composer: 'रचनाकार',
                 revealedBy: 'प्रकाशक',
                 practice: 'सराव',
@@ -292,6 +319,9 @@ export function EnhancedLandingPage({ onSelectStotra }: LandingPageProps) {
                 stotra_hari: 'শ্রী হরি স্তুতি',
                 stotra_keshava: 'শ্রী কেশব নাম',
                 stotra_vayu: 'শ্রী বায়ু স্তুতি',
+                stotra_raghavendra: 'শ্রী রাঘবেন্দ্র স্তোত্রম্',
+                stotra_yantrodharaka: 'শ্রী যন্ত্রোধারক হনুমত্ স্তোত্রম্',
+                stotra_venkateshwara: 'শ্রী বেঙ্কটেশ্বর স্তোত্রম্',
                 composer: 'রচয়িতা',
                 revealedBy: 'প্রকাশক',
                 practice: 'অনুশীলন',
@@ -317,6 +347,9 @@ export function EnhancedLandingPage({ onSelectStotra }: LandingPageProps) {
                 stotra_hari: 'ശ്രീ ഹരി സ്തുതി',
                 stotra_keshava: 'ശ്രീ കേശവ നാമ',
                 stotra_vayu: 'ശ്രീ വായു സ്തുതി',
+                stotra_raghavendra: 'ശ്രീ രാഘവേന്ദ്ര സ്തോത്രം',
+                stotra_yantrodharaka: 'ശ്രീ യന്ത്രോധാരക ഹനുമത് സ്തോത്രം',
+                stotra_venkateshwara: 'ശ്രീ വെങ്കടേശ്വര സ്തോത്രം',
                 composer: 'രചയിതാവ്',
                 revealedBy: 'പ്രകാശിതം',
                 practice: 'പരിശീലനം',
@@ -336,7 +369,7 @@ export function EnhancedLandingPage({ onSelectStotra }: LandingPageProps) {
     };
 
     const renderStotraCard = (
-        stotra: 'vsn' | 'hari' | 'keshava' | 'vayu',
+        stotra: 'vsn' | 'hari' | 'keshava' | 'vayu' | 'raghavendra' | 'yantrodharaka' | 'venkateshwara',
         data: TextFile,
         icon: React.ReactNode,
         color: string,
@@ -765,6 +798,27 @@ export function EnhancedLandingPage({ onSelectStotra }: LandingPageProps) {
                             <SpaIcon sx={{ fontSize: { xs: 24, sm: 28 } }} />,
                             '#10b981',
                             900
+                        )}
+                        {renderStotraCard(
+                            'raghavendra',
+                            raghavendraLines as TextFile,
+                            <SpaIcon sx={{ fontSize: { xs: 24, sm: 28 } }} />,
+                            '#ef4444',
+                            1000
+                        )}
+                        {renderStotraCard(
+                            'yantrodharaka',
+                            yantrodharakaLines as TextFile,
+                            <SpaIcon sx={{ fontSize: { xs: 24, sm: 28 } }} />,
+                            '#06b6d4',
+                            1100
+                        )}
+                        {renderStotraCard(
+                            'venkateshwara',
+                            venkateshwaraLines as TextFile,
+                            <SpaIcon sx={{ fontSize: { xs: 24, sm: 28 } }} />,
+                            '#6366f1',
+                            1200
                         )}
                     </Box>
                 </Box>
