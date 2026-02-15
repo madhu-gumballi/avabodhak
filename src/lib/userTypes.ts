@@ -10,6 +10,14 @@ export interface UserProfile {
   lastLoginAt: Timestamp | Date
 }
 
+export interface LastOpenedStotra {
+  key: string
+  lang: string
+  lineIndex: number
+  mode: 'reading' | 'practice' | 'puzzle'
+  timestamp: number
+}
+
 export interface UserPreferences {
   lang: string
   lang2: string | null
@@ -17,6 +25,7 @@ export interface UserPreferences {
   legendOpen: boolean
   learnMode: boolean
   soundEnabled: boolean
+  lastOpenedStotra: LastOpenedStotra | null
 }
 
 export interface UserStats {
@@ -27,6 +36,15 @@ export interface UserStats {
   longestStreak: number
   lastActiveDate: Timestamp | Date | null
   totalTimeSpentMs: number
+  // Period-specific counters for weekly/monthly leaderboards
+  weeklyLinesCompleted: number
+  weeklyPuzzlesSolved: number
+  weeklyPerfectPuzzles: number
+  weeklyPeriodStart: string | null // ISO date string of week start (Sunday)
+  monthlyLinesCompleted: number
+  monthlyPuzzlesSolved: number
+  monthlyPerfectPuzzles: number
+  monthlyPeriodStart: string | null // ISO date string e.g. "2026-02-01"
 }
 
 export interface DailyGoals {
@@ -80,6 +98,7 @@ export interface LeaderboardEntry {
   region: string | null
   score: number
   rank: number
+  periodStart?: string | null // ISO date string to filter stale entries
 }
 
 export interface LeaderboardDocument {
@@ -144,6 +163,7 @@ export const DEFAULT_USER_PREFERENCES: UserPreferences = {
   legendOpen: false,
   learnMode: false,
   soundEnabled: true,
+  lastOpenedStotra: null,
 }
 
 export const DEFAULT_USER_STATS: UserStats = {
@@ -154,6 +174,14 @@ export const DEFAULT_USER_STATS: UserStats = {
   longestStreak: 0,
   lastActiveDate: null,
   totalTimeSpentMs: 0,
+  weeklyLinesCompleted: 0,
+  weeklyPuzzlesSolved: 0,
+  weeklyPerfectPuzzles: 0,
+  weeklyPeriodStart: null,
+  monthlyLinesCompleted: 0,
+  monthlyPuzzlesSolved: 0,
+  monthlyPerfectPuzzles: 0,
+  monthlyPeriodStart: null,
 }
 
 export const DEFAULT_DAILY_GOALS: Omit<DailyGoals, 'lastResetDate'> = {

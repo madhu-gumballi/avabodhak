@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { Box, Card, CardActionArea, Typography, Fade, Grow, Chip, IconButton, Menu, MenuItem, LinearProgress } from '@mui/material';
 import AutoStoriesIcon from '@mui/icons-material/AutoStories';
 import SpaIcon from '@mui/icons-material/Spa';
@@ -8,22 +8,18 @@ import FormatListNumberedIcon from '@mui/icons-material/FormatListNumbered';
 import TranslateIcon from '@mui/icons-material/Translate';
 import SchoolIcon from '@mui/icons-material/School';
 import ExtensionIcon from '@mui/icons-material/Extension';
+import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import LeaderboardIcon from '@mui/icons-material/Leaderboard';
-import vsnLines from '../data/vs.lines.new.json';
-import hariLines from '../data/hari.lines.json';
-import keshavaLines from '../data/keshava.lines.json';
-import vayuLines from '../data/vayu.lines.json';
-import raghavendraLines from '../data/raghavendra.lines.json';
-import yantrodharakaLines from '../data/yantrodharaka.lines.json';
-import venkateshwaraLines from '../data/venkateshwara.lines.json';
 import type { TextFile, Lang } from '../data/types';
 import { useAuth } from '../context/AuthContext';
 import UserMenu from './UserMenu';
 import LoginButton from './LoginButton';
 import AchievementsPanel from './AchievementsPanel';
 import LeaderboardPanel from './LeaderboardPanel';
-import MyProgressCard from './MyProgressCard';
+import { getPracticeStats } from '../lib/practice';
+import { getPuzzleStats } from '../lib/puzzle';
+import { STOTRAS } from '../lib/stotraConfig';
 
 interface LandingPageProps {
     onSelectStotra: (stotra: 'vsn' | 'hari' | 'keshava' | 'vayu' | 'raghavendra' | 'yantrodharaka' | 'venkateshwara', preferredLang?: Lang, mode?: 'reading' | 'practice' | 'puzzle', lineIndex?: number) => void;
@@ -42,6 +38,18 @@ const LANGUAGE_NAMES: Record<Lang, { native: string; english: string }> = {
     iast: { native: 'IAST', english: 'English' }
 };
 
+type StotraKey = 'vsn' | 'hari' | 'keshava' | 'vayu' | 'raghavendra' | 'yantrodharaka' | 'venkateshwara';
+
+const STOTRA_VISUALS: Record<StotraKey, { icon: React.ReactElement; color: string }> = {
+    vsn: { icon: <AutoStoriesIcon sx={{ fontSize: { xs: 24, sm: 28 } }} />, color: '#0ea5e9' },
+    hari: { icon: <SpaIcon sx={{ fontSize: { xs: 24, sm: 28 } }} />, color: '#f59e0b' },
+    keshava: { icon: <SpaIcon sx={{ fontSize: { xs: 24, sm: 28 } }} />, color: '#8b5cf6' },
+    vayu: { icon: <SpaIcon sx={{ fontSize: { xs: 24, sm: 28 } }} />, color: '#10b981' },
+    raghavendra: { icon: <SpaIcon sx={{ fontSize: { xs: 24, sm: 28 } }} />, color: '#ef4444' },
+    yantrodharaka: { icon: <SpaIcon sx={{ fontSize: { xs: 24, sm: 28 } }} />, color: '#06b6d4' },
+    venkateshwara: { icon: <SpaIcon sx={{ fontSize: { xs: 24, sm: 28 } }} />, color: '#6366f1' },
+};
+
 export function EnhancedLandingPage({ onSelectStotra }: LandingPageProps) {
     const { user, userData, isGuest } = useAuth();
     const [achievementsPanelOpen, setAchievementsPanelOpen] = useState(false);
@@ -57,6 +65,45 @@ export function EnhancedLandingPage({ onSelectStotra }: LandingPageProps) {
     });
 
     const [langMenuAnchor, setLangMenuAnchor] = useState<null | HTMLElement>(null);
+    const [sortKey, setSortKey] = useState(0);
+
+    const lastStotra = useMemo(() => {
+        // Prefer Firestore-backed data (synced across devices)
+        const firestoreEntry = userData?.preferences?.lastOpenedStotra;
+        if (firestoreEntry) {
+            return firestoreEntry as { key: StotraKey; lang: Lang; timestamp: number; lineIndex?: number; mode?: 'reading' | 'practice' | 'puzzle' };
+        }
+        // Fallback to localStorage for guests / not-yet-synced
+        try {
+            const stored = localStorage.getItem('avabodhak:lastStotra');
+            if (stored) return JSON.parse(stored) as { key: StotraKey; lang: Lang; timestamp: number; lineIndex?: number; mode?: 'reading' | 'practice' | 'puzzle' };
+        } catch {}
+        return null;
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [sortKey, userData?.preferences?.lastOpenedStotra]);
+
+    const sortedStotras = useMemo(() => {
+        const list = STOTRAS.filter(s => !s.hidden).map(s => ({
+            ...s,
+            ...STOTRA_VISUALS[s.key],
+        }));
+        const timestamps = new Map<string, number>();
+        for (const s of list) {
+            try {
+                const ts = localStorage.getItem(`avabodhak:lastOpened:${s.key}`);
+                if (ts) timestamps.set(s.key, parseInt(ts, 10));
+            } catch {}
+        }
+        return list.sort((a, b) => {
+            const tsA = timestamps.get(a.key);
+            const tsB = timestamps.get(b.key);
+            if (tsA && tsB) return tsB - tsA;
+            if (tsA) return -1;
+            if (tsB) return 1;
+            return 0;
+        });
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [sortKey]);
 
     useEffect(() => {
         try {
@@ -77,8 +124,24 @@ export function EnhancedLandingPage({ onSelectStotra }: LandingPageProps) {
         handleLanguageMenuClose();
     };
 
-    const handleStotraClick = (stotra: 'vsn' | 'hari' | 'keshava' | 'vayu' | 'raghavendra' | 'yantrodharaka' | 'venkateshwara') => {
+    const handleStotraClick = (stotra: StotraKey) => {
+        try {
+            localStorage.setItem('avabodhak:lastStotra', JSON.stringify({ key: stotra, lang: selectedLang, timestamp: Date.now() }));
+            localStorage.setItem(`avabodhak:lastOpened:${stotra}`, String(Date.now()));
+        } catch {}
+        setSortKey(k => k + 1);
         onSelectStotra(stotra, selectedLang);
+    };
+
+    const handleContinueClick = () => {
+        if (!lastStotra) return;
+        try {
+            const now = Date.now();
+            localStorage.setItem('avabodhak:lastStotra', JSON.stringify({ ...lastStotra, timestamp: now }));
+            localStorage.setItem(`avabodhak:lastOpened:${lastStotra.key}`, String(now));
+        } catch {}
+        setSortKey(k => k + 1);
+        onSelectStotra(lastStotra.key, lastStotra.lang, lastStotra.mode, lastStotra.lineIndex);
     };
 
     const getTranslation = (key: string): string => {
@@ -369,7 +432,7 @@ export function EnhancedLandingPage({ onSelectStotra }: LandingPageProps) {
     };
 
     const renderStotraCard = (
-        stotra: 'vsn' | 'hari' | 'keshava' | 'vayu' | 'raghavendra' | 'yantrodharaka' | 'venkateshwara',
+        stotra: StotraKey,
         data: TextFile,
         icon: React.ReactNode,
         color: string,
@@ -377,6 +440,10 @@ export function EnhancedLandingPage({ onSelectStotra }: LandingPageProps) {
     ) => {
         const metadata = data.metadata;
         const stotraTitleKey = `stotra_${stotra}`;
+        const totalLines = metadata?.totalLines || data.lines.length;
+        const practice = getPracticeStats(selectedLang, totalLines, stotra);
+        const puzzle = getPuzzleStats(selectedLang, totalLines, stotra);
+        const hasProgress = practice.completedLines > 0 || puzzle.completed > 0;
 
         return (
             <Grow in timeout={delay} key={stotra}>
@@ -505,6 +572,50 @@ export function EnhancedLandingPage({ onSelectStotra }: LandingPageProps) {
                                 </Box>
                             </>
                         )}
+
+                        {/* Inline progress bars */}
+                        {hasProgress && (
+                            <Box sx={{ width: '100%', mt: 0.5 }}>
+                                {practice.completedLines > 0 && (
+                                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5, mb: 0.25 }}>
+                                        <Box sx={{ flex: 1 }}>
+                                            <LinearProgress
+                                                variant="determinate"
+                                                value={practice.progress * 100}
+                                                sx={{
+                                                    height: 3,
+                                                    borderRadius: 2,
+                                                    bgcolor: 'rgba(255,255,255,0.06)',
+                                                    '& .MuiLinearProgress-bar': { bgcolor: '#a78bfa', borderRadius: 2 },
+                                                }}
+                                            />
+                                        </Box>
+                                        <Typography variant="caption" sx={{ color: '#94a3b8', fontSize: '0.55rem', minWidth: 28, textAlign: 'right' }}>
+                                            {practice.completedLines}/{totalLines}
+                                        </Typography>
+                                    </Box>
+                                )}
+                                {puzzle.completed > 0 && (
+                                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
+                                        <Box sx={{ flex: 1 }}>
+                                            <LinearProgress
+                                                variant="determinate"
+                                                value={puzzle.progress}
+                                                sx={{
+                                                    height: 3,
+                                                    borderRadius: 2,
+                                                    bgcolor: 'rgba(255,255,255,0.06)',
+                                                    '& .MuiLinearProgress-bar': { bgcolor: '#f472b6', borderRadius: 2 },
+                                                }}
+                                            />
+                                        </Box>
+                                        <Typography variant="caption" sx={{ color: '#94a3b8', fontSize: '0.55rem', minWidth: 28, textAlign: 'right' }}>
+                                            {puzzle.completed}/{puzzle.total}
+                                        </Typography>
+                                    </Box>
+                                )}
+                            </Box>
+                        )}
                     </CardActionArea>
                 </Card>
             </Grow>
@@ -609,11 +720,10 @@ export function EnhancedLandingPage({ onSelectStotra }: LandingPageProps) {
             {/* ===== Scrollable Content ===== */}
             <Box sx={{ flex: 1, overflow: 'auto', px: { xs: 2, sm: 3 }, py: { xs: 2, sm: 3 } }}>
 
-                {/* ===== Engagement Section (Goals + Progress + Quick Actions) ===== */}
+                {/* ===== Daily Goals ===== */}
                 {userData && (
                     <Fade in timeout={800}>
-                        <Box sx={{ mb: 3, maxWidth: { xs: 700, md: 1000 }, mx: 'auto' }}>
-                            {/* Daily Goals - compact inline version */}
+                        <Box sx={{ mb: 2, maxWidth: { xs: 700, md: 1000 }, mx: 'auto' }}>
                             <Card
                                 sx={{
                                     bgcolor: 'rgba(30, 41, 59, 0.6)',
@@ -621,7 +731,6 @@ export function EnhancedLandingPage({ onSelectStotra }: LandingPageProps) {
                                     border: '1px solid rgba(148, 163, 184, 0.15)',
                                     borderRadius: 3,
                                     p: { xs: 1.5, sm: 2 },
-                                    mb: 1.5,
                                 }}
                             >
                                 <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 1.5 }}>
@@ -736,14 +845,55 @@ export function EnhancedLandingPage({ onSelectStotra }: LandingPageProps) {
                                     </Box>
                                 </Box>
                             </Card>
+                        </Box>
+                    </Fade>
+                )}
 
-                            {/* My Progress Card */}
-                            <MyProgressCard
-                                onContinue={(stotra, lang, mode, lineIndex) => {
-                                    onSelectStotra(stotra, lang, mode, lineIndex);
+                {/* ===== Continue Reading Card ===== */}
+                {lastStotra && (
+                    <Fade in timeout={800}>
+                        <Box sx={{ mb: 2, maxWidth: { xs: 700, md: 1000 }, mx: 'auto' }}>
+                            <Card
+                                onClick={handleContinueClick}
+                                sx={{
+                                    bgcolor: 'rgba(30, 41, 59, 0.6)',
+                                    backdropFilter: 'blur(12px)',
+                                    border: '1px solid rgba(148, 163, 184, 0.15)',
+                                    borderLeft: '4px solid #0ea5e9',
+                                    borderRadius: 3,
+                                    cursor: 'pointer',
+                                    transition: 'transform 0.2s, box-shadow 0.2s',
+                                    '&:hover': {
+                                        transform: 'translateY(-1px)',
+                                        boxShadow: '0 8px 16px -4px rgba(0, 0, 0, 0.2)',
+                                        bgcolor: 'rgba(30, 41, 59, 0.8)',
+                                    },
                                 }}
-                                getTranslation={getTranslation}
-                            />
+                            >
+                                <Box sx={{ display: 'flex', alignItems: 'center', p: { xs: 1.5, sm: 2 }, gap: 1.5 }}>
+                                    <Box
+                                        sx={{
+                                            p: 0.75,
+                                            borderRadius: '50%',
+                                            bgcolor: 'rgba(14, 165, 233, 0.15)',
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center',
+                                        }}
+                                    >
+                                        <PlayArrowIcon sx={{ fontSize: 24, color: '#0ea5e9' }} />
+                                    </Box>
+                                    <Box sx={{ flex: 1, minWidth: 0 }}>
+                                        <Typography variant="caption" sx={{ color: '#94a3b8', fontSize: '0.6rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                                            {getTranslation('continue')}
+                                        </Typography>
+                                        <Typography variant="body2" fontWeight={700} sx={{ lineHeight: 1.3 }} noWrap>
+                                            {getTranslation(`stotra_${lastStotra.key}`)}
+                                        </Typography>
+                                    </Box>
+                                    <PlayArrowIcon sx={{ fontSize: 18, color: 'rgba(148, 163, 184, 0.4)' }} />
+                                </Box>
+                            </Card>
                         </Box>
                     </Fade>
                 )}
@@ -771,54 +921,8 @@ export function EnhancedLandingPage({ onSelectStotra }: LandingPageProps) {
                             gap: { xs: 1.5, sm: 2 },
                         }}
                     >
-                        {renderStotraCard(
-                            'vsn',
-                            vsnLines as TextFile,
-                            <AutoStoriesIcon sx={{ fontSize: { xs: 24, sm: 28 } }} />,
-                            '#0ea5e9',
-                            600
-                        )}
-                        {renderStotraCard(
-                            'hari',
-                            hariLines as TextFile,
-                            <SpaIcon sx={{ fontSize: { xs: 24, sm: 28 } }} />,
-                            '#f59e0b',
-                            700
-                        )}
-                        {renderStotraCard(
-                            'keshava',
-                            keshavaLines as TextFile,
-                            <SpaIcon sx={{ fontSize: { xs: 24, sm: 28 } }} />,
-                            '#8b5cf6',
-                            800
-                        )}
-                        {renderStotraCard(
-                            'vayu',
-                            vayuLines as TextFile,
-                            <SpaIcon sx={{ fontSize: { xs: 24, sm: 28 } }} />,
-                            '#10b981',
-                            900
-                        )}
-                        {renderStotraCard(
-                            'raghavendra',
-                            raghavendraLines as TextFile,
-                            <SpaIcon sx={{ fontSize: { xs: 24, sm: 28 } }} />,
-                            '#ef4444',
-                            1000
-                        )}
-                        {renderStotraCard(
-                            'yantrodharaka',
-                            yantrodharakaLines as TextFile,
-                            <SpaIcon sx={{ fontSize: { xs: 24, sm: 28 } }} />,
-                            '#06b6d4',
-                            1100
-                        )}
-                        {renderStotraCard(
-                            'venkateshwara',
-                            venkateshwaraLines as TextFile,
-                            <SpaIcon sx={{ fontSize: { xs: 24, sm: 28 } }} />,
-                            '#6366f1',
-                            1200
+                        {sortedStotras.map((s, i) =>
+                            renderStotraCard(s.key, s.data, s.icon, s.color, 600 + i * 100)
                         )}
                     </Box>
                 </Box>

@@ -212,6 +212,15 @@ export function VSNViewer({ onBack, textOverride, subtitleOverrides, availableLa
     seekWordRef.current = flow.seekWord;
   }, [flow.seekWord]);
 
+  // Seek to initial line on mount (for Continue Reading resume)
+  useEffect(() => {
+    if (initialLineIndexProp !== undefined && initialLineIndexProp > 0) {
+      flow.seekLine(initialLineIndexProp);
+    }
+    // Only run on mount
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   // Check if TTS is supported for current language AND current line has content
   const currentLineText = (text.lines[flow.state.lineIndex] as any)?.[lang] || '';
   const ttsSupported = ttsEnabled && isTTSSupportedForLang(lang) && currentLineText.trim().length > 0;
@@ -283,6 +292,27 @@ export function VSNViewer({ onBack, textOverride, subtitleOverrides, availableLa
 
   // Always show current line number
   useEffect(() => setNavLineNumber(flow.state.lineIndex + 1), [flow.state.lineIndex]);
+
+  // Persist current position to lastStotra for "Continue Reading" on home page
+  // Writes to localStorage immediately (for guests) and debounces Firestore writes
+  const lastStotraTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  useEffect(() => {
+    const entry = {
+      key: stotraKey,
+      lang,
+      timestamp: Date.now(),
+      lineIndex: viewMode === 'reading' ? flow.state.lineIndex : practiceLineIndex,
+      mode: viewMode,
+    };
+    // Always write to localStorage (instant, works for guests)
+    try { localStorage.setItem('avabodhak:lastStotra', JSON.stringify(entry)); } catch {}
+    // Debounce Firestore write (500ms) to avoid hammering on every line change
+    if (lastStotraTimerRef.current) clearTimeout(lastStotraTimerRef.current);
+    lastStotraTimerRef.current = setTimeout(() => {
+      updatePreferences({ lastOpenedStotra: entry });
+    }, 500);
+    return () => { if (lastStotraTimerRef.current) clearTimeout(lastStotraTimerRef.current); };
+  }, [flow.state.lineIndex, practiceLineIndex, viewMode, stotraKey, lang, updatePreferences]);
   const measureHeights = () => {
     const a = lensWrapRef.current?.getBoundingClientRect().height || null;
     setLensH(a);
