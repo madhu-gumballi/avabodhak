@@ -27,30 +27,87 @@ interface CachedLeaderboard {
   fetchedAt: number
 }
 
-// Calculate user score based on stats
-export function calculateScore(userData: UserDocument): number {
+// Get the start of the current week (Sunday midnight) as ISO date string
+export function getCurrentWeekStart(): string {
+  const now = new Date()
+  const day = now.getDay() // 0 = Sunday
+  const sunday = new Date(now)
+  sunday.setDate(now.getDate() - day)
+  sunday.setHours(0, 0, 0, 0)
+  return sunday.toISOString().slice(0, 10) // "YYYY-MM-DD"
+}
+
+// Get the start of the current month as ISO date string
+export function getCurrentMonthStart(): string {
+  const now = new Date()
+  return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-01`
+}
+
+// Check if period stats need resetting and return current period counters.
+// Returns the stats object with period counters reset to 0 if the period rolled over.
+export function getOrResetPeriodStats(stats: UserDocument['stats']): UserDocument['stats'] {
+  const updated = { ...stats }
+  const currentWeek = getCurrentWeekStart()
+  const currentMonth = getCurrentMonthStart()
+
+  if (updated.weeklyPeriodStart !== currentWeek) {
+    updated.weeklyLinesCompleted = 0
+    updated.weeklyPuzzlesSolved = 0
+    updated.weeklyPerfectPuzzles = 0
+    updated.weeklyPeriodStart = currentWeek
+  }
+
+  if (updated.monthlyPeriodStart !== currentMonth) {
+    updated.monthlyLinesCompleted = 0
+    updated.monthlyPuzzlesSolved = 0
+    updated.monthlyPerfectPuzzles = 0
+    updated.monthlyPeriodStart = currentMonth
+  }
+
+  return updated
+}
+
+// Calculate score for a specific period
+export function calculatePeriodScore(userData: UserDocument, period: LeaderboardPeriod): number {
+  const stats = getOrResetPeriodStats(userData.stats)
+
+  if (period === 'weekly') {
+    return (
+      (stats.weeklyLinesCompleted || 0) * 10 +
+      (stats.weeklyPuzzlesSolved || 0) * 25 +
+      (stats.weeklyPerfectPuzzles || 0) * 50
+    )
+  }
+
+  if (period === 'monthly') {
+    return (
+      (stats.monthlyLinesCompleted || 0) * 10 +
+      (stats.monthlyPuzzlesSolved || 0) * 25 +
+      (stats.monthlyPerfectPuzzles || 0) * 50
+    )
+  }
+
+  // allTime: original formula with streaks
   const {
     totalLinesCompleted,
     totalPuzzlesSolved,
     perfectPuzzles,
     currentStreak,
     longestStreak,
-  } = userData.stats
+  } = stats
 
-  // Scoring formula:
-  // - 10 points per line completed
-  // - 25 points per puzzle solved
-  // - 50 bonus points per perfect puzzle (no hints)
-  // - 5 points per day of current streak
-  // - 2 points per day of longest streak
-  const score =
+  return (
     totalLinesCompleted * 10 +
     totalPuzzlesSolved * 25 +
     perfectPuzzles * 50 +
     currentStreak * 5 +
     longestStreak * 2
+  )
+}
 
-  return score
+// Calculate user score based on stats (allTime, kept for backward compat)
+export function calculateScore(userData: UserDocument): number {
+  return calculatePeriodScore(userData, 'allTime')
 }
 
 // Get cached leaderboard from localStorage
@@ -88,12 +145,19 @@ function cacheLeaderboard(period: LeaderboardPeriod, data: LeaderboardDocument):
   localStorage.setItem(LEADERBOARD_CACHE_PREFIX + period, JSON.stringify(cached))
 }
 
+// Get the expected periodStart for a given period
+function getExpectedPeriodStart(period: LeaderboardPeriod): string | null {
+  if (period === 'weekly') return getCurrentWeekStart()
+  if (period === 'monthly') return getCurrentMonthStart()
+  return null // allTime has no period filtering
+}
+
 // Get leaderboard for a specific period
 export async function getLeaderboard(period: LeaderboardPeriod): Promise<LeaderboardEntry[]> {
   // Check cache first
   const cached = getCachedLeaderboard(period)
   if (cached) {
-    return cached.entries
+    return filterStaleEntries(cached.entries, period)
   }
 
   if (!db || !isFirebaseConfigured) {
@@ -108,13 +172,23 @@ export async function getLeaderboard(period: LeaderboardPeriod): Promise<Leaderb
     if (leaderboardSnap.exists()) {
       const data = leaderboardSnap.data() as LeaderboardDocument
       cacheLeaderboard(period, data)
-      return data.entries
+      return filterStaleEntries(data.entries, period)
     }
 
     return []
   } catch {
     return []
   }
+}
+
+// Filter out entries from previous periods
+function filterStaleEntries(entries: LeaderboardEntry[], period: LeaderboardPeriod): LeaderboardEntry[] {
+  const expected = getExpectedPeriodStart(period)
+  if (!expected) return entries // allTime: no filtering
+
+  const filtered = entries.filter((e) => e.periodStart === expected)
+  // Re-rank after filtering
+  return filtered.map((e, i) => ({ ...e, rank: i + 1 }))
 }
 
 // Get user's rank in leaderboard
@@ -140,13 +214,14 @@ export async function updateLeaderboardEntry(
   const userData = getCachedUserData()
   if (!userData) return
 
-  const score = calculateScore(userData)
-
   // Update all time periods
   const periods: LeaderboardPeriod[] = ['weekly', 'monthly', 'allTime']
 
   for (const period of periods) {
     try {
+      const score = calculatePeriodScore(userData, period)
+      const periodStart = getExpectedPeriodStart(period)
+
       const leaderboardRef = doc(db, 'leaderboard', period)
       const leaderboardSnap = await getDoc(leaderboardRef)
 
@@ -164,6 +239,7 @@ export async function updateLeaderboardEntry(
         region,
         score,
         rank: 0, // Will be recalculated
+        periodStart,
       }
 
       if (existingIndex >= 0) {

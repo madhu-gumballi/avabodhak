@@ -27,7 +27,7 @@ export const STOTRAS: StotraInfo[] = [
   { key: 'vayu', totalLines: (vayuLines as TextFile).lines.length, languages: ['deva', 'knda', 'tel', 'tam', 'iast'], data: vayuLines as TextFile },
   { key: 'raghavendra', totalLines: (raghavendraLines as TextFile).lines.length, languages: ['deva', 'knda', 'tel', 'tam', 'iast'], data: raghavendraLines as TextFile },
   { key: 'yantrodharaka', totalLines: (yantrodharakaLines as TextFile).lines.length, languages: ['deva', 'knda', 'tel', 'iast'], data: yantrodharakaLines as TextFile },
-  { key: 'venkateshwara', totalLines: (venkateshwaraLines as TextFile).lines.length, languages: ['knda'], data: venkateshwaraLines as TextFile },
+  { key: 'venkateshwara', totalLines: (venkateshwaraLines as TextFile).lines.length, languages: ['knda', 'iast'], data: venkateshwaraLines as TextFile },
 ];
 
 /**

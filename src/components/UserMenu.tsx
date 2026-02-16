@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react'
+import React, { useState } from 'react'
 import {
   IconButton,
   Menu,
@@ -21,29 +21,159 @@ import PersonIcon from '@mui/icons-material/Person'
 import VolumeUpIcon from '@mui/icons-material/VolumeUp'
 import VolumeOffIcon from '@mui/icons-material/VolumeOff'
 import PublicIcon from '@mui/icons-material/Public'
-import SchoolIcon from '@mui/icons-material/School'
-import ExtensionIcon from '@mui/icons-material/Extension'
 import { useAuth } from '../context/AuthContext'
 import StreakBadge from './StreakBadge'
 import { REGION_OPTIONS, getRegionFlag } from '../lib/region'
-import { STOTRAS, getStotraLines, getStotraChapterIndices } from '../lib/stotraConfig'
-import { getPracticeStats, getPracticeCompletionCount } from '../lib/practice'
-import { getPuzzleStats, getPuzzleCompletionCount } from '../lib/puzzle'
+import type { Lang } from '../data/types'
 
-const STOTRA_SHORT_NAMES: Record<string, string> = {
-  vsn: 'Sri Vishnu Sahasranama',
-  hari: 'Sri Hari Stuti',
-  keshava: 'Sri Keshava Nama',
-  vayu: 'Sri Vayu Stuti',
+// --------------- i18n ---------------
+
+const MENU_STRINGS: Record<string, Record<string, string>> = {
+  iast: {
+    guest_hint: 'Guest mode — Sign in to sync progress',
+    streak: 'Streak',
+    streak_suffix: 'd',
+    achievements: 'Achievements',
+    leaderboard: 'Leaderboard',
+    sound: 'Sound',
+    region: 'Region',
+    select_region: 'Select region',
+    settings: 'Settings',
+    sign_out: 'Sign Out',
+    exit_guest: 'Exit Guest Mode',
+  },
+  deva: {
+    guest_hint: 'अतिथि मोड — प्रगति सहेजने हेतु साइन इन करें',
+    streak: 'स्ट्रीक',
+    streak_suffix: 'दि',
+    achievements: 'उपलब्धियाँ',
+    leaderboard: 'लीडरबोर्ड',
+    sound: 'ध्वनि',
+    region: 'क्षेत्र',
+    select_region: 'क्षेत्र चुनें',
+    settings: 'सेटिंग्स',
+    sign_out: 'साइन आउट',
+    exit_guest: 'अतिथि मोड छोड़ें',
+  },
+  knda: {
+    guest_hint: 'ಅತಿಥಿ ಮೋಡ್ — ಪ್ರಗತಿ ಉಳಿಸಲು ಸೈನ್ ಇನ್ ಮಾಡಿ',
+    streak: 'ಸ್ಟ್ರೀಕ್',
+    streak_suffix: 'ದಿ',
+    achievements: 'ಸಾಧನೆಗಳು',
+    leaderboard: 'ಲೀಡರ್‌ಬೋರ್ಡ್',
+    sound: 'ಧ್ವನಿ',
+    region: 'ಪ್ರದೇಶ',
+    select_region: 'ಪ್ರದೇಶ ಆಯ್ಕೆಮಾಡಿ',
+    settings: 'ಸೆಟ್ಟಿಂಗ್ಸ್',
+    sign_out: 'ಸೈನ್ ಔಟ್',
+    exit_guest: 'ಅತಿಥಿ ಮೋಡ್ ಬಿಡಿ',
+  },
+  tel: {
+    guest_hint: 'అతిథి మోడ్ — ప్రగతి సేవ్ చేయడానికి సైన్ ఇన్ చేయండి',
+    streak: 'స్ట్రీక్',
+    streak_suffix: 'రో',
+    achievements: 'సాధనలు',
+    leaderboard: 'లీడర్‌బోర్డ్',
+    sound: 'ధ్వని',
+    region: 'ప్రాంతం',
+    select_region: 'ప్రాంతం ఎంచుకోండి',
+    settings: 'సెట్టింగ్స్',
+    sign_out: 'సైన్ ఔట్',
+    exit_guest: 'అతిథి మోడ్ విడవండి',
+  },
+  tam: {
+    guest_hint: 'விருந்தினர் பயன்முறை — முன்னேற்றத்தை சேமிக்க உள்நுழையவும்',
+    streak: 'ஸ்ட்ரீக்',
+    streak_suffix: 'நா',
+    achievements: 'சாதனைகள்',
+    leaderboard: 'லீடர்போர்டு',
+    sound: 'ஒலி',
+    region: 'பகுதி',
+    select_region: 'பகுதியை தேர்வுசெய்க',
+    settings: 'அமைப்புகள்',
+    sign_out: 'வெளியேறு',
+    exit_guest: 'விருந்தினர் பயன்முறையிலிருந்து வெளியேறு',
+  },
+  pan: {
+    guest_hint: 'ਮਹਿਮਾਨ ਮੋਡ — ਪ੍ਰਗਤੀ ਸੇਵ ਕਰਨ ਲਈ ਸਾਈਨ ਇਨ ਕਰੋ',
+    streak: 'ਸਟ੍ਰੀਕ',
+    streak_suffix: 'ਦਿ',
+    achievements: 'ਪ੍ਰਾਪਤੀਆਂ',
+    leaderboard: 'ਲੀਡਰਬੋਰਡ',
+    sound: 'ਧੁਨੀ',
+    region: 'ਖੇਤਰ',
+    select_region: 'ਖੇਤਰ ਚੁਣੋ',
+    settings: 'ਸੈਟਿੰਗਜ਼',
+    sign_out: 'ਸਾਈਨ ਆਊਟ',
+    exit_guest: 'ਮਹਿਮਾਨ ਮੋਡ ਛੱਡੋ',
+  },
+  guj: {
+    guest_hint: 'મહેમાન મોડ — પ્રગતિ સાચવવા સાઇન ઇન કરો',
+    streak: 'સ્ટ્રીક',
+    streak_suffix: 'દિ',
+    achievements: 'સિદ્ધિઓ',
+    leaderboard: 'લીડરબોર્ડ',
+    sound: 'ધ્વનિ',
+    region: 'પ્રદેશ',
+    select_region: 'પ્રદેશ પસંદ કરો',
+    settings: 'સેટિંગ્સ',
+    sign_out: 'સાઇન આઉટ',
+    exit_guest: 'મહેમાન મોડ છોડો',
+  },
+  mr: {
+    guest_hint: 'अतिथी मोड — प्रगती जतन करण्यासाठी साइन इन करा',
+    streak: 'स्ट्रीक',
+    streak_suffix: 'दि',
+    achievements: 'कामगिरी',
+    leaderboard: 'लीडरबोर्ड',
+    sound: 'ध्वनी',
+    region: 'प्रदेश',
+    select_region: 'प्रदेश निवडा',
+    settings: 'सेटिंग्ज',
+    sign_out: 'साइन आउट',
+    exit_guest: 'अतिथी मोड सोडा',
+  },
+  ben: {
+    guest_hint: 'অতিথি মোড — অগ্রগতি সংরক্ষণ করতে সাইন ইন করুন',
+    streak: 'স্ট্রীক',
+    streak_suffix: 'দি',
+    achievements: 'অর্জন',
+    leaderboard: 'লিডারবোর্ড',
+    sound: 'ধ্বনি',
+    region: 'অঞ্চল',
+    select_region: 'অঞ্চল নির্বাচন করুন',
+    settings: 'সেটিংস',
+    sign_out: 'সাইন আউট',
+    exit_guest: 'অতিথি মোড ছাড়ুন',
+  },
+  mal: {
+    guest_hint: 'അതിഥി മോഡ് — പുരോഗതി സേവ് ചെയ്യാൻ സൈൻ ഇൻ ചെയ്യുക',
+    streak: 'സ്ട്രീക്ക്',
+    streak_suffix: 'ദി',
+    achievements: 'നേട്ടങ്ങൾ',
+    leaderboard: 'ലീഡർബോർഡ്',
+    sound: 'ശബ്ദം',
+    region: 'പ്രദേശം',
+    select_region: 'പ്രദേശം തിരഞ്ഞെടുക്കുക',
+    settings: 'ക്രമീകരണം',
+    sign_out: 'സൈൻ ഔട്ട്',
+    exit_guest: 'അതിഥി മോഡ് വിടുക',
+  },
+}
+
+function menuT(lang: Lang, key: string): string {
+  return MENU_STRINGS[lang]?.[key] || MENU_STRINGS.iast[key] || key
 }
 
 interface UserMenuProps {
+  lang?: Lang
   onShowAchievements?: () => void
   onShowLeaderboard?: () => void
   onShowSettings?: () => void
 }
 
 export default function UserMenu({
+  lang = 'iast',
   onShowAchievements,
   onShowLeaderboard,
   onShowSettings,
@@ -78,53 +208,6 @@ export default function UserMenu({
     handleClose()
     onShowSettings?.()
   }
-
-  // Compute per-stotra progress for the dropdown.
-  // Cheap first pass (no line-text scan), precise only for winning language.
-  const stotraProgress = useMemo(() => {
-    if (!anchorEl) return [] // skip computation when menu is closed
-    return STOTRAS.map((stotra) => {
-      let bestPracticeCompleted = 0
-      let bestPracticeLang = stotra.languages[0]
-      let bestPuzzleCompleted = 0
-      let bestPuzzleLang = stotra.languages[0]
-
-      for (const lang of stotra.languages) {
-        const ps = getPracticeStats(lang, stotra.totalLines, stotra.key)
-        if (ps.completedLines > bestPracticeCompleted) {
-          bestPracticeCompleted = ps.completedLines
-          bestPracticeLang = lang
-        }
-        const pz = getPuzzleStats(lang, stotra.totalLines, stotra.key)
-        if (pz.completed > bestPuzzleCompleted) {
-          bestPuzzleCompleted = pz.completed
-          bestPuzzleLang = lang
-        }
-      }
-
-      // Precise puzzle total only for the winning language
-      let bestPuzzleTotal = stotra.totalLines
-      if (bestPuzzleCompleted > 0) {
-        const lines = getStotraLines(stotra.data, bestPuzzleLang)
-        const chapters = getStotraChapterIndices(stotra.data)
-        const pz = getPuzzleStats(bestPuzzleLang, stotra.totalLines, stotra.key, lines, chapters)
-        bestPuzzleTotal = pz.total
-      }
-
-      return {
-        key: stotra.key,
-        name: STOTRA_SHORT_NAMES[stotra.key] || stotra.key,
-        practiceCompleted: bestPracticeCompleted,
-        practiceTotal: stotra.totalLines,
-        puzzleCompleted: bestPuzzleCompleted,
-        puzzleTotal: bestPuzzleTotal,
-        practiceCompletionCount: getPracticeCompletionCount(bestPracticeLang, stotra.key),
-        puzzleCompletionCount: getPuzzleCompletionCount(bestPuzzleLang, stotra.key),
-        hasProgress: bestPracticeCompleted > 0 || bestPuzzleCompleted > 0,
-      }
-    }).filter((s) => s.hasProgress)
-      .sort((a, b) => (b.practiceCompleted + b.puzzleCompleted) - (a.practiceCompleted + a.puzzleCompleted))
-  }, [anchorEl]) // recompute when menu opens
 
   // Don't show if not logged in and not guest
   if (!user && !isGuest) {
@@ -183,65 +266,27 @@ export default function UserMenu({
           )}
           {isGuest && (
             <Typography variant="caption" color="warning.main" display="block">
-              Guest mode - Sign in to sync progress
+              {menuT(lang, 'guest_hint')}
             </Typography>
           )}
         </Box>
 
         <Divider sx={{ borderColor: 'rgba(255, 255, 255, 0.1)' }} />
 
-        {/* Compact stats: streak + per-stotra one-liners (max 3) */}
-        <Box sx={{ px: 2, py: 1.5 }}>
-          {currentStreak > 0 && (
-            <Box sx={{ mb: stotraProgress.length > 0 ? 1 : 0 }}>
-              <StatItem label="Streak" value={currentStreak} suffix="d" />
-            </Box>
-          )}
-          {stotraProgress.slice(0, 3).map((s) => {
-            const maxCount = Math.max(s.practiceCompletionCount, s.puzzleCompletionCount)
-            return (
-              <Box key={s.key} sx={{ display: 'flex', alignItems: 'center', gap: 0.5, py: 0.25 }}>
-                <Typography variant="caption" sx={{ fontSize: '0.6rem', color: '#94a3b8', flex: 1, lineHeight: 1.1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-                  {s.name}
-                </Typography>
-                {maxCount > 0 && (
-                  <Typography variant="caption" sx={{ color: '#fbbf24', fontWeight: 700, fontSize: '0.55rem' }}>
-                    x{maxCount}
-                  </Typography>
-                )}
-                {s.practiceCompleted > 0 && (
-                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.25 }}>
-                    <SchoolIcon sx={{ fontSize: 10, color: '#a78bfa' }} />
-                    <Typography variant="caption" sx={{ color: '#a78bfa', fontSize: '0.55rem', fontWeight: 600 }}>
-                      {s.practiceCompleted}/{s.practiceTotal}
-                    </Typography>
-                  </Box>
-                )}
-                {s.puzzleCompleted > 0 && (
-                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.25 }}>
-                    <ExtensionIcon sx={{ fontSize: 10, color: '#f472b6' }} />
-                    <Typography variant="caption" sx={{ color: '#f472b6', fontSize: '0.55rem', fontWeight: 600 }}>
-                      {s.puzzleCompleted}/{s.puzzleTotal}
-                    </Typography>
-                  </Box>
-                )}
-              </Box>
-            )
-          })}
-          {stotraProgress.length > 3 && (
-            <Typography variant="caption" sx={{ color: '#64748b', fontSize: '0.55rem', mt: 0.5, display: 'block' }}>
-              +{stotraProgress.length - 3} more in progress
-            </Typography>
-          )}
-        </Box>
+        {/* Streak */}
+        {currentStreak > 0 && (
+          <Box sx={{ px: 2, py: 1 }}>
+            <StatItem label={menuT(lang, 'streak')} value={currentStreak} suffix={menuT(lang, 'streak_suffix')} />
+          </Box>
+        )}
 
-        <Divider sx={{ borderColor: 'rgba(255, 255, 255, 0.1)' }} />
+        {currentStreak > 0 && <Divider sx={{ borderColor: 'rgba(255, 255, 255, 0.1)' }} />}
 
         <MenuItem onClick={handleAchievements}>
           <ListItemIcon>
             <EmojiEventsIcon fontSize="small" sx={{ color: 'amber.500' }} />
           </ListItemIcon>
-          <ListItemText>Achievements</ListItemText>
+          <ListItemText>{menuT(lang, 'achievements')}</ListItemText>
           {userData && (
             <Typography variant="caption" color="text.secondary">
               {userData.achievements.length}
@@ -253,7 +298,7 @@ export default function UserMenu({
           <ListItemIcon>
             <LeaderboardIcon fontSize="small" sx={{ color: 'primary.light' }} />
           </ListItemIcon>
-          <ListItemText>Leaderboard</ListItemText>
+          <ListItemText>{menuT(lang, 'leaderboard')}</ListItemText>
         </MenuItem>
 
         <Divider sx={{ borderColor: 'rgba(255, 255, 255, 0.1)' }} />
@@ -273,7 +318,7 @@ export default function UserMenu({
               <VolumeOffIcon fontSize="small" sx={{ color: 'text.secondary' }} />
             )}
           </ListItemIcon>
-          <ListItemText>Sound</ListItemText>
+          <ListItemText>{menuT(lang, 'sound')}</ListItemText>
           <Switch
             size="small"
             checked={userData?.preferences?.soundEnabled ?? true}
@@ -291,7 +336,7 @@ export default function UserMenu({
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 0.5 }}>
             <PublicIcon fontSize="small" sx={{ color: 'text.secondary' }} />
             <Typography variant="caption" color="text.secondary">
-              Region
+              {menuT(lang, 'region')}
             </Typography>
           </Box>
           <Select
@@ -303,7 +348,7 @@ export default function UserMenu({
             displayEmpty
             fullWidth
             renderValue={(value) => {
-              if (!value) return 'Select region'
+              if (!value) return menuT(lang, 'select_region')
               return `${getRegionFlag(value)} ${value}`
             }}
             sx={{
@@ -336,7 +381,7 @@ export default function UserMenu({
             <ListItemIcon>
               <SettingsIcon fontSize="small" />
             </ListItemIcon>
-            <ListItemText>Settings</ListItemText>
+            <ListItemText>{menuT(lang, 'settings')}</ListItemText>
           </MenuItem>
         )}
 
@@ -346,7 +391,7 @@ export default function UserMenu({
           <ListItemIcon>
             <LogoutIcon fontSize="small" />
           </ListItemIcon>
-          <ListItemText>{isGuest ? 'Exit Guest Mode' : 'Sign Out'}</ListItemText>
+          <ListItemText>{isGuest ? menuT(lang, 'exit_guest') : menuT(lang, 'sign_out')}</ListItemText>
         </MenuItem>
       </Menu>
     </>

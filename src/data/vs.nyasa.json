@@ -26,7 +26,7 @@
       "iast": "asya śrī viṣṇōrdivya sahasranāma stōtra mahāmantrasya ॥",
       "knda": "ಅಸ್ಯ ಶ್ರೀ ವಿಷ್ಣೋರ್ದಿವ್ಯ ಸಹಸ್ರನಾಮ ಸ್ತೋತ್ರ ಮಹಾಮಂತ್ರಸ್ಯ ॥",
       "tel": "అస్య శ్రీ విష్ణోర్దివ్య సహస్రనామ స్తోత్ర మహామంత్రస్య ॥",
-      "tam": "அஸ்ய ஶ்ரீ விஷ்ணோர்தி³வ்ய ஸஹஸ்ரனாம ஸ்தோத்ர மஹாமந்த்ரஸ்ய ॥",
+      "tam": "அஸ்ய ஶ்ரீ விஷ்ணோர்திவ்ய ஸஹஸ்ரனாம ஸ்தோத்ர மஹாமந்த்ரஸ்ய ॥",
       "guj": "અસ્ય શ્રી વિષ્ણોર્દિવ્ય સહસ્રનામ સ્તોત્ર મહામંત્રસ્ય ॥",
       "pan": "ਅਸ੍ਯ ਸ਼੍ਰੀ ਵਿਸ਼੍ਣੋਰ੍ਦਿਵ੍ਯ ਸਹਸ੍ਰਨਾਮ ਸ੍ਤੋਤ੍ਰ ਮਹਾਮਂਤ੍ਰਸ੍ਯ ॥",
       "mr": "अस्य श्री विष्णोर्दिव्य सहस्रनाम स्तोत्र महामंत्रस्य ॥",
@@ -35,7 +35,13 @@
       "meaning": "Of this divine thousand-name hymn of Sri Vishnu, the great mantra - This opening declares the subject of the nyasa, establishing it as a mahāmantra (great mantra) of supreme spiritual potency.",
       "samasaVibhaga": {
         "compound": "सहस्रनाम-स्तोत्र-महामन्त्र",
-        "breakdown": ["sahasra (thousand)", "nāma (names)", "stōtra (hymn of praise)", "mahā (great)", "mantra (sacred formula)"],
+        "breakdown": [
+          "sahasra (thousand)",
+          "nāma (names)",
+          "stōtra (hymn of praise)",
+          "mahā (great)",
+          "mantra (sacred formula)"
+        ],
         "samasaType": "Karmadhāraya",
         "combinedMeaning": "The great mantra that is the thousand-name hymn"
       }
@@ -46,7 +52,7 @@
       "iast": "śrī vēdavyāsō bhagavān ṛṣiḥ ।",
       "knda": "ಶ್ರೀ ವೇದವ್ಯಾಸೋ ಭಗವಾನ್ ಋಷಿಃ ।",
       "tel": "శ్రీ వేదవ్యాసో భగవాన్ ఋషిః ।",
-      "tam": "ஶ்ரீ வேத³வ்யாஸோ ப⁴க³வான் ருஷி: ।",
+      "tam": "ஶ்ரீ வேதவ்யாஸோ பகவான் ருஷி: ।",
       "guj": "શ્રી વેદવ્યાસો ભગવાન્ ઋષિઃ ।",
       "pan": "ਸ਼੍ਰੀ ਵੇਦਵ੍ਯਾਸੋ ਭਗਵਾਨ੍ ਰੁਰੁਇਸ਼ਿਃ ।",
       "mr": "श्री वेदव्यासो भगवान् ऋषिः ।",
@@ -61,7 +67,7 @@
       "iast": "anuṣṭup Chandaḥ ।",
       "knda": "ಅನುಷ್ಟುಪ್ ಛಂದಃ ।",
       "tel": "అనుష్టుప్ ఛందః ।",
-      "tam": "அனுஷ்டுப் ச²ந்த:³ ।",
+      "tam": "அனுஷ்டுப் சந்த: ।",
       "guj": "અનુષ્ટુપ્ છંદઃ ।",
       "pan": "ਅਨੁਸ਼੍ਟੁਪ੍ ਛਂਦਃ ।",
       "mr": "अनुष्टुप् छंदः ।",
@@ -76,7 +82,7 @@
       "iast": "śrīmahāviṣṇuḥ paramātmā śrīmannārāyaṇō dēvatā ।",
       "knda": "ಶ್ರೀಮಹಾವಿಷ್ಣುಃ ಪರಮಾತ್ಮಾ ಶ್ರೀಮನ್ನಾರಾಯಣೋ ದೇವತಾ ।",
       "tel": "శ్రీమహావిష్ణుః పరమాత్మా శ్రీమన్నారాయణో దేవతా ।",
-      "tam": "ஶ்ரீமஹாவிஷ்ணு: பரமாத்மா ஶ்ரீமன்னாராயணோ தே³வதா ।",
+      "tam": "ஶ்ரீமஹாவிஷ்ணு: பரமாத்மா ஶ்ரீமன்னாராயணோ தேவதா ।",
       "guj": "શ્રીમહાવિષ્ણુઃ પરમાત્મા શ્રીમન્નારાયણો દેવતા ।",
       "pan": "ਸ਼੍ਰੀਮਹਾਵਿਸ਼੍ਣੁਃ ਪਰਮਾਤ੍ਮਾ ਸ਼੍ਰੀਮਨ੍ਨਾਰਾਯਣੋ ਦੇਵਤਾ ।",
       "mr": "श्रीमहाविष्णुः परमात्मा श्रीमन्नारायणो देवता ।",
@@ -91,7 +97,10 @@
             "dhatu": "viṣ (to pervade) + mahā (great)",
             "meaning": "The Great All-Pervader"
           },
-          "gunaVarga": ["sarvavyāpakatva", "mahattva"]
+          "gunaVarga": [
+            "sarvavyāpakatva",
+            "mahattva"
+          ]
         },
         {
           "nama": "नारायण",
@@ -99,9 +108,15 @@
           "etymology": {
             "dhatu": "nāra (beings/waters) + ayana (abode/goal)",
             "meaning": "The refuge of all beings; One who dwells in the waters of creation",
-            "alternates": ["One from whom beings originate", "One who moves in the hearts of beings"]
+            "alternates": [
+              "One from whom beings originate",
+              "One who moves in the hearts of beings"
+            ]
           },
-          "gunaVarga": ["āśraya", "sṛṣṭi"]
+          "gunaVarga": [
+            "āśraya",
+            "sṛṣṭi"
+          ]
         }
       ]
     },
@@ -111,7 +126,7 @@
       "iast": "amṛtāṃśūdbhavō bhānuriti bījam ।",
       "knda": "ಅಮೃತಾಂಶೂದ್ಭವೋ ಭಾನುರಿತಿ ಬೀಜಮ್ ।",
       "tel": "అమృతాంశూద్భవో భానురితి బీజమ్ ।",
-      "tam": "அம்ருதாம்ஶூத்³ப⁴வோ பா⁴னுரிதி பீ³ஜம் ।",
+      "tam": "அம்ருதாம்ஶூத்பவோ பானுரிதி பீஜம் ।",
       "guj": "અમૃતાંશૂદ્ભવો ભાનુરિતિ બીજમ્ ।",
       "pan": "ਅਮ੍ਰੁਰੁਇਤਾਂਸ਼ੂਦ੍ਭਵੋ ਭਾਨੁਰਿਤਿ ਬੀਜਮ੍ ।",
       "mr": "अमृतांशूद्भवो भानुरिति बीजम् ।",
@@ -126,7 +141,7 @@
       "iast": "dēvakīnandanaḥ sraṣṭēti śaktiḥ ।",
       "knda": "ದೇವಕೀನಂದನಃ ಸ್ರಷ್ಟೇತಿ ಶಕ್ತಿಃ ।",
       "tel": "దేవకీనందనః స్రష్టేతి శక్తిః ।",
-      "tam": "தே³வகீனந்த³ன: ஸ்ரஷ்டேதி ஶக்தி: ।",
+      "tam": "தேவகீனந்தன: ஸ்ரஷ்டேதி ஶக்தி: ।",
       "guj": "દેવકીનંદનઃ સ્રષ્ટેતિ શક્તિઃ ।",
       "pan": "ਦੇਵਕੀਨਂਦਨਃ ਸ੍ਰਸ਼੍ਟੇਤਿ ਸ਼ਕ੍ਤਿਃ ।",
       "mr": "देवकीनंदनः स्रष्टेति शक्तिः ।",
@@ -141,7 +156,10 @@
             "dhatu": "Devakī (mother's name) + nandana (son, one who gives joy)",
             "meaning": "The beloved son of Devaki; Sri Krishna"
           },
-          "gunaVarga": ["avatāra", "vātsalya"]
+          "gunaVarga": [
+            "avatāra",
+            "vātsalya"
+          ]
         },
         {
           "nama": "स्रष्टा",
@@ -150,7 +168,9 @@
             "dhatu": "sṛj (to create, emit)",
             "meaning": "The Creator; One who projects forth creation"
           },
-          "gunaVarga": ["sṛṣṭi"]
+          "gunaVarga": [
+            "sṛṣṭi"
+          ]
         }
       ]
     },
@@ -160,7 +180,7 @@
       "iast": "udbhavaḥ, kṣōbhaṇō dēva iti paramōmantraḥ ।",
       "knda": "ಉದ್ಭವಃ, ಕ್ಷೋಭಣೋ ದೇವ ಇತಿ ಪರಮೋಮಂತ್ರಃ ।",
       "tel": "ఉద్భవః, క్షోభణో దేవ ఇతి పరమోమంత్రః ।",
-      "tam": "உத்³ப⁴வ:, க்ஷோப⁴ணோ தே³வ இதி பரமோமந்த்ர: ।",
+      "tam": "உத்பவ:, க்ஷோபணோ தேவ இதி பரமோமந்த்ர: ।",
       "guj": "ઉદ્ભવઃ, ક્ષોભણો દેવ ઇતિ પરમોમંત્રઃ ।",
       "pan": "ਉਦ੍ਭਵਃ, ਕ੍ਸ਼ੋਭਣੋ ਦੇਵ ਇਤਿ ਪਰਮੋਮਂਤ੍ਰਃ ।",
       "mr": "उद्भवः, क्षोभणो देव इति परमोमंत्रः ।",
@@ -175,7 +195,10 @@
             "dhatu": "ud (up) + bhū (to become)",
             "meaning": "The Origin; One from whom all arises"
           },
-          "gunaVarga": ["sṛṣṭi", "kāraṇatva"]
+          "gunaVarga": [
+            "sṛṣṭi",
+            "kāraṇatva"
+          ]
         },
         {
           "nama": "क्षोभण",
@@ -184,7 +207,9 @@
             "dhatu": "kṣubh (to agitate, disturb)",
             "meaning": "The Agitator; One who stirs creation into being from the primordial stillness"
           },
-          "gunaVarga": ["sṛṣṭi"]
+          "gunaVarga": [
+            "sṛṣṭi"
+          ]
         }
       ]
     },
@@ -194,7 +219,7 @@
       "iast": "śaṅkhabhṛnnandakī chakrīti kīlakam ।",
       "knda": "ಶಂಖಭೃನ್ನಂದಕೀ ಚಕ್ರೀತಿ ಕೀಲಕಮ್ ।",
       "tel": "శంఖభృన్నందకీ చక్రీతి కీలకమ్ ।",
-      "tam": "ஶங்க³ப்⁴ருன்னந்த³கீ சக்ரீதி கீலகம் ।",
+      "tam": "ஶங்கப்ருன்னந்தகீ சக்ரீதி கீலகம் ।",
       "guj": "શંખભૃન્નંદકી ચક્રીતિ કીલકમ્ ।",
       "pan": "ਸ਼ਂਖਭ੍ਰੁਰੁਇਨ੍ਨਂਦਕੀ ਚਕ੍ਰੀਤਿ ਕੀਲਕਮ੍ ।",
       "mr": "शंखभृन्नंदकी चक्रीति कीलकम् ।",
@@ -210,7 +235,9 @@
             "dhatu": "śaṅkha (conch) + bhṛt (bearer)",
             "meaning": "Bearer of the conch Panchajanya"
           },
-          "gunaVarga": ["āyudha"]
+          "gunaVarga": [
+            "āyudha"
+          ]
         },
         {
           "nama": "नन्दकी",
@@ -219,7 +246,9 @@
             "dhatu": "nandaka (name of the sword) + ī (possessor)",
             "meaning": "Wielder of the sword Nandaka"
           },
-          "gunaVarga": ["āyudha"]
+          "gunaVarga": [
+            "āyudha"
+          ]
         },
         {
           "nama": "चक्री",
@@ -228,7 +257,9 @@
             "dhatu": "chakra (discus) + ī (possessor)",
             "meaning": "Holder of the discus Sudarshana"
           },
-          "gunaVarga": ["āyudha"]
+          "gunaVarga": [
+            "āyudha"
+          ]
         }
       ]
     },
@@ -238,7 +269,7 @@
       "iast": "śār​ṅgadhanvā gadādhara ityastram ।",
       "knda": "ಶಾರ್​ಙ್ಗಧನ್ವಾ ಗದಾಧರ ಇತ್ಯಸ್ತ್ರಮ್ ।",
       "tel": "శార్​ఙ్గధన్వా గదాధర ఇత్యస్త్రమ్ ।",
-      "tam": "ஶார்​ங்க³த⁴ன்வா க³தா³த⁴ர இத்யஸ்த்ரம் ।",
+      "tam": "ஶார்​ங்கதன்வா கதாதர இத்யஸ்த்ரம் ।",
       "guj": "શાર્​ઙ્ગધન્વા ગદાધર ઇત્યસ્ત્રમ્ ।",
       "pan": "ਸ਼ਾਰ੍​ਙ੍ਗਧਨ੍ਵਾ ਗਦਾਧਰ ਇਤ੍ਯਸ੍ਤ੍ਰਮ੍ ।",
       "mr": "शार्​ङ्गधन्वा गदाधर इत्यस्त्रम् ।",
@@ -253,7 +284,9 @@
             "dhatu": "śārṅga (name of the bow) + dhanvan (bow-wielder)",
             "meaning": "Wielder of the bow Sharnga"
           },
-          "gunaVarga": ["āyudha"]
+          "gunaVarga": [
+            "āyudha"
+          ]
         },
         {
           "nama": "गदाधर",
@@ -262,7 +295,9 @@
             "dhatu": "gadā (mace) + dhara (holder)",
             "meaning": "Bearer of the mace Kaumodaki"
           },
-          "gunaVarga": ["āyudha"]
+          "gunaVarga": [
+            "āyudha"
+          ]
         }
       ]
     },
@@ -272,7 +307,7 @@
       "iast": "rathāṅgapāṇi rakṣōbhya iti nētram ।",
       "knda": "ರಥಾಂಗಪಾಣಿ ರಕ್ಷೋಭ್ಯ ಇತಿ ನೇತ್ರಮ್ ।",
       "tel": "రథాంగపాణి రక్షోభ్య ఇతి నేత్రమ్ ।",
-      "tam": "ரதா²ங்க³பாணி ரக்ஷோப்⁴ய இதி நேத்ரம் ।",
+      "tam": "ரதாங்கபாணி ரக்ஷோப்ய இதி நேத்ரம் ।",
       "guj": "રથાંગપાણિ રક્ષોભ્ય ઇતિ નેત્રમ્ ।",
       "pan": "ਰਥਾਂਗਪਾਣਿ ਰਕ੍ਸ਼ੋਭ੍ਯ ਇਤਿ ਨੇਤ੍ਰਮ੍ ।",
       "mr": "रथांगपाणि रक्षोभ्य इति नेत्रम् ।",
@@ -287,7 +322,9 @@
             "dhatu": "ratha (chariot) + aṅga (part, wheel) + pāṇi (hand)",
             "meaning": "One whose hand holds the chariot wheel (Sudarshana chakra)"
           },
-          "gunaVarga": ["āyudha"]
+          "gunaVarga": [
+            "āyudha"
+          ]
         },
         {
           "nama": "रक्षोभ्य",
@@ -296,7 +333,9 @@
             "dhatu": "rakṣ (to protect) + a-kṣobhya (unshakeable)",
             "meaning": "The unshakeable protector; One whose protection cannot be disturbed"
           },
-          "gunaVarga": ["rakṣaṇa"]
+          "gunaVarga": [
+            "rakṣaṇa"
+          ]
         }
       ]
     },
@@ -306,7 +345,7 @@
       "iast": "trisāmāsāmagaḥ sāmēti kavacham ।",
       "knda": "ತ್ರಿಸಾಮಾಸಾಮಗಃ ಸಾಮೇತಿ ಕವಚಮ್ ।",
       "tel": "త్రిసామాసామగః సామేతి కవచమ్ ।",
-      "tam": "த்ரிஸாமாஸாமக:³ ஸாமேதி கவசம் ।",
+      "tam": "த்ரிஸாமாஸாமக: ஸாமேதி கவசம் ।",
       "guj": "ત્રિસામાસામગઃ સામેતિ કવચમ્ ।",
       "pan": "ਤ੍ਰਿਸਾਮਾਸਾਮਗਃ ਸਾਮੇਤਿ ਕਵਚਮ੍ ।",
       "mr": "त्रिसामासामगः सामेति कवचम् ।",
@@ -322,7 +361,9 @@
             "dhatu": "tri (three) + sāma (Sama hymn)",
             "meaning": "One who is praised by the three principal Sama hymns"
           },
-          "gunaVarga": ["vedamaya"]
+          "gunaVarga": [
+            "vedamaya"
+          ]
         },
         {
           "nama": "सामग",
@@ -331,7 +372,9 @@
             "dhatu": "sāma + ga (going, knowing)",
             "meaning": "One who knows/sings the Sama Veda"
           },
-          "gunaVarga": ["vedamaya"]
+          "gunaVarga": [
+            "vedamaya"
+          ]
         }
       ]
     },
@@ -341,7 +384,7 @@
       "iast": "ānandaṃ parabrahmēti yōniḥ ।",
       "knda": "ಆನಂದಂ ಪರಬ್ರಹ್ಮೇತಿ ಯೋನಿಃ ।",
       "tel": "ఆనందం పరబ్రహ్మేతి యోనిః ।",
-      "tam": "ஆனந்த³ம் பரப்³ரஹ்மேதி யோனி: ।",
+      "tam": "ஆனந்தம் பரப்ரஹ்மேதி யோனி: ।",
       "guj": "આનંદં પરબ્રહ્મેતિ યોનિઃ ।",
       "pan": "ਆਨਂਦਂ ਪਰਬ੍ਰਹ੍ਮੇਤਿ ਯੋਨਿਃ ।",
       "mr": "आनंदं परब्रह्मेति योनिः ।",
@@ -356,7 +399,7 @@
       "iast": "ṛtussudarśanaḥ kāla iti digbandhaḥ ॥",
       "knda": "ಋತುಸ್ಸುದರ್ಶನಃ ಕಾಲ ಇತಿ ದಿಗ್ಬಂಧಃ ॥",
       "tel": "ఋతుస్సుదర్శనః కాల ఇతి దిగ్బంధః ॥",
-      "tam": "ருதுஸ்ஸுத³ர்ஶன: கால இதி தி³க்³ப³ந்த:⁴ ॥",
+      "tam": "ருதுஸ்ஸுதர்ஶன: கால இதி திக்பந்த: ॥",
       "guj": "ઋતુસ્સુદર્શનઃ કાલ ઇતિ દિગ્બંધઃ ॥",
       "pan": "ਰੁਰੁਇਤੁਸ੍ਸੁਦਰ੍ਸ਼ਨਃ ਕਾਲ ਇਤਿ ਦਿਗ੍ਬਂਧਃ ॥",
       "mr": "ऋतुस्सुदर्शनः काल इति दिग्बंधः ॥",
@@ -371,7 +414,9 @@
             "dhatu": "ṛ (to go, flow)",
             "meaning": "Season; One who is the cycle of seasons"
           },
-          "gunaVarga": ["kāla"]
+          "gunaVarga": [
+            "kāla"
+          ]
         },
         {
           "nama": "सुदर्शन",
@@ -380,7 +425,10 @@
             "dhatu": "su (good, beautiful) + darśana (sight, vision)",
             "meaning": "Beautiful to behold; Also the name of Vishnu's discus"
           },
-          "gunaVarga": ["saundarya", "āyudha"]
+          "gunaVarga": [
+            "saundarya",
+            "āyudha"
+          ]
         },
         {
           "nama": "काल",
@@ -389,7 +437,10 @@
             "dhatu": "kal (to count, impel)",
             "meaning": "Time; The cosmic force that measures and moves all things"
           },
-          "gunaVarga": ["kāla", "sarvavyāpakatva"]
+          "gunaVarga": [
+            "kāla",
+            "sarvavyāpakatva"
+          ]
         }
       ]
     },
@@ -399,7 +450,7 @@
       "iast": "śrīviśvarūpa iti dhyānam ।",
       "knda": "ಶ್ರೀವಿಶ್ವರೂಪ ಇತಿ ಧ್ಯಾನಮ್ ।",
       "tel": "శ్రీవిశ్వరూప ఇతి ధ్యానమ్ ।",
-      "tam": "ஶ்ரீவிஶ்வரூப இதி த்⁴யானம் ।",
+      "tam": "ஶ்ரீவிஶ்வரூப இதி த்யானம் ।",
       "guj": "શ્રીવિશ્વરૂપ ઇતિ ધ્યાનમ્ ।",
       "pan": "ਸ਼੍ਰੀਵਿਸ਼੍ਵਰੂਪ ਇਤਿ ਧ੍ਯਾਨਮ੍ ।",
       "mr": "श्रीविश्वरूप इति ध्यानम् ।",
@@ -414,7 +465,10 @@
             "dhatu": "viśva (universe, all) + rūpa (form)",
             "meaning": "One whose form is the universe; The cosmic form containing all existence"
           },
-          "gunaVarga": ["sarvavyāpakatva", "viśvamaya"]
+          "gunaVarga": [
+            "sarvavyāpakatva",
+            "viśvamaya"
+          ]
         }
       ],
       "note": "The Vishvarupa is the cosmic form Vishnu/Krishna revealed in Bhagavad Gita Chapter 11, showing the entire universe within his divine body."
@@ -425,7 +479,7 @@
       "iast": "śrī mahāviṣṇu prītyarthē sahasranāma japē pārāyaṇē viniyōgaḥ ।",
       "knda": "ಶ್ರೀ ಮಹಾವಿಷ್ಣು ಪ್ರೀತ್ಯರ್ಥೇ ಸಹಸ್ರನಾಮ ಜಪೇ ಪಾರಾಯಣೇ ವಿನಿಯೋಗಃ ।",
       "tel": "శ్రీ మహావిష్ణు ప్రీత్యర్థే సహస్రనామ జపే పారాయణే వినియోగః ।",
-      "tam": "ஶ்ரீ மஹாவிஷ்ணு ப்ரீத்யர்தே² ஸஹஸ்ரனாம ஜபே பாராயணே வினியோக:³ ।",
+      "tam": "ஶ்ரீ மஹாவிஷ்ணு ப்ரீத்யர்தே ஸஹஸ்ரனாம ஜபே பாராயணே வினியோக: ।",
       "guj": "શ્રી મહાવિષ્ણુ પ્રીત્યર્થે સહસ્રનામ જપે પારાયણે વિનિયોગઃ ।",
       "pan": "ਸ਼੍ਰੀ ਮਹਾਵਿਸ਼੍ਣੁ ਪ੍ਰੀਤ੍ਯਰ੍ਥੇ ਸਹਸ੍ਰਨਾਮ ਜਪੇ ਪਾਰਾਯਣੇ ਵਿਨਿਯੋਗਃ ।",
       "mr": "श्री महाविष्णु प्रीत्यर्थे सहस्रनाम जपे पारायणे विनियोगः ।",
@@ -456,7 +510,7 @@
       "iast": "viśvaṃ viṣṇurvaṣaṭkāra ityaṅguṣṭhābhyāṃ namaḥ",
       "knda": "ವಿಶ್ವಂ ವಿಷ್ಣುರ್ವಷಟ್ಕಾರ ಇತ್ಯಂಗುಷ್ಠಾಭ್ಯಾಂ ನಮಃ",
       "tel": "విశ్వం విష్ణుర్వషట్కార ఇత్యంగుష్ఠాభ్యాం నమః",
-      "tam": "விஶ்வம் விஷ்ணுர்வஷட்கார இத்யங்கு³ஷ்டா²ப்⁴யாம் நம:",
+      "tam": "விஶ்வம் விஷ்ணுர்வஷட்கார இத்யங்குஷ்டாப்யாம் நம:",
       "guj": "વિશ્વં વિષ્ણુર્વષટ્કાર ઇત્યંગુષ્ઠાભ્યાં નમઃ",
       "pan": "ਵਿਸ਼੍ਵਂ ਵਿਸ਼੍ਣੁਰ੍ਵਸ਼ਟ੍ਕਾਰ ਇਤ੍ਯਂਗੁਸ਼੍ਠਾਭ੍ਯਾਂ ਨਮਃ",
       "mr": "विश्वं विष्णुर्वषट्कार इत्यंगुष्ठाभ्यां नमः",
@@ -471,7 +525,9 @@
             "dhatu": "viś (to enter, pervade)",
             "meaning": "The Universe; One who enters and pervades all"
           },
-          "gunaVarga": ["sarvavyāpakatva"]
+          "gunaVarga": [
+            "sarvavyāpakatva"
+          ]
         },
         {
           "nama": "विष्णु",
@@ -480,7 +536,9 @@
             "dhatu": "viṣ (to pervade)",
             "meaning": "The All-Pervader"
           },
-          "gunaVarga": ["sarvavyāpakatva"]
+          "gunaVarga": [
+            "sarvavyāpakatva"
+          ]
         },
         {
           "nama": "वषट्कार",
@@ -489,7 +547,9 @@
             "dhatu": "vaṣaṭ (sacrificial exclamation) + kāra (maker)",
             "meaning": "The Sacrificial Call personified; The essence of Vedic ritual"
           },
-          "gunaVarga": ["yajña"]
+          "gunaVarga": [
+            "yajña"
+          ]
         }
       ]
     },
@@ -499,7 +559,7 @@
       "iast": "amṛtāṃ śūdbhavō bhānuriti tarjanībhyāṃ namaḥ",
       "knda": "ಅಮೃತಾಂ ಶೂದ್ಭವೋ ಭಾನುರಿತಿ ತರ್ಜನೀಭ್ಯಾಂ ನಮಃ",
       "tel": "అమృతాం శూద్భవో భానురితి తర్జనీభ్యాం నమః",
-      "tam": "அம்ருதாம் ஶூத்³ப⁴வோ பா⁴னுரிதி தர்ஜனீப்⁴யாம் நம:",
+      "tam": "அம்ருதாம் ஶூத்பவோ பானுரிதி தர்ஜனீப்யாம் நம:",
       "guj": "અમૃતાં શૂદ્ભવો ભાનુરિતિ તર્જનીભ્યાં નમઃ",
       "pan": "ਅਮ੍ਰੁਰੁਇਤਾਂ ਸ਼ੂਦ੍ਭਵੋ ਭਾਨੁਰਿਤਿ ਤਰ੍ਜਨੀਭ੍ਯਾਂ ਨਮਃ",
       "mr": "अमृतां शूद्भवो भानुरिति तर्जनीभ्यां नमः",
@@ -514,7 +574,10 @@
             "dhatu": "amṛta (immortal) + aṃśu (ray) + udbhava (born from)",
             "meaning": "One born from immortal rays; Connected to the moon and sun"
           },
-          "gunaVarga": ["prakāśa", "amṛtatva"]
+          "gunaVarga": [
+            "prakāśa",
+            "amṛtatva"
+          ]
         },
         {
           "nama": "भानु",
@@ -523,7 +586,9 @@
             "dhatu": "bhā (to shine)",
             "meaning": "The Radiant One; The Sun"
           },
-          "gunaVarga": ["prakāśa"]
+          "gunaVarga": [
+            "prakāśa"
+          ]
         }
       ]
     },
@@ -533,7 +598,7 @@
       "iast": "brahmaṇyō brahmakṛt brahmēti madhyamābhyāṃ namaḥ",
       "knda": "ಬ್ರಹ್ಮಣ್ಯೋ ಬ್ರಹ್ಮಕೃತ್ ಬ್ರಹ್ಮೇತಿ ಮಧ್ಯಮಾಭ್ಯಾಂ ನಮಃ",
       "tel": "బ్రహ్మణ్యో బ్రహ్మకృత్ బ్రహ్మేతి మధ్యమాభ్యాం నమః",
-      "tam": "ப்³ரஹ்மண்யோ ப்³ரஹ்மக்ருத் ப்³ரஹ்மேதி மத்⁴யமாப்⁴யாம் நம:",
+      "tam": "ப்ரஹ்மண்யோ ப்ரஹ்மக்ருத் ப்ரஹ்மேதி மத்யமாப்யாம் நம:",
       "guj": "બ્રહ્મણ્યો બ્રહ્મકૃત્ બ્રહ્મેતિ મધ્યમાભ્યાં નમઃ",
       "pan": "ਬ੍ਰਹ੍ਮਣ੍ਯੋ ਬ੍ਰਹ੍ਮਕ੍ਰੁਰੁਇਤ੍ ਬ੍ਰਹ੍ਮੇਤਿ ਮਧ੍ਯਮਾਭ੍ਯਾਂ ਨਮਃ",
       "mr": "ब्रह्मण्यो ब्रह्मकृत् ब्रह्मेति मध्यमाभ्यां नमः",
@@ -548,7 +613,10 @@
             "dhatu": "brahman + ya (related to)",
             "meaning": "Friend of Brahmins; Favorable to sacred knowledge and those who pursue it"
           },
-          "gunaVarga": ["jñāna", "bhaktavatsala"]
+          "gunaVarga": [
+            "jñāna",
+            "bhaktavatsala"
+          ]
         },
         {
           "nama": "ब्रह्मकृत्",
@@ -557,7 +625,9 @@
             "dhatu": "brahma (Brahma) + kṛt (maker)",
             "meaning": "Creator of Brahma; One who creates the creator"
           },
-          "gunaVarga": ["sṛṣṭi"]
+          "gunaVarga": [
+            "sṛṣṭi"
+          ]
         },
         {
           "nama": "ब्रह्म",
@@ -566,7 +636,9 @@
             "dhatu": "bṛh (to expand, grow)",
             "meaning": "The Supreme Reality; The Vast; Brahman"
           },
-          "gunaVarga": ["paratattva"]
+          "gunaVarga": [
+            "paratattva"
+          ]
         }
       ]
     },
@@ -576,7 +648,7 @@
       "iast": "suvarṇabindu rakṣōbhya iti anāmikābhyāṃ namaḥ",
       "knda": "ಸುವರ್ಣಬಿಂದು ರಕ್ಷೋಭ್ಯ ಇತಿ ಅನಾಮಿಕಾಭ್ಯಾಂ ನಮಃ",
       "tel": "సువర్ణబిందు రక్షోభ్య ఇతి అనామికాభ్యాం నమః",
-      "tam": "ஸுவர்ணபி³ந்து³ ரக்ஷோப்⁴ய இதி அனாமிகாப்⁴யாம் நம:",
+      "tam": "ஸுவர்ணபிந்து ரக்ஷோப்ய இதி அனாமிகாப்யாம் நம:",
       "guj": "સુવર્ણબિંદુ રક્ષોભ્ય ઇતિ અનામિકાભ્યાં નમઃ",
       "pan": "ਸੁਵਰ੍ਣਬਿਂਦੁ ਰਕ੍ਸ਼ੋਭ੍ਯ ਇਤਿ ਅਨਾਮਿਕਾਭ੍ਯਾਂ ਨਮਃ",
       "mr": "सुवर्णबिंदु रक्षोभ्य इति अनामिकाभ्यां नमः",
@@ -591,7 +663,10 @@
             "dhatu": "suvarṇa (gold) + bindu (point, drop)",
             "meaning": "The Golden Point; The precious essence; The golden drop of consciousness"
           },
-          "gunaVarga": ["saundarya", "paratattva"]
+          "gunaVarga": [
+            "saundarya",
+            "paratattva"
+          ]
         },
         {
           "nama": "रक्षोभ्य",
@@ -600,7 +675,9 @@
             "dhatu": "rakṣ (protect) + a-kṣobhya (unshakeable)",
             "meaning": "The unshakeable protector"
           },
-          "gunaVarga": ["rakṣaṇa"]
+          "gunaVarga": [
+            "rakṣaṇa"
+          ]
         }
       ]
     },
@@ -610,7 +687,7 @@
       "iast": "nimiṣō'nimiṣaḥ sragvīti kaniṣṭhikābhyāṃ namaḥ",
       "knda": "ನಿಮಿಷೋಽನಿಮಿಷಃ ಸ್ರಗ್ವೀತಿ ಕನಿಷ್ಠಿಕಾಭ್ಯಾಂ ನಮಃ",
       "tel": "నిమిషోఽనిమిషః స్రగ్వీతి కనిష్ఠికాభ్యాం నమః",
-      "tam": "நிமிஷோனிமிஷ: ஸ்ரக்³வீதி கனிஷ்டி²காப்⁴யாம் நம:",
+      "tam": "நிமிஷோனிமிஷ: ஸ்ரக்வீதி கனிஷ்டிகாப்யாம் நம:",
       "guj": "નિમિષોઽનિમિષઃ સ્રગ્વીતિ કનિષ્ઠિકાભ્યાં નમઃ",
       "pan": "ਨਿਮਿਸ਼ੋ਽ਨਿਮਿਸ਼ਃ ਸ੍ਰਗ੍ਵੀਤਿ ਕਨਿਸ਼੍ਠਿਕਾਭ੍ਯਾਂ ਨਮਃ",
       "mr": "निमिषोऽनिमिषः स्रग्वीति कनिष्ठिकाभ्यां नमः",
@@ -625,7 +702,9 @@
             "dhatu": "ni + miṣ (to blink)",
             "meaning": "One who blinks; Represents the manifest creation that appears and disappears"
           },
-          "gunaVarga": ["sṛṣṭi"]
+          "gunaVarga": [
+            "sṛṣṭi"
+          ]
         },
         {
           "nama": "अनिमिष",
@@ -634,7 +713,10 @@
             "dhatu": "a (not) + nimiṣa (blinking)",
             "meaning": "The Unblinking; Ever-watchful; The eternal witness"
           },
-          "gunaVarga": ["nityatva", "sākṣitva"]
+          "gunaVarga": [
+            "nityatva",
+            "sākṣitva"
+          ]
         },
         {
           "nama": "स्रग्वी",
@@ -643,7 +725,9 @@
             "dhatu": "sraj (garland) + vī (possessor)",
             "meaning": "The Garlanded One; Wearer of the Vaijayanti garland"
           },
-          "gunaVarga": ["saundarya"]
+          "gunaVarga": [
+            "saundarya"
+          ]
         }
       ]
     },
@@ -653,7 +737,7 @@
       "iast": "rathāṅgapāṇi rakṣōbhya iti karatala karapṛṣṭhābhyāṃ namaḥ",
       "knda": "ರಥಾಂಗಪಾಣಿ ರಕ್ಷೋಭ್ಯ ಇತಿ ಕರತಲ ಕರಪೃಷ್ಠಾಭ್ಯಾಂ ನಮಃ",
       "tel": "రథాంగపాణి రక్షోభ్య ఇతి కరతల కరపృష్ఠాభ్యాం నమః",
-      "tam": "ரதா²ங்க³பாணி ரக்ஷோப்⁴ய இதி கரதல கரப்ருஷ்டா²ப்⁴யாம் நம:",
+      "tam": "ரதாங்கபாணி ரக்ஷோப்ய இதி கரதல கரப்ருஷ்டாப்யாம் நம:",
       "guj": "રથાંગપાણિ રક્ષોભ્ય ઇતિ કરતલ કરપૃષ્ઠાભ્યાં નમઃ",
       "pan": "ਰਥਾਂਗਪਾਣਿ ਰਕ੍ਸ਼ੋਭ੍ਯ ਇਤਿ ਕਰਤਲ ਕਰਪ੍ਰੁਰੁਇਸ਼੍ਠਾਭ੍ਯਾਂ ਨਮਃ",
       "mr": "रथांगपाणि रक्षोभ्य इति करतल करपृष्ठाभ्यां नमः",
@@ -668,7 +752,9 @@
             "dhatu": "ratha (chariot) + aṅga (limb, wheel) + pāṇi (hand)",
             "meaning": "One holding the chariot wheel (Sudarshana chakra) in hand"
           },
-          "gunaVarga": ["āyudha"]
+          "gunaVarga": [
+            "āyudha"
+          ]
         }
       ]
     },
@@ -678,7 +764,7 @@
       "iast": "aṅganyāsaḥ",
       "knda": "ಅಂಗನ್ಯಾಸಃ",
       "tel": "అంగన్యాసః",
-      "tam": "அங்க³ன்யாஸ:",
+      "tam": "அங்கன்யாஸ:",
       "guj": "અંગન્યાસઃ",
       "pan": "ਅਂਗਨ੍ਯਾਸਃ",
       "mr": "अंगन्यासः",
@@ -694,7 +780,7 @@
       "iast": "suvrataḥ sumukhaḥ sūkṣma iti jñānāya hṛdayāya namaḥ",
       "knda": "ಸುವ್ರತಃ ಸುಮುಖಃ ಸೂಕ್ಷ್ಮ ಇತಿ ಜ್ಞಾನಾಯ ಹೃದಯಾಯ ನಮಃ",
       "tel": "సువ్రతః సుముఖః సూక్ష్మ ఇతి జ్ఞానాయ హృదయాయ నమః",
-      "tam": "ஸுவ்ரத: ஸுமுக:² ஸூக்ஷ்ம இதி ஜ்ஞானாய ஹ்ருத³யாய நம:",
+      "tam": "ஸுவ்ரத: ஸுமுக: ஸூக்ஷ்ம இதி ஜ்ஞானாய ஹ்ருதயாய நம:",
       "guj": "સુવ્રતઃ સુમુખઃ સૂક્ષ્મ ઇતિ જ્ઞાનાય હૃદયાય નમઃ",
       "pan": "ਸੁਵ੍ਰਤਃ ਸੁਮੁਖਃ ਸੂਕ੍ਸ਼੍ਮ ਇਤਿ ਜ੍ਞਾਨਾਯ ਹ੍ਰੁਰੁਇਦਯਾਯ ਨਮਃ",
       "mr": "सुव्रतः सुमुखः सूक्ष्म इति ज्ञानाय हृदयाय नमः",
@@ -709,7 +795,9 @@
             "dhatu": "su (good) + vrata (vow, observance)",
             "meaning": "One of excellent vows; One who perfectly observes sacred duties"
           },
-          "gunaVarga": ["dharma"]
+          "gunaVarga": [
+            "dharma"
+          ]
         },
         {
           "nama": "सुमुख",
@@ -718,7 +806,9 @@
             "dhatu": "su (beautiful) + mukha (face)",
             "meaning": "Beautiful-faced; One with a gracious countenance"
           },
-          "gunaVarga": ["saundarya"]
+          "gunaVarga": [
+            "saundarya"
+          ]
         },
         {
           "nama": "सूक्ष्म",
@@ -727,7 +817,9 @@
             "dhatu": "sūkṣ (to be subtle)",
             "meaning": "The Subtle; Beyond gross perception; The innermost essence"
           },
-          "gunaVarga": ["paratattva"]
+          "gunaVarga": [
+            "paratattva"
+          ]
         }
       ],
       "note": "The heart (hridaya) is associated with jnana (knowledge) as it is considered the seat of inner wisdom and the place where the Atman dwells."
@@ -753,7 +845,10 @@
             "dhatu": "sahasra (thousand) + mūrti (form)",
             "meaning": "One with a thousand forms; Having innumerable manifestations"
           },
-          "gunaVarga": ["sarvavyāpakatva", "viśvamaya"]
+          "gunaVarga": [
+            "sarvavyāpakatva",
+            "viśvamaya"
+          ]
         },
         {
           "nama": "विश्वात्मा",
@@ -762,7 +857,10 @@
             "dhatu": "viśva (universe) + ātmā (self, soul)",
             "meaning": "The Soul of the Universe; The inner Self of all beings"
           },
-          "gunaVarga": ["sarvavyāpakatva", "antaryāmitva"]
+          "gunaVarga": [
+            "sarvavyāpakatva",
+            "antaryāmitva"
+          ]
         }
       ],
       "note": "The head (shiras) is associated with aishvarya (divine sovereignty/lordship). 'Svaha' is the oblation call, offering the mantra to the deity."
@@ -773,7 +871,7 @@
       "iast": "sahasrārchiḥ saptajihva iti śaktyai śikhāyai vaṣaṭ",
       "knda": "ಸಹಸ್ರಾರ್ಚಿಃ ಸಪ್ತಜಿಹ್ವ ಇತಿ ಶಕ್ತ್ಯೈ ಶಿಖಾಯೈ ವಷಟ್",
       "tel": "సహస్రార్చిః సప్తజిహ్వ ఇతి శక్త్యై శిఖాయై వషట్",
-      "tam": "ஸஹஸ்ரார்சி: ஸப்தஜிஹ்வ இதி ஶக்த்யை ஶிகா²யை வஷட்",
+      "tam": "ஸஹஸ்ரார்சி: ஸப்தஜிஹ்வ இதி ஶக்த்யை ஶிகாயை வஷட்",
       "guj": "સહસ્રાર્ચિઃ સપ્તજિહ્વ ઇતિ શક્ત્યૈ શિખાયૈ વષટ્",
       "pan": "ਸਹਸ੍ਰਾਰ੍ਚਿਃ ਸਪ੍ਤਜਿਹ੍ਵ ਇਤਿ ਸ਼ਕ੍ਤ੍ਯੈ ਸ਼ਿਖਾਯੈ ਵਸ਼ਟ੍",
       "mr": "सहस्रार्चिः सप्तजिह्व इति शक्त्यै शिखायै वषट्",
@@ -788,7 +886,10 @@
             "dhatu": "sahasra (thousand) + archi (ray, flame)",
             "meaning": "One with a thousand rays; Infinitely radiant"
           },
-          "gunaVarga": ["prakāśa", "tejas"]
+          "gunaVarga": [
+            "prakāśa",
+            "tejas"
+          ]
         },
         {
           "nama": "सप्तजिह्व",
@@ -797,7 +898,9 @@
             "dhatu": "sapta (seven) + jihva (tongue)",
             "meaning": "Seven-tongued; Like fire with its seven flames"
           },
-          "gunaVarga": ["tejas"]
+          "gunaVarga": [
+            "tejas"
+          ]
         }
       ],
       "note": "The shikha (topknot) is associated with shakti (divine power). The seven tongues refer to the seven flames of Agni (fire), representing transformative energy. 'Vashat' is a Vedic offering call."
@@ -808,7 +911,7 @@
       "iast": "trisāmā sāmagassāmēti balāya kavachāya huṃ",
       "knda": "ತ್ರಿಸಾಮಾ ಸಾಮಗಸ್ಸಾಮೇತಿ ಬಲಾಯ ಕವಚಾಯ ಹುಂ",
       "tel": "త్రిసామా సామగస్సామేతి బలాయ కవచాయ హుం",
-      "tam": "த்ரிஸாமா ஸாமக³ஸ்ஸாமேதி ப³லாய கவசாய ஹும்",
+      "tam": "த்ரிஸாமா ஸாமகஸ்ஸாமேதி பலாய கவசாய ஹும்",
       "guj": "ત્રિસામા સામગસ્સામેતિ બલાય કવચાય હું",
       "pan": "ਤ੍ਰਿਸਾਮਾ ਸਾਮਗਸ੍ਸਾਮੇਤਿ ਬਲਾਯ ਕਵਚਾਯ ਹੁਂ",
       "mr": "त्रिसामा सामगस्सामेति बलाय कवचाय हुं",
@@ -823,7 +926,9 @@
             "dhatu": "tri (three) + sāma (Sama hymn)",
             "meaning": "One praised by the three principal Sama hymns (Devavratam, Brihat, Rathantaram)"
           },
-          "gunaVarga": ["vedamaya"]
+          "gunaVarga": [
+            "vedamaya"
+          ]
         },
         {
           "nama": "सामग",
@@ -832,7 +937,9 @@
             "dhatu": "sāma + ga (knower, singer)",
             "meaning": "Knower/Singer of Sama Veda"
           },
-          "gunaVarga": ["vedamaya"]
+          "gunaVarga": [
+            "vedamaya"
+          ]
         },
         {
           "nama": "साम",
@@ -841,7 +948,9 @@
             "dhatu": "sā (to bind, complete)",
             "meaning": "The Sama Veda itself; Sacred song; Harmony"
           },
-          "gunaVarga": ["vedamaya"]
+          "gunaVarga": [
+            "vedamaya"
+          ]
         }
       ],
       "note": "The kavacha (armor/chest) is associated with bala (strength). 'Hum' is a powerful bija mantra that invokes protection. The Sama Veda's sacred melodies form spiritual armor."
@@ -852,7 +961,7 @@
       "iast": "rathāṅgapāṇi rakṣōbhya iti nētrābhyāṃ vauṣaṭ",
       "knda": "ರಥಾಂಗಪಾಣಿ ರಕ್ಷೋಭ್ಯ ಇತಿ ನೇತ್ರಾಭ್ಯಾಂ ವೌಷಟ್",
       "tel": "రథాంగపాణి రక్షోభ్య ఇతి నేత్రాభ్యాం వౌషట్",
-      "tam": "ரதா²ங்க³பாணி ரக்ஷோப்⁴ய இதி நேத்ராப்⁴யாம் வௌஷட்",
+      "tam": "ரதாங்கபாணி ரக்ஷோப்ய இதி நேத்ராப்யாம் வௌஷட்",
       "guj": "રથાંગપાણિ રક્ષોભ્ય ઇતિ નેત્રાભ્યાં વૌષટ્",
       "pan": "ਰਥਾਂਗਪਾਣਿ ਰਕ੍ਸ਼ੋਭ੍ਯ ਇਤਿ ਨੇਤ੍ਰਾਭ੍ਯਾਂ ਵੌਸ਼ਟ੍",
       "mr": "रथांगपाणि रक्षोभ्य इति नेत्राभ्यां वौषट्",
@@ -867,7 +976,7 @@
       "iast": "śāṅgadhanvā gadādhara iti vīryāya astrāyaphaṭ",
       "knda": "ಶಾಂಗಧನ್ವಾ ಗದಾಧರ ಇತಿ ವೀರ್ಯಾಯ ಅಸ್ತ್ರಾಯಫಟ್",
       "tel": "శాంగధన్వా గదాధర ఇతి వీర్యాయ అస్త్రాయఫట్",
-      "tam": "ஶாங்க³த⁴ன்வா க³தா³த⁴ர இதி வீர்யாய அஸ்த்ராயப²ட்",
+      "tam": "ஶாங்கதன்வா கதாதர இதி வீர்யாய அஸ்த்ராயபட்",
       "guj": "શાંગધન્વા ગદાધર ઇતિ વીર્યાય અસ્ત્રાયફટ્",
       "pan": "ਸ਼ਾਂਗਧਨ੍ਵਾ ਗਦਾਧਰ ਇਤਿ ਵੀਰ੍ਯਾਯ ਅਸ੍ਤ੍ਰਾਯਫਟ੍",
       "mr": "शांगधन्वा गदाधर इति वीर्याय अस्त्रायफट्",
@@ -882,7 +991,10 @@
             "dhatu": "śārṅga (name of the divine bow) + dhanvan (bow-wielder)",
             "meaning": "Wielder of the Sharnga bow"
           },
-          "gunaVarga": ["āyudha", "vīrya"]
+          "gunaVarga": [
+            "āyudha",
+            "vīrya"
+          ]
         },
         {
           "nama": "गदाधर",
@@ -891,7 +1003,10 @@
             "dhatu": "gadā (mace) + dhara (holder)",
             "meaning": "Bearer of the mace Kaumodaki"
           },
-          "gunaVarga": ["āyudha", "vīrya"]
+          "gunaVarga": [
+            "āyudha",
+            "vīrya"
+          ]
         }
       ],
       "note": "The astra (weapon) placement is associated with virya (valor/potency). 'Phat' is a bija that dispels negative forces. A finger snap accompanies this, creating a protective barrier."
@@ -902,7 +1017,7 @@
       "iast": "ṛtuḥ sudarśanaḥ kāla iti digbhandhaḥ",
       "knda": "ಋತುಃ ಸುದರ್ಶನಃ ಕಾಲ ಇತಿ ದಿಗ್ಭಂಧಃ",
       "tel": "ఋతుః సుదర్శనః కాల ఇతి దిగ్భంధః",
-      "tam": "ருது: ஸுத³ர்ஶன: கால இதி தி³க்³ப⁴ந்த:⁴",
+      "tam": "ருது: ஸுதர்ஶன: கால இதி திக்பந்த:",
       "guj": "ઋતુઃ સુદર્શનઃ કાલ ઇતિ દિગ્ભંધઃ",
       "pan": "ਰੁਰੁਇਤੁਃ ਸੁਦਰ੍ਸ਼ਨਃ ਕਾਲ ਇਤਿ ਦਿਗ੍ਭਂਧਃ",
       "mr": "ऋतुः सुदर्शनः काल इति दिग्भंधः",
@@ -917,7 +1032,9 @@
             "dhatu": "ṛ (to go, move)",
             "meaning": "Season; The cyclic movement of time"
           },
-          "gunaVarga": ["kāla"]
+          "gunaVarga": [
+            "kāla"
+          ]
         },
         {
           "nama": "सुदर्शन",
@@ -926,7 +1043,10 @@
             "dhatu": "su (good, beautiful) + darśana (vision, appearance)",
             "meaning": "Beautiful to behold; Also the divine discus"
           },
-          "gunaVarga": ["saundarya", "āyudha"]
+          "gunaVarga": [
+            "saundarya",
+            "āyudha"
+          ]
         },
         {
           "nama": "काल",
@@ -935,7 +1055,10 @@
             "dhatu": "kal (to count, drive)",
             "meaning": "Time; The cosmic force that governs all change"
           },
-          "gunaVarga": ["kāla", "sarvavyāpakatva"]
+          "gunaVarga": [
+            "kāla",
+            "sarvavyāpakatva"
+          ]
         }
       ],
       "note": "Digbandha seals all directions (the four cardinal, four intermediate, plus zenith and nadir). Vishnu as Time encompasses all directions and moments."
@@ -946,7 +1069,7 @@
       "iast": "dhyānam",
       "knda": "ಧ್ಯಾನಂ",
       "tel": "ధ్యానం",
-      "tam": "த்⁴யானம்",
+      "tam": "த்யானம்",
       "guj": "ધ્યાનમ્",
       "pan": "ਧ੍ਯਾਨਮ੍",
       "mr": "ध्यानम्",

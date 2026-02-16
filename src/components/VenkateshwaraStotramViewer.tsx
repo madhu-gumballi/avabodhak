@@ -9,7 +9,7 @@ interface Props {
   initialLineIndex?: number;
 }
 
-const AVAILABLE_LANGS: Lang[] = ['knda'];
+const AVAILABLE_LANGS: Lang[] = ['knda', 'iast'];
 
 const SUBTITLE_OVERRIDES: Partial<Record<Lang, string>> = {
   knda: 'ಶ್ರೀ ವೇಂಕಟೇಶ್ವರ ಸ್ತೋತ್ರಂ',

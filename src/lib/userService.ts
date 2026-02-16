@@ -137,18 +137,19 @@ export async function getUserDocument(user: User): Promise<UserDocument> {
 
   if (userSnap.exists()) {
     const data = userSnap.data() as UserDocument
-    // Backfill region for existing users
+    // Backfill region for existing users — fire-and-forget so quota errors
+    // (or network issues) don't block the app from loading.
     if (!data.profile.region) {
       data.profile.region = detectRegionFromTimezone()
-      await updateDoc(userRef, {
+      updateDoc(userRef, {
         'profile.lastLoginAt': serverTimestamp(),
         'profile.region': data.profile.region,
-      })
+      }).catch(() => {})
     } else {
-      // Update last login
-      await updateDoc(userRef, {
+      // Update last login (non-blocking)
+      updateDoc(userRef, {
         'profile.lastLoginAt': serverTimestamp(),
-      })
+      }).catch(() => {})
     }
     cacheUserData(data)
     return data

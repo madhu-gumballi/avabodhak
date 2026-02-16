@@ -38,7 +38,7 @@ import {
   endSession,
 } from '../lib/userService'
 import { checkAchievementAfterAction, ACHIEVEMENTS } from '../lib/achievements'
-import { updateLeaderboardEntry, invalidateLeaderboardCache } from '../lib/leaderboard'
+import { updateLeaderboardEntry, invalidateLeaderboardCache, getOrResetPeriodStats } from '../lib/leaderboard'
 import { syncAllPracticeToFirestore, bulkLoadPracticeFromFirestore } from '../lib/practice'
 import { syncAllPuzzleToFirestore, bulkLoadPuzzleFromFirestore, bulkLoadPuzzleCompletionsFromFirestore } from '../lib/puzzle'
 
@@ -113,16 +113,18 @@ export function AuthProvider({ children }: AuthProviderProps) {
           // Get or create user document
           const userDoc = await getUserDocument(firebaseUser)
           setUserData(userDoc)
+          setLoading(false)
 
           // Load cloud progress into localStorage in parallel (for cross-device sync)
+          // These run after loading=false so the UI is already usable.
           await Promise.all([
             bulkLoadPracticeFromFirestore(firebaseUser.uid),
             bulkLoadPuzzleFromFirestore(firebaseUser.uid),
             bulkLoadPuzzleCompletionsFromFirestore(firebaseUser.uid),
-          ])
+          ]).catch(() => {})
 
           // Check and reset daily goals
-          await checkAndResetDailyGoals(firebaseUser.uid)
+          await checkAndResetDailyGoals(firebaseUser.uid).catch(() => {})
 
           // Start session tracking
           startSession()
@@ -138,14 +140,14 @@ export function AuthProvider({ children }: AuthProviderProps) {
           if (cached) {
             setUserData(cached)
           }
+          setLoading(false)
         }
       } else {
         // User not authenticated - show login prompt
         setUserData(null)
         setShowLoginPrompt(true)
+        setLoading(false)
       }
-
-      setLoading(false)
     })
 
     return () => unsubscribe()
@@ -327,9 +329,22 @@ export function AuthProvider({ children }: AuthProviderProps) {
   const recordLineComplete = useCallback(async (): Promise<AchievementId[]> => {
     const userId = user?.uid || 'guest'
 
-    // Update stats
+    // Reset period counters if period rolled over, then increment.
+    // IMPORTANT: persist ALL period counters (lines + puzzles) so that a
+    // period rollover properly zeroes out the counters we're NOT incrementing.
+    const periodStats = getOrResetPeriodStats(userData?.stats || {} as UserStats)
     const newTotal = (userData?.stats.totalLinesCompleted || 0) + 1
-    await updateStats({ totalLinesCompleted: newTotal })
+    await updateStats({
+      totalLinesCompleted: newTotal,
+      weeklyLinesCompleted: (periodStats.weeklyLinesCompleted || 0) + 1,
+      weeklyPuzzlesSolved: periodStats.weeklyPuzzlesSolved || 0,
+      weeklyPerfectPuzzles: periodStats.weeklyPerfectPuzzles || 0,
+      weeklyPeriodStart: periodStats.weeklyPeriodStart,
+      monthlyLinesCompleted: (periodStats.monthlyLinesCompleted || 0) + 1,
+      monthlyPuzzlesSolved: periodStats.monthlyPuzzlesSolved || 0,
+      monthlyPerfectPuzzles: periodStats.monthlyPerfectPuzzles || 0,
+      monthlyPeriodStart: periodStats.monthlyPeriodStart,
+    })
 
     // Update daily goals
     await incrementDailyLines(userId)
@@ -362,12 +377,25 @@ export function AuthProvider({ children }: AuthProviderProps) {
     async (perfect: boolean): Promise<AchievementId[]> => {
       const userId = user?.uid || 'guest'
 
-      // Update stats
+      // Reset period counters if period rolled over, then increment.
+      // IMPORTANT: persist ALL period counters (lines + puzzles) so that a
+      // period rollover properly zeroes out the counters we're NOT incrementing.
+      const periodStats = getOrResetPeriodStats(userData?.stats || {} as UserStats)
       const updates: Partial<UserStats> = {
         totalPuzzlesSolved: (userData?.stats.totalPuzzlesSolved || 0) + 1,
+        weeklyLinesCompleted: periodStats.weeklyLinesCompleted || 0,
+        weeklyPuzzlesSolved: (periodStats.weeklyPuzzlesSolved || 0) + 1,
+        weeklyPerfectPuzzles: periodStats.weeklyPerfectPuzzles || 0,
+        weeklyPeriodStart: periodStats.weeklyPeriodStart,
+        monthlyLinesCompleted: periodStats.monthlyLinesCompleted || 0,
+        monthlyPuzzlesSolved: (periodStats.monthlyPuzzlesSolved || 0) + 1,
+        monthlyPerfectPuzzles: periodStats.monthlyPerfectPuzzles || 0,
+        monthlyPeriodStart: periodStats.monthlyPeriodStart,
       }
       if (perfect) {
         updates.perfectPuzzles = (userData?.stats.perfectPuzzles || 0) + 1
+        updates.weeklyPerfectPuzzles = (periodStats.weeklyPerfectPuzzles || 0) + 1
+        updates.monthlyPerfectPuzzles = (periodStats.monthlyPerfectPuzzles || 0) + 1
       }
       await updateStats(updates)
 

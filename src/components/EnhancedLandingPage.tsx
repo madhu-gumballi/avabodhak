@@ -676,6 +676,7 @@ export function EnhancedLandingPage({ onSelectStotra }: LandingPageProps) {
                     </IconButton>
                     {(user || isGuest) ? (
                         <UserMenu
+                            lang={selectedLang}
                             onShowAchievements={() => setAchievementsPanelOpen(true)}
                             onShowLeaderboard={() => setLeaderboardPanelOpen(true)}
                         />

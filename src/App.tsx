@@ -51,9 +51,15 @@ function AppContent() {
     setInitialLineIndex(undefined);
   };
 
-  // Show nothing while loading auth state
+  // Show loading spinner while auth state initializes
   if (loading) {
-    return null;
+    return (
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100vh', gap: 24 }}>
+        <div style={{ width: 48, height: 48, border: '3px solid rgba(14,165,233,0.2)', borderTopColor: '#0ea5e9', borderRadius: '50%', animation: 'spin 0.8s linear infinite' }} />
+        <div style={{ color: '#94a3b8', fontSize: 14 }}>Loading Avabodhak...</div>
+        <style>{`@keyframes spin{to{transform:rotate(360deg)}}`}</style>
+      </div>
+    );
   }
 
   return (

@@ -10,9 +10,9 @@ export function isTTSEnabled(): boolean {
   return TTS_ENABLED;
 }
 
-// Supported languages for TTS
+// Supported languages for TTS (English/IAST excluded due to poor quality)
 export function isTTSSupportedForLang(lang: string): boolean {
-  const supported = ['deva', 'knda', 'tel', 'tam', 'pan', 'guj', 'mr', 'ben', 'mal', 'iast'];
+  const supported = ['deva', 'knda', 'tel', 'tam', 'pan', 'guj', 'mr', 'ben', 'mal'];
   return supported.includes(lang);
 }
 
@@ -40,6 +40,27 @@ async function putCachedAudio(lang: string, text: string, response: Response): P
     await cache.put(ttsCacheKey(lang, text), response.clone());
   } catch {
     // Cache API unavailable (e.g. Firefox private browsing)
+  }
+}
+
+// --------------- Cache management ---------------
+
+/** Delete a specific entry from the browser TTS cache */
+export async function clearTTSCacheEntry(lang: string, text: string): Promise<boolean> {
+  try {
+    const cache = await caches.open(TTS_CACHE_NAME);
+    return await cache.delete(ttsCacheKey(lang, text));
+  } catch {
+    return false;
+  }
+}
+
+/** Delete all entries from the browser TTS cache */
+export async function clearAllTTSCache(): Promise<boolean> {
+  try {
+    return await caches.delete(TTS_CACHE_NAME);
+  } catch {
+    return false;
   }
 }
 

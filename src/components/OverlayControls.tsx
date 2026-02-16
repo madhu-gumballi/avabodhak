@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import RecordVoiceOverIcon from '@mui/icons-material/RecordVoiceOver';
 import StopIcon from '@mui/icons-material/Stop';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
@@ -20,12 +20,35 @@ interface Props {
   ttsSupported?: boolean;
 }
 
+const AUTO_HIDE_DELAY = 2500; // ms before buttons fade out
+
 export function OverlayControls({ visible, onVisibleChange, ttsPlaying, onTTSToggle, onPrevLine, onNextLine, onNudged, indicator, atEnd, onReplay, navLineNumber, totalLines, ttsSupported }: Props) {
   const rootRef = useRef<HTMLDivElement>(null);
   const lastTapRef = useRef<{ t: number; x: number } | null>(null);
   const clickTimerRef = useRef<number | null>(null);
   const centerBtnRef = useRef<HTMLButtonElement>(null);
   const lastTouchTimeRef = useRef<number>(0);
+  const fadeTimerRef = useRef<number | null>(null);
+  const [fading, setFading] = useState(false);
+
+  // Auto-hide: start fade timer when buttons become visible
+  useEffect(() => {
+    if (fadeTimerRef.current) window.clearTimeout(fadeTimerRef.current);
+    if (visible) {
+      setFading(false);
+      fadeTimerRef.current = window.setTimeout(() => {
+        setFading(true);
+        // After the CSS transition completes, hide completely
+        fadeTimerRef.current = window.setTimeout(() => {
+          onVisibleChange(false);
+          setFading(false);
+        }, 500) as unknown as number;
+      }, AUTO_HIDE_DELAY) as unknown as number;
+    }
+    return () => {
+      if (fadeTimerRef.current) window.clearTimeout(fadeTimerRef.current);
+    };
+  }, [visible, onVisibleChange]);
 
   useEffect(() => {
     const el = rootRef.current;
@@ -155,23 +178,43 @@ export function OverlayControls({ visible, onVisibleChange, ttsPlaying, onTTSTog
     <div ref={rootRef} className="absolute inset-0 z-20 select-none">
       <div className="w-full h-full">
         {visible && (
-          <div className="absolute inset-0 flex items-end justify-center pb-12">
-            <div className="absolute inset-0 bg-black/10" />
-            <div className="flex items-center justify-between w-full px-8">
-              <button aria-label="Prev Line" onClick={(e) => { e.stopPropagation(); onPrevLine(); onNudged && onNudged('prev'); }} className="rounded-full bg-slate-900/40 backdrop-blur-sm border border-slate-600/30 text-slate-300/70 p-4 hover:bg-slate-800/60 hover:text-slate-100 hover:scale-110 transition-all shadow-lg">
-                <ChevronLeftIcon fontSize="large" />
-              </button>
-              <button aria-label="Next Line" onClick={(e) => { e.stopPropagation(); onNextLine(); onNudged && onNudged('next'); }} className="rounded-full bg-slate-900/40 backdrop-blur-sm border border-slate-600/30 text-slate-300/70 p-4 hover:bg-slate-800/60 hover:text-slate-100 hover:scale-110 transition-all shadow-lg">
-                <ChevronRightIcon fontSize="large" />
-              </button>
-            </div>
-            {atEnd && (
-              <div className="absolute bottom-8 left-1/2 -translate-x-1/2">
-                <button onClick={(e) => { e.stopPropagation(); onReplay && onReplay(); }} className="px-3 py-1.5 rounded-full bg-slate-900/80 border border-slate-700/70 text-slate-100 shadow">
-                  Replay from start
-                </button>
-              </div>
-            )}
+          <div
+            className="absolute inset-0 flex items-center justify-between pointer-events-none"
+            style={{
+              opacity: fading ? 0 : 1,
+              transition: 'opacity 500ms ease-out',
+            }}
+          >
+            <div className="absolute inset-0 bg-black/10 pointer-events-auto" />
+            {/* Left arrow - positioned outside the text area on the left edge */}
+            <button
+              aria-label="Prev Line"
+              onClick={(e) => { e.stopPropagation(); onPrevLine(); onNudged && onNudged('prev'); }}
+              className="relative z-10 pointer-events-auto rounded-full bg-slate-900/60 backdrop-blur-sm border border-slate-600/30 text-slate-300/80 p-2.5 hover:bg-slate-800/70 hover:text-slate-100 hover:scale-110 transition-all shadow-lg ml-1.5"
+            >
+              <ChevronLeftIcon fontSize="medium" />
+            </button>
+            {/* Right arrow - positioned outside the text area on the right edge */}
+            <button
+              aria-label="Next Line"
+              onClick={(e) => { e.stopPropagation(); onNextLine(); onNudged && onNudged('next'); }}
+              className="relative z-10 pointer-events-auto rounded-full bg-slate-900/60 backdrop-blur-sm border border-slate-600/30 text-slate-300/80 p-2.5 hover:bg-slate-800/70 hover:text-slate-100 hover:scale-110 transition-all shadow-lg mr-1.5"
+            >
+              <ChevronRightIcon fontSize="medium" />
+            </button>
+          </div>
+        )}
+        {visible && atEnd && (
+          <div
+            className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10"
+            style={{
+              opacity: fading ? 0 : 1,
+              transition: 'opacity 500ms ease-out',
+            }}
+          >
+            <button onClick={(e) => { e.stopPropagation(); onReplay && onReplay(); }} className="px-3 py-1.5 rounded-full bg-slate-900/80 border border-slate-700/70 text-slate-100 shadow">
+              Replay from start
+            </button>
           </div>
         )}
         {indicator?.show && indicator.dir === 'prev' && (

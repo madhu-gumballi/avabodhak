@@ -1,10 +1,8 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import {
   Box,
   IconButton,
-  Tooltip,
   Paper,
-  Slide,
   Drawer,
   Typography,
   Select,
@@ -22,6 +20,7 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import TranslateIcon from '@mui/icons-material/Translate';
 import HelpOutlineRoundedIcon from '@mui/icons-material/HelpOutlineRounded';
 import MapIcon from '@mui/icons-material/Map';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
 import type { Lang } from '../data/types';
 
 type ViewMode = 'reading' | 'practice' | 'puzzle';
@@ -44,12 +43,14 @@ interface MobileModeDockProps {
   T: (key: string) => string;
 }
 
+const AUTO_HIDE_MS = 3000; // auto-collapse after action
+
 /**
- * MobileModeDock - Floating bottom navigation for mobile devices
- * Groups mode toggles in an intuitive, thumb-friendly dock
+ * MobileModeDock - Collapsible right-edge dock for mobile devices.
  *
- * Layout: [ Practice | Puzzle | Read | Details | More ]
- * (Practice/Puzzle first for thumb-friendly access to learning features)
+ * Collapsed: a small tab sticks out from the right edge of the screen.
+ * Expanded: slides out to show mode toggles + actions, then auto-collapses
+ *           after the user takes an action or after a timeout.
  */
 export function MobileModeDock({
   viewMode,
@@ -68,7 +69,46 @@ export function MobileModeDock({
   labelFn,
   T,
 }: MobileModeDockProps) {
+  const [expanded, setExpanded] = useState(false);
   const [settingsOpen, setSettingsOpen] = useState(false);
+  const hideTimerRef = useRef<number | null>(null);
+
+  const clearHideTimer = useCallback(() => {
+    if (hideTimerRef.current) {
+      window.clearTimeout(hideTimerRef.current);
+      hideTimerRef.current = null;
+    }
+  }, []);
+
+  const scheduleHide = useCallback(() => {
+    clearHideTimer();
+    hideTimerRef.current = window.setTimeout(() => {
+      setExpanded(false);
+    }, AUTO_HIDE_MS) as unknown as number;
+  }, [clearHideTimer]);
+
+  // When dock expands, start the auto-hide timer
+  useEffect(() => {
+    if (expanded) {
+      scheduleHide();
+    } else {
+      clearHideTimer();
+    }
+    return clearHideTimer;
+  }, [expanded, scheduleHide, clearHideTimer]);
+
+  // After an action, collapse the dock
+  const handleAction = useCallback(
+    (action: () => void) => {
+      action();
+      // Short delay so the user sees visual feedback before collapse
+      clearHideTimer();
+      hideTimerRef.current = window.setTimeout(() => {
+        setExpanded(false);
+      }, 400) as unknown as number;
+    },
+    [clearHideTimer],
+  );
 
   const DockButton = ({
     active,
@@ -92,12 +132,12 @@ export function MobileModeDock({
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        minWidth: { xs: 40, sm: 56 },
         position: 'relative',
+        minWidth: 48,
       }}
     >
       <IconButton
-        onClick={onClick}
+        onClick={() => handleAction(onClick)}
         sx={{
           color: active ? color || '#0ea5e9' : '#94a3b8',
           bgcolor: active ? `${color || '#0ea5e9'}20` : 'transparent',
@@ -106,14 +146,14 @@ export function MobileModeDock({
           },
           transition: 'all 0.2s ease',
           position: 'relative',
+          p: 1,
         }}
       >
-        {/* Progress ring around icon */}
         {progress !== undefined && progress > 0 && (
           <CircularProgress
             variant="determinate"
             value={progress}
-            size={36}
+            size={32}
             thickness={2}
             sx={{
               position: 'absolute',
@@ -143,29 +183,29 @@ export function MobileModeDock({
       <Typography
         variant="caption"
         sx={{
-          fontSize: '0.6rem',
+          fontSize: '0.55rem',
           color: active ? color || '#0ea5e9' : '#64748b',
-          mt: 0.25,
+          mt: 0.125,
           fontWeight: active ? 600 : 400,
+          lineHeight: 1,
         }}
       >
         {label}
       </Typography>
-      {/* Completion indicator */}
       {progress !== undefined && progress >= 100 && (
         <Box
           sx={{
             position: 'absolute',
             top: -2,
-            right: 4,
-            width: 12,
-            height: 12,
+            right: 2,
+            width: 10,
+            height: 10,
             borderRadius: '50%',
             bgcolor: '#22c55e',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            fontSize: '0.5rem',
+            fontSize: '0.45rem',
             color: 'white',
             fontWeight: 'bold',
           }}
@@ -176,93 +216,138 @@ export function MobileModeDock({
     </Box>
   );
 
+  // --- Collapsed tab (right edge) ---
+  if (!expanded) {
+    return (
+      <Box
+        onClick={() => setExpanded(true)}
+        sx={{
+          position: 'fixed',
+          right: 0,
+          bottom: '40%',
+          zIndex: 1200,
+          cursor: 'pointer',
+          display: 'flex',
+          alignItems: 'center',
+          // Small tab that sticks out from right edge
+          bgcolor: 'rgba(15, 23, 42, 0.85)',
+          backdropFilter: 'blur(8px)',
+          border: '1px solid rgba(51, 65, 85, 0.6)',
+          borderRight: 'none',
+          borderRadius: '12px 0 0 12px',
+          px: 0.5,
+          py: 1.5,
+          boxShadow: '-2px 0 12px rgba(0,0,0,0.3)',
+          transition: 'transform 0.2s ease, opacity 0.2s ease',
+          '&:active': { transform: 'scale(0.95)' },
+        }}
+      >
+        <MoreVertIcon sx={{ color: '#94a3b8', fontSize: 20 }} />
+      </Box>
+    );
+  }
+
+  // --- Expanded dock ---
   return (
     <>
-      {/* Floating Dock */}
-      <Slide direction="up" in={true} mountOnEnter unmountOnExit>
-        <Paper
-          elevation={8}
-          sx={{
-            position: 'fixed',
-            bottom: 12,
-            left: '50%',
-            transform: 'translateX(-50%)',
-            maxWidth: 'calc(100vw - 24px)',
-            borderRadius: 4,
-            bgcolor: 'rgba(15, 23, 42, 0.95)',
-            backdropFilter: 'blur(12px)',
-            border: '1px solid rgba(51, 65, 85, 0.6)',
-            px: { xs: 0.25, sm: 1 },
-            py: 0.75,
-            display: 'flex',
-            justifyContent: 'center',
-            flexWrap: 'nowrap',
-            gap: { xs: 0, sm: 0.5 },
-            zIndex: 1200,
-            boxShadow: '0 8px 32px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.05) inset',
+      {/* Backdrop to dismiss */}
+      <Box
+        onClick={() => setExpanded(false)}
+        sx={{
+          position: 'fixed',
+          inset: 0,
+          zIndex: 1199,
+        }}
+      />
+
+      {/* Expanded panel on right edge */}
+      <Paper
+        elevation={8}
+        sx={{
+          position: 'fixed',
+          right: 0,
+          bottom: '18%',
+          zIndex: 1200,
+          borderRadius: '16px 0 0 16px',
+          bgcolor: 'rgba(15, 23, 42, 0.95)',
+          backdropFilter: 'blur(12px)',
+          border: '1px solid rgba(51, 65, 85, 0.6)',
+          borderRight: 'none',
+          py: 1.5,
+          px: 0.75,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          gap: 0.5,
+          boxShadow: '-4px 0 24px rgba(0,0,0,0.4)',
+          animation: 'slideInRight 200ms ease-out',
+          '@keyframes slideInRight': {
+            from: { transform: 'translateX(100%)' },
+            to: { transform: 'translateX(0)' },
+          },
+        }}
+      >
+        {/* Practice */}
+        <DockButton
+          active={viewMode === 'practice'}
+          color="#3b82f6"
+          onClick={() => onViewModeChange(viewMode === 'practice' ? 'reading' : 'practice')}
+          icon={<SchoolIcon fontSize="small" />}
+          label="Practice"
+          progress={practiceProgress}
+        />
+
+        {/* Puzzle */}
+        <DockButton
+          active={viewMode === 'puzzle'}
+          color="#8b5cf6"
+          onClick={() => onViewModeChange(viewMode === 'puzzle' ? 'reading' : 'puzzle')}
+          icon={<GridViewIcon fontSize="small" />}
+          label="Puzzle"
+          progress={puzzleProgress}
+        />
+
+        <Divider sx={{ borderColor: 'rgba(51,65,85,0.6)', width: '80%', my: 0.25 }} />
+
+        {/* Read */}
+        <DockButton
+          active={viewMode === 'reading'}
+          color="#0ea5e9"
+          onClick={() => {
+            if (viewMode !== 'reading') onViewModeChange('reading');
           }}
-        >
-          {/* Practice Mode - First for thumb-friendly access */}
-          <DockButton
-            active={viewMode === 'practice'}
-            color="#3b82f6"
-            onClick={() => onViewModeChange(viewMode === 'practice' ? 'reading' : 'practice')}
-            icon={<SchoolIcon fontSize="small" />}
-            label="Practice"
-            progress={practiceProgress}
-          />
+          icon={<AutoStoriesIcon fontSize="small" />}
+          label="Read"
+        />
 
-          {/* Puzzle Mode */}
-          <DockButton
-            active={viewMode === 'puzzle'}
-            color="#8b5cf6"
-            onClick={() => onViewModeChange(viewMode === 'puzzle' ? 'reading' : 'puzzle')}
-            icon={<GridViewIcon fontSize="small" />}
-            label="Puzzle"
-            progress={puzzleProgress}
-          />
+        {/* Verse Details */}
+        <DockButton
+          active={verseDetailOpen}
+          color="#a78bfa"
+          onClick={onVerseDetailToggle}
+          icon={<InfoOutlinedIcon fontSize="small" />}
+          label="Details"
+        />
 
-          {/* Divider - hidden on very small screens */}
-          <Divider orientation="vertical" flexItem sx={{ borderColor: 'rgba(51,65,85,0.6)', mx: 0.5, display: { xs: 'none', sm: 'block' } }} />
+        <Divider sx={{ borderColor: 'rgba(51,65,85,0.6)', width: '80%', my: 0.25 }} />
 
-          {/* Read Mode */}
-          <DockButton
-            active={viewMode === 'reading'}
-            color="#0ea5e9"
-            onClick={() => {
-              if (viewMode !== 'reading') onViewModeChange('reading');
-            }}
-            icon={<AutoStoriesIcon fontSize="small" />}
-            label="Read"
-          />
-
-          {/* Verse Details */}
-          <DockButton
-            active={verseDetailOpen}
-            color="#a78bfa"
-            onClick={onVerseDetailToggle}
-            icon={<InfoOutlinedIcon fontSize="small" />}
-            label="Details"
-          />
-
-          {/* Divider - hidden on very small screens */}
-          <Divider orientation="vertical" flexItem sx={{ borderColor: 'rgba(51,65,85,0.6)', mx: 0.5, display: { xs: 'none', sm: 'block' } }} />
-
-          {/* Settings/More */}
-          <DockButton
-            onClick={() => setSettingsOpen(true)}
-            icon={<SettingsIcon fontSize="small" />}
-            label="More"
-            badge={!!lang2}
-          />
-        </Paper>
-      </Slide>
+        {/* Settings/More */}
+        <DockButton
+          onClick={() => setSettingsOpen(true)}
+          icon={<SettingsIcon fontSize="small" />}
+          label="More"
+          badge={!!lang2}
+        />
+      </Paper>
 
       {/* Settings Drawer */}
       <Drawer
         anchor="bottom"
         open={settingsOpen}
-        onClose={() => setSettingsOpen(false)}
+        onClose={() => {
+          setSettingsOpen(false);
+          setExpanded(false);
+        }}
         PaperProps={{
           sx: {
             bgcolor: 'rgba(15, 23, 42, 0.98)',
@@ -359,6 +444,7 @@ export function MobileModeDock({
             <Box
               onClick={() => {
                 setSettingsOpen(false);
+                setExpanded(false);
                 onExploreOpen();
               }}
               sx={{
@@ -384,6 +470,7 @@ export function MobileModeDock({
             <Box
               onClick={() => {
                 setSettingsOpen(false);
+                setExpanded(false);
                 onHelpOpen();
               }}
               sx={{
