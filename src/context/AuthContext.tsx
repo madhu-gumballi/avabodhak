@@ -68,6 +68,9 @@ interface AuthContextType {
   recordPuzzleComplete: (perfect: boolean) => Promise<AchievementId[]>
   recordActivity: () => Promise<{ streak: number }>
 
+  // Feedback
+  recordFeedbackSubmit: () => Promise<AchievementId[]>
+
   // Achievement state
   newAchievement: AchievementId | null
   clearNewAchievement: () => void
@@ -442,6 +445,19 @@ export function AuthProvider({ children }: AuthProviderProps) {
     return { streak: current }
   }, [user, refreshUserData])
 
+  // Record feedback submission (triggers achievement check)
+  const recordFeedbackSubmit = useCallback(async (): Promise<AchievementId[]> => {
+    const userId = user?.uid || 'guest'
+    const newAchievements = await checkAchievementAfterAction(userId, 'feedback_submit', {
+      feedbackGiven: true,
+    })
+    if (newAchievements.length > 0) {
+      setNewAchievement(newAchievements[0])
+      await refreshUserData()
+    }
+    return newAchievements
+  }, [user, refreshUserData])
+
   // Clear new achievement notification
   const clearNewAchievement = useCallback(() => {
     setNewAchievement(null)
@@ -465,6 +481,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     recordLineComplete,
     recordPuzzleComplete,
     recordActivity,
+    recordFeedbackSubmit,
     newAchievement,
     clearNewAchievement,
   }

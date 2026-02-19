@@ -51,6 +51,7 @@ export function getAchievementShareContent(achievementId: AchievementId): ShareC
     hari_master: `${emoji} I completed the Hari Stuti on ${APP_NAME}! ${APP_HASHTAG}`,
     keshava_master: `${emoji} I completed the Keshava Nama on ${APP_NAME}! ${APP_HASHTAG}`,
     vayu_master: `${emoji} I completed the Vayu Stuti on ${APP_NAME}! ${APP_HASHTAG}`,
+    feedback_given: `${emoji} I shared my feedback on ${APP_NAME}! Every voice matters. ${APP_HASHTAG}`,
   }
 
   return {
@@ -188,6 +189,72 @@ export async function copyToClipboard(content: ShareContent): Promise<boolean> {
       return false
     }
   }
+}
+
+/**
+ * Share content with an image file using Web Share API
+ * Falls back to text-only share + image download on unsupported platforms
+ */
+export async function shareWithImage(
+  content: ShareContent,
+  imageBlob: Blob,
+  fileName: string = 'achievement.png'
+): Promise<boolean> {
+  const file = new File([imageBlob], fileName, { type: 'image/png' })
+
+  // Try native share with file
+  if (navigator.share) {
+    const shareData: ShareData = {
+      title: content.title,
+      text: content.text,
+      url: content.url,
+      files: [file],
+    }
+
+    // Check if sharing files is supported
+    if (navigator.canShare?.(shareData)) {
+      try {
+        await navigator.share(shareData)
+        return true
+      } catch (error) {
+        if ((error as Error).name === 'AbortError') return false
+      }
+    }
+
+    // Fall back to text-only native share + download image
+    try {
+      downloadBlob(imageBlob, fileName)
+      await navigator.share({
+        title: content.title,
+        text: content.text,
+        url: content.url,
+      })
+      return true
+    } catch (error) {
+      if ((error as Error).name !== 'AbortError') {
+        console.error('Share failed:', error)
+      }
+      return false
+    }
+  }
+
+  // No native share — just download the image
+  downloadBlob(imageBlob, fileName)
+  return true
+}
+
+/**
+ * Download a Blob as a file (fallback for desktop)
+ */
+export function downloadBlob(blob: Blob, fileName: string): void {
+  const url = URL.createObjectURL(blob)
+  const a = document.createElement('a')
+  a.href = url
+  a.download = fileName
+  document.body.appendChild(a)
+  a.click()
+  document.body.removeChild(a)
+  URL.revokeObjectURL(url)
 }
 
 /**

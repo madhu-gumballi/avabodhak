@@ -142,6 +142,13 @@ export const ACHIEVEMENTS: Record<AchievementId, AchievementDefinition> = {
     icon: '💨',
     criteria: 'Complete both practice and puzzle modes for all Vayu Stuti lines',
   },
+  feedback_given: {
+    id: 'feedback_given',
+    name: 'Voice Heard',
+    description: 'Submit your first feedback',
+    icon: '💬',
+    criteria: 'Share your feedback about the app',
+  },
 }
 
 // Get all achievement definitions
@@ -181,6 +188,7 @@ interface AchievementContext {
   sessionLinesCompleted?: number
   languagesUsed?: Set<string>
   totalStotras?: number
+  feedbackGiven?: boolean
 }
 
 // Achievement checkers
@@ -300,6 +308,10 @@ const checkers: Record<AchievementId, AchievementChecker> = {
     const puzzleComplete = (vayuProgress.puzzle.completedLines?.length || 0) >= 20
     return practiceComplete && puzzleComplete
   },
+
+  feedback_given: (_, __, context) => {
+    return context?.feedbackGiven === true
+  },
 }
 
 // Check all achievements and return newly unlocked ones
@@ -335,7 +347,7 @@ export async function checkAchievements(
 // Check specific achievement after an action
 export async function checkAchievementAfterAction(
   userId: string,
-  action: 'practice_complete' | 'puzzle_complete' | 'streak_update' | 'session_lines',
+  action: 'practice_complete' | 'puzzle_complete' | 'streak_update' | 'session_lines' | 'feedback_submit',
   context?: AchievementContext
 ): Promise<AchievementId[]> {
   const userData = getCachedUserData()
@@ -363,6 +375,9 @@ export async function checkAchievementAfterAction(
       break
     case 'session_lines':
       toCheck.push('speed_learner')
+      break
+    case 'feedback_submit':
+      toCheck.push('feedback_given')
       break
   }
 
@@ -454,6 +469,12 @@ export function getAchievementProgress(
         current: 0, // Would need progress data
         target: 2, // Practice + Puzzle completion
         percentage: 0,
+      }
+    case 'feedback_given':
+      return {
+        current: hasAchievement(userData, 'feedback_given') ? 1 : 0,
+        target: 1,
+        percentage: hasAchievement(userData, 'feedback_given') ? 100 : 0,
       }
     default:
       return {

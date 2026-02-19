@@ -20,6 +20,7 @@ import SettingsIcon from '@mui/icons-material/Settings'
 import PersonIcon from '@mui/icons-material/Person'
 import VolumeUpIcon from '@mui/icons-material/VolumeUp'
 import VolumeOffIcon from '@mui/icons-material/VolumeOff'
+import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline'
 import PublicIcon from '@mui/icons-material/Public'
 import { useAuth } from '../context/AuthContext'
 import StreakBadge from './StreakBadge'
@@ -35,6 +36,7 @@ const MENU_STRINGS: Record<string, Record<string, string>> = {
     streak_suffix: 'd',
     achievements: 'Achievements',
     leaderboard: 'Leaderboard',
+    feedback: 'Feedback',
     sound: 'Sound',
     region: 'Region',
     select_region: 'Select region',
@@ -48,6 +50,7 @@ const MENU_STRINGS: Record<string, Record<string, string>> = {
     streak_suffix: 'दि',
     achievements: 'उपलब्धियाँ',
     leaderboard: 'लीडरबोर्ड',
+    feedback: 'प्रतिक्रिया',
     sound: 'ध्वनि',
     region: 'क्षेत्र',
     select_region: 'क्षेत्र चुनें',
@@ -61,6 +64,7 @@ const MENU_STRINGS: Record<string, Record<string, string>> = {
     streak_suffix: 'ದಿ',
     achievements: 'ಸಾಧನೆಗಳು',
     leaderboard: 'ಲೀಡರ್‌ಬೋರ್ಡ್',
+    feedback: 'ಪ್ರತಿಕ್ರಿಯೆ',
     sound: 'ಧ್ವನಿ',
     region: 'ಪ್ರದೇಶ',
     select_region: 'ಪ್ರದೇಶ ಆಯ್ಕೆಮಾಡಿ',
@@ -74,6 +78,7 @@ const MENU_STRINGS: Record<string, Record<string, string>> = {
     streak_suffix: 'రో',
     achievements: 'సాధనలు',
     leaderboard: 'లీడర్‌బోర్డ్',
+    feedback: 'అభిప్రాయం',
     sound: 'ధ్వని',
     region: 'ప్రాంతం',
     select_region: 'ప్రాంతం ఎంచుకోండి',
@@ -87,6 +92,7 @@ const MENU_STRINGS: Record<string, Record<string, string>> = {
     streak_suffix: 'நா',
     achievements: 'சாதனைகள்',
     leaderboard: 'லீடர்போர்டு',
+    feedback: 'கருத்து',
     sound: 'ஒலி',
     region: 'பகுதி',
     select_region: 'பகுதியை தேர்வுசெய்க',
@@ -100,6 +106,7 @@ const MENU_STRINGS: Record<string, Record<string, string>> = {
     streak_suffix: 'ਦਿ',
     achievements: 'ਪ੍ਰਾਪਤੀਆਂ',
     leaderboard: 'ਲੀਡਰਬੋਰਡ',
+    feedback: 'ਫੀਡਬੈਕ',
     sound: 'ਧੁਨੀ',
     region: 'ਖੇਤਰ',
     select_region: 'ਖੇਤਰ ਚੁਣੋ',
@@ -113,6 +120,7 @@ const MENU_STRINGS: Record<string, Record<string, string>> = {
     streak_suffix: 'દિ',
     achievements: 'સિદ્ધિઓ',
     leaderboard: 'લીડરબોર્ડ',
+    feedback: 'ફીડબેક',
     sound: 'ધ્વનિ',
     region: 'પ્રદેશ',
     select_region: 'પ્રદેશ પસંદ કરો',
@@ -126,6 +134,7 @@ const MENU_STRINGS: Record<string, Record<string, string>> = {
     streak_suffix: 'दि',
     achievements: 'कामगिरी',
     leaderboard: 'लीडरबोर्ड',
+    feedback: 'अभिप्राय',
     sound: 'ध्वनी',
     region: 'प्रदेश',
     select_region: 'प्रदेश निवडा',
@@ -139,6 +148,7 @@ const MENU_STRINGS: Record<string, Record<string, string>> = {
     streak_suffix: 'দি',
     achievements: 'অর্জন',
     leaderboard: 'লিডারবোর্ড',
+    feedback: 'প্রতিক্রিয়া',
     sound: 'ধ্বনি',
     region: 'অঞ্চল',
     select_region: 'অঞ্চল নির্বাচন করুন',
@@ -152,6 +162,7 @@ const MENU_STRINGS: Record<string, Record<string, string>> = {
     streak_suffix: 'ദി',
     achievements: 'നേട്ടങ്ങൾ',
     leaderboard: 'ലീഡർബോർഡ്',
+    feedback: 'ഫീഡ്‌ബാക്ക്',
     sound: 'ശബ്ദം',
     region: 'പ്രദേശം',
     select_region: 'പ്രദേശം തിരഞ്ഞെടുക്കുക',
@@ -169,6 +180,7 @@ interface UserMenuProps {
   lang?: Lang
   onShowAchievements?: () => void
   onShowLeaderboard?: () => void
+  onShowFeedback?: () => void
   onShowSettings?: () => void
 }
 
@@ -176,6 +188,7 @@ export default function UserMenu({
   lang = 'iast',
   onShowAchievements,
   onShowLeaderboard,
+  onShowFeedback,
   onShowSettings,
 }: UserMenuProps) {
   const { user, userData, isGuest, signOut, updatePreferences, updateProfile } = useAuth()
@@ -202,6 +215,11 @@ export default function UserMenu({
   const handleLeaderboard = () => {
     handleClose()
     onShowLeaderboard?.()
+  }
+
+  const handleFeedback = () => {
+    handleClose()
+    onShowFeedback?.()
   }
 
   const handleSettings = () => {
@@ -249,6 +267,8 @@ export default function UserMenu({
             mt: 1,
             minWidth: 220,
             maxWidth: 260,
+            maxHeight: '80vh',
+            overflow: 'auto',
             bgcolor: 'rgba(15, 23, 42, 0.95)',
             backdropFilter: 'blur(12px)',
             border: '1px solid rgba(255, 255, 255, 0.1)',
@@ -299,6 +319,13 @@ export default function UserMenu({
             <LeaderboardIcon fontSize="small" sx={{ color: 'primary.light' }} />
           </ListItemIcon>
           <ListItemText>{menuT(lang, 'leaderboard')}</ListItemText>
+        </MenuItem>
+
+        <MenuItem onClick={handleFeedback}>
+          <ListItemIcon>
+            <ChatBubbleOutlineIcon fontSize="small" sx={{ color: '#a78bfa' }} />
+          </ListItemIcon>
+          <ListItemText>{menuT(lang, 'feedback')}</ListItemText>
         </MenuItem>
 
         <Divider sx={{ borderColor: 'rgba(255, 255, 255, 0.1)' }} />

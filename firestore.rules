@@ -26,6 +26,12 @@ service cloud.firestore {
       }
     }
 
+    // Feedback collection - authenticated users can create and read their own feedback
+    match /feedback/{feedbackId} {
+      allow create: if request.auth != null && request.resource.data.userId == request.auth.uid;
+      allow read: if request.auth != null && resource.data.userId == request.auth.uid;
+    }
+
     // Leaderboard collection - anyone authenticated can read, only cloud functions can write
     match /leaderboard/{period} {
       allow read: if request.auth != null;

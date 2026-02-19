@@ -130,6 +130,7 @@ export type AchievementId =
   | 'hari_master'
   | 'keshava_master'
   | 'vayu_master'
+  | 'feedback_given'
 
 export interface AchievementDefinition {
   id: AchievementId

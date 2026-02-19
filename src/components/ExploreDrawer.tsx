@@ -1,3 +1,4 @@
+import { useState, useEffect, useRef, useCallback } from 'react';
 import {
   Box,
   Drawer,
@@ -5,6 +6,7 @@ import {
   IconButton,
   Chip,
   Slider,
+  keyframes,
 } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
@@ -12,6 +14,12 @@ import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import FirstPageIcon from '@mui/icons-material/FirstPage';
 import LastPageIcon from '@mui/icons-material/LastPage';
 import type { Lang } from '../data/types';
+
+const pulseGold = keyframes`
+  0%   { transform: scale(1);    background-color: #fbbf24; }
+  50%  { transform: scale(1.35); background-color: #f59e0b; }
+  100% { transform: scale(1.15); background-color: #fbbf24; }
+`;
 
 interface ExploreDrawerProps {
   open: boolean;
@@ -40,6 +48,49 @@ export function ExploreDrawer({
   lang,
   T,
 }: ExploreDrawerProps) {
+  const [animTarget, setAnimTarget] = useState<number | null>(null);
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const targetRef = useRef<HTMLDivElement | null>(null);
+
+  // Clean up timer on unmount or when drawer closes
+  useEffect(() => {
+    if (!open) {
+      setAnimTarget(null);
+      if (timerRef.current) {
+        clearTimeout(timerRef.current);
+        timerRef.current = null;
+      }
+    }
+    return () => {
+      if (timerRef.current) {
+        clearTimeout(timerRef.current);
+        timerRef.current = null;
+      }
+    };
+  }, [open]);
+
+  // Scroll target block into view when animTarget is set
+  useEffect(() => {
+    if (animTarget !== null && targetRef.current) {
+      targetRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }, [animTarget]);
+
+  const handleBlockClick = useCallback((i: number) => {
+    if (i === current) return; // Already on this verse
+    // Cancel any in-flight animation
+    if (timerRef.current) {
+      clearTimeout(timerRef.current);
+    }
+    setAnimTarget(i);
+    timerRef.current = setTimeout(() => {
+      onSeek(i);
+      onClose();
+      setAnimTarget(null);
+      timerRef.current = null;
+    }, 600);
+  }, [current, onSeek, onClose]);
+
   // Group verses into chunks for visual display
   const chunkSize = 10;
   const chunks = Math.ceil(total / chunkSize);
@@ -54,6 +105,57 @@ export function ExploreDrawer({
   const currentChapter = chapterMarks.filter(c => c <= current).length || 1;
   const nextSection = sectionMarks.find(s => s > current);
   const prevSection = [...sectionMarks].reverse().find(s => s < current);
+
+  // Determine block styling based on animation state
+  const getBlockSx = (i: number) => {
+    const isAnimating = animTarget !== null;
+    const isCurrent = i === current;
+    const isTarget = i === animTarget;
+
+    if (isTarget) {
+      // Target block: pulse golden animation
+      return {
+        aspectRatio: '1',
+        borderRadius: 0.5,
+        bgcolor: '#fbbf24',
+        opacity: 1,
+        cursor: 'pointer',
+        animation: `${pulseGold} 0.5s ease forwards`,
+        border: '2px solid #fef3c7',
+        zIndex: 2,
+        position: 'relative' as const,
+      };
+    }
+
+    if (isCurrent && isAnimating) {
+      // Current block fading out during animation
+      return {
+        aspectRatio: '1',
+        borderRadius: 0.5,
+        bgcolor: '#fbbf24',
+        opacity: 0.4,
+        cursor: 'pointer',
+        transition: 'all 0.4s ease',
+        transform: 'scale(0.9)',
+        border: '2px solid #fef3c7',
+      };
+    }
+
+    // Normal state
+    return {
+      aspectRatio: '1',
+      borderRadius: 0.5,
+      bgcolor: isCurrent ? '#fbbf24' : getVerseColor(i),
+      opacity: isCurrent ? 1 : 0.6,
+      cursor: 'pointer',
+      transition: 'all 0.4s ease',
+      '&:hover': {
+        opacity: 1,
+        transform: 'scale(1.2)',
+      },
+      border: isCurrent ? '2px solid #fef3c7' : 'none',
+    };
+  };
 
   return (
     <Drawer
@@ -135,25 +237,9 @@ export function ExploreDrawer({
           {Array.from({ length: total }).map((_, i) => (
             <Box
               key={i}
-              onClick={() => {
-                onSeek(i);
-                onClose();
-              }}
-              sx={{
-                aspectRatio: '1',
-                borderRadius: 0.5,
-                bgcolor: i === current
-                  ? '#fbbf24'
-                  : getVerseColor(i),
-                opacity: i === current ? 1 : 0.6,
-                cursor: 'pointer',
-                transition: 'all 0.15s ease',
-                '&:hover': {
-                  opacity: 1,
-                  transform: 'scale(1.2)',
-                },
-                border: i === current ? '2px solid #fef3c7' : 'none',
-              }}
+              ref={i === animTarget ? targetRef : undefined}
+              onClick={() => handleBlockClick(i)}
+              sx={getBlockSx(i)}
               title={`Verse ${i + 1}`}
             />
           ))}

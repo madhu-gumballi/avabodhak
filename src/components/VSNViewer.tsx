@@ -41,6 +41,7 @@ import StreakBadge from './StreakBadge';
 import DailyGoalWidget from './DailyGoalWidget';
 import AchievementsPanel from './AchievementsPanel';
 import LeaderboardPanel from './LeaderboardPanel';
+import FeedbackWidget from './FeedbackWidget';
 import { isTTSEnabled, isTTSSupportedForLang, LineTTSPlayer } from '../lib/tts';
 
 
@@ -51,6 +52,7 @@ export function VSNViewer({ onBack, textOverride, subtitleOverrides, availableLa
   const { user, userData, isGuest, recordActivity, updatePreferences } = useAuth();
   const [achievementsPanelOpen, setAchievementsPanelOpen] = useState(false);
   const [leaderboardPanelOpen, setLeaderboardPanelOpen] = useState(false);
+  const [feedbackOpen, setFeedbackOpen] = useState(false);
 
   // Record activity on mount for streak tracking
   useEffect(() => {
@@ -303,19 +305,40 @@ export function VSNViewer({ onBack, textOverride, subtitleOverrides, availableLa
   // Always show current line number
   useEffect(() => setNavLineNumber(flow.state.lineIndex + 1), [flow.state.lineIndex]);
 
-  // TTS auto-play: play audio automatically when line changes and toggle is on
+  // TTS auto-play: play audio automatically when line changes and toggle is on.
+  // Uses a 300ms debounce so rapid arrow-key navigation only plays the final verse.
+  // The LineTTSPlayer generation counter also cancels any in-flight fetch/playback
+  // if a new playLine() call arrives, preventing audio overlap entirely.
   const prevLineRef = useRef<number>(flow.state.lineIndex);
   useEffect(() => {
     if (prevLineRef.current === flow.state.lineIndex) return;
     prevLineRef.current = flow.state.lineIndex;
     if (!ttsAutoPlay || !lineTTSPlayer || viewMode !== 'reading') return;
+    if (!ttsEnabled || !isTTSSupportedForLang(lang)) return;
     const lineText = (text.lines[flow.state.lineIndex] as any)?.[lang] || '';
-    if (!ttsEnabled || !isTTSSupportedForLang(lang) || !lineText.trim()) return;
-    // Small delay to let the UI settle before playing
+    if (!lineText.trim()) return;
+
+    // Immediately stop any current playback so the user doesn't hear stale audio
+    lineTTSPlayer.stop();
+
+    // Debounce: wait for navigation to settle before playing
     const id = window.setTimeout(() => {
       flow.seekWord(0);
       lineTTSPlayer.playLine(lineText, lang, flow.tokens);
-    }, 200);
+
+      // Eagerly prefetch adjacent verses for smooth playback on slow connections
+      const totalLines = text.lines.length;
+      const idx = flow.state.lineIndex;
+      for (const offset of [1, 2, 3, 4, -1, -2]) {
+        const adjIdx = idx + offset;
+        if (adjIdx >= 0 && adjIdx < totalLines) {
+          const adjText = (text.lines[adjIdx] as any)?.[lang] || '';
+          if (adjText.trim()) {
+            lineTTSPlayer.prefetch(adjText, lang);
+          }
+        }
+      }
+    }, 300);
     return () => window.clearTimeout(id);
   }, [flow.state.lineIndex, ttsAutoPlay, lineTTSPlayer, viewMode, text.lines, lang, ttsEnabled, flow.tokens, flow.seekWord]);
 
@@ -1171,6 +1194,7 @@ export function VSNViewer({ onBack, textOverride, subtitleOverrides, availableLa
                   lang={lang}
                   onShowAchievements={() => setAchievementsPanelOpen(true)}
                   onShowLeaderboard={() => setLeaderboardPanelOpen(true)}
+                  onShowFeedback={() => setFeedbackOpen(true)}
                 />
               ) : (
                 <LoginButton variant="text" />
@@ -1217,6 +1241,7 @@ export function VSNViewer({ onBack, textOverride, subtitleOverrides, availableLa
                   lang={lang}
                   onShowAchievements={() => setAchievementsPanelOpen(true)}
                   onShowLeaderboard={() => setLeaderboardPanelOpen(true)}
+                  onShowFeedback={() => setFeedbackOpen(true)}
                 />
               ) : (
                 <LoginButton variant="icon" />
@@ -1867,6 +1892,12 @@ export function VSNViewer({ onBack, textOverride, subtitleOverrides, availableLa
           open={leaderboardPanelOpen}
           onClose={() => setLeaderboardPanelOpen(false)}
           lang={lang}
+        />
+
+        {/* Feedback Widget */}
+        <FeedbackWidget
+          open={feedbackOpen}
+          onClose={() => setFeedbackOpen(false)}
         />
 
       </div>

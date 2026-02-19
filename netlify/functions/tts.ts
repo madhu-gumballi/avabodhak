@@ -53,7 +53,7 @@ const handler: Handler = async (event, context) => {
 
     try {
         const body = JSON.parse(event.body || '{}');
-        const { text, lang } = body;
+        const { text, lang, force } = body;
 
         if (!text) {
             return {
@@ -81,17 +81,21 @@ const handler: Handler = async (event, context) => {
         const languageCode = getLanguageCode(lang);
         const cacheKey = blobCacheKey(lang, text);
 
-        // Check Netlify Blob cache first
+        // Check Netlify Blob cache first (skip if force refresh requested)
         let audioBase64: string | undefined;
-        try {
-            const store = getStore(TTS_BLOB_STORE);
-            const cached = await store.get(cacheKey);
-            if (cached) {
-                console.log(`TTS blob cache hit: ${cacheKey.substring(0, 40)}`);
-                audioBase64 = cached;
+        if (!force) {
+            try {
+                const store = getStore(TTS_BLOB_STORE);
+                const cached = await store.get(cacheKey);
+                if (cached) {
+                    console.log(`TTS blob cache hit: ${cacheKey.substring(0, 40)}`);
+                    audioBase64 = cached;
+                }
+            } catch (err) {
+                console.warn('Blob cache read error (proceeding without cache):', err);
             }
-        } catch (err) {
-            console.warn('Blob cache read error (proceeding without cache):', err);
+        } else {
+            console.log(`TTS force refresh: skipping blob cache for ${cacheKey.substring(0, 40)}`);
         }
 
         // Cache miss — call Sarvam API

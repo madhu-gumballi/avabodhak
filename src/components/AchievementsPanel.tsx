@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
   Dialog,
   DialogTitle,
@@ -7,16 +7,21 @@ import {
   Box,
   Typography,
   LinearProgress,
+  CircularProgress,
 } from '@mui/material'
 import CloseIcon from '@mui/icons-material/Close'
 import LockIcon from '@mui/icons-material/Lock'
+import ShareIcon from '@mui/icons-material/Share'
 import { useAuth } from '../context/AuthContext'
 import {
   getAllAchievements,
   getUnlockedAchievements,
   getLockedAchievements,
   getAchievementProgress,
+  ACHIEVEMENTS,
 } from '../lib/achievements'
+import { getAchievementShareContent, shareWithImage } from '../lib/share'
+import { generateAchievementCard } from '../lib/achievementCard'
 import type { AchievementId } from '../lib/userTypes'
 import type { Lang } from '../data/types'
 
@@ -256,6 +261,18 @@ const ACHIEVEMENT_NAMES: Record<AchievementId, Record<Lang, string>> = {
     mal: 'വായുസ്തുതിസിദ്ധ',
     iast: 'Vayu Stuti Siddha'
   },
+  feedback_given: {
+    deva: 'स्वरश्रुत',
+    knda: 'ಸ್ವರಶ್ರುತ',
+    tel: 'స్వరశ్రుత',
+    tam: 'ஸ்வரச்ருத',
+    pan: 'ਸ੍ਵਰਸ਼੍ਰੁਤ',
+    guj: 'સ્વરશ્રુત',
+    mr: 'स्वरश्रुत',
+    ben: 'স্বরশ্রুত',
+    mal: 'സ്വരശ്രുത',
+    iast: 'Voice Heard'
+  },
 }
 
 // Localized achievement descriptions
@@ -488,6 +505,18 @@ const ACHIEVEMENT_DESCRIPTIONS: Record<AchievementId, Record<Lang, string>> = {
     mal: 'വായു സ്തുതി പരിശീലനവും പസിലും പൂര്‍ത്തിയാക്കുക',
     iast: 'Complete Vayu Stuti practice and puzzle'
   },
+  feedback_given: {
+    deva: 'अपना पहला फीडबैक दें',
+    knda: 'ನಿಮ್ಮ ಮೊದಲ ಪ್ರತಿಕ್ರಿಯೆ ನೀಡಿ',
+    tel: 'మీ మొదటి ఫీడ్‌బ్యాక్ ఇవ్వండి',
+    tam: 'உங்கள் முதல் கருத்தை தெரிவிக்கவும்',
+    pan: 'ਆਪਣੀ ਪਹਿਲੀ ਫੀਡਬੈਕ ਦਿਓ',
+    guj: 'તમારો પહેલો ફીડબેક આપો',
+    mr: 'तुमचा पहिला अभिप्राय द्या',
+    ben: 'আপনার প্রথম প্রতিক্রিয়া জানান',
+    mal: 'നിങ്ങളുടെ ആദ്യ ഫീഡ്‌ബാക്ക് നൽകുക',
+    iast: 'Submit your first feedback'
+  },
 }
 
 // UI text translations
@@ -628,6 +657,28 @@ const UI_TEXT: Record<string, Record<Lang, string>> = {
 
 export default function AchievementsPanel({ open, onClose, lang = 'deva' }: AchievementsPanelProps) {
   const { userData } = useAuth()
+  const [sharingId, setSharingId] = useState<AchievementId | null>(null)
+
+  const handleShareAchievement = async (achievementId: AchievementId) => {
+    setSharingId(achievementId)
+    try {
+      const achievement = ACHIEVEMENTS[achievementId]
+      if (!achievement) return
+
+      const cardBlob = await generateAchievementCard({
+        achievementIcon: achievement.icon,
+        achievementName: achievement.name,
+        achievementDescription: achievement.description,
+        userName: userData?.profile.displayName,
+      })
+      const content = getAchievementShareContent(achievementId)
+      await shareWithImage(content, cardBlob, `avabodhak-${achievementId}.png`)
+    } catch {
+      // Silently fail
+    } finally {
+      setSharingId(null)
+    }
+  }
 
   const getUIText = (key: string): string => {
     return UI_TEXT[key]?.[lang] || UI_TEXT[key]?.iast || key
@@ -734,12 +785,15 @@ export default function AchievementsPanel({ open, onClose, lang = 'deva' }: Achi
               {unlocked.map((achievement) => (
                 <AchievementCard
                   key={achievement.id}
+                  achievementId={achievement.id}
                   icon={achievement.icon}
                   name={getAchievementName(achievement.id)}
                   description={getAchievementDescription(achievement.id)}
                   unlocked
                   unlockedAt={achievement.unlockedAt}
                   formatDate={formatDate}
+                  onShare={handleShareAchievement}
+                  sharing={sharingId === achievement.id}
                 />
               ))}
             </Box>
@@ -789,6 +843,7 @@ export default function AchievementsPanel({ open, onClose, lang = 'deva' }: Achi
 }
 
 interface AchievementCardProps {
+  achievementId?: AchievementId
   icon: string
   name: string
   description: string
@@ -797,9 +852,12 @@ interface AchievementCardProps {
   progress?: { current: number; target: number; percentage: number }
   formatDate?: (date: Date) => string
   progressLabel?: string
+  onShare?: (id: AchievementId) => void
+  sharing?: boolean
 }
 
 function AchievementCard({
+  achievementId,
   icon,
   name,
   description,
@@ -808,6 +866,8 @@ function AchievementCard({
   progress,
   formatDate,
   progressLabel = 'Progress',
+  onShare,
+  sharing,
 }: AchievementCardProps) {
   return (
     <Box
@@ -917,6 +977,29 @@ function AchievementCard({
             </Typography>
           )}
         </Box>
+
+        {/* Share button for unlocked achievements */}
+        {unlocked && onShare && achievementId && (
+          <IconButton
+            size="small"
+            onClick={() => onShare(achievementId)}
+            disabled={sharing}
+            sx={{
+              color: 'rgba(245, 158, 11, 0.6)',
+              mt: 0.5,
+              '&:hover': {
+                color: 'rgb(245, 158, 11)',
+                bgcolor: 'rgba(245, 158, 11, 0.1)',
+              },
+            }}
+          >
+            {sharing ? (
+              <CircularProgress size={18} sx={{ color: 'rgba(245, 158, 11, 0.6)' }} />
+            ) : (
+              <ShareIcon sx={{ fontSize: 18 }} />
+            )}
+          </IconButton>
+        )}
       </Box>
     </Box>
   )

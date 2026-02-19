@@ -17,6 +17,7 @@ import UserMenu from './UserMenu';
 import LoginButton from './LoginButton';
 import AchievementsPanel from './AchievementsPanel';
 import LeaderboardPanel from './LeaderboardPanel';
+import FeedbackWidget from './FeedbackWidget';
 import { getPracticeStats } from '../lib/practice';
 import { getPuzzleStats } from '../lib/puzzle';
 import { STOTRAS } from '../lib/stotraConfig';
@@ -54,6 +55,7 @@ export function EnhancedLandingPage({ onSelectStotra }: LandingPageProps) {
     const { user, userData, isGuest } = useAuth();
     const [achievementsPanelOpen, setAchievementsPanelOpen] = useState(false);
     const [leaderboardPanelOpen, setLeaderboardPanelOpen] = useState(false);
+    const [feedbackOpen, setFeedbackOpen] = useState(false);
 
     const [selectedLang, setSelectedLang] = useState<Lang>(() => {
         try {
@@ -679,6 +681,7 @@ export function EnhancedLandingPage({ onSelectStotra }: LandingPageProps) {
                             lang={selectedLang}
                             onShowAchievements={() => setAchievementsPanelOpen(true)}
                             onShowLeaderboard={() => setLeaderboardPanelOpen(true)}
+                            onShowFeedback={() => setFeedbackOpen(true)}
                         />
                     ) : (
                         <LoginButton variant="icon" />
@@ -948,6 +951,12 @@ export function EnhancedLandingPage({ onSelectStotra }: LandingPageProps) {
                 open={leaderboardPanelOpen}
                 onClose={() => setLeaderboardPanelOpen(false)}
                 lang={selectedLang}
+            />
+
+            {/* Feedback Widget */}
+            <FeedbackWidget
+                open={feedbackOpen}
+                onClose={() => setFeedbackOpen(false)}
             />
         </Box>
     );

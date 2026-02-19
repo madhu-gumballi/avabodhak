@@ -64,6 +64,27 @@ export async function clearAllTTSCache(): Promise<boolean> {
   }
 }
 
+// --------------- Text cleaning for TTS ---------------
+
+/** Clean text for TTS: remove dandas, verse numbers, and punctuation marks */
+function cleanTextForTTS(text: string): string {
+  return text.trim()
+    // Remove double danda with numbers: ॥ १ ॥, ॥ 1 ॥, ॥ ೧ ॥, ॥ ౧ ॥, ॥ ௧ ॥
+    .replace(/॥\s*[०-९೦-೯౦-౯௦-௯\d]+\s*॥/g, '')
+    // Remove ASCII double-pipe with numbers: || 1 ||, || 12 ||
+    .replace(/\|\|\s*\d+\s*\|\|/g, '')
+    // Remove remaining double dandas: ॥ or ||
+    .replace(/॥/g, '')
+    .replace(/\|\|/g, '')
+    // Remove remaining single dandas: । or | (pada separators)
+    .replace(/[।|]/g, '')
+    // Remove trailing verse/line numbers (standalone digits at end)
+    .replace(/\s+\d+\s*$/, '')
+    // Clean up extra whitespace
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
 // --------------- Client-side word-timing estimation ---------------
 
 function estimateTimepoints(words: string[], duration: number): { word: number; time: number }[] {
@@ -99,6 +120,9 @@ export interface LineTTSCallbacks {
  * LineTTSPlayer - Plays audio for entire lines of text
  * Uses the /api/tts endpoint (backed by Sarvam.ai)
  * Caches audio in browser Cache API for instant repeat plays
+ *
+ * Uses a generation counter to prevent stale async operations from
+ * starting playback after a newer playLine() call has taken over.
  */
 export class LineTTSPlayer {
   private currentAudio: HTMLAudioElement | null = null;
@@ -110,6 +134,8 @@ export class LineTTSPlayer {
   private timepoints: { word: number; time: number }[] = [];
   private currentWordIndex: number = -1;
   private timeupdateHandler: (() => void) | null = null;
+  private activeAbort: AbortController | null = null;
+  private playGeneration: number = 0;
 
   constructor() {}
 
@@ -141,8 +167,12 @@ export class LineTTSPlayer {
     // Unlock audio on first play (Safari requirement)
     this.unlockAudio();
 
-    // Stop any current playback
+    // Stop any current playback and abort in-flight fetches
     this.cleanup();
+
+    // Capture this call's generation — if cleanup() is called again (by a newer
+    // playLine or stop), generation increments and we bail at every async boundary.
+    const myGen = this.playGeneration;
 
     if (!TTS_ENABLED || !text.trim()) {
       return;
@@ -151,24 +181,7 @@ export class LineTTSPlayer {
     this.callbacks.onStart?.();
 
     try {
-      // Clean text for TTS: remove dandas, verse numbers, and punctuation marks
-      // that cause unintended audio rendering
-      let ttsText = text.trim()
-        // Remove double danda with numbers: ॥ १ ॥, ॥ 1 ॥, ॥ ೧ ॥, ॥ ౧ ॥, ॥ ௧ ॥
-        .replace(/॥\s*[०-९೦-೯౦-౯௦-௯\d]+\s*॥/g, '')
-        // Remove ASCII double-pipe with numbers: || 1 ||, || 12 ||
-        .replace(/\|\|\s*\d+\s*\|\|/g, '')
-        // Remove remaining double dandas: ॥ or ||
-        .replace(/॥/g, '')
-        .replace(/\|\|/g, '')
-        // Remove remaining single dandas: । or | (pada separators)
-        .replace(/[।|]/g, '')
-        // Remove trailing verse/line numbers (standalone digits at end)
-        .replace(/\s+\d+\s*$/, '')
-        // Clean up extra whitespace
-        .replace(/\s+/g, ' ')
-        .trim();
-
+      const ttsText = cleanTextForTTS(text);
       const useWordTiming = Array.isArray(words) && words.length > 0 && this.callbacks.onWordChange;
 
       console.log('LineTTS: playLine start', { lang, length: ttsText.length, wordSync: useWordTiming });
@@ -177,14 +190,19 @@ export class LineTTSPlayer {
       let blob: Blob;
 
       const cached = await getCachedAudio(lang, ttsText);
+
+      // Bail if superseded during cache lookup
+      if (this.playGeneration !== myGen) return;
+
       if (cached) {
         console.log('LineTTS: cache hit');
         blob = await cached.blob();
       } else {
         console.log('LineTTS: cache miss');
 
-        // Fetch line audio from TTS API
+        // Create AbortController for this fetch — stored on instance so cleanup() can abort it
         const controller = new AbortController();
+        this.activeAbort = controller;
         const timeoutId = window.setTimeout(() => controller.abort(), 15000); // 15s timeout
 
         const res = await fetch('/api/tts', {
@@ -196,6 +214,9 @@ export class LineTTSPlayer {
 
         window.clearTimeout(timeoutId);
 
+        // Bail if superseded during fetch
+        if (this.playGeneration !== myGen) return;
+
         if (!res.ok) {
           console.error('LineTTS: TTS request failed', res.status, res.statusText);
           throw new Error(`TTS request failed: ${res.status}`);
@@ -206,6 +227,11 @@ export class LineTTSPlayer {
         // Store in cache before consuming the response body
         await putCachedAudio(lang, ttsText, res);
         blob = await res.blob();
+      }
+
+      // Bail if superseded during blob conversion
+      if (this.playGeneration !== myGen || this.disposed) {
+        return;
       }
 
       console.log('LineTTS: got blob', { size: blob.size });
@@ -225,12 +251,6 @@ export class LineTTSPlayer {
         }
       } catch {}
 
-      if (this.disposed) {
-        console.warn('LineTTS: disposed during fetch, dropping audio');
-        URL.revokeObjectURL(url);
-        return;
-      }
-
       console.log('LineTTS: starting playback');
       this._isPlaying = true;
       this.currentAudio = audio;
@@ -249,6 +269,13 @@ export class LineTTSPlayer {
           // Also resolve on error to avoid hanging
           audio.addEventListener('error', () => resolve(), { once: true });
         });
+      }
+
+      // Bail if superseded during metadata loading
+      if (this.playGeneration !== myGen) {
+        audio.pause();
+        URL.revokeObjectURL(url);
+        return;
       }
 
       // Set up word tracking if we have timepoints
@@ -281,8 +308,8 @@ export class LineTTSPlayer {
 
       // Play and wait for end
       await new Promise<void>((resolve, reject) => {
-        if (!this.currentAudio) {
-          console.warn('LineTTS: currentAudio missing at playback time');
+        if (!this.currentAudio || this.playGeneration !== myGen) {
+          console.warn('LineTTS: superseded before playback');
           resolve();
           return;
         }
@@ -309,16 +336,60 @@ export class LineTTSPlayer {
             console.log('LineTTS: play() promise resolved');
           })
           .catch((err) => {
+            // If superseded, resolve silently instead of error
+            if (this.playGeneration !== myGen) {
+              resolve();
+              return;
+            }
             console.error('LineTTS: play() rejected', err);
             handleError(err);
           });
       });
     } catch (err: any) {
+      // Silently ignore AbortError from cancelled fetches
+      if (err?.name === 'AbortError' || this.playGeneration !== myGen) return;
       console.error('TTS line fetch error', err);
       this.callbacks.onError?.(err);
       this.cleanup();
     } finally {
-      this._isPlaying = false;
+      if (this.playGeneration === myGen) {
+        this._isPlaying = false;
+      }
+    }
+  }
+
+  /**
+   * Prefetch audio for a line of text into the cache without playing it.
+   * Best-effort — errors are silently ignored.
+   */
+  async prefetch(text: string, lang: string): Promise<void> {
+    if (!TTS_ENABLED || !text.trim()) return;
+
+    const ttsText = cleanTextForTTS(text);
+
+    // Already cached — nothing to do
+    const cached = await getCachedAudio(lang, ttsText);
+    if (cached) return;
+
+    try {
+      const controller = new AbortController();
+      const timeoutId = window.setTimeout(() => controller.abort(), 15000);
+
+      const res = await fetch('/api/tts', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ text: ttsText, lang }),
+        signal: controller.signal,
+      });
+
+      window.clearTimeout(timeoutId);
+
+      if (res.ok) {
+        await putCachedAudio(lang, ttsText, res);
+        console.log('LineTTS: prefetch cached', { lang, length: ttsText.length });
+      }
+    } catch {
+      // Prefetch is best-effort — silently ignore errors
     }
   }
 
@@ -339,9 +410,18 @@ export class LineTTSPlayer {
   }
 
   /**
-   * Clean up audio resources
+   * Clean up audio resources and invalidate any in-flight playLine calls
    */
   private cleanup(): void {
+    // Increment generation to invalidate any in-flight async playLine operations
+    this.playGeneration++;
+
+    // Abort any in-flight fetch
+    if (this.activeAbort) {
+      this.activeAbort.abort();
+      this.activeAbort = null;
+    }
+
     // Remove timeupdate listener
     if (this.currentAudio && this.timeupdateHandler) {
       this.currentAudio.removeEventListener('timeupdate', this.timeupdateHandler);

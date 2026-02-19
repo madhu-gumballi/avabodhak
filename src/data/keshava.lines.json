@@ -463,15 +463,15 @@
     },
     {
       "id": "12",
-      "deva": "अब्धियोळगे बिद्दु नानु ओद्दुकोंबेनय्य भवदि गेद्दु पोप बुद्धि तोरो पद्मनाभने",
-      "iast": "abdhiyoḻage biddu nānu oddukombenayya bhavadi geddu pōpa buddhi tōro padmanābhane",
-      "knda": "ಅಬ್ಧಿಯೊಳಗೆ ಬಿದ್ದು ನಾನು ಒದ್ದುಕೊಂಬೆನಯ್ಯ ಭವದಿ ಗೆದ್ದು ಪೋಪ ಬುದ್ಧಿ ತೋರೊ ಪದ್ಮನಾಭನೆ",
-      "tel": "అబ్ధియొళగె బిద్దు నాను ఒద్దుకొంబెనయ్య భవది గెద్దు పోప బుద్ధి తోరొ పద్మనాభనె",
-      "tam": "அப்தியொளகெ பித்து நானு ஒத்துகொம்பெனய்ய பவதி கெத்து போப புத்தி தோரொ பத்மனாபனெ",
-      "pan": "ਅਬ੍ਧਿਯੋਲ਼ਗੇ ਬਿਦ੍ਦੁ ਨਾਨੁ ਓਦ੍ਦੁਕੋਂਬੇਨਯ੍ਯ ਭਵਦਿ ਗੇਦ੍ਦੁ ਪੋਪ ਬੁਦ੍ਧਿ ਤੋਰੋ ਪਦ੍ਮਨਾਭਨੇ",
-      "guj": "અબ્ધિયોળગે બિદ્દુ નાનુ ઓદ્દુકોંબેનય્ય ભવદિ ગેદ્દુ પોપ બુદ્ધિ તોરો પદ્મનાભને",
-      "meaning": "I have fallen into the ocean (of samsara) and am struggling, O Lord. Show me the wisdom to conquer worldly existence and escape, O Padmanabha.",
-      "translation": "Having fallen into the ocean of existence, I am flailing about, O Lord. Grant me the understanding to overcome this worldly life and be liberated, O lotus-naveled one.",
+      "deva": "बिद्दु भवदनेक जनुम बद्दनागि कलुषदिंद गेद्दु पोप बुद्धि तोरो पद्मनाभने",
+      "iast": "biddu bhavadanēka januma baddanāgi kaluṣadinda geddu pōpa buddhi tōro padmanābhane",
+      "knda": "ಬಿದ್ದು ಭವದನೇಕ ಜನುಮ ಬದ್ದನಾಗಿ ಕಲುಷದಿಂದ ಗೆದ್ದು ಪೋಪ ಬುದ್ಧಿ ತೋರೊ ಪದ್ಮನಾಭನೆ",
+      "tel": "బిద్దు భవదనేక జనుమ బద్దనాగి కలుషదింద గెద్దు పోప బుద్ధి తోరొ పద్మనాభనె",
+      "tam": "பித்து பவதனேக ஜனும பத்தனாகி கலுஷதிந்த கெத்து போப புத்தி தோரொ பத்மனாபனெ",
+      "pan": "ਬਿਦ੍ਦੁ ਭਵਦਨੇਕ ਜਨੁਮ ਬਦ੍ਦਨਾਗਿ ਕਲੁਸ਼ਦਿੰਦ ਗੇਦ੍ਦੁ ਪੋਪ ਬੁਦ੍ਧਿ ਤੋਰੋ ਪਦ੍ਮਨਾਭਨੇ",
+      "guj": "બિદ્દુ ભવદનેક જનુમ બદ્દનાગિ કલુષદિંદ ગેદ્દુ પોપ બુદ્ધિ તોરો પદ્મનાભને",
+      "meaning": "Having fallen and been bound through countless births in worldly existence, tainted by sin, show me the wisdom to overcome and escape, O Padmanabha.",
+      "translation": "Having fallen into innumerable births in this cycle of existence, bound and stained by impurity, grant me the intelligence to conquer this and be liberated, O lotus-naveled one.",
       "bhaktiRasa": "sharanagati",
       "namaAnalysis": [
         {
@@ -487,10 +487,10 @@
         }
       ],
       "regionalGlossary": [
-        {"term": "abdhiyoḻage biddu", "meaning": "having fallen into the ocean (of samsara)"},
-        {"term": "oddukombena", "meaning": "I am struggling/flailing"},
-        {"term": "bhavadi geddu pōpa", "meaning": "to conquer worldly existence and escape"},
-        {"term": "buddhi tōro", "meaning": "show/grant the wisdom"}
+        {"term": "biddu bhavadanēka januma", "meaning": "having fallen into countless births in worldly existence"},
+        {"term": "baddanāgi", "meaning": "being bound/enslaved"},
+        {"term": "kaluṣadinda", "meaning": "by sin/impurity"},
+        {"term": "geddu pōpa buddhi tōro", "meaning": "show the wisdom to conquer and escape"}
       ]
     },
     {
@@ -864,15 +864,15 @@
     },
     {
       "id": "24",
-      "deva": "मोरेयनिडुवेनय्य निनगे सेरेय बिडिसु भवद एनगे इरिसु भक्तरोळगे परमपुरुष श्रीहरे ॥२२॥",
-      "iast": "moreyaniḍuvenayya ninage sereya biḍisu bhavada enage irisu bhaktaroḻage paramapuruṣa śrīharē ॥22॥",
-      "knda": "ಮೊರೆಯನಿಡುವೆನಯ್ಯ ನಿನಗೆ ಸೆರೆಯ ಬಿಡಿಸು ಭವದ ಎನಗೆ ಇರಿಸು ಭಕ್ತರೊಳಗೆ ಪರಮಪುರುಷ ಶ್ರೀಹರೇ ॥೨೨॥",
-      "tel": "మొరెయనిడువెనయ్య నినగె సెరెయ బిడిసు భవద ఎనగె ఇరిసు భక్తరొళగె పరమపురుష శ్రీహరే ॥22॥",
-      "tam": "மொரெயனிடுவெனய்ய நினகெ ஸெரெய பிடிஸு பவத எனகெ இரிஸு பக்தரொளகெ பரமபுருஷ ஶ்ரீஹரே ॥22॥",
-      "pan": "ਮੋਰੇਯਨਿਡੁਵੇਨਯ੍ਯ ਨਿਨਗੇ ਸੇਰੇਯ ਬਿਡਿਸੁ ਭਵਦ ਏਨਗੇ ਇਰਿਸੁ ਭਕ੍ਤਰੋਲ਼ਗੇ ਪਰਮਪੁਰੁਸ਼ ਸ਼੍ਰੀਹਰੇ ॥22॥",
-      "guj": "મોરેયનિડુવેનય્ય નિનગે સેરેય બિડિસુ ભવદ એનગે ઇરિસુ ભક્તરોળગે પરમપુરુષ શ્રીહરે ॥૨૨॥",
-      "meaning": "I plead before You, O Lord. Free me from the prison of worldly existence and place me among the devotees, O Supreme Person, O Sri Hari.",
-      "translation": "I take refuge at Your feet, O Lord. Release me from the bondage of samsara and keep me in the company of devotees, O Paramapurusha, O Sri Hari.",
+      "deva": "मोरेय इडुवेनय्य निनगे शरधिशयन शुभमतिय इरिसो भक्तरोळगे परमपुरुष श्रीहरे ॥२२॥",
+      "iast": "moreya iḍuvenayya ninage śaradhiśayana śubhamatiya irisō bhaktaroḻage paramapuruṣa śrīharē ॥22॥",
+      "knda": "ಮೊರೆಯ ಇಡುವೆನಯ್ಯ ನಿನಗೆ ಶರಧಿಶಯನ ಶುಭಮತಿಯ ಇರಿಸೋ ಭಕ್ತರೊಳಗೆ ಪರಮಪುರುಷ ಶ್ರೀಹರೇ ॥೨೨॥",
+      "tel": "మొరెయ ఇడువెనయ్య నినగె శరధిశయన శుభమతియ ఇరిసో భక్తరొళగె పరమపురుష శ్రీహరే ॥22॥",
+      "tam": "மொரெய இடுவெனய்ய நினகெ ஶரதிஶயன ஶுபமதிய இரிஸோ பக்தரொளகெ பரமபுருஷ ஶ்ரீஹரே ॥22॥",
+      "pan": "ਮੋਰੇਯ ਇਡੁਵੇਨਯ੍ਯ ਨਿਨਗੇ ਸ਼ਰਧਿਸ਼ਯਨ ਸ਼ੁਭਮਤਿਯ ਇਰਿਸੋ ਭਕ੍ਤਰੋਲ਼ਗੇ ਪਰਮਪੁਰੁਸ਼ ਸ਼੍ਰੀਹਰੇ ॥22॥",
+      "guj": "મોરેય ઇડુવેનય્ય નિનગે શરધિશયન શુભમતિય ઇરિસો ભક્તરોળગે પરમપુરુષ શ્રીહરે ॥૨૨॥",
+      "meaning": "I plead before You, O ocean-reclined Lord. Grant me auspicious wisdom and place me among the devotees, O Supreme Person, O Sri Hari.",
+      "translation": "I cry out to You, O Lord who reclines on the cosmic ocean. Bestow upon me noble intellect and keep me in the company of Your devotees, O Paramapurusha, O Sri Hari.",
       "bhaktiRasa": "sharanagati",
       "namaAnalysis": [
         {
@@ -898,9 +898,10 @@
         }
       ],
       "regionalGlossary": [
-        {"term": "moreyaniḍuvenayya", "meaning": "I plead/take refuge, O Lord"},
-        {"term": "sereya biḍisu bhavada", "meaning": "release from the prison of worldly existence"},
-        {"term": "bhaktaroḻage irisu", "meaning": "place/keep among the devotees"}
+        {"term": "moreya iḍuvenayya", "meaning": "I plead/cry out, O Lord"},
+        {"term": "śaradhiśayana", "meaning": "one who reclines on the ocean (epithet of Vishnu)"},
+        {"term": "śubhamatiya irisō", "meaning": "grant/bestow auspicious wisdom"},
+        {"term": "bhaktaroḻage", "meaning": "among the devotees"}
       ]
     },
     {
@@ -977,15 +978,15 @@
     },
     {
       "id": "27",
-      "deva": "मरेतु बिडदे हरिय नाम बरेदु ओदि केळुवरिगे करेदु मुक्ति कोडुव बाडदादिकेशव ॥२५॥",
-      "iast": "maretu biḍade hariya nāma baredu ōdi kēḻuvarige karedu mukti koḍuva bāḍadādikēśava ॥25॥",
-      "knda": "ಮರೆತು ಬಿಡದೆ ಹರಿಯ ನಾಮ ಬರೆದು ಓದಿ ಕೇಳುವರಿಗೆ ಕರೆದು ಮುಕ್ತಿ ಕೊಡುವ ಬಾಡದಾದಿಕೇಶವ ॥೨೫॥",
-      "tel": "మరెతు బిడదె హరియ నామ బరెదు ఓది కేళువరిగె కరెదు ముక్తి కొడువ బాడదాదికేశవ ॥25॥",
-      "tam": "மரெது பிடதெ ஹரிய நாம பரெது ஓதி கேளுவரிகெ கரெது முக்தி கொடுவ பாடதாதிகேஶவ ॥25॥",
-      "pan": "ਮਰੇਤੁ ਬਿਡਦੇ ਹਰਿਯ ਨਾਮ ਬਰੇਦੁ ਓਦਿ ਕੇਲ਼ੁਵਰਿਗੇ ਕਰੇਦੁ ਮੁਕ੍ਤਿ ਕੋਡੁਵ ਬਾਡਦਾਦਿਕੇਸ਼ਵ ॥25॥",
-      "guj": "મરેતુ બિડદે હરિય નામ બરેદુ ઓદિ કેળુવરિગે કરેદુ મુક્તિ કોડુવ બાડદાદિકેશવ ॥૨૫॥",
-      "meaning": "The eternal Adikeshava, without forgetting, calls and grants liberation to those who write, recite, and listen to Hari's names.",
-      "translation": "The primordial Keshava, never failing, summons and bestows liberation upon those who inscribe, chant, and hear the names of Hari.",
+      "deva": "मरेयदले हरिय नाम बरेदु ओदि पेळ्दवरिगे करेदु मुक्ति कोडुव नेलेयादिकेशव ॥२५॥",
+      "iast": "mareyadale hariya nāma baredu ōdi pēḷdavarige karedu mukti koḍuva neleyādikēśava ॥25॥",
+      "knda": "ಮರೆಯದಲೆ ಹರಿಯ ನಾಮ ಬರೆದು ಓದಿ ಪೇಳ್ದವರಿಗೆ ಕರೆದು ಮುಕ್ತಿ ಕೊಡುವ ನೆಲೆಯಾದಿಕೇಶವ ॥೨೫॥",
+      "tel": "మరెయదలె హరియ నామ బరెదు ఓది పేళ్దవరిగె కరెదు ముక్తి కొడువ నెలెయాదికేశవ ॥25॥",
+      "tam": "மரெயதலெ ஹரிய நாம பரெது ஓதி பேள்தவரிகெ கரெது முக்தி கொடுவ நெலெயாதிகேஶவ ॥25॥",
+      "pan": "ਮਰੇਯਦਲੇ ਹਰਿਯ ਨਾਮ ਬਰੇਦੁ ਓਦਿ ਪੇਲ਼੍ਦਵਰਿਗੇ ਕਰੇਦੁ ਮੁਕ੍ਤਿ ਕੋਡੁਵ ਨੇਲੇਯਾਦਿਕੇਸ਼ਵ ॥25॥",
+      "guj": "મરેયદલે હરિય નામ બરેદુ ઓદિ પેળ્દવરિગે કરેદુ મુક્તિ કોડુવ નેલેયાદિકેશવ ॥૨૫॥",
+      "meaning": "Without forgetting, to those who write, recite, and proclaim Hari's names, the abiding Adikeshava calls and grants liberation.",
+      "translation": "The primordial Keshava, the eternal abode, summons and bestows liberation upon those who inscribe, chant, and proclaim the names of Hari without forgetting.",
       "bhaktiRasa": "vatsalya",
       "verseType": "phalashruti",
       "namaAnalysis": [
@@ -1003,10 +1004,10 @@
         }
       ],
       "regionalGlossary": [
-        {"term": "maretu biḍade", "meaning": "without forgetting"},
-        {"term": "hariya nāma baredu ōdi kēḻuvarige", "meaning": "to those who write, recite, and listen to Hari's names"},
+        {"term": "mareyadale", "meaning": "without forgetting"},
+        {"term": "baredu ōdi pēḷdavarige", "meaning": "to those who write, recite, and proclaim"},
         {"term": "karedu mukti koḍuva", "meaning": "calls/summons and grants liberation"},
-        {"term": "bāḍada", "meaning": "unfading/eternal"}
+        {"term": "neleyādikēśava", "meaning": "the eternal abode/foundation, Adikeshava"}
       ],
       "composerSignature": "This verse contains the ankita (signature) 'Adikeshava', identifying the composer Kanaka Dasa and his ishta devata"
     }
