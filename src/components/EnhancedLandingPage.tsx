@@ -493,155 +493,168 @@ export function EnhancedLandingPage({ onSelectStotra }: LandingPageProps) {
                 >
                     <CardActionArea
                         onClick={() => handleStotraClick(stotra)}
-                        sx={{ p: { xs: 1.5, sm: 2 }, display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: 0.75 }}
+                        sx={{ p: 0, display: 'flex', flexDirection: 'column', alignItems: 'stretch' }}
                     >
-                        {/* Header: icon (with open-issue badge) + title + quality tier */}
-                        <Box sx={{ display: 'flex', alignItems: 'flex-start', gap: 1.5, width: '100%' }}>
-                            {/* Icon circle with optional open-issues count badge */}
-                            <Box sx={{ position: 'relative', flexShrink: 0, mt: 0.25 }}>
-                                <Box
-                                    sx={{
-                                        p: 0.75,
-                                        borderRadius: '50%',
-                                        bgcolor: `${color}15`,
-                                        color: color,
-                                        display: 'flex',
-                                        alignItems: 'center',
-                                        justifyContent: 'center',
-                                    }}
-                                >
-                                    {icon}
-                                </Box>
-                                {!summariesLoading && openCount > 0 && (
+                        {/* ── Part 1: Stotra metadata ── */}
+                        <Box sx={{ px: { xs: 1.5, sm: 2 }, pt: { xs: 1.5, sm: 2 }, pb: 1.5 }}>
+                            <Box sx={{ display: 'flex', alignItems: 'flex-start', gap: 1.5 }}>
+                                {/* Icon circle with optional open-issues badge */}
+                                <Box sx={{ position: 'relative', flexShrink: 0, mt: 0.25 }}>
                                     <Box
-                                        onClick={(e) => { e.stopPropagation(); setDrilldownStotra(stotra); }}
                                         sx={{
-                                            position: 'absolute', top: -3, right: -3,
-                                            minWidth: 16, height: 16, px: 0.25,
-                                            borderRadius: '50%', bgcolor: '#f59e0b',
-                                            color: 'black', fontSize: '0.48rem', fontWeight: 800,
-                                            display: 'flex', alignItems: 'center', justifyContent: 'center',
-                                            cursor: 'pointer', lineHeight: 1,
+                                            p: 0.75,
+                                            borderRadius: '50%',
+                                            bgcolor: `${color}15`,
+                                            color: color,
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center',
                                         }}
                                     >
-                                        {openCount > 9 ? '9+' : openCount}
+                                        {icon}
                                     </Box>
-                                )}
-                            </Box>
-
-                            {/* Title + compact info line */}
-                            <Box sx={{ flex: 1, minWidth: 0 }}>
-                                <Box sx={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 0.5 }}>
-                                    <Typography variant="body1" fontWeight="700" sx={{ lineHeight: 1.3, flex: 1 }}>
-                                        {getTranslation(stotraTitleKey)}
-                                    </Typography>
-                                    {provenance && (
+                                    {!summariesLoading && openCount > 0 && (
                                         <Box
-                                            onClick={(e) => { e.stopPropagation(); setProvenanceModal({ stotra, provenance }); }}
-                                            sx={{ cursor: 'pointer', flexShrink: 0, mt: 0.25 }}
+                                            onClick={(e) => { e.stopPropagation(); setDrilldownStotra(stotra); }}
+                                            sx={{
+                                                position: 'absolute', top: -3, right: -3,
+                                                minWidth: 16, height: 16, px: 0.25,
+                                                borderRadius: '50%', bgcolor: '#f59e0b',
+                                                color: 'black', fontSize: '0.48rem', fontWeight: 800,
+                                                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                                                cursor: 'pointer', lineHeight: 1,
+                                            }}
                                         >
-                                            <TextQualityBadge tier={provenance.qualityTier} size="small" />
+                                            {openCount > 9 ? '9+' : openCount}
                                         </Box>
                                     )}
                                 </Box>
-                                {/* Compact stats line: composer · lines · langs · chapters */}
-                                <Typography variant="caption" sx={{ color: 'rgba(148,163,184,0.65)', fontSize: '0.62rem', display: 'block', mt: 0.25, lineHeight: 1.4 }}>
-                                    {[
-                                        metadata?.composer || metadata?.revealedBy,
-                                        totalLines ? `${totalLines} lines` : null,
-                                        metadata?.languages?.length ? `${metadata.languages.length} langs` : null,
-                                        (metadata?.chapters && metadata.chapters > 1) ? `${metadata.chapters} §` : null,
-                                    ].filter(Boolean).join(' · ')}
-                                </Typography>
+
+                                <Box sx={{ flex: 1, minWidth: 0 }}>
+                                    <Typography variant="body1" fontWeight="700" sx={{ lineHeight: 1.3 }}>
+                                        {getTranslation(stotraTitleKey)}
+                                    </Typography>
+                                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.75, mt: 0.5, flexWrap: 'wrap' }}>
+                                        {provenance && (
+                                            <Box
+                                                onClick={(e) => { e.stopPropagation(); setProvenanceModal({ stotra, provenance }); }}
+                                                sx={{ cursor: 'pointer', flexShrink: 0 }}
+                                            >
+                                                <TextQualityBadge tier={provenance.qualityTier} size="small" />
+                                            </Box>
+                                        )}
+                                        <Typography variant="caption" sx={{ color: 'rgba(148,163,184,0.6)', fontSize: '0.62rem', lineHeight: 1.3 }}>
+                                            {[
+                                                metadata?.composer || metadata?.revealedBy,
+                                                totalLines ? `${totalLines} lines` : null,
+                                                metadata?.languages?.length ? `${metadata.languages.length} langs` : null,
+                                                (metadata?.chapters && metadata.chapters > 1) ? `${metadata.chapters} §` : null,
+                                            ].filter(Boolean).join(' · ')}
+                                        </Typography>
+                                    </Box>
+                                </Box>
                             </Box>
                         </Box>
 
-                        {/* Mode chips + resolved count (if any) */}
-                        {(metadata?.practiceMode || metadata?.puzzleMode || (!summariesLoading && resolvedCount > 0)) && (
-                            <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5, flexWrap: 'wrap' }}>
-                                {metadata?.practiceMode && (
-                                    <Chip
-                                        icon={<SchoolIcon sx={{ fontSize: 11 }} />}
-                                        label={getTranslation('practice')}
-                                        size="small"
-                                        sx={{
-                                            bgcolor: 'rgba(139, 92, 246, 0.12)',
-                                            color: '#a78bfa',
-                                            border: '1px solid rgba(139, 92, 246, 0.2)',
-                                            fontSize: '0.6rem',
-                                            height: 20,
-                                            '& .MuiChip-icon': { ml: 0.5 },
-                                        }}
-                                    />
-                                )}
-                                {metadata?.puzzleMode && (
-                                    <Chip
-                                        icon={<ExtensionIcon sx={{ fontSize: 11 }} />}
-                                        label={getTranslation('puzzle')}
-                                        size="small"
-                                        sx={{
-                                            bgcolor: 'rgba(236, 72, 153, 0.12)',
-                                            color: '#f472b6',
-                                            border: '1px solid rgba(236, 72, 153, 0.2)',
-                                            fontSize: '0.6rem',
-                                            height: 20,
-                                            '& .MuiChip-icon': { ml: 0.5 },
-                                        }}
-                                    />
-                                )}
-                                {!summariesLoading && resolvedCount > 0 && (
-                                    <Typography variant="caption" sx={{ fontSize: '0.6rem', color: '#4ade80', ml: 0.25 }}>
-                                        ✓ {resolvedCount} resolved
-                                    </Typography>
-                                )}
-                            </Box>
-                        )}
+                        {/* ── Part 2: Modes + progress (only if stotra has any modes) ── */}
+                        {(metadata?.practiceMode || metadata?.puzzleMode) && (
+                            <Box
+                                sx={{
+                                    px: { xs: 1.5, sm: 2 },
+                                    py: 1.25,
+                                    borderTop: '1px solid rgba(148,163,184,0.08)',
+                                    bgcolor: 'rgba(0,0,0,0.18)',
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    gap: 1,
+                                }}
+                            >
+                                {/* Mode chips */}
+                                <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.75 }}>
+                                    {metadata.practiceMode && (
+                                        <Chip
+                                            icon={<SchoolIcon sx={{ fontSize: 11 }} />}
+                                            label={getTranslation('practice')}
+                                            size="small"
+                                            sx={{
+                                                bgcolor: 'rgba(139,92,246,0.15)',
+                                                color: '#a78bfa',
+                                                border: '1px solid rgba(139,92,246,0.25)',
+                                                fontSize: '0.6rem',
+                                                height: 20,
+                                                '& .MuiChip-icon': { ml: 0.5 },
+                                            }}
+                                        />
+                                    )}
+                                    {metadata.puzzleMode && (
+                                        <Chip
+                                            icon={<ExtensionIcon sx={{ fontSize: 11 }} />}
+                                            label={getTranslation('puzzle')}
+                                            size="small"
+                                            sx={{
+                                                bgcolor: 'rgba(236,72,153,0.15)',
+                                                color: '#f472b6',
+                                                border: '1px solid rgba(236,72,153,0.25)',
+                                                fontSize: '0.6rem',
+                                                height: 20,
+                                                '& .MuiChip-icon': { ml: 0.5 },
+                                            }}
+                                        />
+                                    )}
+                                    {!summariesLoading && resolvedCount > 0 && (
+                                        <Typography variant="caption" sx={{ fontSize: '0.6rem', color: '#4ade80', ml: 'auto' }}>
+                                            ✓ {resolvedCount} resolved
+                                        </Typography>
+                                    )}
+                                </Box>
 
-                        {/* Progress bars — side by side to save vertical space */}
-                        {hasProgress && (
-                            <Box sx={{ width: '100%', display: 'flex', gap: 1.5, mt: 0.25 }}>
-                                {practice.completedLines > 0 && (
-                                    <Box sx={{ flex: 1 }}>
-                                        <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 0.25 }}>
-                                            <Typography variant="caption" sx={{ color: '#94a3b8', fontSize: '0.55rem' }}>
-                                                {getTranslation('practice')}
-                                            </Typography>
-                                            <Typography variant="caption" sx={{ color: '#94a3b8', fontSize: '0.55rem' }}>
-                                                {practice.completedLines}/{totalLines}
-                                            </Typography>
-                                        </Box>
-                                        <LinearProgress
-                                            variant="determinate"
-                                            value={practice.progress * 100}
-                                            sx={{
-                                                height: 3,
-                                                borderRadius: 2,
-                                                bgcolor: 'rgba(255,255,255,0.06)',
-                                                '& .MuiLinearProgress-bar': { bgcolor: '#a78bfa', borderRadius: 2 },
-                                            }}
-                                        />
-                                    </Box>
-                                )}
-                                {puzzle.completed > 0 && (
-                                    <Box sx={{ flex: 1 }}>
-                                        <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 0.25 }}>
-                                            <Typography variant="caption" sx={{ color: '#94a3b8', fontSize: '0.55rem' }}>
-                                                {getTranslation('puzzle')}
-                                            </Typography>
-                                            <Typography variant="caption" sx={{ color: '#94a3b8', fontSize: '0.55rem' }}>
-                                                {puzzle.completed}/{puzzle.total}
-                                            </Typography>
-                                        </Box>
-                                        <LinearProgress
-                                            variant="determinate"
-                                            value={puzzle.progress}
-                                            sx={{
-                                                height: 3,
-                                                borderRadius: 2,
-                                                bgcolor: 'rgba(255,255,255,0.06)',
-                                                '& .MuiLinearProgress-bar': { bgcolor: '#f472b6', borderRadius: 2 },
-                                            }}
-                                        />
+                                {/* Progress bars — side by side */}
+                                {hasProgress && (
+                                    <Box sx={{ display: 'flex', gap: 1.5 }}>
+                                        {practice.completedLines > 0 && (
+                                            <Box sx={{ flex: 1 }}>
+                                                <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 0.4 }}>
+                                                    <Typography variant="caption" sx={{ color: '#94a3b8', fontSize: '0.55rem' }}>
+                                                        {getTranslation('practice')}
+                                                    </Typography>
+                                                    <Typography variant="caption" sx={{ color: '#94a3b8', fontSize: '0.55rem' }}>
+                                                        {practice.completedLines}/{totalLines}
+                                                    </Typography>
+                                                </Box>
+                                                <LinearProgress
+                                                    variant="determinate"
+                                                    value={practice.progress * 100}
+                                                    sx={{
+                                                        height: 3,
+                                                        borderRadius: 2,
+                                                        bgcolor: 'rgba(255,255,255,0.06)',
+                                                        '& .MuiLinearProgress-bar': { bgcolor: '#a78bfa', borderRadius: 2 },
+                                                    }}
+                                                />
+                                            </Box>
+                                        )}
+                                        {puzzle.completed > 0 && (
+                                            <Box sx={{ flex: 1 }}>
+                                                <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 0.4 }}>
+                                                    <Typography variant="caption" sx={{ color: '#94a3b8', fontSize: '0.55rem' }}>
+                                                        {getTranslation('puzzle')}
+                                                    </Typography>
+                                                    <Typography variant="caption" sx={{ color: '#94a3b8', fontSize: '0.55rem' }}>
+                                                        {puzzle.completed}/{puzzle.total}
+                                                    </Typography>
+                                                </Box>
+                                                <LinearProgress
+                                                    variant="determinate"
+                                                    value={puzzle.progress}
+                                                    sx={{
+                                                        height: 3,
+                                                        borderRadius: 2,
+                                                        bgcolor: 'rgba(255,255,255,0.06)',
+                                                        '& .MuiLinearProgress-bar': { bgcolor: '#f472b6', borderRadius: 2 },
+                                                    }}
+                                                />
+                                            </Box>
+                                        )}
                                     </Box>
                                 )}
                             </Box>
