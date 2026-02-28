@@ -331,7 +331,6 @@ export function FlowLens({ tokens, rows, wordIndex, lineIndex, lang, legendOpen:
               <Tooltip title={lineData.note} placement="top" arrow>
                 <button
                   onClick={(e) => { e.stopPropagation(); e.preventDefault(); }}
-                  onPointerDown={(e) => e.stopPropagation()}
                   className="absolute left-1.5 top-1/2 -translate-y-1/2 z-30 inline-flex items-center justify-center w-6 h-6 rounded-md bg-sky-900/60 hover:bg-sky-800/80 text-sky-400 border border-sky-500/30 transition-colors cursor-pointer"
                   type="button"
                 >
@@ -349,7 +348,6 @@ export function FlowLens({ tokens, rows, wordIndex, lineIndex, lang, legendOpen:
               {/* Copy button */}
               <button
                 onClick={(e) => { e.stopPropagation(); e.preventDefault(); handleCopy(); }}
-                onPointerDown={(e) => e.stopPropagation()}
                 className="inline-flex items-center justify-center w-6 h-6 rounded-md bg-slate-700/90 hover:bg-slate-600 text-slate-300 hover:text-white border border-slate-500/50 transition-colors cursor-pointer active:scale-95"
                 title="Copy verse"
                 type="button"
@@ -361,7 +359,6 @@ export function FlowLens({ tokens, rows, wordIndex, lineIndex, lang, legendOpen:
               {stotraKey && lineId && (
                 <button
                   onClick={(e) => { e.stopPropagation(); e.preventDefault(); setReportModalOpen(true); }}
-                  onPointerDown={(e) => e.stopPropagation()}
                   onContextMenu={(e) => { e.preventDefault(); e.stopPropagation(); onOpenIssueDrilldown?.(); }}
                   className={`relative inline-flex items-center justify-center w-6 h-6 rounded-md border transition-colors cursor-pointer active:scale-95 ${
                     lineOpenIssueCount > 0

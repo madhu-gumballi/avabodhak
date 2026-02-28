@@ -1,11 +1,8 @@
 import { useState, useEffect, useMemo } from 'react';
-import { Box, Card, CardActionArea, Typography, Fade, Grow, Chip, IconButton, Menu, MenuItem, LinearProgress, Skeleton, Dialog, DialogTitle, DialogContent, DialogActions, Button, Divider } from '@mui/material';
+import { Box, Card, CardActionArea, Typography, Fade, Grow, Chip, IconButton, Menu, MenuItem, LinearProgress, Dialog, DialogTitle, DialogContent, DialogActions, Button, Divider } from '@mui/material';
 import AutoStoriesIcon from '@mui/icons-material/AutoStories';
 import SpaIcon from '@mui/icons-material/Spa';
 import LanguageIcon from '@mui/icons-material/Language';
-import MenuBookIcon from '@mui/icons-material/MenuBook';
-import FormatListNumberedIcon from '@mui/icons-material/FormatListNumbered';
-import TranslateIcon from '@mui/icons-material/Translate';
 import SchoolIcon from '@mui/icons-material/School';
 import ExtensionIcon from '@mui/icons-material/Extension';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
@@ -496,192 +493,155 @@ export function EnhancedLandingPage({ onSelectStotra }: LandingPageProps) {
                 >
                     <CardActionArea
                         onClick={() => handleStotraClick(stotra)}
-                        sx={{ p: { xs: 1.5, sm: 2 }, display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: 1 }}
+                        sx={{ p: { xs: 1.5, sm: 2 }, display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: 0.75 }}
                     >
-                        {/* Header with icon and title */}
-                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, width: '100%' }}>
-                            <Box
-                                sx={{
-                                    p: 1,
-                                    borderRadius: '50%',
-                                    bgcolor: `${color}15`,
-                                    color: color,
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'center',
-                                }}
-                            >
-                                {icon}
-                            </Box>
-                            <Typography variant="body1" fontWeight="700" sx={{ lineHeight: 1.3, flex: 1 }}>
-                                {getTranslation(stotraTitleKey)}
-                            </Typography>
-                        </Box>
-
-                        {/* Quality badge + issue count row */}
-                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, pl: 0.5, flexWrap: 'wrap' }}>
-                            {provenance ? (
-                                <TextQualityBadge tier={provenance.qualityTier} size="small" />
-                            ) : null}
-                            {provenance && (
-                                <Typography
-                                    variant="caption"
+                        {/* Header: icon (with open-issue badge) + title + quality tier */}
+                        <Box sx={{ display: 'flex', alignItems: 'flex-start', gap: 1.5, width: '100%' }}>
+                            {/* Icon circle with optional open-issues count badge */}
+                            <Box sx={{ position: 'relative', flexShrink: 0, mt: 0.25 }}>
+                                <Box
                                     sx={{
-                                        fontSize: '0.6rem',
-                                        color: '#64748b',
-                                        cursor: 'pointer',
-                                        '&:hover': { color: '#94a3b8', textDecoration: 'underline' },
+                                        p: 0.75,
+                                        borderRadius: '50%',
+                                        bgcolor: `${color}15`,
+                                        color: color,
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
                                     }}
-                                    onClick={(e) => { e.stopPropagation(); setProvenanceModal({ stotra, provenance }); }}
                                 >
-                                    ⓘ About this text
-                                </Typography>
-                            )}
-                            {summariesLoading && user ? (
-                                <Skeleton variant="text" width={60} height={14} sx={{ bgcolor: 'rgba(255,255,255,0.06)' }} />
-                            ) : summary ? (
-                                <Typography
-                                    variant="caption"
-                                    sx={{
-                                        fontSize: '0.6rem',
-                                        color: openCount > 0 ? '#f59e0b' : '#4ade80',
-                                        cursor: openCount > 0 ? 'pointer' : 'default',
-                                        '&:hover': openCount > 0 ? { textDecoration: 'underline' } : {},
-                                    }}
-                                    onClick={openCount > 0 ? (e) => { e.stopPropagation(); setDrilldownStotra(stotra); } : undefined}
-                                >
-                                    {openCount > 0 ? `⚑ ${openCount} open${resolvedCount > 0 ? ` · ${resolvedCount} resolved` : ''}` : '✓ No open issues'}
-                                </Typography>
-                            ) : null}
-                        </Box>
-
-                        {metadata && (
-                            <>
-                                {/* Composer - compact single line */}
-                                {(metadata.composer || metadata.revealedBy) && (
-                                    <Typography variant="caption" sx={{ color: 'rgba(148, 163, 184, 0.8)', fontSize: '0.65rem', lineHeight: 1.3, pl: 0.5 }}>
-                                        {metadata.composer && <>{metadata.composer}</>}
-                                        {metadata.composer && metadata.revealedBy && ' / '}
-                                        {metadata.revealedBy && <>{metadata.revealedBy}</>}
-                                    </Typography>
+                                    {icon}
+                                </Box>
+                                {!summariesLoading && openCount > 0 && (
+                                    <Box
+                                        onClick={(e) => { e.stopPropagation(); setDrilldownStotra(stotra); }}
+                                        sx={{
+                                            position: 'absolute', top: -3, right: -3,
+                                            minWidth: 16, height: 16, px: 0.25,
+                                            borderRadius: '50%', bgcolor: '#f59e0b',
+                                            color: 'black', fontSize: '0.48rem', fontWeight: 800,
+                                            display: 'flex', alignItems: 'center', justifyContent: 'center',
+                                            cursor: 'pointer', lineHeight: 1,
+                                        }}
+                                    >
+                                        {openCount > 9 ? '9+' : openCount}
+                                    </Box>
                                 )}
+                            </Box>
 
-                                {/* Stats + mode chips in one compact row */}
-                                <Box sx={{ display: 'flex', gap: 0.5, flexWrap: 'wrap', width: '100%' }}>
-                                    <Chip
-                                        icon={<FormatListNumberedIcon sx={{ fontSize: 12 }} />}
-                                        label={`${metadata.totalLines}`}
-                                        size="small"
-                                        sx={{
-                                            bgcolor: 'rgba(16, 185, 129, 0.12)',
-                                            color: '#34d399',
-                                            border: '1px solid rgba(16, 185, 129, 0.2)',
-                                            fontSize: '0.65rem',
-                                            height: 20,
-                                            '& .MuiChip-icon': { ml: 0.5 },
-                                        }}
-                                    />
-                                    <Chip
-                                        icon={<TranslateIcon sx={{ fontSize: 12 }} />}
-                                        label={`${metadata.languages.length}`}
-                                        size="small"
-                                        sx={{
-                                            bgcolor: 'rgba(245, 158, 11, 0.12)',
-                                            color: '#fbbf24',
-                                            border: '1px solid rgba(245, 158, 11, 0.2)',
-                                            fontSize: '0.65rem',
-                                            height: 20,
-                                            '& .MuiChip-icon': { ml: 0.5 },
-                                        }}
-                                    />
-                                    {metadata.chapters > 1 && (
-                                        <Chip
-                                            icon={<MenuBookIcon sx={{ fontSize: 12 }} />}
-                                            label={`${metadata.chapters}`}
-                                            size="small"
-                                            sx={{
-                                                bgcolor: 'rgba(59, 130, 246, 0.12)',
-                                                color: '#60a5fa',
-                                                border: '1px solid rgba(59, 130, 246, 0.2)',
-                                                fontSize: '0.65rem',
-                                                height: 20,
-                                                '& .MuiChip-icon': { ml: 0.5 },
-                                            }}
-                                        />
-                                    )}
-                                    {metadata.practiceMode && (
-                                        <Chip
-                                            icon={<SchoolIcon sx={{ fontSize: 11 }} />}
-                                            label={getTranslation('practice')}
-                                            size="small"
-                                            sx={{
-                                                bgcolor: 'rgba(139, 92, 246, 0.12)',
-                                                color: '#a78bfa',
-                                                border: '1px solid rgba(139, 92, 246, 0.2)',
-                                                fontSize: '0.6rem',
-                                                height: 20,
-                                                '& .MuiChip-icon': { ml: 0.5 },
-                                            }}
-                                        />
-                                    )}
-                                    {metadata.puzzleMode && (
-                                        <Chip
-                                            icon={<ExtensionIcon sx={{ fontSize: 11 }} />}
-                                            label={getTranslation('puzzle')}
-                                            size="small"
-                                            sx={{
-                                                bgcolor: 'rgba(236, 72, 153, 0.12)',
-                                                color: '#f472b6',
-                                                border: '1px solid rgba(236, 72, 153, 0.2)',
-                                                fontSize: '0.6rem',
-                                                height: 20,
-                                                '& .MuiChip-icon': { ml: 0.5 },
-                                            }}
-                                        />
+                            {/* Title + compact info line */}
+                            <Box sx={{ flex: 1, minWidth: 0 }}>
+                                <Box sx={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 0.5 }}>
+                                    <Typography variant="body1" fontWeight="700" sx={{ lineHeight: 1.3, flex: 1 }}>
+                                        {getTranslation(stotraTitleKey)}
+                                    </Typography>
+                                    {provenance && (
+                                        <Box
+                                            onClick={(e) => { e.stopPropagation(); setProvenanceModal({ stotra, provenance }); }}
+                                            sx={{ cursor: 'pointer', flexShrink: 0, mt: 0.25 }}
+                                        >
+                                            <TextQualityBadge tier={provenance.qualityTier} size="small" />
+                                        </Box>
                                     )}
                                 </Box>
-                            </>
+                                {/* Compact stats line: composer · lines · langs · chapters */}
+                                <Typography variant="caption" sx={{ color: 'rgba(148,163,184,0.65)', fontSize: '0.62rem', display: 'block', mt: 0.25, lineHeight: 1.4 }}>
+                                    {[
+                                        metadata?.composer || metadata?.revealedBy,
+                                        totalLines ? `${totalLines} lines` : null,
+                                        metadata?.languages?.length ? `${metadata.languages.length} langs` : null,
+                                        (metadata?.chapters && metadata.chapters > 1) ? `${metadata.chapters} §` : null,
+                                    ].filter(Boolean).join(' · ')}
+                                </Typography>
+                            </Box>
+                        </Box>
+
+                        {/* Mode chips + resolved count (if any) */}
+                        {(metadata?.practiceMode || metadata?.puzzleMode || (!summariesLoading && resolvedCount > 0)) && (
+                            <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5, flexWrap: 'wrap' }}>
+                                {metadata?.practiceMode && (
+                                    <Chip
+                                        icon={<SchoolIcon sx={{ fontSize: 11 }} />}
+                                        label={getTranslation('practice')}
+                                        size="small"
+                                        sx={{
+                                            bgcolor: 'rgba(139, 92, 246, 0.12)',
+                                            color: '#a78bfa',
+                                            border: '1px solid rgba(139, 92, 246, 0.2)',
+                                            fontSize: '0.6rem',
+                                            height: 20,
+                                            '& .MuiChip-icon': { ml: 0.5 },
+                                        }}
+                                    />
+                                )}
+                                {metadata?.puzzleMode && (
+                                    <Chip
+                                        icon={<ExtensionIcon sx={{ fontSize: 11 }} />}
+                                        label={getTranslation('puzzle')}
+                                        size="small"
+                                        sx={{
+                                            bgcolor: 'rgba(236, 72, 153, 0.12)',
+                                            color: '#f472b6',
+                                            border: '1px solid rgba(236, 72, 153, 0.2)',
+                                            fontSize: '0.6rem',
+                                            height: 20,
+                                            '& .MuiChip-icon': { ml: 0.5 },
+                                        }}
+                                    />
+                                )}
+                                {!summariesLoading && resolvedCount > 0 && (
+                                    <Typography variant="caption" sx={{ fontSize: '0.6rem', color: '#4ade80', ml: 0.25 }}>
+                                        ✓ {resolvedCount} resolved
+                                    </Typography>
+                                )}
+                            </Box>
                         )}
 
-                        {/* Inline progress bars */}
+                        {/* Progress bars — side by side to save vertical space */}
                         {hasProgress && (
-                            <Box sx={{ width: '100%', mt: 0.5 }}>
+                            <Box sx={{ width: '100%', display: 'flex', gap: 1.5, mt: 0.25 }}>
                                 {practice.completedLines > 0 && (
-                                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5, mb: 0.25 }}>
-                                        <Box sx={{ flex: 1 }}>
-                                            <LinearProgress
-                                                variant="determinate"
-                                                value={practice.progress * 100}
-                                                sx={{
-                                                    height: 3,
-                                                    borderRadius: 2,
-                                                    bgcolor: 'rgba(255,255,255,0.06)',
-                                                    '& .MuiLinearProgress-bar': { bgcolor: '#a78bfa', borderRadius: 2 },
-                                                }}
-                                            />
+                                    <Box sx={{ flex: 1 }}>
+                                        <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 0.25 }}>
+                                            <Typography variant="caption" sx={{ color: '#94a3b8', fontSize: '0.55rem' }}>
+                                                {getTranslation('practice')}
+                                            </Typography>
+                                            <Typography variant="caption" sx={{ color: '#94a3b8', fontSize: '0.55rem' }}>
+                                                {practice.completedLines}/{totalLines}
+                                            </Typography>
                                         </Box>
-                                        <Typography variant="caption" sx={{ color: '#94a3b8', fontSize: '0.55rem', minWidth: 28, textAlign: 'right' }}>
-                                            {practice.completedLines}/{totalLines}
-                                        </Typography>
+                                        <LinearProgress
+                                            variant="determinate"
+                                            value={practice.progress * 100}
+                                            sx={{
+                                                height: 3,
+                                                borderRadius: 2,
+                                                bgcolor: 'rgba(255,255,255,0.06)',
+                                                '& .MuiLinearProgress-bar': { bgcolor: '#a78bfa', borderRadius: 2 },
+                                            }}
+                                        />
                                     </Box>
                                 )}
                                 {puzzle.completed > 0 && (
-                                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
-                                        <Box sx={{ flex: 1 }}>
-                                            <LinearProgress
-                                                variant="determinate"
-                                                value={puzzle.progress}
-                                                sx={{
-                                                    height: 3,
-                                                    borderRadius: 2,
-                                                    bgcolor: 'rgba(255,255,255,0.06)',
-                                                    '& .MuiLinearProgress-bar': { bgcolor: '#f472b6', borderRadius: 2 },
-                                                }}
-                                            />
+                                    <Box sx={{ flex: 1 }}>
+                                        <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 0.25 }}>
+                                            <Typography variant="caption" sx={{ color: '#94a3b8', fontSize: '0.55rem' }}>
+                                                {getTranslation('puzzle')}
+                                            </Typography>
+                                            <Typography variant="caption" sx={{ color: '#94a3b8', fontSize: '0.55rem' }}>
+                                                {puzzle.completed}/{puzzle.total}
+                                            </Typography>
                                         </Box>
-                                        <Typography variant="caption" sx={{ color: '#94a3b8', fontSize: '0.55rem', minWidth: 28, textAlign: 'right' }}>
-                                            {puzzle.completed}/{puzzle.total}
-                                        </Typography>
+                                        <LinearProgress
+                                            variant="determinate"
+                                            value={puzzle.progress}
+                                            sx={{
+                                                height: 3,
+                                                borderRadius: 2,
+                                                bgcolor: 'rgba(255,255,255,0.06)',
+                                                '& .MuiLinearProgress-bar': { bgcolor: '#f472b6', borderRadius: 2 },
+                                            }}
+                                        />
                                     </Box>
                                 )}
                             </Box>
