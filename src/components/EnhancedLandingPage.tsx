@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo } from 'react';
-import { Box, Card, CardActionArea, Typography, Fade, Grow, Chip, IconButton, Menu, MenuItem, LinearProgress } from '@mui/material';
+import { Box, Card, CardActionArea, Typography, Fade, Grow, Chip, IconButton, Menu, MenuItem, LinearProgress, Skeleton, Dialog, DialogTitle, DialogContent, DialogActions, Button, Divider } from '@mui/material';
 import AutoStoriesIcon from '@mui/icons-material/AutoStories';
 import SpaIcon from '@mui/icons-material/Spa';
 import LanguageIcon from '@mui/icons-material/Language';
@@ -11,7 +11,7 @@ import ExtensionIcon from '@mui/icons-material/Extension';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import LeaderboardIcon from '@mui/icons-material/Leaderboard';
-import type { TextFile, Lang } from '../data/types';
+import type { TextFile, Lang, TextProvenance } from '../data/types';
 import { useAuth } from '../context/AuthContext';
 import UserMenu from './UserMenu';
 import LoginButton from './LoginButton';
@@ -21,6 +21,10 @@ import FeedbackWidget from './FeedbackWidget';
 import { getPracticeStats } from '../lib/practice';
 import { getPuzzleStats } from '../lib/puzzle';
 import { STOTRAS } from '../lib/stotraConfig';
+import { TextQualityBadge } from './TextQualityBadge';
+import { getQualitySummary } from '../lib/textIssueService';
+import type { StotraQualitySummary } from '../lib/textIssueService';
+import { VerifierDashboard } from './VerifierDashboard';
 
 interface LandingPageProps {
     onSelectStotra: (stotra: 'vsn' | 'hari' | 'keshava' | 'vayu' | 'raghavendra' | 'yantrodharaka' | 'venkateshwara', preferredLang?: Lang, mode?: 'reading' | 'practice' | 'puzzle', lineIndex?: number) => void;
@@ -56,6 +60,11 @@ export function EnhancedLandingPage({ onSelectStotra }: LandingPageProps) {
     const [achievementsPanelOpen, setAchievementsPanelOpen] = useState(false);
     const [leaderboardPanelOpen, setLeaderboardPanelOpen] = useState(false);
     const [feedbackOpen, setFeedbackOpen] = useState(false);
+    const [qualitySummaries, setQualitySummaries] = useState<Record<string, StotraQualitySummary | null>>({});
+    const [summariesLoading, setSummariesLoading] = useState(true);
+    const [drilldownStotra, setDrilldownStotra] = useState<string | null>(null);
+    const [verifierDashboardOpen, setVerifierDashboardOpen] = useState(false);
+    const [provenanceModal, setProvenanceModal] = useState<{ stotra: string; provenance: TextProvenance } | null>(null);
 
     const [selectedLang, setSelectedLang] = useState<Lang>(() => {
         try {
@@ -112,6 +121,20 @@ export function EnhancedLandingPage({ onSelectStotra }: LandingPageProps) {
             localStorage.setItem('landing:lang', selectedLang);
         } catch {}
     }, [selectedLang]);
+
+    // Load quality summaries for all stotras
+    useEffect(() => {
+        if (!user) { setSummariesLoading(false); return; }
+        setSummariesLoading(true);
+        const keys = STOTRAS.filter(s => !s.hidden).map(s => s.key);
+        Promise.all(keys.map(key => getQualitySummary(key).then(s => ({ key, s })).catch(() => ({ key, s: null }))))
+            .then(results => {
+                const map: Record<string, StotraQualitySummary | null> = {};
+                results.forEach(({ key, s }) => { map[key] = s; });
+                setQualitySummaries(map);
+            })
+            .finally(() => setSummariesLoading(false));
+    }, [user]);
 
     const handleLanguageMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
         setLangMenuAnchor(event.currentTarget);
@@ -441,11 +464,19 @@ export function EnhancedLandingPage({ onSelectStotra }: LandingPageProps) {
         delay: number
     ) => {
         const metadata = data.metadata;
+        const provenance = data.provenance;
         const stotraTitleKey = `stotra_${stotra}`;
         const totalLines = metadata?.totalLines || data.lines.length;
         const practice = getPracticeStats(selectedLang, totalLines, stotra);
         const puzzle = getPuzzleStats(selectedLang, totalLines, stotra);
         const hasProgress = practice.completedLines > 0 || puzzle.completed > 0;
+        const summary = qualitySummaries[stotra];
+        const openCount = summary
+            ? (summary.counts.doubt.open + summary.counts.variant.open + summary.counts.error.open)
+            : 0;
+        const resolvedCount = summary
+            ? (summary.counts.doubt.resolved + summary.counts.variant.resolved + summary.counts.error.resolved)
+            : 0;
 
         return (
             <Grow in timeout={delay} key={stotra}>
@@ -485,6 +516,43 @@ export function EnhancedLandingPage({ onSelectStotra }: LandingPageProps) {
                             <Typography variant="body1" fontWeight="700" sx={{ lineHeight: 1.3, flex: 1 }}>
                                 {getTranslation(stotraTitleKey)}
                             </Typography>
+                        </Box>
+
+                        {/* Quality badge + issue count row */}
+                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, pl: 0.5, flexWrap: 'wrap' }}>
+                            {provenance ? (
+                                <TextQualityBadge tier={provenance.qualityTier} size="small" />
+                            ) : null}
+                            {provenance && (
+                                <Typography
+                                    variant="caption"
+                                    sx={{
+                                        fontSize: '0.6rem',
+                                        color: '#64748b',
+                                        cursor: 'pointer',
+                                        '&:hover': { color: '#94a3b8', textDecoration: 'underline' },
+                                    }}
+                                    onClick={(e) => { e.stopPropagation(); setProvenanceModal({ stotra, provenance }); }}
+                                >
+                                    ⓘ About this text
+                                </Typography>
+                            )}
+                            {summariesLoading && user ? (
+                                <Skeleton variant="text" width={60} height={14} sx={{ bgcolor: 'rgba(255,255,255,0.06)' }} />
+                            ) : summary ? (
+                                <Typography
+                                    variant="caption"
+                                    sx={{
+                                        fontSize: '0.6rem',
+                                        color: openCount > 0 ? '#f59e0b' : '#4ade80',
+                                        cursor: openCount > 0 ? 'pointer' : 'default',
+                                        '&:hover': openCount > 0 ? { textDecoration: 'underline' } : {},
+                                    }}
+                                    onClick={openCount > 0 ? (e) => { e.stopPropagation(); setDrilldownStotra(stotra); } : undefined}
+                                >
+                                    {openCount > 0 ? `⚑ ${openCount} open${resolvedCount > 0 ? ` · ${resolvedCount} resolved` : ''}` : '✓ No open issues'}
+                                </Typography>
+                            ) : null}
                         </Box>
 
                         {metadata && (
@@ -682,6 +750,7 @@ export function EnhancedLandingPage({ onSelectStotra }: LandingPageProps) {
                             onShowAchievements={() => setAchievementsPanelOpen(true)}
                             onShowLeaderboard={() => setLeaderboardPanelOpen(true)}
                             onShowFeedback={() => setFeedbackOpen(true)}
+                            onShowVerifierDashboard={() => setVerifierDashboardOpen(true)}
                         />
                     ) : (
                         <LoginButton variant="icon" />
@@ -958,6 +1027,90 @@ export function EnhancedLandingPage({ onSelectStotra }: LandingPageProps) {
                 open={feedbackOpen}
                 onClose={() => setFeedbackOpen(false)}
             />
+
+            {/* Issues Drilldown Panel (Phase 4 - lazy imported to avoid circular deps) */}
+            {drilldownStotra && (
+                <IssuesDrilldownPanelLazy
+                    open={!!drilldownStotra}
+                    onClose={() => setDrilldownStotra(null)}
+                    stotraKey={drilldownStotra}
+                />
+            )}
+
+            {/* Verifier Dashboard */}
+            <VerifierDashboard
+                open={verifierDashboardOpen}
+                onClose={() => setVerifierDashboardOpen(false)}
+            />
+
+            {/* Provenance Info Modal */}
+            <Dialog
+                open={!!provenanceModal}
+                onClose={() => setProvenanceModal(null)}
+                maxWidth="xs"
+                fullWidth
+                PaperProps={{
+                    sx: {
+                        bgcolor: 'rgba(15, 23, 42, 0.97)',
+                        border: '1px solid rgba(51, 65, 85, 0.6)',
+                        borderRadius: 3,
+                        backdropFilter: 'blur(12px)',
+                    }
+                }}
+            >
+                <DialogTitle sx={{ pb: 1, color: '#f1f5f9', fontSize: '1rem', display: 'flex', alignItems: 'center', gap: 1 }}>
+                    <span style={{ fontSize: 18 }}>📜</span> About this text
+                </DialogTitle>
+                <DialogContent sx={{ pt: 0 }}>
+                    {provenanceModal && (
+                        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.5 }}>
+                            <Divider sx={{ borderColor: 'rgba(100, 116, 139, 0.2)', mb: 0.5 }} />
+                            {[
+                                { label: 'Source', value: provenanceModal.provenance.primarySource.label },
+                                { label: 'Type', value: provenanceModal.provenance.primarySource.type.replace(/_/g, ' ') },
+                                provenanceModal.provenance.primarySource.url ? { label: 'URL', value: provenanceModal.provenance.primarySource.url } : null,
+                                provenanceModal.provenance.sampradayaVariant ? { label: 'Tradition', value: `${provenanceModal.provenance.sampradayaVariant} recension` } : null,
+                                { label: 'Cross-referenced', value: provenanceModal.provenance.crossReferenced ? 'Yes' : 'No' },
+                                { label: 'Scholar reviewed', value: provenanceModal.provenance.scholarReviewed ? 'Yes' : 'No' },
+                                provenanceModal.provenance.lastVerified ? { label: 'Last verified', value: provenanceModal.provenance.lastVerified } : null,
+                            ].filter(Boolean).map((row, i) => (
+                                <Box key={i} sx={{ display: 'flex', gap: 1 }}>
+                                    <Typography variant="caption" sx={{ color: '#64748b', minWidth: 110, flexShrink: 0 }}>{(row as any).label}</Typography>
+                                    <Typography variant="caption" sx={{ color: '#cbd5e1' }}>{(row as any).value}</Typography>
+                                </Box>
+                            ))}
+                            {provenanceModal.provenance.knownVariants && provenanceModal.provenance.knownVariants.length > 0 && (
+                                <Box>
+                                    <Typography variant="caption" sx={{ color: '#64748b', display: 'block', mb: 0.5 }}>Known variants:</Typography>
+                                    {provenanceModal.provenance.knownVariants.map((v, i) => (
+                                        <Typography key={i} variant="caption" sx={{ color: '#94a3b8', display: 'block', pl: 1 }}>• {v}</Typography>
+                                    ))}
+                                </Box>
+                            )}
+                            <Divider sx={{ borderColor: 'rgba(100, 116, 139, 0.2)', mt: 0.5 }} />
+                            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                                <TextQualityBadge tier={provenanceModal.provenance.qualityTier} size="small" />
+                                <Typography variant="caption" sx={{ color: '#64748b', fontSize: '0.65rem' }}>
+                                    Tier {provenanceModal.provenance.qualityTier} — Community digital source
+                                </Typography>
+                            </Box>
+                        </Box>
+                    )}
+                </DialogContent>
+                <DialogActions sx={{ px: 2, pb: 2 }}>
+                    <Button onClick={() => setProvenanceModal(null)} size="small" sx={{ color: '#94a3b8' }}>Close</Button>
+                </DialogActions>
+            </Dialog>
         </Box>
     );
+}
+
+// Lazy wrapper for IssuesDrilldownPanel to avoid import cycle
+function IssuesDrilldownPanelLazy(props: { open: boolean; onClose: () => void; stotraKey: string }) {
+    const [Panel, setPanel] = useState<React.ComponentType<typeof props> | null>(null);
+    useEffect(() => {
+        import('./IssuesDrilldownPanel').then(m => setPanel(() => m.IssuesDrilldownPanel as React.ComponentType<typeof props>));
+    }, []);
+    if (!Panel) return null;
+    return <Panel {...props} />;
 }

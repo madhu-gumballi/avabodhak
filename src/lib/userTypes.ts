@@ -1,5 +1,7 @@
 import type { Timestamp } from 'firebase/firestore'
 
+export type UserRole = 'user' | 'verifier' | 'admin';
+
 // User profile stored at /users/{userId}
 export interface UserProfile {
   displayName: string
@@ -67,6 +69,7 @@ export interface UserDocument {
   stats: UserStats
   dailyGoals: DailyGoals
   achievements: Achievement[]
+  role?: UserRole  // Absent = 'user'
 }
 
 // Progress per stotra stored at /users/{userId}/progress/{stotraId}

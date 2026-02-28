@@ -27,6 +27,17 @@
     "knda": "https://vignanam.org/kannada/sri-venkateswara-stotram.html",
     "iast": ""
   },
+  "provenance": {
+    "qualityTier": 3,
+    "primarySource": {
+      "type": "digital_community",
+      "label": "vignanam.org",
+      "url": "https://vignanam.org/kannada/sri-venkateswara-stotram.html"
+    },
+    "sampradayaVariant": "common",
+    "crossReferenced": false,
+    "scholarReviewed": false
+  },
   "lines": [
     {
       "id": "1",

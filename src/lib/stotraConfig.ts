@@ -10,24 +10,25 @@ import vayuLines from '../data/vayu.lines.json';
 import raghavendraLines from '../data/raghavendra.lines.json';
 import yantrodharakaLines from '../data/yantrodharaka.lines.json';
 import venkateshwaraLines from '../data/venkateshwara.lines.json';
-import type { TextFile, Lang, Line } from '../data/types';
+import type { TextFile, Lang, Line, TextProvenance } from '../data/types';
 
 export interface StotraInfo {
   key: 'vsn' | 'hari' | 'keshava' | 'vayu' | 'raghavendra' | 'yantrodharaka' | 'venkateshwara';
   totalLines: number;
   languages: Lang[];
   data: TextFile;
+  provenance?: TextProvenance;
   hidden?: boolean;
 }
 
 export const STOTRAS: StotraInfo[] = [
-  { key: 'vsn', totalLines: (vsnLines as TextFile).lines.length, languages: ['deva', 'knda', 'tel', 'tam', 'pan', 'guj', 'mr', 'ben', 'mal', 'iast'], data: vsnLines as TextFile },
-  { key: 'hari', totalLines: (hariLines as TextFile).lines.length, languages: ['deva', 'knda', 'tel', 'tam', 'pan', 'iast'], data: hariLines as TextFile },
-  { key: 'keshava', totalLines: (keshavaLines as TextFile).lines.length, languages: ['deva', 'knda', 'tel', 'tam', 'pan', 'guj', 'iast'], data: keshavaLines as TextFile },
-  { key: 'vayu', totalLines: (vayuLines as TextFile).lines.length, languages: ['deva', 'knda', 'tel', 'tam', 'iast'], data: vayuLines as TextFile },
-  { key: 'raghavendra', totalLines: (raghavendraLines as TextFile).lines.length, languages: ['deva', 'knda', 'tel', 'tam', 'iast'], data: raghavendraLines as TextFile },
-  { key: 'yantrodharaka', totalLines: (yantrodharakaLines as TextFile).lines.length, languages: ['deva', 'knda', 'tel', 'iast'], data: yantrodharakaLines as TextFile },
-  { key: 'venkateshwara', totalLines: (venkateshwaraLines as TextFile).lines.length, languages: ['knda', 'iast'], data: venkateshwaraLines as TextFile },
+  { key: 'vsn', totalLines: (vsnLines as TextFile).lines.length, languages: ['deva', 'knda', 'tel', 'tam', 'pan', 'guj', 'mr', 'ben', 'mal', 'iast'], data: vsnLines as TextFile, provenance: (vsnLines as TextFile).provenance },
+  { key: 'hari', totalLines: (hariLines as TextFile).lines.length, languages: ['deva', 'knda', 'tel', 'tam', 'pan', 'iast'], data: hariLines as TextFile, provenance: (hariLines as TextFile).provenance },
+  { key: 'keshava', totalLines: (keshavaLines as TextFile).lines.length, languages: ['deva', 'knda', 'tel', 'tam', 'pan', 'guj', 'iast'], data: keshavaLines as TextFile, provenance: (keshavaLines as TextFile).provenance },
+  { key: 'vayu', totalLines: (vayuLines as TextFile).lines.length, languages: ['deva', 'knda', 'tel', 'tam', 'iast'], data: vayuLines as TextFile, provenance: (vayuLines as TextFile).provenance },
+  { key: 'raghavendra', totalLines: (raghavendraLines as TextFile).lines.length, languages: ['deva', 'knda', 'tel', 'tam', 'iast'], data: raghavendraLines as TextFile, provenance: (raghavendraLines as TextFile).provenance },
+  { key: 'yantrodharaka', totalLines: (yantrodharakaLines as TextFile).lines.length, languages: ['deva', 'knda', 'tel', 'iast'], data: yantrodharakaLines as TextFile, provenance: (yantrodharakaLines as TextFile).provenance },
+  { key: 'venkateshwara', totalLines: (venkateshwaraLines as TextFile).lines.length, languages: ['knda', 'iast'], data: venkateshwaraLines as TextFile, provenance: (venkateshwaraLines as TextFile).provenance },
 ];
 
 /**

@@ -84,6 +84,20 @@
     "ben": "https://vignanam.org/bengali/sree-vishnu-sahasra-nama-stotram.html",
     "mal": "https://vignanam.org/malayalam/sree-vishnu-sahasra-nama-stotram.html"
   },
+  "provenance": {
+    "qualityTier": 3,
+    "primarySource": {
+      "type": "digital_community",
+      "label": "vignanam.org",
+      "url": "https://vignanam.org/english/sree-vishnu-sahasra-nama-stotram.html"
+    },
+    "sampradayaVariant": "common",
+    "knownVariants": [
+      "Verse 54 reading differs between Madhva and Advaita traditions"
+    ],
+    "crossReferenced": false,
+    "scholarReviewed": false
+  },
   "lines": [
     {
       "id": "1",

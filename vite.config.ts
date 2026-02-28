@@ -34,6 +34,16 @@ export default defineConfig({
         target: 'http://localhost:8081',
         changeOrigin: true,
       },
+      '/api/text-issue': {
+        target: 'http://localhost:8888',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api\/text-issue/, '/.netlify/functions/textIssue'),
+      },
+      '/api/feedback': {
+        target: 'http://localhost:8888',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api\/feedback/, '/.netlify/functions/feedback'),
+      },
     },
   },
   test: {

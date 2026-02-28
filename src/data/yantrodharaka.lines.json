@@ -35,6 +35,17 @@
     "knda": "https://stotranidhi.com/kn/sri-yantrodharaka-hanuman-stotram-in-kannada/",
     "tel": "https://stotranidhi.com/te/sri-yantrodharaka-hanuman-stotram-in-telugu/"
   },
+  "provenance": {
+    "qualityTier": 3,
+    "primarySource": {
+      "type": "digital_community",
+      "label": "stotranidhi.com",
+      "url": "https://stotranidhi.com/en/sri-yantrodharaka-hanuman-stotram-in-english/"
+    },
+    "sampradayaVariant": "Madhva",
+    "crossReferenced": false,
+    "scholarReviewed": false
+  },
   "lines": [
     {
       "id": "1",

@@ -21,7 +21,9 @@ import type {
   RasaType,
   DevataSvarupa,
   CompoundBreakdown,
+  TextProvenance,
 } from '../data/types';
+import { TextQualityBadge } from './TextQualityBadge';
 
 // Rasa (sentiment) display info
 const RASA_INFO: Record<RasaType, { label: string; color: string; icon?: string }> = {
@@ -53,6 +55,7 @@ interface VerseDetailPanelProps {
     padachchheda?: string;
     wordByWord?: { word: string; meaning: string }[];
   };
+  provenance?: TextProvenance;
 }
 
 // Props for inline display (no drawer)
@@ -63,6 +66,7 @@ interface VerseDetailInlineProps {
   lang: Lang;
   enrichedData?: VerseDetailPanelProps['enrichedData'];
   compact?: boolean; // More compact layout for mobile
+  provenance?: TextProvenance;
 }
 
 /**
@@ -77,6 +81,7 @@ export function VerseDetailPanel({
   lineIast,
   lang,
   enrichedData,
+  provenance,
 }: VerseDetailPanelProps) {
   // Normalize samasaVibhaga to always be an array (handles both array and single object cases)
   const samasaVibhagaArray = enrichedData?.samasaVibhaga
@@ -550,6 +555,57 @@ export function VerseDetailPanel({
               </DetailSection>
             )}
 
+            {/* About this text — provenance */}
+            {provenance && (
+              <DetailSection
+                icon={<span style={{ fontSize: 18 }}>📜</span>}
+                title="About this text"
+                color="#94a3b8"
+              >
+                <Box sx={{ display: 'flex', flexDirection: 'column', gap: 0.75 }}>
+                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                    <Typography variant="caption" sx={{ color: '#64748b', minWidth: 110 }}>Source</Typography>
+                    <Typography variant="caption" sx={{ color: '#cbd5e1' }}>
+                      {provenance.primarySource.label}{' '}
+                      <span style={{ color: '#475569' }}>({provenance.primarySource.type.replace('_', ' ')})</span>
+                    </Typography>
+                  </Box>
+                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                    <Typography variant="caption" sx={{ color: '#64748b', minWidth: 110 }}>Quality</Typography>
+                    <TextQualityBadge tier={provenance.qualityTier} size="small" />
+                  </Box>
+                  {provenance.sampradayaVariant && (
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                      <Typography variant="caption" sx={{ color: '#64748b', minWidth: 110 }}>Tradition</Typography>
+                      <Typography variant="caption" sx={{ color: '#cbd5e1' }}>{provenance.sampradayaVariant} recension</Typography>
+                    </Box>
+                  )}
+                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                    <Typography variant="caption" sx={{ color: '#64748b', minWidth: 110 }}>Cross-referenced</Typography>
+                    <Typography variant="caption" sx={{ color: provenance.crossReferenced ? '#4ade80' : '#64748b' }}>
+                      {provenance.crossReferenced ? 'Yes' : 'No'}
+                    </Typography>
+                  </Box>
+                  {provenance.lastVerified && (
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                      <Typography variant="caption" sx={{ color: '#64748b', minWidth: 110 }}>Last verified</Typography>
+                      <Typography variant="caption" sx={{ color: '#cbd5e1' }}>{provenance.lastVerified}</Typography>
+                    </Box>
+                  )}
+                  {provenance.knownVariants && provenance.knownVariants.length > 0 && (
+                    <Box sx={{ mt: 0.5 }}>
+                      <Typography variant="caption" sx={{ color: '#64748b', display: 'block', mb: 0.5 }}>Known variants:</Typography>
+                      {provenance.knownVariants.map((v, i) => (
+                        <Typography key={i} variant="caption" sx={{ color: '#94a3b8', display: 'block', pl: 1 }}>
+                          • {v}
+                        </Typography>
+                      ))}
+                    </Box>
+                  )}
+                </Box>
+              </DetailSection>
+            )}
+
             {/* Disclaimer */}
             <Box
               sx={{
@@ -643,6 +699,7 @@ export function VerseDetailInline({
   lang,
   enrichedData,
   compact = false,
+  provenance,
 }: VerseDetailInlineProps) {
   // Normalize samasaVibhaga to always be an array
   const samasaVibhagaArray = enrichedData?.samasaVibhaga
@@ -1069,6 +1126,35 @@ export function VerseDetailInline({
                       )}
                     </Box>
                   ))}
+                </Box>
+              </DetailSectionCompact>
+            )}
+
+            {/* About this text — provenance */}
+            {provenance && (
+              <DetailSectionCompact
+                icon={<span style={{ fontSize: compact ? 14 : 16 }}>📜</span>}
+                title="About this text"
+                color="#94a3b8"
+                compact={compact}
+              >
+                <Box sx={{ display: 'flex', flexDirection: 'column', gap: 0.5 }}>
+                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                    <Typography variant="caption" sx={{ color: '#64748b', minWidth: 90, fontSize: compact ? '0.6rem' : '0.65rem' }}>Source</Typography>
+                    <Typography variant="caption" sx={{ color: '#cbd5e1', fontSize: compact ? '0.6rem' : '0.65rem' }}>
+                      {provenance.primarySource.label}
+                    </Typography>
+                  </Box>
+                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                    <Typography variant="caption" sx={{ color: '#64748b', minWidth: 90, fontSize: compact ? '0.6rem' : '0.65rem' }}>Quality</Typography>
+                    <TextQualityBadge tier={provenance.qualityTier} size="small" />
+                  </Box>
+                  {provenance.sampradayaVariant && (
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                      <Typography variant="caption" sx={{ color: '#64748b', minWidth: 90, fontSize: compact ? '0.6rem' : '0.65rem' }}>Tradition</Typography>
+                      <Typography variant="caption" sx={{ color: '#cbd5e1', fontSize: compact ? '0.6rem' : '0.65rem' }}>{provenance.sampradayaVariant} recension</Typography>
+                    </Box>
+                  )}
                 </Box>
               </DetailSectionCompact>
             )}

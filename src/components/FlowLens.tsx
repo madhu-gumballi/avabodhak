@@ -2,8 +2,18 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import type { Lang, Keyword, CompoundBreakdown } from '../data/types';
 import { DIACRITIC_INFO, isIASTDiacritic, simplifyIAST, extractIASTDiacritics, classifyIASTWord } from '../lib/pronounce';
 import { basicSplit, chunkOffsetsByWord, segmentGraphemes } from '../lib/tokenize';
-import { Paper } from '@mui/material';
+import { Paper, Tooltip } from '@mui/material';
 import { WordInfoPopover } from './WordInfoPopover';
+import { ReportIssueModal } from './ReportIssueModal';
+import type { IssueType } from '../lib/textIssueService';
+
+// Flag icon SVG component
+const FlagIcon = ({ className }: { className?: string }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+    <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path>
+    <line x1="4" y1="22" x2="4" y2="15"></line>
+  </svg>
+);
 
 // Copy icon SVG component
 const CopyIcon = ({ className }: { className?: string }) => (
@@ -49,13 +59,20 @@ interface Props {
   learnMode?: boolean; // When true, words become tappable to show etymology/meaning
   lineData?: LineData; // Enriched data for the current line
   highlightWords?: HighlightWord[]; // Special words to highlight (e.g., divine names)
+  // Issue reporting
+  stotraKey?: string;
+  lineId?: string;
+  lineOpenIssueCount?: number;  // # open issues for this line
+  lineIssueTypes?: IssueType[]; // types of open issues
+  onOpenIssueDrilldown?: () => void; // long-press: open drilldown panel
 }
 
-export function FlowLens({ tokens, rows, wordIndex, lineIndex, lang, legendOpen: legendOpenProp, onLegendOpenChange, detailsOpen, onToggleDetails, expandedProp, onExpandedChange, playing, chapter, learnMode = false, lineData, highlightWords }: Props) {
+export function FlowLens({ tokens, rows, wordIndex, lineIndex, lang, legendOpen: legendOpenProp, onLegendOpenChange, detailsOpen, onToggleDetails, expandedProp, onExpandedChange, playing, chapter, learnMode = false, lineData, highlightWords, stotraKey, lineId, lineOpenIssueCount = 0, lineIssueTypes = [], onOpenIssueDrilldown }: Props) {
   const [prev, curr, next] = rows;
   const [expanded, setExpanded] = useState(false);
   const [secVisible, setSecVisible] = useState(true);
   const [copied, setCopied] = useState(false);
+  const [reportModalOpen, setReportModalOpen] = useState(false);
 
   // Copy current line to clipboard
   const handleCopy = useCallback(async () => {
@@ -251,7 +268,7 @@ export function FlowLens({ tokens, rows, wordIndex, lineIndex, lang, legendOpen:
       <div className="flex items-center justify-center text-center">
         {/* Grouped current block: tokens + (Pronounce, Original) auxiliary lines */}
         <div className="flex flex-col items-center gap-1 w-full p-1 rounded-2xl ring-1 ring-sky-500/10 bg-slate-900/30">
-          <div className="relative flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 px-2 py-2 pr-6 rounded-xl bg-slate-800/60 border border-slate-700 w-full">
+          <div className="relative flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 px-2 py-2 pr-8 rounded-xl bg-slate-800/60 border border-slate-700 w-full">
             {isNumericLike(curr) ? (
               <span className="inline-flex items-center gap-1 px-2 py-1 rounded-md border border-sky-400/40 text-sky-200">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-3.5 h-3.5 opacity-80"><path d="M6.75 5.25a.75.75 0 01.75.75v12a.75.75 0 01-1.5 0v-12a.75.75 0 01.75-.75zm10.5 0a.75.75 0 01.75.75v12a.75.75 0 01-1.5 0v-12a.75.75 0 01.75-.75z"/></svg>
@@ -309,16 +326,60 @@ export function FlowLens({ tokens, rows, wordIndex, lineIndex, lang, legendOpen:
             )}
             {/* Do not show danda marker on the main highlighted row */}
 
-            {/* Copy button - z-30 to be above OverlayControls (z-20) */}
-            <button
-              onClick={(e) => { e.stopPropagation(); e.preventDefault(); handleCopy(); }}
-              onPointerDown={(e) => e.stopPropagation()}
-              className="absolute right-1.5 top-1.5 z-30 inline-flex items-center justify-center w-6 h-6 rounded-md bg-slate-700/90 hover:bg-slate-600 text-slate-300 hover:text-white border border-slate-500/50 transition-colors cursor-pointer active:scale-95"
-              title="Copy verse"
-              type="button"
-            >
-              {copied ? <CheckIcon className="w-3.5 h-3.5 text-emerald-400" /> : <CopyIcon className="w-3.5 h-3.5" />}
-            </button>
+            {/* Known variant / note indicator (ⓘ) */}
+            {lineData?.note && (
+              <Tooltip title={lineData.note} placement="top" arrow>
+                <button
+                  onClick={(e) => { e.stopPropagation(); e.preventDefault(); }}
+                  onPointerDown={(e) => e.stopPropagation()}
+                  className="absolute left-1.5 top-1/2 -translate-y-1/2 z-30 inline-flex items-center justify-center w-6 h-6 rounded-md bg-sky-900/60 hover:bg-sky-800/80 text-sky-400 border border-sky-500/30 transition-colors cursor-pointer"
+                  type="button"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-3.5 h-3.5">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <path d="M12 16v-4"></path>
+                    <path d="M12 8h.01"></path>
+                  </svg>
+                </button>
+              </Tooltip>
+            )}
+
+            {/* Action buttons — stacked column, right side, always visible */}
+            <div className="absolute right-1.5 top-1/2 -translate-y-1/2 z-30 flex flex-col gap-1">
+              {/* Copy button */}
+              <button
+                onClick={(e) => { e.stopPropagation(); e.preventDefault(); handleCopy(); }}
+                onPointerDown={(e) => e.stopPropagation()}
+                className="inline-flex items-center justify-center w-6 h-6 rounded-md bg-slate-700/90 hover:bg-slate-600 text-slate-300 hover:text-white border border-slate-500/50 transition-colors cursor-pointer active:scale-95"
+                title="Copy verse"
+                type="button"
+              >
+                {copied ? <CheckIcon className="w-3.5 h-3.5 text-emerald-400" /> : <CopyIcon className="w-3.5 h-3.5" />}
+              </button>
+
+              {/* Flag / report issue button — always visible on all screen sizes */}
+              {stotraKey && lineId && (
+                <button
+                  onClick={(e) => { e.stopPropagation(); e.preventDefault(); setReportModalOpen(true); }}
+                  onPointerDown={(e) => e.stopPropagation()}
+                  onContextMenu={(e) => { e.preventDefault(); e.stopPropagation(); onOpenIssueDrilldown?.(); }}
+                  className={`relative inline-flex items-center justify-center w-6 h-6 rounded-md border transition-colors cursor-pointer active:scale-95 ${
+                    lineOpenIssueCount > 0
+                      ? 'bg-amber-500/20 hover:bg-amber-500/30 text-amber-400 border-amber-500/40'
+                      : 'bg-slate-700/60 hover:bg-slate-600/80 text-slate-400 hover:text-slate-200 border-slate-500/30'
+                  }`}
+                  title={lineOpenIssueCount > 0 ? `${lineOpenIssueCount} open issue${lineOpenIssueCount > 1 ? 's' : ''} · Tap to report · Long-press to view` : 'Report a text issue'}
+                  type="button"
+                >
+                  <FlagIcon className="w-3.5 h-3.5" />
+                  {lineOpenIssueCount > 0 && (
+                    <span className="absolute -top-1.5 -right-1.5 min-w-[14px] h-[14px] rounded-full bg-amber-500 text-black text-[9px] font-bold flex items-center justify-center px-0.5 leading-none">
+                      {lineOpenIssueCount > 9 ? '9+' : lineOpenIssueCount}
+                    </span>
+                  )}
+                </button>
+              )}
+            </div>
           </div>
 
           {/* Word breakdown – show whole words with subtle diacritic highlighting (IAST/English only) */}
@@ -417,8 +478,20 @@ export function FlowLens({ tokens, rows, wordIndex, lineIndex, lang, legendOpen:
   }
 
   return (
-    <Paper className="relative space-y-3" sx={{ p: { xs: 1.5, sm: 2 }, borderRadius: 3 }}>
-      <CurrentRow />
-    </Paper>
+    <>
+      <Paper className="relative group space-y-3" sx={{ p: { xs: 1.5, sm: 2 }, borderRadius: 3 }}>
+        <CurrentRow />
+      </Paper>
+      {stotraKey && lineId && curr && (
+        <ReportIssueModal
+          open={reportModalOpen}
+          onClose={() => setReportModalOpen(false)}
+          stotraKey={stotraKey}
+          lineId={lineId}
+          lineText={curr}
+          script={lang}
+        />
+      )}
+    </>
   );
 }

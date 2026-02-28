@@ -66,6 +66,17 @@
     "tel": "https://vignanam.org/telugu/sri-hari-stotram-jagajjalapalam.html",
     "pan": "https://vignanam.org/punjabi/sri-hari-stotram-jagajjalapalam.html"
   },
+  "provenance": {
+    "qualityTier": 3,
+    "primarySource": {
+      "type": "digital_community",
+      "label": "vignanam.org",
+      "url": "https://vignanam.org/english/sri-hari-stotram-jagajjalapalam.html"
+    },
+    "sampradayaVariant": "common",
+    "crossReferenced": false,
+    "scholarReviewed": false
+  },
   "lines": [
     {
       "id": "1",

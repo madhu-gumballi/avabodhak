@@ -3,7 +3,15 @@
   "metadata": {
     "chapters": 1,
     "totalLines": 26,
-    "languages": ["deva", "knda", "tel", "tam", "pan", "guj", "iast"],
+    "languages": [
+      "deva",
+      "knda",
+      "tel",
+      "tam",
+      "pan",
+      "guj",
+      "iast"
+    ],
     "practiceMode": true,
     "puzzleMode": true,
     "stotraType": "bhajan",
@@ -25,11 +33,33 @@
       "raga": "Traditional Karnataka folk melody",
       "style": "Kannada Bhajan"
     },
-    "namaReferences": ["Keshava", "Narayana", "Madhava", "Govinda", "Vishnu", "Madhusudana", "Trivikrama", "Vamana", "Sridhara", "Hrishikesha", "Padmanabha", "Damodara"],
+    "namaReferences": [
+      "Keshava",
+      "Narayana",
+      "Madhava",
+      "Govinda",
+      "Vishnu",
+      "Madhusudana",
+      "Trivikrama",
+      "Vamana",
+      "Sridhara",
+      "Hrishikesha",
+      "Padmanabha",
+      "Damodara"
+    ],
     "regionalGlossary": [
-      {"term": "charana bhajane", "meaning": "worship of the feet"},
-      {"term": "hokkenayya", "meaning": "I have surrendered"},
-      {"term": "karunisayya", "meaning": "please bestow grace"}
+      {
+        "term": "charana bhajane",
+        "meaning": "worship of the feet"
+      },
+      {
+        "term": "hokkenayya",
+        "meaning": "I have surrendered"
+      },
+      {
+        "term": "karunisayya",
+        "meaning": "please bestow grace"
+      }
     ],
     "credits": {
       "textSource": "Haridasa Sahitya (Karnataka devotional literature)",
@@ -43,44 +73,176 @@
       "note": "This bhajan uses the Dvadasha Namas (12 names of Vishnu: Keshava through Damodara) and additional Vyuha and avatar names. Each name carries profound theological significance in the Dvaita tradition."
     },
     "dvadashaNamaEtymology": [
-      {"nama": "Keshava", "meaning": "One with beautiful hair; slayer of Keshi; controller of Brahma and Shiva"},
-      {"nama": "Narayana", "meaning": "Abode of all beings (nara); one who lies on cosmic waters"},
-      {"nama": "Madhava", "meaning": "Lord of Lakshmi (Ma); spring personified; destroyer of Madhu demon"},
-      {"nama": "Govinda", "meaning": "Protector of cows; one who gives joy to the earth/senses"},
-      {"nama": "Vishnu", "meaning": "All-pervading; one who enters everywhere"},
-      {"nama": "Madhusudana", "meaning": "Slayer of the demon Madhu"},
-      {"nama": "Trivikrama", "meaning": "One who measured the three worlds in three strides (Vamana avatar)"},
-      {"nama": "Vamana", "meaning": "The dwarf; fifth avatar who humbled Bali"},
-      {"nama": "Sridhara", "meaning": "Bearer of Sri (Lakshmi); one who holds prosperity"},
-      {"nama": "Hrishikesha", "meaning": "Lord of the senses; controller of all faculties"},
-      {"nama": "Padmanabha", "meaning": "One from whose navel the lotus (with Brahma) emerged"},
-      {"nama": "Damodara", "meaning": "One bound by a rope around the belly by Yashoda; one whose belly contains the universe"}
+      {
+        "nama": "Keshava",
+        "meaning": "One with beautiful hair; slayer of Keshi; controller of Brahma and Shiva"
+      },
+      {
+        "nama": "Narayana",
+        "meaning": "Abode of all beings (nara); one who lies on cosmic waters"
+      },
+      {
+        "nama": "Madhava",
+        "meaning": "Lord of Lakshmi (Ma); spring personified; destroyer of Madhu demon"
+      },
+      {
+        "nama": "Govinda",
+        "meaning": "Protector of cows; one who gives joy to the earth/senses"
+      },
+      {
+        "nama": "Vishnu",
+        "meaning": "All-pervading; one who enters everywhere"
+      },
+      {
+        "nama": "Madhusudana",
+        "meaning": "Slayer of the demon Madhu"
+      },
+      {
+        "nama": "Trivikrama",
+        "meaning": "One who measured the three worlds in three strides (Vamana avatar)"
+      },
+      {
+        "nama": "Vamana",
+        "meaning": "The dwarf; fifth avatar who humbled Bali"
+      },
+      {
+        "nama": "Sridhara",
+        "meaning": "Bearer of Sri (Lakshmi); one who holds prosperity"
+      },
+      {
+        "nama": "Hrishikesha",
+        "meaning": "Lord of the senses; controller of all faculties"
+      },
+      {
+        "nama": "Padmanabha",
+        "meaning": "One from whose navel the lotus (with Brahma) emerged"
+      },
+      {
+        "nama": "Damodara",
+        "meaning": "One bound by a rope around the belly by Yashoda; one whose belly contains the universe"
+      }
     ],
     "chaturvimshatiNama": [
-      {"nama": "Keshava", "iast": "kēśava", "meaning": "Beautiful-haired; slayer of Keshi"},
-      {"nama": "Narayana", "iast": "nārāyaṇa", "meaning": "Abode of all beings"},
-      {"nama": "Madhava", "iast": "mādhava", "meaning": "Lord of Lakshmi"},
-      {"nama": "Govinda", "iast": "gōvinda", "meaning": "Protector of cows"},
-      {"nama": "Vishnu", "iast": "viṣṇu", "meaning": "All-pervading"},
-      {"nama": "Madhusudana", "iast": "madhusūdana", "meaning": "Slayer of Madhu"},
-      {"nama": "Trivikrama", "iast": "trivikrama", "meaning": "Three-strider"},
-      {"nama": "Vamana", "iast": "vāmana", "meaning": "The Dwarf"},
-      {"nama": "Sridhara", "iast": "śrīdhara", "meaning": "Bearer of Sri"},
-      {"nama": "Hrishikesha", "iast": "hṛṣīkēśa", "meaning": "Lord of senses"},
-      {"nama": "Padmanabha", "iast": "padmanābha", "meaning": "Lotus-naveled"},
-      {"nama": "Damodara", "iast": "dāmōdara", "meaning": "Rope-bellied"},
-      {"nama": "Sankarshana", "iast": "saṅkarṣaṇa", "meaning": "One who attracts"},
-      {"nama": "Vasudeva", "iast": "vāsudēva", "meaning": "Son of Vasudeva"},
-      {"nama": "Pradyumna", "iast": "pradyumna", "meaning": "Exceedingly mighty"},
-      {"nama": "Aniruddha", "iast": "aniruddha", "meaning": "Unstoppable"},
-      {"nama": "Purushottama", "iast": "puruṣōttama", "meaning": "Supreme Person"},
-      {"nama": "Adhokshaja", "iast": "adhōkṣaja", "meaning": "Beyond senses"},
-      {"nama": "Narasimha", "iast": "narasiṁha", "meaning": "Man-lion"},
-      {"nama": "Achyuta", "iast": "acyuta", "meaning": "Infallible"},
-      {"nama": "Janardana", "iast": "janārdana", "meaning": "Liberator of beings"},
-      {"nama": "Upendra", "iast": "upēndra", "meaning": "Younger brother of Indra"},
-      {"nama": "Hari", "iast": "hari", "meaning": "Remover of sins"},
-      {"nama": "Krishna", "iast": "kṛṣṇa", "meaning": "All-attractive"}
+      {
+        "nama": "Keshava",
+        "iast": "kēśava",
+        "meaning": "Beautiful-haired; slayer of Keshi"
+      },
+      {
+        "nama": "Narayana",
+        "iast": "nārāyaṇa",
+        "meaning": "Abode of all beings"
+      },
+      {
+        "nama": "Madhava",
+        "iast": "mādhava",
+        "meaning": "Lord of Lakshmi"
+      },
+      {
+        "nama": "Govinda",
+        "iast": "gōvinda",
+        "meaning": "Protector of cows"
+      },
+      {
+        "nama": "Vishnu",
+        "iast": "viṣṇu",
+        "meaning": "All-pervading"
+      },
+      {
+        "nama": "Madhusudana",
+        "iast": "madhusūdana",
+        "meaning": "Slayer of Madhu"
+      },
+      {
+        "nama": "Trivikrama",
+        "iast": "trivikrama",
+        "meaning": "Three-strider"
+      },
+      {
+        "nama": "Vamana",
+        "iast": "vāmana",
+        "meaning": "The Dwarf"
+      },
+      {
+        "nama": "Sridhara",
+        "iast": "śrīdhara",
+        "meaning": "Bearer of Sri"
+      },
+      {
+        "nama": "Hrishikesha",
+        "iast": "hṛṣīkēśa",
+        "meaning": "Lord of senses"
+      },
+      {
+        "nama": "Padmanabha",
+        "iast": "padmanābha",
+        "meaning": "Lotus-naveled"
+      },
+      {
+        "nama": "Damodara",
+        "iast": "dāmōdara",
+        "meaning": "Rope-bellied"
+      },
+      {
+        "nama": "Sankarshana",
+        "iast": "saṅkarṣaṇa",
+        "meaning": "One who attracts"
+      },
+      {
+        "nama": "Vasudeva",
+        "iast": "vāsudēva",
+        "meaning": "Son of Vasudeva"
+      },
+      {
+        "nama": "Pradyumna",
+        "iast": "pradyumna",
+        "meaning": "Exceedingly mighty"
+      },
+      {
+        "nama": "Aniruddha",
+        "iast": "aniruddha",
+        "meaning": "Unstoppable"
+      },
+      {
+        "nama": "Purushottama",
+        "iast": "puruṣōttama",
+        "meaning": "Supreme Person"
+      },
+      {
+        "nama": "Adhokshaja",
+        "iast": "adhōkṣaja",
+        "meaning": "Beyond senses"
+      },
+      {
+        "nama": "Narasimha",
+        "iast": "narasiṁha",
+        "meaning": "Man-lion"
+      },
+      {
+        "nama": "Achyuta",
+        "iast": "acyuta",
+        "meaning": "Infallible"
+      },
+      {
+        "nama": "Janardana",
+        "iast": "janārdana",
+        "meaning": "Liberator of beings"
+      },
+      {
+        "nama": "Upendra",
+        "iast": "upēndra",
+        "meaning": "Younger brother of Indra"
+      },
+      {
+        "nama": "Hari",
+        "iast": "hari",
+        "meaning": "Remover of sins"
+      },
+      {
+        "nama": "Krishna",
+        "iast": "kṛṣṇa",
+        "meaning": "All-attractive"
+      }
     ]
   },
   "sources": {
@@ -91,6 +253,17 @@
     "tam": "https://vignanam.org/tamil/keshava-nama.html",
     "pan": "https://vignanam.org/punjabi/keshava-nama.html",
     "guj": "https://vignanam.org/gujarati/keshava-nama.html"
+  },
+  "provenance": {
+    "qualityTier": 3,
+    "primarySource": {
+      "type": "digital_community",
+      "label": "vignanam.org",
+      "url": "https://vignanam.org/english/keshava-nama.html"
+    },
+    "sampradayaVariant": "common",
+    "crossReferenced": false,
+    "scholarReviewed": false
   },
   "lines": [
     {
@@ -125,10 +298,20 @@
           "etymology": {
             "dhatu": "केश (keśa) + व (va)",
             "meaning": "One with beautiful hair; OR One who killed Keshi demon; OR ka (Brahma) + a (Vishnu) + īśa (Shiva) - Lord of the Trinity",
-            "alternates": ["Slayer of demon Keshi", "One with long beautiful hair", "Controller of Brahma and Shiva"]
+            "alternates": [
+              "Slayer of demon Keshi",
+              "One with long beautiful hair",
+              "Controller of Brahma and Shiva"
+            ]
           },
-          "gunaVarga": ["saundarya", "shakti"],
-          "relatedNamas": ["Hrishikesha", "Janardana"]
+          "gunaVarga": [
+            "saundarya",
+            "shakti"
+          ],
+          "relatedNamas": [
+            "Hrishikesha",
+            "Janardana"
+          ]
         },
         {
           "nama": "श्रीश",
@@ -137,16 +320,37 @@
             "dhatu": "श्री (śrī) + ईश (īśa)",
             "meaning": "Lord of Sri (Lakshmi), Master of all auspiciousness and prosperity"
           },
-          "gunaVarga": ["anugraha", "vyapti"]
+          "gunaVarga": [
+            "anugraha",
+            "vyapti"
+          ]
         }
       ],
       "regionalGlossary": [
-        {"term": "ninna charaṇa", "meaning": "your feet"},
-        {"term": "bhajane", "meaning": "worship/devotion"},
-        {"term": "āśeyinda", "meaning": "with desire/hope"},
-        {"term": "māḍuvenu", "meaning": "I do/perform"},
-        {"term": "dōṣa rāśi", "meaning": "heap of faults/sins"},
-        {"term": "nāśa māḍu", "meaning": "destroy"}
+        {
+          "term": "ninna charaṇa",
+          "meaning": "your feet"
+        },
+        {
+          "term": "bhajane",
+          "meaning": "worship/devotion"
+        },
+        {
+          "term": "āśeyinda",
+          "meaning": "with desire/hope"
+        },
+        {
+          "term": "māḍuvenu",
+          "meaning": "I do/perform"
+        },
+        {
+          "term": "dōṣa rāśi",
+          "meaning": "heap of faults/sins"
+        },
+        {
+          "term": "nāśa māḍu",
+          "meaning": "destroy"
+        }
       ]
     },
     {
@@ -168,17 +372,40 @@
           "etymology": {
             "dhatu": "नर (nara) + अयन (ayana)",
             "meaning": "Abode of all beings; one who lies on the cosmic waters; the goal and refuge of all souls",
-            "alternates": ["One in whom all beings dwell", "One who dwells in all beings", "One who rests on waters (Kshira Sagara)"]
+            "alternates": [
+              "One in whom all beings dwell",
+              "One who dwells in all beings",
+              "One who rests on waters (Kshira Sagara)"
+            ]
           },
-          "gunaVarga": ["vyapti", "rakshana"],
-          "relatedNamas": ["Vishnu", "Padmanabha", "Anantashayana"]
+          "gunaVarga": [
+            "vyapti",
+            "rakshana"
+          ],
+          "relatedNamas": [
+            "Vishnu",
+            "Padmanabha",
+            "Anantashayana"
+          ]
         }
       ],
       "regionalGlossary": [
-        {"term": "śaraṇu hokkenayya", "meaning": "I have surrendered/taken refuge, O Lord"},
-        {"term": "maraṇa samaya", "meaning": "time of death"},
-        {"term": "charaṇa smaraṇe", "meaning": "remembrance of feet"},
-        {"term": "karuṇisayya", "meaning": "please bestow grace"}
+        {
+          "term": "śaraṇu hokkenayya",
+          "meaning": "I have surrendered/taken refuge, O Lord"
+        },
+        {
+          "term": "maraṇa samaya",
+          "meaning": "time of death"
+        },
+        {
+          "term": "charaṇa smaraṇe",
+          "meaning": "remembrance of feet"
+        },
+        {
+          "term": "karuṇisayya",
+          "meaning": "please bestow grace"
+        }
       ]
     },
     {
@@ -200,18 +427,44 @@
           "etymology": {
             "dhatu": "मा (mā) + धव (dhava)",
             "meaning": "Lord of Lakshmi (Ma); also spring personified; destroyer of demon Madhu",
-            "alternates": ["Consort of Ma (Lakshmi)", "Born in Madhu lineage (Yadava)", "One who is known through madhu-vidya"]
+            "alternates": [
+              "Consort of Ma (Lakshmi)",
+              "Born in Madhu lineage (Yadava)",
+              "One who is known through madhu-vidya"
+            ]
           },
-          "gunaVarga": ["anugraha", "jnana"],
-          "relatedNamas": ["Sridhara", "Lakshmipati", "Madhusudana"]
+          "gunaVarga": [
+            "anugraha",
+            "jnana"
+          ],
+          "relatedNamas": [
+            "Sridhara",
+            "Lakshmipati",
+            "Madhusudana"
+          ]
         }
       ],
       "regionalGlossary": [
-        {"term": "śōdhisenna", "meaning": "purify me"},
-        {"term": "bhavada kaluṣa", "meaning": "impurities of worldly existence"},
-        {"term": "bōdhisayya", "meaning": "grant knowledge, O Lord"},
-        {"term": "yamana bādhe", "meaning": "torment/affliction of Yama (death)"},
-        {"term": "biḍisu", "meaning": "release/free"}
+        {
+          "term": "śōdhisenna",
+          "meaning": "purify me"
+        },
+        {
+          "term": "bhavada kaluṣa",
+          "meaning": "impurities of worldly existence"
+        },
+        {
+          "term": "bōdhisayya",
+          "meaning": "grant knowledge, O Lord"
+        },
+        {
+          "term": "yamana bādhe",
+          "meaning": "torment/affliction of Yama (death)"
+        },
+        {
+          "term": "biḍisu",
+          "meaning": "release/free"
+        }
       ]
     },
     {
@@ -233,17 +486,40 @@
           "etymology": {
             "dhatu": "गो (go) + विंद (vinda)",
             "meaning": "Protector of cows; one who gives joy to the earth; one who is found through Vedic words (go = speech/Vedas)",
-            "alternates": ["Finder of cows (Krishna lila)", "Giver of joy to senses", "One known through sacred words"]
+            "alternates": [
+              "Finder of cows (Krishna lila)",
+              "Giver of joy to senses",
+              "One known through sacred words"
+            ]
           },
-          "gunaVarga": ["rakshana", "vatsalya"],
-          "relatedNamas": ["Gopala", "Govardhanadhara", "Gopinatha"]
+          "gunaVarga": [
+            "rakshana",
+            "vatsalya"
+          ],
+          "relatedNamas": [
+            "Gopala",
+            "Govardhanadhara",
+            "Gopinatha"
+          ]
         }
       ],
       "regionalGlossary": [
-        {"term": "hindanēka yōnigaḻali", "meaning": "in countless wombs before"},
-        {"term": "bandu bandu nonde", "meaning": "coming again and again, suffered"},
-        {"term": "bhavada bandha", "meaning": "bondage of worldly existence"},
-        {"term": "tande", "meaning": "O Father"}
+        {
+          "term": "hindanēka yōnigaḻali",
+          "meaning": "in countless wombs before"
+        },
+        {
+          "term": "bandu bandu nonde",
+          "meaning": "coming again and again, suffered"
+        },
+        {
+          "term": "bhavada bandha",
+          "meaning": "bondage of worldly existence"
+        },
+        {
+          "term": "tande",
+          "meaning": "O Father"
+        }
       ]
     },
     {
@@ -265,10 +541,21 @@
           "etymology": {
             "dhatu": "विष् (viṣ) - to pervade",
             "meaning": "One who pervades everything; the all-pervading; one who enters everywhere",
-            "alternates": ["The omnipresent one", "One who has entered all", "The pervader of the universe"]
+            "alternates": [
+              "The omnipresent one",
+              "One who has entered all",
+              "The pervader of the universe"
+            ]
           },
-          "gunaVarga": ["vyapti", "sarveshvaratva"],
-          "relatedNamas": ["Narayana", "Trivikrama", "Urukrama"]
+          "gunaVarga": [
+            "vyapti",
+            "sarveshvaratva"
+          ],
+          "relatedNamas": [
+            "Narayana",
+            "Trivikrama",
+            "Urukrama"
+          ]
         },
         {
           "nama": "कृष्ण",
@@ -276,17 +563,40 @@
           "etymology": {
             "dhatu": "कृष् (kṛṣ) - to attract",
             "meaning": "The all-attractive one; the dark-complexioned one",
-            "alternates": ["One who attracts all", "The dark one (beauty)", "One who plows the field of heart"]
+            "alternates": [
+              "One who attracts all",
+              "The dark one (beauty)",
+              "One who plows the field of heart"
+            ]
           },
-          "gunaVarga": ["saundarya", "madhurya"],
-          "relatedNamas": ["Govinda", "Gopala", "Shyamasundara"]
+          "gunaVarga": [
+            "saundarya",
+            "madhurya"
+          ],
+          "relatedNamas": [
+            "Govinda",
+            "Gopala",
+            "Shyamasundara"
+          ]
         }
       ],
       "regionalGlossary": [
-        {"term": "bhraṣṭanenisa bēḍa", "meaning": "do not let me become fallen/corrupt"},
-        {"term": "iṣṭu mātra bēḍikombe", "meaning": "this much alone I ask/pray"},
-        {"term": "śiṣṭaroḻage", "meaning": "among the righteous/virtuous"},
-        {"term": "kaṣṭa biḍisu", "meaning": "remove difficulties/hardship"}
+        {
+          "term": "bhraṣṭanenisa bēḍa",
+          "meaning": "do not let me become fallen/corrupt"
+        },
+        {
+          "term": "iṣṭu mātra bēḍikombe",
+          "meaning": "this much alone I ask/pray"
+        },
+        {
+          "term": "śiṣṭaroḻage",
+          "meaning": "among the righteous/virtuous"
+        },
+        {
+          "term": "kaṣṭa biḍisu",
+          "meaning": "remove difficulties/hardship"
+        }
       ]
     },
     {
@@ -308,17 +618,40 @@
           "etymology": {
             "dhatu": "मधु (madhu) + सूदन (sūdana)",
             "meaning": "Slayer of the demon Madhu; destroyer of the intoxication of ignorance",
-            "alternates": ["Destroyer of demon Madhu", "One who destroys the 'honey' of worldly attachment", "Vanquisher of evil"]
+            "alternates": [
+              "Destroyer of demon Madhu",
+              "One who destroys the 'honey' of worldly attachment",
+              "Vanquisher of evil"
+            ]
           },
-          "gunaVarga": ["shakti", "rakshana"],
-          "relatedNamas": ["Kaitabhajit", "Madhava", "Madhuripu"]
+          "gunaVarga": [
+            "shakti",
+            "rakshana"
+          ],
+          "relatedNamas": [
+            "Kaitabhajit",
+            "Madhava",
+            "Madhuripu"
+          ]
         }
       ],
       "regionalGlossary": [
-        {"term": "modalu", "meaning": "first, at the outset"},
-        {"term": "pāda pūje", "meaning": "worship of feet"},
-        {"term": "mudadi gaivenayya", "meaning": "I do/perform with joy, O Lord"},
-        {"term": "hṛdayadoḻage odagisayya", "meaning": "please manifest/appear within my heart"}
+        {
+          "term": "modalu",
+          "meaning": "first, at the outset"
+        },
+        {
+          "term": "pāda pūje",
+          "meaning": "worship of feet"
+        },
+        {
+          "term": "mudadi gaivenayya",
+          "meaning": "I do/perform with joy, O Lord"
+        },
+        {
+          "term": "hṛdayadoḻage odagisayya",
+          "meaning": "please manifest/appear within my heart"
+        }
       ]
     },
     {
@@ -340,18 +673,41 @@
           "etymology": {
             "dhatu": "त्रि (tri) + विक्रम (vikrama)",
             "meaning": "One who measured the three worlds in three strides; Vamana avatar who covered earth, sky and heaven",
-            "alternates": ["One of three great strides", "Conqueror of three worlds", "The cosmic measurer"]
+            "alternates": [
+              "One of three great strides",
+              "Conqueror of three worlds",
+              "The cosmic measurer"
+            ]
           },
-          "gunaVarga": ["mahima", "shakti"],
-          "relatedNamas": ["Vamana", "Urukrama", "Vikrama"],
+          "gunaVarga": [
+            "mahima",
+            "shakti"
+          ],
+          "relatedNamas": [
+            "Vamana",
+            "Urukrama",
+            "Vikrama"
+          ],
           "avatarReference": "Vamana avatar - the dwarf Brahmin who grew to cosmic size to measure the three worlds with three steps, humbling King Bali"
         }
       ],
       "regionalGlossary": [
-        {"term": "kavidukoṇḍu iruva pāpa", "meaning": "sins that have engulfed/surrounded (me)"},
-        {"term": "savedu hōguvante", "meaning": "so that they wear away/vanish"},
-        {"term": "javana bādhe", "meaning": "torment of Yama (death)"},
-        {"term": "ghana", "meaning": "great, magnificent"}
+        {
+          "term": "kavidukoṇḍu iruva pāpa",
+          "meaning": "sins that have engulfed/surrounded (me)"
+        },
+        {
+          "term": "savedu hōguvante",
+          "meaning": "so that they wear away/vanish"
+        },
+        {
+          "term": "javana bādhe",
+          "meaning": "torment of Yama (death)"
+        },
+        {
+          "term": "ghana",
+          "meaning": "great, magnificent"
+        }
       ]
     },
     {
@@ -373,10 +729,21 @@
           "etymology": {
             "dhatu": "वम् (vam) - to emit/produce",
             "meaning": "The dwarf; one of beautiful/auspicious form; the fifth avatar",
-            "alternates": ["The short one", "One who produces auspiciousness", "The incarnation who humbled Bali"]
+            "alternates": [
+              "The short one",
+              "One who produces auspiciousness",
+              "The incarnation who humbled Bali"
+            ]
           },
-          "gunaVarga": ["saundarya", "karunya"],
-          "relatedNamas": ["Trivikrama", "Urukrama", "Upendra"],
+          "gunaVarga": [
+            "saundarya",
+            "karunya"
+          ],
+          "relatedNamas": [
+            "Trivikrama",
+            "Urukrama",
+            "Upendra"
+          ],
           "avatarReference": "Vamana - the dwarf Brahmin avatar who asked King Bali for three steps of land, then revealed His cosmic form"
         },
         {
@@ -385,16 +752,34 @@
           "etymology": {
             "dhatu": "काम (kāma) + जनक (janaka)",
             "meaning": "Father of Kamadeva (Manmatha/Cupid); Vishnu as Pradyumna's father",
-            "alternates": ["Progenitor of desire", "Father of love-god"]
+            "alternates": [
+              "Progenitor of desire",
+              "Father of love-god"
+            ]
           },
-          "gunaVarga": ["srishti", "madhurya"]
+          "gunaVarga": [
+            "srishti",
+            "madhurya"
+          ]
         }
       ],
       "regionalGlossary": [
-        {"term": "prēmadinda pāḍuvantha", "meaning": "to sing with love/devotion"},
-        {"term": "nēmavenage", "meaning": "grant me the discipline/practice"},
-        {"term": "pālisayya", "meaning": "please grant/bestow"},
-        {"term": "svāmi", "meaning": "Lord, Master"}
+        {
+          "term": "prēmadinda pāḍuvantha",
+          "meaning": "to sing with love/devotion"
+        },
+        {
+          "term": "nēmavenage",
+          "meaning": "grant me the discipline/practice"
+        },
+        {
+          "term": "pālisayya",
+          "meaning": "please grant/bestow"
+        },
+        {
+          "term": "svāmi",
+          "meaning": "Lord, Master"
+        }
       ]
     },
     {
@@ -416,17 +801,40 @@
           "etymology": {
             "dhatu": "श्री (śrī) + धर (dhara)",
             "meaning": "Bearer of Sri (Lakshmi); one who holds all auspiciousness and prosperity on His chest",
-            "alternates": ["Holder of Lakshmi", "One adorned with Srivatsa mark", "Bearer of all wealth and beauty"]
+            "alternates": [
+              "Holder of Lakshmi",
+              "One adorned with Srivatsa mark",
+              "Bearer of all wealth and beauty"
+            ]
           },
-          "gunaVarga": ["anugraha", "saundarya"],
-          "relatedNamas": ["Srinivasa", "Lakshmipati", "Srisha"]
+          "gunaVarga": [
+            "anugraha",
+            "saundarya"
+          ],
+          "relatedNamas": [
+            "Srinivasa",
+            "Lakshmipati",
+            "Srisha"
+          ]
         }
       ],
       "regionalGlossary": [
-        {"term": "madananayya", "meaning": "O Father of Madana (Kamadeva/Cupid)"},
-        {"term": "mahime vadanadalli", "meaning": "glory on the face/lips (in speech)"},
-        {"term": "hṛdayadalli sadana", "meaning": "dwelling/abode in the heart"},
-        {"term": "mudadi", "meaning": "with joy/delight"}
+        {
+          "term": "madananayya",
+          "meaning": "O Father of Madana (Kamadeva/Cupid)"
+        },
+        {
+          "term": "mahime vadanadalli",
+          "meaning": "glory on the face/lips (in speech)"
+        },
+        {
+          "term": "hṛdayadalli sadana",
+          "meaning": "dwelling/abode in the heart"
+        },
+        {
+          "term": "mudadi",
+          "meaning": "with joy/delight"
+        }
       ]
     },
     {
@@ -448,17 +856,40 @@
           "etymology": {
             "dhatu": "हृषीक (hṛṣīka) + ईश (īśa)",
             "meaning": "Lord of the senses (hrishika = senses); controller of all faculties; one who gives joy to senses",
-            "alternates": ["Master of senses", "One whose hair stood on end (from joy)", "Controller of mind and senses"]
+            "alternates": [
+              "Master of senses",
+              "One whose hair stood on end (from joy)",
+              "Controller of mind and senses"
+            ]
           },
-          "gunaVarga": ["niyantritva", "jnana"],
-          "relatedNamas": ["Keshava", "Govinda", "Madhusudana"]
+          "gunaVarga": [
+            "niyantritva",
+            "jnana"
+          ],
+          "relatedNamas": [
+            "Keshava",
+            "Govinda",
+            "Madhusudana"
+          ]
         }
       ],
       "regionalGlossary": [
-        {"term": "husiyanāḍi", "meaning": "speaking lies/falsehood"},
-        {"term": "hoṭṭe horeva", "meaning": "filling the belly, sustaining oneself"},
-        {"term": "viṣayadalli rasika", "meaning": "one who enjoys/relishes sense objects"},
-        {"term": "husige hākadirō", "meaning": "do not cast into deception/falsehood"}
+        {
+          "term": "husiyanāḍi",
+          "meaning": "speaking lies/falsehood"
+        },
+        {
+          "term": "hoṭṭe horeva",
+          "meaning": "filling the belly, sustaining oneself"
+        },
+        {
+          "term": "viṣayadalli rasika",
+          "meaning": "one who enjoys/relishes sense objects"
+        },
+        {
+          "term": "husige hākadirō",
+          "meaning": "do not cast into deception/falsehood"
+        }
       ]
     },
     {
@@ -480,17 +911,40 @@
           "etymology": {
             "dhatu": "पद्म (padma) + नाभ (nābha)",
             "meaning": "One from whose navel the lotus emerged; from that lotus Brahma was born to create the universe",
-            "alternates": ["Lotus-naveled", "One whose navel is like a lotus", "Source of creation"]
+            "alternates": [
+              "Lotus-naveled",
+              "One whose navel is like a lotus",
+              "Source of creation"
+            ]
           },
-          "gunaVarga": ["srishti", "mahima"],
-          "relatedNamas": ["Hiranyagarbha", "Brahmananda", "Vishvakarman"]
+          "gunaVarga": [
+            "srishti",
+            "mahima"
+          ],
+          "relatedNamas": [
+            "Hiranyagarbha",
+            "Brahmananda",
+            "Vishvakarman"
+          ]
         }
       ],
       "regionalGlossary": [
-        {"term": "biddu bhavadanēka januma", "meaning": "having fallen into countless births in worldly existence"},
-        {"term": "baddanāgi", "meaning": "being bound/enslaved"},
-        {"term": "kaluṣadinda", "meaning": "by sin/impurity"},
-        {"term": "geddu pōpa buddhi tōro", "meaning": "show the wisdom to conquer and escape"}
+        {
+          "term": "biddu bhavadanēka januma",
+          "meaning": "having fallen into countless births in worldly existence"
+        },
+        {
+          "term": "baddanāgi",
+          "meaning": "being bound/enslaved"
+        },
+        {
+          "term": "kaluṣadinda",
+          "meaning": "by sin/impurity"
+        },
+        {
+          "term": "geddu pōpa buddhi tōro",
+          "meaning": "show the wisdom to conquer and escape"
+        }
       ]
     },
     {
@@ -512,17 +966,37 @@
           "etymology": {
             "dhatu": "दाम (dāma) + उदर (udara)",
             "meaning": "One whose belly (udara) was bound by a rope (dama) by Yashoda; one whose belly contains the entire universe",
-            "alternates": ["Rope-bellied", "One bound by mother's love", "One who controls (dama) the universe in His belly"]
+            "alternates": [
+              "Rope-bellied",
+              "One bound by mother's love",
+              "One who controls (dama) the universe in His belly"
+            ]
           },
-          "gunaVarga": ["vatsalya", "saulabhya"],
-          "relatedNamas": ["Yashoda-nandana", "Bala-Krishna", "Gopala"],
+          "gunaVarga": [
+            "vatsalya",
+            "saulabhya"
+          ],
+          "relatedNamas": [
+            "Yashoda-nandana",
+            "Bala-Krishna",
+            "Gopala"
+          ],
           "lilaReference": "Krishna's childhood pastime where Yashoda tied Him to a mortar with a rope, demonstrating His accessibility to pure devotion"
         }
       ],
       "regionalGlossary": [
-        {"term": "kāmakrōdha biḍisi", "meaning": "removing lust and anger"},
-        {"term": "jihveyoḻage nuḍisu", "meaning": "make (it) speak/resound on the tongue"},
-        {"term": "śrīmahānubhāvanāda", "meaning": "O supremely glorious one"}
+        {
+          "term": "kāmakrōdha biḍisi",
+          "meaning": "removing lust and anger"
+        },
+        {
+          "term": "jihveyoḻage nuḍisu",
+          "meaning": "make (it) speak/resound on the tongue"
+        },
+        {
+          "term": "śrīmahānubhāvanāda",
+          "meaning": "O supremely glorious one"
+        }
       ]
     },
     {
@@ -544,10 +1018,21 @@
           "etymology": {
             "dhatu": "सं (sam) + कर्ष (karṣa) - to draw together",
             "meaning": "One who draws all beings to Himself; the attractive power of the Lord; one of the Chaturvyuha",
-            "alternates": ["The drawer/attractor", "Balarama (elder brother of Krishna)", "One who dissolves the universe at pralaya"]
+            "alternates": [
+              "The drawer/attractor",
+              "Balarama (elder brother of Krishna)",
+              "One who dissolves the universe at pralaya"
+            ]
           },
-          "gunaVarga": ["shakti", "samhara"],
-          "relatedNamas": ["Balarama", "Ananta", "Sesha"],
+          "gunaVarga": [
+            "shakti",
+            "samhara"
+          ],
+          "relatedNamas": [
+            "Balarama",
+            "Ananta",
+            "Sesha"
+          ],
           "vyuhaReference": "Second of the Chaturvyuha (Vasudeva, Sankarshana, Pradyumna, Aniruddha) - represents divine knowledge and strength"
         },
         {
@@ -557,12 +1042,20 @@
             "dhatu": "पंकज (paṅkaja - lotus) + अक्ष (akṣa - eye)",
             "meaning": "Lotus-eyed; one whose eyes are beautiful like lotuses"
           },
-          "gunaVarga": ["saundarya"]
+          "gunaVarga": [
+            "saundarya"
+          ]
         }
       ],
       "regionalGlossary": [
-        {"term": "maṅkubuddhi biḍisi", "meaning": "removing dull/ignorant intellect"},
-        {"term": "kiṅkaranna māḍikoḻḻo", "meaning": "make (me) your servant/attendant"}
+        {
+          "term": "maṅkubuddhi biḍisi",
+          "meaning": "removing dull/ignorant intellect"
+        },
+        {
+          "term": "kiṅkaranna māḍikoḻḻo",
+          "meaning": "make (me) your servant/attendant"
+        }
       ]
     },
     {
@@ -584,28 +1077,48 @@
           "etymology": {
             "dhatu": "वसु (vasu) + देव (deva)",
             "meaning": "Son of Vasudeva; the indwelling Lord who pervades all; the brilliant one who dwells everywhere",
-            "alternates": ["Son of Vasudeva", "The all-pervading divine light", "One in whom all beings dwell"]
+            "alternates": [
+              "Son of Vasudeva",
+              "The all-pervading divine light",
+              "One in whom all beings dwell"
+            ]
           },
-          "gunaVarga": ["vyapti", "sarveshvaratva"],
-          "relatedNamas": ["Devaki-nandana", "Krishna", "Narayana"],
+          "gunaVarga": [
+            "vyapti",
+            "sarveshvaratva"
+          ],
+          "relatedNamas": [
+            "Devaki-nandana",
+            "Krishna",
+            "Narayana"
+          ],
           "vyuhaReference": "First and foremost of the Chaturvyuha - represents the Supreme Being in His fullness"
         }
       ],
       "regionalGlossary": [
-        {"term": "ēsu janma bandarēnu", "meaning": "however many births may come"},
-        {"term": "dāsanallavēno", "meaning": "am I not (Your) servant?"},
-        {"term": "ghāsi māḍadirō", "meaning": "do not forsake/abandon"}
+        {
+          "term": "ēsu janma bandarēnu",
+          "meaning": "however many births may come"
+        },
+        {
+          "term": "dāsanallavēno",
+          "meaning": "am I not (Your) servant?"
+        },
+        {
+          "term": "ghāsi māḍadirō",
+          "meaning": "do not forsake/abandon"
+        }
       ]
     },
     {
       "id": "16",
-      "deva": "बुद्धि शून्यनागि नानु कद्द कळ्ळनादेनय्य तिद्दि हृदय शुद्धि माडो प्रद्युम्नने",
-      "iast": "buddhi śūnyanāgi nānu kadda kaḻḻanādenayya tiddi hṛdaya śuddhi māḍo pradyumnane",
-      "knda": "ಬುದ್ಧಿ ಶೂನ್ಯನಾಗಿ ನಾನು ಕದ್ದ ಕಳ್ಳನಾದೆನಯ್ಯ ತಿದ್ದಿ ಹೃದಯ ಶುದ್ಧಿ ಮಾಡೊ ಪ್ರದ್ಯುಮ್ನನೆ",
-      "tel": "బుద్ధి శూన్యనాగి నాను కద్ద కళ్ళనాదెనయ్య తిద్ది హృదయ శుద్ధి మాడొ ప్రద్యుమ్ననె",
-      "tam": "புத்தி ஶூன்யனாகி நானு கத்த கள்ளனாதெனய்ய தித்தி ஹ்ருதய ஶுத்தி மாடொ ப்ரத்யும்னனெ",
-      "pan": "ਬੁਦ੍ਧਿ ਸ਼ੂਨ੍ਯਨਾਗਿ ਨਾਨੁ ਕਦ੍ਦ ਕਲ਼੍ਲ਼ਨਾਦੇਨਯ੍ਯ ਤਿਦ੍ਦਿ ਹ੍ਰਿਦਯ ਸ਼ੁਦ੍ਧਿ ਮਾਡੋ ਪ੍ਰਦ੍ਯੁਮ੍ਨਨੇ",
-      "guj": "બુદ્ધિ શૂન્યનાગિ નાનુ કદ્દ કળ્ળનાદેનય્ય તિદ્દિ હૃદય શુદ્ધિ માડો પ્રદ્યુમ્નને ॥૧૪॥",
+      "deva": "बुद्धि शून्यनागि एन्न । बद्धकाय कुहक मनव तिद्दि हृदय शुद्ध माडो प्रद्युम्नने",
+      "iast": "buddhi śūnyanāgi enna | baddhakāya kuhaka manava tiddi hṛdaya śuddha māḍo pradyumnane",
+      "knda": "ಬುದ್ಧಿ ಶೂನ್ಯನಾಗಿ ಎನ್ನ | ಬದ್ಧಕಾಯ ಕುಹಕ ಮನವ ತಿದ್ದಿ ಹೃದಯ ಶುದ್ಧ ಮಾಡೋ ಪ್ರದ್ಯುಮ್ನನೇ",
+      "tel": "బుద్ధి శూన్యనాగి ఎన్న | బద్ధకాయ కుహక మనవ తిద్ది హృదయ శుద్ధ మాడో ప్రద్యుమ్ననే",
+      "tam": "புத்தி ஶூந்யநாகி ஏந்ந । பத்தகாய குஹக மநவ தித்தி ஹ்ரு'தய ஶுத்த மாடோ ப்ரத்யும்நநே",
+      "pan": "ਬੁਦ੍ਧਿ ਸ਼ੂਨ੍ਯਨਾਗਿ ਏਨ੍ਨ । ਬਦ੍ਧਕਾਯ ਕੁਹਕ ਮਨਵ ਤਿਦ੍ਦਿ ਹ੍ਰਿਦਯ ਸ਼ੁਦ੍ਧ ਮਾਡੋ ਪ੍ਰਦ੍ਯੁਮ੍ਨਨੇ",
+      "guj": "બુદ્ધિ શૂન્યનાગિ એન્ન । બદ્ધકાય કુહક મનવ તિદ્દિ હૃદય શુદ્ધ માડો પ્રદ્યુમ્નને",
       "meaning": "Being devoid of wisdom, I became a thief, O Lord. Correct me and purify my heart, O Pradyumna.",
       "translation": "Lacking intelligence, I have become a sinner, O Lord. Reform me and cleanse my heart, O Pradyumna.",
       "bhaktiRasa": "sharanagati",
@@ -616,28 +1129,48 @@
           "etymology": {
             "dhatu": "प्र (pra) + द्युम्न (dyumna - wealth/splendor)",
             "meaning": "One of supreme splendor; son of Krishna and Rukmini; one of the Chaturvyuha representing the mind principle",
-            "alternates": ["The supremely radiant", "One of great wealth/glory", "Kamadeva reborn"]
+            "alternates": [
+              "The supremely radiant",
+              "One of great wealth/glory",
+              "Kamadeva reborn"
+            ]
           },
-          "gunaVarga": ["saundarya", "jnana"],
-          "relatedNamas": ["Rukmini-putra", "Manmatha", "Kamadeva"],
+          "gunaVarga": [
+            "saundarya",
+            "jnana"
+          ],
+          "relatedNamas": [
+            "Rukmini-putra",
+            "Manmatha",
+            "Kamadeva"
+          ],
           "vyuhaReference": "Third of the Chaturvyuha - represents the mind (manas) and creative power; historically the son of Krishna who was Kamadeva reborn"
         }
       ],
       "regionalGlossary": [
-        {"term": "buddhi śūnyanāgi", "meaning": "being devoid of wisdom/intellect"},
-        {"term": "kadda kaḻḻanādena", "meaning": "I became a thief/sinner"},
-        {"term": "tiddi hṛdaya śuddhi māḍo", "meaning": "correct/reform and purify the heart"}
+        {
+          "term": "buddhi śūnyanāgi",
+          "meaning": "being devoid of wisdom/intellect"
+        },
+        {
+          "term": "kadda kaḻḻanādena",
+          "meaning": "I became a thief/sinner"
+        },
+        {
+          "term": "tiddi hṛdaya śuddhi māḍo",
+          "meaning": "correct/reform and purify the heart"
+        }
       ]
     },
     {
       "id": "17",
-      "deva": "जननि जनक नीने एंदु एनुवेनय्य दीनबंधु एनगे मुक्ति पालिसिंदु अनिरुद्धने ॥१५॥",
-      "iast": "janani janaka nīne endu enuvenayya dīnabandhu enage mukti pālisindu aniruddhane ॥15॥",
-      "knda": "ಜನನಿ ಜನಕ ನೀನೆ ಎಂದು ಎನುವೆನಯ್ಯ ದೀನಬಂಧು ಎನಗೆ ಮುಕ್ತಿ ಪಾಲಿಸಿಂದು ಅನಿರುದ್ಧನೆ ॥೧೫॥",
-      "tel": "జననీ జనక నీనె ఎందు ఎనువెనయ్య దీనబంధు ఎనగె ముక్తి పాలిసిందు అనిరుద్ధనె ॥15॥",
-      "tam": "ஜனனி ஜனக நீனெ எந்து எனுவெனய்ய தீனபந்து எனகெ முக்தி பாலிஸிந்து அனிருத்தனெ ॥15॥",
-      "pan": "ਜਨਨਿ ਜਨਕ ਨੀਨੇ ਏਂਦੁ ਏਨੁਵੇਨਯ੍ਯ ਦੀਨਬੰਧੁ ਏਨਗੇ ਮੁਕ੍ਤਿ ਪਾਲਿਸਿਂਦੁ ਅਨਿਰੁਦ੍ਧਨੇ ॥15॥",
-      "guj": "જનની જનક નીને એંદુ એનુવેનય્ય દીનબંધુ એનગે મુક્તિ પાલિસિંદુ અનિરુદ્ધને ॥૧૫॥",
+      "deva": "जननि जनक नीनेयेंदु नेनेवेनय्य दीनबंधु एनगे मुक्ति पालिसिन्नु अनिरुद्धने ॥१५॥",
+      "iast": "janani janaka nīneyeṃdu nenevenayya dīnabaṃdhu enage mukti pālisinnu aniruddhane ॥15॥",
+      "knda": "ಜನನಿ ಜನಕ ನೀನೆಯೆಂದು ನೆನೆವೆನಯ್ಯ ದೀನಬಂಧು ಎನಗೆ ಮುಕ್ತಿ ಪಾಲಿಸಿನ್ನು ಅನಿರುದ್ಧನೇ ॥೧೫॥",
+      "tel": "జనని జనక నీనెయెందు నెనెవెనయ్య దీనబంధు ఎనగె ముక్తి పాలిసిన్ను అనిరుద్ధనే ॥౧౫॥",
+      "tam": "ஜநநி ஜநக நீநேயேம்து நேநேவேநய்ய தீநபம்து ஏநகே முக்தி பாலிஸிந்நு அநிருத்தநே ॥௧௫॥",
+      "pan": "ਜਨਨਿ ਜਨਕ ਨੀਨੇਯੇਂਦੁ ਨੇਨੇਵੇਨਯ੍ਯ ਦੀਨਬਂਧੁ ਏਨਗੇ ਮੁਕ੍ਤਿ ਪਾਲਿਸਿਨ੍ਨੁ ਅਨਿਰੁਦ੍ਧਨੇ ॥੧੫॥",
+      "guj": "જનનિ જનક નીનેયેંદુ નેનેવેનય્ય દીનબંધુ એનગે મુક્તિ પાલિસિન્નુ અનિરુદ્ધને ॥૧૫॥",
       "meaning": "You alone are my mother and father, I declare, O Lord. O Friend of the distressed, grant me liberation today, O Aniruddha.",
       "translation": "You are both my mother and father, I proclaim, O Lord. O Kinsman of the afflicted, bestow liberation upon me now, O unstoppable Aniruddha.",
       "bhaktiRasa": "sharanagati",
@@ -648,10 +1181,20 @@
           "etymology": {
             "dhatu": "अ (a - not) + निरुद्ध (niruddha - obstructed)",
             "meaning": "The unobstructed; one who cannot be stopped; grandson of Krishna through Pradyumna; one of the Chaturvyuha",
-            "alternates": ["The unstoppable", "One without obstacles", "The ever-free"]
+            "alternates": [
+              "The unstoppable",
+              "One without obstacles",
+              "The ever-free"
+            ]
           },
-          "gunaVarga": ["shakti", "svatantrya"],
-          "relatedNamas": ["Pradyumna-putra", "Banasura-jit"],
+          "gunaVarga": [
+            "shakti",
+            "svatantrya"
+          ],
+          "relatedNamas": [
+            "Pradyumna-putra",
+            "Banasura-jit"
+          ],
           "vyuhaReference": "Fourth of the Chaturvyuha - represents the ego principle (ahankara) and protective power; historically the grandson of Krishna"
         },
         {
@@ -661,13 +1204,25 @@
             "dhatu": "दीन (dīna - distressed) + बंधु (bandhu - relative/friend)",
             "meaning": "Friend/kinsman of the distressed; protector of the helpless"
           },
-          "gunaVarga": ["karunya", "rakshana"]
+          "gunaVarga": [
+            "karunya",
+            "rakshana"
+          ]
         }
       ],
       "regionalGlossary": [
-        {"term": "janani janaka nīne", "meaning": "You alone are (my) mother and father"},
-        {"term": "endu enuvenayya", "meaning": "thus I declare/proclaim, O Lord"},
-        {"term": "mukti pālisindu", "meaning": "grant liberation today/now"}
+        {
+          "term": "janani janaka nīne",
+          "meaning": "You alone are (my) mother and father"
+        },
+        {
+          "term": "endu enuvenayya",
+          "meaning": "thus I declare/proclaim, O Lord"
+        },
+        {
+          "term": "mukti pālisindu",
+          "meaning": "grant liberation today/now"
+        }
       ]
     },
     {
@@ -689,29 +1244,52 @@
           "etymology": {
             "dhatu": "पुरुष (puruṣa) + उत्तम (uttama)",
             "meaning": "The Supreme Person; best among all beings; transcending both the perishable (kshara) and imperishable (akshara)",
-            "alternates": ["Best of all persons", "The highest purusha", "Supreme Being beyond duality"]
+            "alternates": [
+              "Best of all persons",
+              "The highest purusha",
+              "Supreme Being beyond duality"
+            ]
           },
-          "gunaVarga": ["sarveshvaratva", "paratva"],
-          "relatedNamas": ["Narayana", "Paramatman", "Parabrahman"],
+          "gunaVarga": [
+            "sarveshvaratva",
+            "paratva"
+          ],
+          "relatedNamas": [
+            "Narayana",
+            "Paramatman",
+            "Parabrahman"
+          ],
           "gitaReference": "Bhagavad Gita 15.18 - 'Therefore I am celebrated both in the world and in the Vedas as Purushottama'"
         }
       ],
       "regionalGlossary": [
-        {"term": "haruṣadinda", "meaning": "with joy/delight"},
-        {"term": "smarisuvante māḍu", "meaning": "make (me) remember"},
-        {"term": "nēma irisu", "meaning": "establish/keep steadfast"},
-        {"term": "charaṇadalli kṣēma", "meaning": "safety/welfare at the feet"}
+        {
+          "term": "haruṣadinda",
+          "meaning": "with joy/delight"
+        },
+        {
+          "term": "smarisuvante māḍu",
+          "meaning": "make (me) remember"
+        },
+        {
+          "term": "nēma irisu",
+          "meaning": "establish/keep steadfast"
+        },
+        {
+          "term": "charaṇadalli kṣēma",
+          "meaning": "safety/welfare at the feet"
+        }
       ]
     },
     {
       "id": "19",
-      "deva": "साधु संग कोट्टु निन्न पादभजकनेनिसु एन्न भेद माडि नोडदिरो अधोक्षज ॥१७॥",
-      "iast": "sādhu saṅga koṭṭu ninna pādabhajakanenisu enna bhēda māḍi nōḍadirō adhōkṣaja ॥17॥",
-      "knda": "ಸಾಧು ಸಂಗ ಕೊಟ್ಟು ನಿನ್ನ ಪಾದಭಜಕನೆನಿಸು ಎನ್ನ ಭೇದ ಮಾಡಿ ನೋಡದಿರೋ ಅಧೋಕ್ಷಜ ॥೧೭॥",
-      "tel": "సాధు సంగ కొట్టు నిన్న పాదభజకనెనిసు ఎన్న భేద మాడి నోడదిరో అధోక్షజ ॥17॥",
-      "tam": "ஸாது ஸங்க கொட்டு நின்ன பாதபஜகனெனிஸு என்ன பேத மாடி நோடதிரோ அதோக்ஷஜ ॥17॥",
-      "pan": "ਸਾਧੁ ਸੰਗ ਕੋਟ੍ਟੁ ਨਿਨ੍ਨ ਪਾਦਭਜਕਨੇਨਿਸੁ ਏਨ੍ਨ ਭੇਦ ਮਾਡਿ ਨੋਡਦਿਰੋ ਅਧੋਕ੍ਸ਼ਜ ॥17॥",
-      "guj": "સાધુ સંગ કોટ્ટુ નિન્ન પાદભજકનેનિસુ એન્ન ભેદ માડિ નોડદિરો અધોક્ષજ ॥૧૭॥",
+      "deva": "साधुसंग कोट्टु निन्न पादभजने इत्तु एन्न भेदमाडि नोडदिरो हे अधोक्षज ॥१७॥",
+      "iast": "sādhusaṃga koṭṭu ninna pādabhajane ittu enna bhedamāḍi noḍadiro he adhokṣaja ॥17॥",
+      "knda": "ಸಾಧುಸಂಗ ಕೊಟ್ಟು ನಿನ್ನ ಪಾದಭಜನೆ ಇತ್ತು ಎನ್ನ ಭೇದಮಾಡಿ ನೋಡದಿರೊ ಹೇ ಅಧೋಕ್ಷಜ ॥೧೭॥",
+      "tel": "సాధుసంగ కొట్టు నిన్న పాదభజనె ఇత్తు ఎన్న భేదమాడి నోడదిరొ హే అధోక్షజ ॥౧౭॥",
+      "tam": "ஸாதுஸம்க கோட்டு நிந்ந பாதபஜநே இத்து ஏந்ந பேதமாடி நோடதிரோ ஹே அதோக்ஷஜ ॥௧௭॥",
+      "pan": "ਸਾਧੁਸਂਗ ਕੋਟ੍ਟੁ ਨਿਨ੍ਨ ਪਾਦਭਜਨੇ ਇਤ੍ਤੁ ਏਨ੍ਨ ਭੇਦਮਾਡਿ ਨੋਡਦਿਰੋ ਹੇ ਅਧੋਕ੍ਸ਼ਜ ॥੧੭॥",
+      "guj": "સાધુસંગ કોટ્ટુ નિન્ન પાદભજને ઇત્તુ એન્ન ભેદમાડિ નોડદિરો હે અધોક્ષજ ॥૧૭॥",
       "meaning": "Grant me the company of saints and make me a worshipper of Your feet. Do not look upon me with discrimination, O Adhokshaja.",
       "translation": "Bestow upon me the association of holy ones and consider me a devotee of Your feet. Do not regard me differently, O Lord beyond the senses.",
       "bhaktiRasa": "sharanagati",
@@ -722,16 +1300,36 @@
           "etymology": {
             "dhatu": "अधः (adhaḥ - below) + अक्ष (akṣa - senses) + ज (ja - born/existing)",
             "meaning": "One who is beyond the reach of the senses; one whose true nature cannot be perceived by downward-flowing senses",
-            "alternates": ["Beyond sensory perception", "One who defeats the senses", "The transcendental one"]
+            "alternates": [
+              "Beyond sensory perception",
+              "One who defeats the senses",
+              "The transcendental one"
+            ]
           },
-          "gunaVarga": ["paratva", "aprameya"],
-          "relatedNamas": ["Avyakta", "Aprameya", "Achintya"]
+          "gunaVarga": [
+            "paratva",
+            "aprameya"
+          ],
+          "relatedNamas": [
+            "Avyakta",
+            "Aprameya",
+            "Achintya"
+          ]
         }
       ],
       "regionalGlossary": [
-        {"term": "sādhu saṅga koṭṭu", "meaning": "grant the company of saints/holy ones"},
-        {"term": "pādabhajakanenisu", "meaning": "make (me) a worshipper of (Your) feet"},
-        {"term": "bhēda māḍi nōḍadirō", "meaning": "do not look upon with discrimination/differently"}
+        {
+          "term": "sādhu saṅga koṭṭu",
+          "meaning": "grant the company of saints/holy ones"
+        },
+        {
+          "term": "pādabhajakanenisu",
+          "meaning": "make (me) a worshipper of (Your) feet"
+        },
+        {
+          "term": "bhēda māḍi nōḍadirō",
+          "meaning": "do not look upon with discrimination/differently"
+        }
       ]
     },
     {
@@ -753,29 +1351,52 @@
           "etymology": {
             "dhatu": "नर (nara - man) + सिंह (siṃha - lion)",
             "meaning": "The Man-Lion; fierce avatar who protected devotee Prahlada by emerging from a pillar",
-            "alternates": ["Man-Lion incarnation", "Protector of devotees", "The fierce form"]
+            "alternates": [
+              "Man-Lion incarnation",
+              "Protector of devotees",
+              "The fierce form"
+            ]
           },
-          "gunaVarga": ["rakshana", "ugrata"],
-          "relatedNamas": ["Prahlada-varada", "Hiranyakashipu-hantri", "Stambhaja"],
+          "gunaVarga": [
+            "rakshana",
+            "ugrata"
+          ],
+          "relatedNamas": [
+            "Prahlada-varada",
+            "Hiranyakashipu-hantri",
+            "Stambhaja"
+          ],
           "avatarReference": "Narasimha avatar - appeared as half-man half-lion to save child devotee Prahlada from his demon father Hiranyakashipu"
         }
       ],
       "regionalGlossary": [
-        {"term": "chārucharaṇa tōri", "meaning": "showing (Your) beautiful feet"},
-        {"term": "pārugāṇisayya", "meaning": "ferry across/help cross over, O Lord"},
-        {"term": "konege bhāra hāki iruve", "meaning": "finally I have placed (my) burden"},
-        {"term": "ninage", "meaning": "upon You"}
+        {
+          "term": "chārucharaṇa tōri",
+          "meaning": "showing (Your) beautiful feet"
+        },
+        {
+          "term": "pārugāṇisayya",
+          "meaning": "ferry across/help cross over, O Lord"
+        },
+        {
+          "term": "konege bhāra hāki iruve",
+          "meaning": "finally I have placed (my) burden"
+        },
+        {
+          "term": "ninage",
+          "meaning": "upon You"
+        }
       ]
     },
     {
       "id": "21",
-      "deva": "संचितार्थ पापगळनु किंचितादरुळियदंते मुंचितागि कळेदु पोरेयो स्वामि अच्युत ॥१९॥",
-      "iast": "sañchitārtha pāpagaḻanu kiñchitādaruḻiyadante muñchitāgi kaḻedu poreyo svāmi achyuta ॥19॥",
-      "knda": "ಸಂಚಿತಾರ್ಥ ಪಾಪಗಳನು ಕಿಂಚಿತಾದರುಳಿಯದಂತೆ ಮುಂಚಿತಾಗಿ ಕಳೆದು ಪೊರೆಯೊ ಸ್ವಾಮಿ ಅಚ್ಯುತ ॥೧೯॥",
-      "tel": "సంచితార్థ పాపగళను కించితాదరుళియదంతె మంచితాగి కళెదు పొరెయొ స్వామి అచ్యుత ॥19॥",
-      "tam": "ஸஞ்சிதார்த பாபகளனு கிஞ்சிதாதருளியதந்தெ முஞ்சிதாகி களெது பொரெயொ ஸ்வாமி அச்யுத ॥19॥",
-      "pan": "ਸੰਚਿਤਾਰ੍ਥ ਪਾਪਗਲ਼ਨੁ ਕਿੰਚਿਤਾਦਰੁਲ਼ਿਯਦੰਤੇ ਮੁੰਚਿਤਾਗਿ ਕਲ਼ੇਦੁ ਪੋਰੇਯੋ ਸ੍ਵਾਮਿ ਅਚ੍ਯੁਤ ॥19॥",
-      "guj": "સંચિતાર્થ પાપગળનુ કિંચિતાદરુળિયદંતે મુંચિતાગિ કળેદુ પોરેયો સ્વામિ અચ્યુત ॥૧૯॥",
+      "deva": "संचितादि पापगळु किंचिताद पीडेगळनु मुंचितागि कळेयबेको स्वामि अच्युत ॥१९॥",
+      "iast": "saṃcitādi pāpagaḻu kiṃcitāda pīḍegaḻanu muṃcitāgi kaḻeyabeko svāmi acyuta ॥19॥",
+      "knda": "ಸಂಚಿತಾದಿ ಪಾಪಗಳು ಕಿಂಚಿತಾದ ಪೀಡೆಗಳನು ಮುಂಚಿತಾಗಿ ಕಳೆಯಬೇಕೋ ಸ್ವಾಮಿ ಅಚ್ಯುತ ॥೧೯॥",
+      "tel": "సంచితాది పాపగళు కించితాద పీడెగళను ముంచితాగి కళెయబేకో స్వామి అచ్యుత ॥౧౯॥",
+      "tam": "ஸம்சிதாதி பாபகளு கிம்சிதாத பீடேகளநு மும்சிதாகி களேயபேகோ ஸ்வாமி அச்யுத ॥௧௯॥",
+      "pan": "ਸਂਚਿਤਾਦਿ ਪਾਪਗਲ਼ੁ ਕਿਂਚਿਤਾਦ ਪੀਡੇਗਲ਼ਨੁ ਮੁਂਚਿਤਾਗਿ ਕਲ਼ੇਯਬੇਕੋ ਸ੍ਵਾਮਿ ਅਚ੍ਯੁਤ ॥੧੯॥",
+      "guj": "સંચિતાદિ પાપગળુ કિંચિતાદ પીડેગળનુ મુંચિતાગિ કળેયબેકો સ્વામિ અચ્યુત ॥૧૯॥",
       "meaning": "Remove beforehand my accumulated sins without leaving even a trace, and protect me, O Lord Achyuta.",
       "translation": "Completely destroy my stored sins without leaving even the slightest remnant, and shelter me, O unfailing Master.",
       "bhaktiRasa": "sharanagati",
@@ -786,28 +1407,51 @@
           "etymology": {
             "dhatu": "अ (a - not) + च्युत (cyuta - fallen)",
             "meaning": "The unfallen; one who never falls from His position; one who never fails His devotees",
-            "alternates": ["The infallible", "One who never slips", "The unchanging one"]
+            "alternates": [
+              "The infallible",
+              "One who never slips",
+              "The unchanging one"
+            ]
           },
-          "gunaVarga": ["nityatva", "rakshana"],
-          "relatedNamas": ["Ananta", "Avyaya", "Aprameya"]
+          "gunaVarga": [
+            "nityatva",
+            "rakshana"
+          ],
+          "relatedNamas": [
+            "Ananta",
+            "Avyaya",
+            "Aprameya"
+          ]
         }
       ],
       "regionalGlossary": [
-        {"term": "sañchitārtha pāpagaḻanu", "meaning": "accumulated/stored sins"},
-        {"term": "kiñchitādaruḻiyadante", "meaning": "without leaving even a little bit"},
-        {"term": "muñchitāgi kaḻedu", "meaning": "remove beforehand/in advance"},
-        {"term": "poreyo svāmi", "meaning": "protect (me), O Lord"}
+        {
+          "term": "sañchitārtha pāpagaḻanu",
+          "meaning": "accumulated/stored sins"
+        },
+        {
+          "term": "kiñchitādaruḻiyadante",
+          "meaning": "without leaving even a little bit"
+        },
+        {
+          "term": "muñchitāgi kaḻedu",
+          "meaning": "remove beforehand/in advance"
+        },
+        {
+          "term": "poreyo svāmi",
+          "meaning": "protect (me), O Lord"
+        }
       ]
     },
     {
       "id": "22",
-      "deva": "ज्ञान भक्ति कोट्टु निन्न ध्यानदल्लि इट्टु एन्न हीन बुद्धि बिडिसो मुन्न जनार्दन ॥२०॥",
-      "iast": "jñāna bhakti koṭṭu ninna dhyānadalli iṭṭu enna hīna buddhi biḍiso munna janārdana ॥20॥",
-      "knda": "ಜ್ಞಾನ ಭಕ್ತಿ ಕೊಟ್ಟು ನಿನ್ನ ಧ್ಯಾನದಲ್ಲಿ ಇಟ್ಟು ಎನ್ನ ಹೀನ ಬುದ್ಧಿ ಬಿಡಿಸೊ ಮುನ್ನ ಜನಾರ್ದನ ॥೨೦॥",
-      "tel": "జ్ఞాన భక్తి కొట్టు నిన్న ధ్యానదల్లి ఇట్టు ఎన్న హీన బుద్ధి బిడిసొ మున్న జనార్దన ॥20॥",
-      "tam": "ஜ்ஞான பக்தி கொட்டு நின்ன த்யானதல்லி இட்டு என்ன ஹீன புத்தி பிடிஸொ முன்ன ஜனார்தன ॥20॥",
-      "pan": "ਜ੍ਞਾਨ ਭਕ੍ਤਿ ਕੋਟ੍ਟੁ ਨਿਨ੍ਨ ਧ੍ਯਾਨਦਲ੍ਲਿ ਇਟ੍ਟੁ ਏਨ੍ਨ ਹੀਨ ਬੁਦ੍ਧਿ ਬਿਡਿਸੋ ਮੁਨ੍ਨ ਜਨਾਰ੍ਦਨ ॥20॥",
-      "guj": "જ્ઞાન ભક્તિ કોટ્ટુ નિન્ન ધ્યાનદલ્લિ ઇટ્ટુ એન્ન હીન બુદ્ધિ બિડિસો મુન્ન જનાર્દન ॥૨૦॥",
+      "deva": "ज्ञान भकुति कोट्टु निन्न ध्यानदल्लि इट्टु सदा हीन बुद्धि बिडिसो मुन्न श्री जनार्धन ॥२०॥",
+      "iast": "jñāna bhakuti koṭṭu ninna dhyānadalli iṭṭu sadā hīna buddhi biḍiso munna śrī janārdhana ॥20॥",
+      "knda": "ಜ್ಞಾನ ಭಕುತಿ ಕೊಟ್ಟು ನಿನ್ನ ಧ್ಯಾನದಲ್ಲಿ ಇಟ್ಟು ಸದಾ ಹೀನ ಬುದ್ಧಿ ಬಿಡಿಸೊ ಮುನ್ನ ಶ್ರೀ ಜನಾರ್ಧನ ॥೨೦॥",
+      "tel": "జ్ఞాన భకుతి కొట్టు నిన్న ధ్యానదల్లి ఇట్టు సదా హీన బుద్ధి బిడిసొ మున్న శ్రీ జనార్ధన ॥౨౦॥",
+      "tam": "ஜ்ஞாந பகுதி கோட்டு நிந்ந த்யாநதல்லி இட்டு ஸதா ஹீந புத்தி பிடிஸோ முந்ந ஶ்ரீ ஜநார்தந ॥௨௦॥",
+      "pan": "ਜ੍ਞਾਨ ਭਕੁਤਿ ਕੋਟ੍ਟੁ ਨਿਨ੍ਨ ਧ੍ਯਾਨਦਲ੍ਲਿ ਇਟ੍ਟੁ ਸਦਾ ਹੀਨ ਬੁਦ੍ਧਿ ਬਿਡਿਸੋ ਮੁਨ੍ਨ ਸ਼੍ਰੀ ਜਨਾਰ੍ਧਨ ॥੨੦॥",
+      "guj": "જ્ઞાન ભકુતિ કોટ્ટુ નિન્ન ધ્યાનદલ્લિ ઇટ્ટુ સદા હીન બુદ્ધિ બિડિસો મુન્ન શ્રી જનાર્ધન ॥૨૦॥",
       "meaning": "Grant me knowledge and devotion, establish me in meditation upon You, and remove my inferior intellect first, O Janardana.",
       "translation": "Bestow knowledge and devotion, place me in contemplation of You, and first remove my lowly mind, O tormentor of the wicked.",
       "bhaktiRasa": "jnana",
@@ -818,27 +1462,47 @@
           "etymology": {
             "dhatu": "जन (jana - people) + अर्दन (ardana - afflicting/worshipping)",
             "meaning": "One who afflicts the wicked; one whom people worship; one who is sought by devotees",
-            "alternates": ["Tormentor of evil people", "One worshipped by all", "Remover of birth and death"]
+            "alternates": [
+              "Tormentor of evil people",
+              "One worshipped by all",
+              "Remover of birth and death"
+            ]
           },
-          "gunaVarga": ["rakshana", "shakti"],
-          "relatedNamas": ["Achyuta", "Keshava", "Madhusudana"]
+          "gunaVarga": [
+            "rakshana",
+            "shakti"
+          ],
+          "relatedNamas": [
+            "Achyuta",
+            "Keshava",
+            "Madhusudana"
+          ]
         }
       ],
       "regionalGlossary": [
-        {"term": "jñāna bhakti koṭṭu", "meaning": "grant knowledge and devotion"},
-        {"term": "dhyānadalli iṭṭu", "meaning": "establish/place in meditation"},
-        {"term": "hīna buddhi biḍiso munna", "meaning": "first remove the inferior/lowly intellect"}
+        {
+          "term": "jñāna bhakti koṭṭu",
+          "meaning": "grant knowledge and devotion"
+        },
+        {
+          "term": "dhyānadalli iṭṭu",
+          "meaning": "establish/place in meditation"
+        },
+        {
+          "term": "hīna buddhi biḍiso munna",
+          "meaning": "first remove the inferior/lowly intellect"
+        }
       ]
     },
     {
       "id": "23",
-      "deva": "जपतपानुष्ठान नीनु ओप्पुवंते माडलिल्ल तप्प कोटि क्षमिसबेकु उपेंद्रने ॥२१॥",
-      "iast": "japatapānuṣṭhāna nīnu oppuvante māḍalilla tappa kōṭi kṣamisabēku upēndrane ॥21॥",
-      "knda": "ಜಪತಪಾನುಷ್ಠಾನ ನೀನು ಒಪ್ಪುವಂತೆ ಮಾಡಲಿಲ್ಲ ತಪ್ಪ ಕೋಟಿ ಕ್ಷಮಿಸಬೇಕು ಉಪೇಂದ್ರನೆ ॥೨೧॥",
-      "tel": "జపతపానుష్ఠాన నీను ఒప్పువంతె మాడలిల్ల తప్ప కోటి క్షమిసబేకు ఉపేందరనె ॥21॥",
-      "tam": "ஜபதபானுஷ்டான நீனு ஒப்புவந்தெ மாடலில்ல தப்ப கோடி க்ஷமிஸபேகு உபேந்த்ரனெ ॥21॥",
-      "pan": "ਜਪਤਪਾਨੁਸ਼੍ਠਾਨ ਨੀਨੁ ਓਪ੍ਪੁਵੰਤੇ ਮਾਡਲਿਲ੍ਲ ਤਪ੍ਪ ਕੋਟਿ ਕ੍ਸ਼ਮਿਸਬੇਕੁ ਉਪੇਂਦ੍ਰਨੇ ॥21॥",
-      "guj": "જપતપાનુષ્ઠાન નીનુ ઓપ્પુવંતે માડલિલ્લ તપ્પ કોટિ ક્ષમિસબેકુ ઉપેંદ્રને ॥૨૧॥",
+      "deva": "जपतपानुष्ठानविल्ल कुपितगामियाद एन्न कृपेय माडि क्षमिसबेकु हे उपेंद्रने ॥२१॥",
+      "iast": "japatapānuṣṭhānavilla kupitagāmiyāda enna kṛpeya māḍi kṣamisabeku he upeṃdrane ॥21॥",
+      "knda": "ಜಪತಪಾನುಷ್ಠಾನವಿಲ್ಲ ಕುಪಿತಗಾಮಿಯಾದ ಎನ್ನ ಕೃಪೆಯ ಮಾಡಿ ಕ್ಷಮಿಸಬೇಕು ಹೇ ಉಪೇಂದ್ರನೇ ॥೨೧॥",
+      "tel": "జపతపానుష్ఠానవిల్ల కుపితగామియాద ఎన్న కృపెయ మాడి క్షమిసబేకు హే ఉపేంద్రనే ॥౨౧॥",
+      "tam": "ஜபதபாநுஷ்டாநவில்ல குபிதகாமியாத ஏந்ந க்ரு'பேய மாடி க்ஷமிஸபேகு ஹே உபேம்த்ரநே ॥௨௧॥",
+      "pan": "ਜਪਤਪਾਨੁਸ਼੍ਠਾਨਵਿਲ੍ਲ ਕੁਪਿਤਗਾਮਿਯਾਦ ਏਨ੍ਨ ਕ੍ਰਿਪੇਯ ਮਾਡਿ ਕ੍ਸ਼ਮਿਸਬੇਕੁ ਹੇ ਉਪੇਂਦ੍ਰਨੇ ॥੨੧॥",
+      "guj": "જપતપાનુષ્ઠાનવિલ્લ કુપિતગામિયાદ એન્ન કૃપેય માડિ ક્ષમિસબેકુ હે ઉપેંદ્રને ॥૨૧॥",
       "meaning": "I have not performed japa, austerities, or observances in a manner pleasing to You. Please forgive my crores of faults, O Upendra.",
       "translation": "I have not done repetition of mantras, penance, or spiritual practices in a way acceptable to You. You must forgive my millions of mistakes, O younger brother of Indra.",
       "bhaktiRasa": "sharanagati",
@@ -849,17 +1513,37 @@
           "etymology": {
             "dhatu": "उप (upa - near/younger) + इंद्र (indra)",
             "meaning": "Younger brother of Indra; one who appeared as Vamana, the younger brother of Indra born to Aditi",
-            "alternates": ["One who surpasses Indra", "Vamana avatar", "Subordinate to none yet appearing humble"]
+            "alternates": [
+              "One who surpasses Indra",
+              "Vamana avatar",
+              "Subordinate to none yet appearing humble"
+            ]
           },
-          "gunaVarga": ["saulabhya", "karunya"],
-          "relatedNamas": ["Vamana", "Trivikrama", "Indra-anuja"],
+          "gunaVarga": [
+            "saulabhya",
+            "karunya"
+          ],
+          "relatedNamas": [
+            "Vamana",
+            "Trivikrama",
+            "Indra-anuja"
+          ],
           "avatarReference": "Vamana was born as the son of Aditi and Kashyapa, making Him the younger brother of Indra"
         }
       ],
       "regionalGlossary": [
-        {"term": "japatapānuṣṭhāna", "meaning": "japa (mantra repetition), tapas (austerity), and observances"},
-        {"term": "oppuvante māḍalilla", "meaning": "did not do in a manner pleasing/acceptable"},
-        {"term": "tappa kōṭi kṣamisabēku", "meaning": "must forgive crores of faults/mistakes"}
+        {
+          "term": "japatapānuṣṭhāna",
+          "meaning": "japa (mantra repetition), tapas (austerity), and observances"
+        },
+        {
+          "term": "oppuvante māḍalilla",
+          "meaning": "did not do in a manner pleasing/acceptable"
+        },
+        {
+          "term": "tappa kōṭi kṣamisabēku",
+          "meaning": "must forgive crores of faults/mistakes"
+        }
       ]
     },
     {
@@ -881,9 +1565,16 @@
           "etymology": {
             "dhatu": "परम (parama - supreme) + पुरुष (puruṣa - person)",
             "meaning": "The Supreme Person; the highest being transcending all",
-            "alternates": ["Supreme Soul", "Highest Person", "Ultimate Being"]
+            "alternates": [
+              "Supreme Soul",
+              "Highest Person",
+              "Ultimate Being"
+            ]
           },
-          "gunaVarga": ["paratva", "sarveshvaratva"]
+          "gunaVarga": [
+            "paratva",
+            "sarveshvaratva"
+          ]
         },
         {
           "nama": "श्रीहरि",
@@ -891,28 +1582,51 @@
           "etymology": {
             "dhatu": "श्री (śrī - auspiciousness) + हरि (hari - remover/Vishnu)",
             "meaning": "The auspicious Hari; the one who removes sins; Vishnu with Lakshmi",
-            "alternates": ["Auspicious remover", "Consort of Sri", "The golden-hued Lord"]
+            "alternates": [
+              "Auspicious remover",
+              "Consort of Sri",
+              "The golden-hued Lord"
+            ]
           },
-          "gunaVarga": ["anugraha", "saundarya"],
-          "relatedNamas": ["Narayana", "Lakshminatha", "Srinivasa"]
+          "gunaVarga": [
+            "anugraha",
+            "saundarya"
+          ],
+          "relatedNamas": [
+            "Narayana",
+            "Lakshminatha",
+            "Srinivasa"
+          ]
         }
       ],
       "regionalGlossary": [
-        {"term": "moreya iḍuvenayya", "meaning": "I plead/cry out, O Lord"},
-        {"term": "śaradhiśayana", "meaning": "one who reclines on the ocean (epithet of Vishnu)"},
-        {"term": "śubhamatiya irisō", "meaning": "grant/bestow auspicious wisdom"},
-        {"term": "bhaktaroḻage", "meaning": "among the devotees"}
+        {
+          "term": "moreya iḍuvenayya",
+          "meaning": "I plead/cry out, O Lord"
+        },
+        {
+          "term": "śaradhiśayana",
+          "meaning": "one who reclines on the ocean (epithet of Vishnu)"
+        },
+        {
+          "term": "śubhamatiya irisō",
+          "meaning": "grant/bestow auspicious wisdom"
+        },
+        {
+          "term": "bhaktaroḻage",
+          "meaning": "among the devotees"
+        }
       ]
     },
     {
       "id": "25",
-      "deva": "पुट्टिसले बेडविन्नु पुट्टिसिदके पालिसिन्नु इष्टु बेडिकोंबे नानु श्रीकृष्णने ॥२३॥",
-      "iast": "puṭṭisalē bēḍavinnu puṭṭisidake pālisinnu iṣṭu bēḍikombe nānu śrīkṛṣṇane ॥23॥",
-      "knda": "ಪುಟ್ಟಿಸಲೇ ಬೇಡವಿನ್ನು ಪುಟ್ಟಿಸಿದಕೆ ಪಾಲಿಸಿನ್ನು ಇಷ್ಟು ಬೇಡಿಕೊಂಬೆ ನಾನು ಶ್ರೀಕೃಷ್ಣನೆ ॥೨೩॥",
-      "tel": "పుట్టిసలే బేడవిన్ను పుట్టిసిదకె పాలిసిన్ను ఇష్టు బేడికొంబె నాను శ్రీకృష్ణనె ॥23॥",
-      "tam": "புட்டிஸலே பேடவின்னு புட்டிஸிதகெ பாலிஸின்னு இஷ்டு பேடிகொம்பெ நானு ஶ்ரீக்ருஷ்ணனெ ॥23॥",
-      "pan": "ਪੁਟ੍ਟਿਸਲੇ ਬੇਡਵਿਨ੍ਨੁ ਪੁਟ੍ਟਿਸਿਦਕੇ ਪਾਲਿਸਿਨ੍ਨੁ ਇਸ਼੍ਟੁ ਬੇਡਿਕੋਂਬੇ ਨਾਨੁ ਸ਼੍ਰੀਕ੍ਰਿਸ਼੍ਣਨੇ ॥23॥",
-      "guj": "પુટ્ટિસલે બેડવિન્નુ પુટ્ટિસિદકે પાલિસિન્નુ ઇષ્ટુ બેડિકોંબે નાનુ શ્રીકૃષ્ણને ॥૨૩॥",
+      "deva": "पुट्टिसले बेडविन्नु पुट्टिसिदके पालिसिन्नु इष्टु बेडिकोंबे श्री कृष्णने ॥२३॥",
+      "iast": "puṭṭisale beḍavinnu puṭṭisidake pālisinnu iṣṭu beḍikoṃbe śrī kṛṣṇane ॥23॥",
+      "knda": "ಪುಟ್ಟಿಸಲೇ ಬೇಡವಿನ್ನು ಪುಟ್ಟಿಸಿದಕೆ ಪಾಲಿಸಿನ್ನು ಇಷ್ಟು ಬೇಡಿಕೊಂಬೆ ಶ್ರೀ ಕೃಷ್ಣನೆ ॥೨೩॥",
+      "tel": "పుట్టిసలే బేడవిన్ను పుట్టిసిదకె పాలిసిన్ను ఇష్టు బేడికొంబె శ్రీ కృష్ణనె ॥౨౩॥",
+      "tam": "புட்டிஸலே பேடவிந்நு புட்டிஸிதகே பாலிஸிந்நு இஷ்டு பேடிகோம்பே ஶ்ரீ க்ரு'ஷ்ணநே ॥௨௩॥",
+      "pan": "ਪੁਟ੍ਟਿਸਲੇ ਬੇਡਵਿਨ੍ਨੁ ਪੁਟ੍ਟਿਸਿਦਕੇ ਪਾਲਿਸਿਨ੍ਨੁ ਇਸ਼੍ਟੁ ਬੇਡਿਕੋਂਬੇ ਸ਼੍ਰੀ ਕ੍ਰਿਸ਼੍ਣਨੇ ॥੨੩॥",
+      "guj": "પુટ્ટિસલે બેડવિન્નુ પુટ્ટિસિદકે પાલિસિન્નુ ઇષ્ટુ બેડિકોંબે શ્રી કૃષ્ણને ॥૨૩॥",
       "meaning": "Do not make me be born again. Since You have created me, protect me henceforth. This much alone I pray, O Sri Krishna.",
       "translation": "Do not give me another birth. Having brought me into existence, please sustain me now. This is my only prayer, O Sri Krishna.",
       "bhaktiRasa": "sharanagati",
@@ -923,27 +1637,48 @@
           "etymology": {
             "dhatu": "श्री (śrī - auspicious/Lakshmi) + कृष्ण (kṛṣṇa - the dark one/all-attractive)",
             "meaning": "The auspicious Krishna; the all-attractive Lord with Lakshmi; the dark-complexioned one with all opulences",
-            "alternates": ["The blessed all-attractive one", "Krishna with all divine qualities", "The dark Lord with Sri"]
+            "alternates": [
+              "The blessed all-attractive one",
+              "Krishna with all divine qualities",
+              "The dark Lord with Sri"
+            ]
           },
-          "gunaVarga": ["saundarya", "madhurya", "vatsalya"],
-          "relatedNamas": ["Govinda", "Gopala", "Parthasarathi"]
+          "gunaVarga": [
+            "saundarya",
+            "madhurya",
+            "vatsalya"
+          ],
+          "relatedNamas": [
+            "Govinda",
+            "Gopala",
+            "Parthasarathi"
+          ]
         }
       ],
       "regionalGlossary": [
-        {"term": "puṭṭisalē bēḍavinnu", "meaning": "do not make (me) be born again henceforth"},
-        {"term": "puṭṭisidake pālisinnu", "meaning": "since You have created/born (me), protect/sustain henceforth"},
-        {"term": "iṣṭu bēḍikombe nānu", "meaning": "this much alone I pray/request"}
+        {
+          "term": "puṭṭisalē bēḍavinnu",
+          "meaning": "do not make (me) be born again henceforth"
+        },
+        {
+          "term": "puṭṭisidake pālisinnu",
+          "meaning": "since You have created/born (me), protect/sustain henceforth"
+        },
+        {
+          "term": "iṣṭu bēḍikombe nānu",
+          "meaning": "this much alone I pray/request"
+        }
       ]
     },
     {
       "id": "26",
-      "deva": "सत्यवाद नामगळनु नित्यदल्लि पठिसुववर अर्तियिंद कायदिरनु कर्तृ केशव ॥२४॥",
-      "iast": "satyavāda nāmagaḻanu nityadalli paṭhisuvavara artiyinda kāyadiranu kartṛ kēśava ॥24॥",
-      "knda": "ಸತ್ಯವಾದ ನಾಮಗಳನು ನಿತ್ಯದಲ್ಲಿ ಪಠಿಸುವವರ ಅರ್ತಿಯಿಂದ ಕಾಯದಿರನು ಕರ್ತೃ ಕೇಶವ ॥೨೪॥",
-      "tel": "సత్యవాద నామగళను నిత్యదల్లి పఠిసువావర అర్తియింద కాయదిరను కర్తృ కేశవ ॥24॥",
-      "tam": "ஸத்யவாத நாமகளனு நித்யதல்லி படிஸுவாவர அர்தியிந்த காயதிரனு கர்த்ரு கேஶவ ॥24॥",
-      "pan": "ਸਤ੍ਯਵਾਦ ਨਾਮਗਲ਼ਨੁ ਨਿਤ੍ਯਦਲ੍ਲਿ ਪਠਿਸੁਵਵਰ ਅਰ੍ਤਿਯਿਂਦ ਕਾਯਦਿਰਨੁ ਕਰ੍ਤ੍ਰਿ ਕੇਸ਼ਵ ॥24॥",
-      "guj": "સત્યવાદ નામગળનુ નિત્યદલ્લિ પઠિસુવવર અર્તિયિંદ કાયદિરનુ કર્તૃ કેશવ ॥૨૪॥",
+      "deva": "सत्यवाद नामगलनु नित्यदल्लि पठिसुवरिगे अर्थियिंद सलहुतिरुव कर्तृ केशव ॥२४॥",
+      "iast": "satyavāda nāmagalanu nityadalli paṭhisuvarige arthiyiṃda salahutiruva kartṛ keśava ॥24॥",
+      "knda": "ಸತ್ಯವಾದ ನಾಮಗಲನು ನಿತ್ಯದಲ್ಲಿ ಪಠಿಸುವರಿಗೆ ಅರ್ಥಿಯಿಂದ ಸಲಹುತಿರುವ ಕರ್ತೃ ಕೇಶವ ॥೨೪॥",
+      "tel": "సత్యవాద నామగలను నిత్యదల్లి పఠిసువరిగె అర్థియింద సలహుతిరువ కర్తృ కేశవ ॥౨౪॥",
+      "tam": "ஸத்யவாத நாமகலநு நித்யதல்லி படிஸுவரிகே அர்தியிம்த ஸலஹுதிருவ கர்த்ரு' கேஶவ ॥௨௪॥",
+      "pan": "ਸਤ੍ਯਵਾਦ ਨਾਮਗਲਨੁ ਨਿਤ੍ਯਦਲ੍ਲਿ ਪਠਿਸੁਵਰਿਗੇ ਅਰ੍ਥਿਯਿਂਦ ਸਲਹੁਤਿਰੁਵ ਕਰ੍ਤ੍ਰਿ ਕੇਸ਼ਵ ॥੨੪॥",
+      "guj": "સત્યવાદ નામગલનુ નિત્યદલ્લિ પઠિસુવરિગે અર્થિયિંદ સલહુતિરુવ કર્તૃ કેશવ ॥૨૪॥",
       "meaning": "Keshava, the Creator, will not fail to protect with love those who daily recite these true names.",
       "translation": "The Lord Keshava, the doer of all, will lovingly safeguard those who chant these truthful divine names every day.",
       "bhaktiRasa": "vatsalya",
@@ -955,10 +1690,20 @@
           "etymology": {
             "dhatu": "केश (keśa) + व (va)",
             "meaning": "One with beautiful hair; slayer of Keshi demon; controller of Brahma and Shiva (ka + a + īśa)",
-            "alternates": ["Beautiful-haired one", "Destroyer of Keshi", "Lord of the trinity"]
+            "alternates": [
+              "Beautiful-haired one",
+              "Destroyer of Keshi",
+              "Lord of the trinity"
+            ]
           },
-          "gunaVarga": ["saundarya", "sarveshvaratva"],
-          "relatedNamas": ["Hrishikesha", "Janardana"]
+          "gunaVarga": [
+            "saundarya",
+            "sarveshvaratva"
+          ],
+          "relatedNamas": [
+            "Hrishikesha",
+            "Janardana"
+          ]
         },
         {
           "nama": "कर्तृ",
@@ -967,13 +1712,25 @@
             "dhatu": "कृ (kṛ) - to do/make",
             "meaning": "The doer; the creator; the one who performs all actions"
           },
-          "gunaVarga": ["srishti", "karta"]
+          "gunaVarga": [
+            "srishti",
+            "karta"
+          ]
         }
       ],
       "regionalGlossary": [
-        {"term": "satyavāda nāmagaḻanu", "meaning": "these true/genuine divine names"},
-        {"term": "nityadalli paṭhisuvavara", "meaning": "those who recite daily"},
-        {"term": "artiyinda kāyadiranu", "meaning": "will not fail to protect with love/affection"}
+        {
+          "term": "satyavāda nāmagaḻanu",
+          "meaning": "these true/genuine divine names"
+        },
+        {
+          "term": "nityadalli paṭhisuvavara",
+          "meaning": "those who recite daily"
+        },
+        {
+          "term": "artiyinda kāyadiranu",
+          "meaning": "will not fail to protect with love/affection"
+        }
       ]
     },
     {
@@ -996,18 +1753,41 @@
           "etymology": {
             "dhatu": "आदि (ādi - primordial/first) + केशव (kēśava)",
             "meaning": "The primordial Keshava; the original Lord; the first and foremost among all",
-            "alternates": ["The ancient Keshava", "The first Lord", "The eternal source"]
+            "alternates": [
+              "The ancient Keshava",
+              "The first Lord",
+              "The eternal source"
+            ]
           },
-          "gunaVarga": ["nityatva", "paratva"],
-          "relatedNamas": ["Keshava", "Adinatha", "Adideva"],
+          "gunaVarga": [
+            "nityatva",
+            "paratva"
+          ],
+          "relatedNamas": [
+            "Keshava",
+            "Adinatha",
+            "Adideva"
+          ],
           "note": "This is the ankita (signature name) of Kanaka Dasa, identifying the presiding deity as the Lord of Kaginele or Udupi"
         }
       ],
       "regionalGlossary": [
-        {"term": "mareyadale", "meaning": "without forgetting"},
-        {"term": "baredu ōdi pēḷdavarige", "meaning": "to those who write, recite, and proclaim"},
-        {"term": "karedu mukti koḍuva", "meaning": "calls/summons and grants liberation"},
-        {"term": "neleyādikēśava", "meaning": "the eternal abode/foundation, Adikeshava"}
+        {
+          "term": "mareyadale",
+          "meaning": "without forgetting"
+        },
+        {
+          "term": "baredu ōdi pēḷdavarige",
+          "meaning": "to those who write, recite, and proclaim"
+        },
+        {
+          "term": "karedu mukti koḍuva",
+          "meaning": "calls/summons and grants liberation"
+        },
+        {
+          "term": "neleyādikēśava",
+          "meaning": "the eternal abode/foundation, Adikeshava"
+        }
       ],
       "composerSignature": "This verse contains the ankita (signature) 'Adikeshava', identifying the composer Kanaka Dasa and his ishta devata"
     }

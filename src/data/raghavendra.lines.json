@@ -51,6 +51,17 @@
     "tel": "https://vignanam.org/telugu/sri-raghavendra-stotram.html",
     "tam": "https://vignanam.org/tamil/sri-raghavendra-stotram.html"
   },
+  "provenance": {
+    "qualityTier": 3,
+    "primarySource": {
+      "type": "digital_community",
+      "label": "vignanam.org",
+      "url": "https://vignanam.org/english/sri-raghavendra-stotram.html"
+    },
+    "sampradayaVariant": "Madhva",
+    "crossReferenced": false,
+    "scholarReviewed": false
+  },
   "lines": [
     {
       "id": "1",

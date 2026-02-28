@@ -49,6 +49,8 @@ interface AuthContextType {
   loading: boolean
   isGuest: boolean
   showLoginPrompt: boolean
+  isVerifier: boolean
+  isAdmin: boolean
 
   // Auth actions
   signInWithGoogle: () => Promise<void>
@@ -469,6 +471,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
     loading,
     isGuest,
     showLoginPrompt,
+    isVerifier: userData?.role === 'verifier' || userData?.role === 'admin',
+    isAdmin: userData?.role === 'admin',
     signInWithGoogle,
     signOut,
     continueAsGuest,

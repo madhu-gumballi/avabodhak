@@ -79,6 +79,17 @@
     "tel": "https://stotranidhi.com/vayu-stuti-in-telugu/",
     "tam": "https://stotranidhi.com/ta/vayu-stuti-in-tamil/"
   },
+  "provenance": {
+    "qualityTier": 3,
+    "primarySource": {
+      "type": "digital_community",
+      "label": "stotranidhi.com",
+      "url": "https://stotranidhi.com/en/vayu-stuti-in-english/"
+    },
+    "sampradayaVariant": "Madhva",
+    "crossReferenced": false,
+    "scholarReviewed": false
+  },
   "lines": [
     {
       "id": "1",

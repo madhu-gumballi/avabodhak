@@ -43,6 +43,10 @@ import AchievementsPanel from './AchievementsPanel';
 import LeaderboardPanel from './LeaderboardPanel';
 import FeedbackWidget from './FeedbackWidget';
 import { isTTSEnabled, isTTSSupportedForLang, LineTTSPlayer } from '../lib/tts';
+import { TextQualityBadge } from './TextQualityBadge';
+import { getQualitySummary } from '../lib/textIssueService';
+import type { StotraQualitySummary } from '../lib/textIssueService';
+import { VerifierDashboard } from './VerifierDashboard';
 
 
 export function VSNViewer({ onBack, textOverride, subtitleOverrides, availableLangs, preferredLang, initialMode, initialLineIndex: initialLineIndexProp, stotraKey = 'vsn' }: { onBack: () => void; textOverride?: TextFile; subtitleOverrides?: Partial<Record<Lang, string>>; availableLangs?: Lang[]; preferredLang?: Lang; initialMode?: 'reading' | 'practice' | 'puzzle'; initialLineIndex?: number; stotraKey?: string }) {
@@ -53,11 +57,21 @@ export function VSNViewer({ onBack, textOverride, subtitleOverrides, availableLa
   const [achievementsPanelOpen, setAchievementsPanelOpen] = useState(false);
   const [leaderboardPanelOpen, setLeaderboardPanelOpen] = useState(false);
   const [feedbackOpen, setFeedbackOpen] = useState(false);
+  const [qualitySummary, setQualitySummary] = useState<StotraQualitySummary | null>(null);
+  const [drilldownOpen, setDrilldownOpen] = useState(false);
+  const [drilldownLineId, setDrilldownLineId] = useState<string | undefined>(undefined);
+  const [verifierDashboardOpen, setVerifierDashboardOpen] = useState(false);
 
   // Record activity on mount for streak tracking
   useEffect(() => {
     recordActivity();
   }, []);
+
+  // Load quality summary for this stotra
+  useEffect(() => {
+    if (!user) return;
+    getQualitySummary(stotraKey).then(setQualitySummary).catch(() => {});
+  }, [stotraKey, user]);
 
   const theme = useMemo(() => createTheme({
     palette: { mode: 'dark', primary: { main: '#0ea5e9' }, secondary: { main: '#f59e0b' } },
@@ -1050,8 +1064,25 @@ export function VSNViewer({ onBack, textOverride, subtitleOverrides, availableLa
               </IconButton>
               <img src="/icons/stotra-mala-logo.svg" alt="Stotra Maala" style={{ width: 28, height: 28, borderRadius: 6 }} />
               <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
-                <Typography variant="h6" sx={{ lineHeight: 1, letterSpacing: '-0.01em' }}>{T('app_title')}</Typography>
-                <Typography variant="caption" sx={{ display: 'block', mt: 0.5, color: 'text.secondary' }}>{T('app_subtitle')}</Typography>
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                  <Typography variant="h6" sx={{ lineHeight: 1, letterSpacing: '-0.01em' }}>{T('app_title')}</Typography>
+                  {text.provenance && <TextQualityBadge tier={text.provenance.qualityTier} size="small" />}
+                </Box>
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mt: 0.5 }}>
+                  <Typography variant="caption" sx={{ color: 'text.secondary' }}>{T('app_subtitle')}</Typography>
+                  {qualitySummary && (() => {
+                    const open = qualitySummary.counts.doubt.open + qualitySummary.counts.variant.open + qualitySummary.counts.error.open;
+                    return open > 0 ? (
+                      <Typography
+                        variant="caption"
+                        sx={{ color: '#f59e0b', cursor: 'pointer', fontSize: '0.6rem', '&:hover': { textDecoration: 'underline' } }}
+                        onClick={() => { setDrilldownLineId(undefined); setDrilldownOpen(true); }}
+                      >
+                        ⚑ {open} open
+                      </Typography>
+                    ) : null;
+                  })()}
+                </Box>
               </Box>
             </Box>
             {/* Desktop Controls - Full toolbar */}
@@ -1195,6 +1226,7 @@ export function VSNViewer({ onBack, textOverride, subtitleOverrides, availableLa
                   onShowAchievements={() => setAchievementsPanelOpen(true)}
                   onShowLeaderboard={() => setLeaderboardPanelOpen(true)}
                   onShowFeedback={() => setFeedbackOpen(true)}
+                  onShowVerifierDashboard={() => setVerifierDashboardOpen(true)}
                 />
               ) : (
                 <LoginButton variant="text" />
@@ -1446,6 +1478,11 @@ export function VSNViewer({ onBack, textOverride, subtitleOverrides, availableLa
                             note: (text.lines[flow.state.lineIndex] as any)?.note,
                           }}
                           highlightWords={highlightWords}
+                          stotraKey={stotraKey}
+                          lineId={(text.lines[flow.state.lineIndex] as Line)?.id}
+                          lineOpenIssueCount={qualitySummary?.byLine[(text.lines[flow.state.lineIndex] as Line)?.id]?.open || 0}
+                          lineIssueTypes={qualitySummary?.byLine[(text.lines[flow.state.lineIndex] as Line)?.id]?.types || []}
+                          onOpenIssueDrilldown={() => { setDrilldownLineId((text.lines[flow.state.lineIndex] as Line)?.id); setDrilldownOpen(true); }}
                         />
                         {lang2 && (
                           <Box sx={{ mt: 1.5 }}>
@@ -1565,6 +1602,7 @@ export function VSNViewer({ onBack, textOverride, subtitleOverrides, availableLa
                         lineIast={(text.lines[flow.state.lineIndex] as any)?.iast}
                         lang={lang}
                         compact={true}
+                        provenance={text.provenance}
                         enrichedData={(() => {
                           const line = text.lines[flow.state.lineIndex] as any;
                           if (line?.samasaVibhaga || line?.chandas || line?.alamkara || line?.rasa || line?.devataSvarupa || line?.upadesha || line?.imagery || line?.meaning || line?.namaAnalysis || line?.note || line?.bhaktiRasa || line?.regionalGlossary || line?.translation || line?.padachchheda || line?.wordByWord) {
@@ -1591,6 +1629,7 @@ export function VSNViewer({ onBack, textOverride, subtitleOverrides, availableLa
                       lineText={(text.lines[flow.state.lineIndex] as any)?.[lang] || ''}
                       lineIast={(text.lines[flow.state.lineIndex] as any)?.iast}
                       lang={lang}
+                      provenance={text.provenance}
                       enrichedData={(() => {
                         const line = text.lines[flow.state.lineIndex] as any;
                         if (line?.samasaVibhaga || line?.chandas || line?.alamkara || line?.rasa || line?.devataSvarupa || line?.upadesha || line?.imagery || line?.meaning || line?.namaAnalysis || line?.note || line?.bhaktiRasa || line?.regionalGlossary || line?.translation || line?.padachchheda || line?.wordByWord) {
@@ -1900,7 +1939,33 @@ export function VSNViewer({ onBack, textOverride, subtitleOverrides, availableLa
           onClose={() => setFeedbackOpen(false)}
         />
 
+        {/* Verifier Dashboard */}
+        <VerifierDashboard
+          open={verifierDashboardOpen}
+          onClose={() => setVerifierDashboardOpen(false)}
+        />
+
+        {/* Issues Drilldown Panel */}
+        {drilldownOpen && (
+          <IssuesDrilldownPanelLazy
+            open={drilldownOpen}
+            onClose={() => setDrilldownOpen(false)}
+            stotraKey={stotraKey}
+            lineId={drilldownLineId}
+          />
+        )}
+
       </div>
     </ThemeProvider>
   );
+}
+
+// Lazy wrapper for IssuesDrilldownPanel
+function IssuesDrilldownPanelLazy(props: { open: boolean; onClose: () => void; stotraKey: string; lineId?: string }) {
+  const [Panel, setPanel] = useState<React.ComponentType<typeof props> | null>(null);
+  useEffect(() => {
+    import('./IssuesDrilldownPanel').then(m => setPanel(() => m.IssuesDrilldownPanel as React.ComponentType<typeof props>));
+  }, []);
+  if (!Panel) return null;
+  return <Panel {...props} />;
 }

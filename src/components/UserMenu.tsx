@@ -22,6 +22,7 @@ import VolumeUpIcon from '@mui/icons-material/VolumeUp'
 import VolumeOffIcon from '@mui/icons-material/VolumeOff'
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline'
 import PublicIcon from '@mui/icons-material/Public'
+import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings'
 import { useAuth } from '../context/AuthContext'
 import StreakBadge from './StreakBadge'
 import { REGION_OPTIONS, getRegionFlag } from '../lib/region'
@@ -182,6 +183,7 @@ interface UserMenuProps {
   onShowLeaderboard?: () => void
   onShowFeedback?: () => void
   onShowSettings?: () => void
+  onShowVerifierDashboard?: () => void
 }
 
 export default function UserMenu({
@@ -190,8 +192,9 @@ export default function UserMenu({
   onShowLeaderboard,
   onShowFeedback,
   onShowSettings,
+  onShowVerifierDashboard,
 }: UserMenuProps) {
-  const { user, userData, isGuest, signOut, updatePreferences, updateProfile } = useAuth()
+  const { user, userData, isGuest, signOut, updatePreferences, updateProfile, isVerifier, isAdmin } = useAuth()
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null)
 
   const handleOpen = (event: React.MouseEvent<HTMLElement>) => {
@@ -225,6 +228,11 @@ export default function UserMenu({
   const handleSettings = () => {
     handleClose()
     onShowSettings?.()
+  }
+
+  const handleVerifierDashboard = () => {
+    handleClose()
+    onShowVerifierDashboard?.()
   }
 
   // Don't show if not logged in and not guest
@@ -327,6 +335,15 @@ export default function UserMenu({
           </ListItemIcon>
           <ListItemText>{menuT(lang, 'feedback')}</ListItemText>
         </MenuItem>
+
+        {(isVerifier || isAdmin) && (
+          <MenuItem onClick={handleVerifierDashboard}>
+            <ListItemIcon>
+              <AdminPanelSettingsIcon fontSize="small" sx={{ color: '#60a5fa' }} />
+            </ListItemIcon>
+            <ListItemText>Verifier Dashboard</ListItemText>
+          </MenuItem>
+        )}
 
         <Divider sx={{ borderColor: 'rgba(255, 255, 255, 0.1)' }} />
 

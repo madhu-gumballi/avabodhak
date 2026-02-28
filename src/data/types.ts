@@ -51,11 +51,37 @@ export interface TextFile {
   title: string;
   metadata?: StotraMetadata;
   sources: { deva: string; knda: string; iast: string; tel?: string; tam?: string; guj?: string; pan?: string; mr?: string; ben?: string; mal?: string };
+  provenance?: TextProvenance;
   lines: Line[];
   media?: Media[];
 }
 
 export type Lang = 'deva' | 'knda' | 'iast' | 'tel' | 'tam' | 'guj' | 'pan' | 'mr' | 'ben' | 'mal';
+
+// ============================================================================
+// Text Provenance & Quality System
+// ============================================================================
+
+export type QualityTier = 1 | 2 | 3 | 4;
+// 1=Scholarly critical edition, 2=Named print edition,
+// 3=Community digital (vignanam/stotrasamhita), 4=Unknown
+
+export interface TextProvenance {
+  qualityTier: QualityTier;
+  primarySource: {
+    type: 'critical_edition' | 'published_book' | 'digital_community' | 'internet_unknown';
+    label: string;       // "vignanam.org" | "Ramakrishna Mutt, 2005"
+    url?: string;
+    editor?: string;
+    year?: string;
+  };
+  secondarySources?: Array<{ label: string; url?: string }>;
+  sampradayaVariant?: string;  // "Madhva" | "Advaita" | "common"
+  knownVariants?: string[];    // Known patha-bheda issues
+  crossReferenced: boolean;
+  scholarReviewed: boolean;
+  lastVerified?: string;       // ISO date "2026-02-28"
+}
 
 // ============================================================================
 // Stotra Tattva Darshana - Enriched Types for Multi-dimensional Analysis
