@@ -19,7 +19,7 @@ const STATUS_ORDER: Record<IssueStatus, number> = {
   wontfix: 3,
 };
 
-function sortIssues(items: Pick<PublicIssueView, 'status' | 'reportCount'>[]): typeof items {
+function sortIssues<T extends Pick<PublicIssueView, 'status' | 'reportCount'>>(items: T[]): T[] {
   return [...items].sort((a, b) => {
     if (STATUS_ORDER[a.status] !== STATUS_ORDER[b.status]) {
       return STATUS_ORDER[a.status] - STATUS_ORDER[b.status];
