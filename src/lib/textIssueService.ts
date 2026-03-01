@@ -2,6 +2,7 @@ import {
   collection,
   doc,
   addDoc,
+  setDoc,
   getDocs,
   getDoc,
   updateDoc,
@@ -129,7 +130,20 @@ export async function submitTextIssue(params: {
   if (params.suggestedText) report.suggestedText = params.suggestedText;
   if (params.reference) report.reference = params.reference;
 
-  await addDoc(collection(db, 'textIssues'), report);
+  const docRef = await addDoc(collection(db, 'textIssues'), report);
+
+  // Create privacy-stripped public projection so the drilldown panel can display it
+  await setDoc(doc(db, 'publicIssues', docRef.id), {
+    stotraKey: params.stotraKey,
+    lineId: params.lineId,
+    issueType: params.issueType,
+    description: params.description,
+    ...(params.suggestedText && { suggestedText: params.suggestedText }),
+    ...(params.reference && { reference: params.reference }),
+    status: 'open',
+    reportCount: 1,
+    createdAt: serverTimestamp(),
+  });
 
   // Update quality summary counts
   await updateQualitySummary(params.stotraKey, params.lineId, params.issueType, 'open', +1);
@@ -325,8 +339,6 @@ export async function resolveIssue(params: {
   };
 
   await updateDoc(publicRef, publicData).catch(async () => {
-    // Create if not exists
-    const { setDoc } = await import('firebase/firestore');
     await setDoc(publicRef, publicData);
   });
 
